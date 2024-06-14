@@ -1,4 +1,4 @@
-@extends('business.layouts.master')
+@extends('business.auth.layouts.master')
 @section('content')
 <div class="authentication-wrapper authentication-cover authentication-bg">
     <div class="authentication-inner row">

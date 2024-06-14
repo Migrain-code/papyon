@@ -1,43 +1,28 @@
-@include('business.layouts.components.modal.password-update-modal')
-<div class="modal fade" id="notification_detail_modal" tabindex="-1" role="dialog">
-    <!--begin::Modal dialog-->
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <!--begin::Modal content-->
-        <div class="modal-content">
-            <!--begin::Modal header-->
-            <div class="modal-header">
-                <!--begin::Modal title-->
-                <h2 id="notificationTitle">Bildirim İçeriği</h2>
-                <!--end::Modal title-->
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
 
-                <!--begin::Close-->
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>                </div>
-                <!--end::Close-->
-            </div>
-            <!--end::Modal header-->
+<script src="/business/assets/vendor/libs/jquery/jquery.js"></script>
+<script src="/business/assets/vendor/libs/popper/popper.js"></script>
+<script src="/business/assets/vendor/js/bootstrap.js"></script>
+<script src="/business/assets/vendor/libs/node-waves/node-waves.js"></script>
+<script src="/business/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="/business/assets/vendor/libs/hammer/hammer.js"></script>
+<script src="/business/assets/vendor/libs/i18n/i18n.js"></script>
+<script src="/business/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+<script src="/business/assets/vendor/js/menu.js"></script>
 
-            <!--begin::Modal body-->
-            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
-                <!--begin::Form-->
-                <p id="notificationMessage"></p>
-                <!--end::Form-->
-            </div>
-            <!--end::Modal body-->
-        </div>
-        <!--end::Modal content-->
-    </div>
-    <!--end::Modal dialog-->
-</div>
+<!-- Vendors JS -->
+<script src="/business/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+<script src="/business/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+<script src="/business/assets/vendor/libs/select2/select2.js"></script>
 
-<script src="/business/assets/plugins/global/plugins.bundle.js"></script>
-<script src="/business/assets/js/scripts.bundle.js"></script>
-<!--end::Global Javascript Bundle-->
-<script src="/business/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-<!--end::Vendors Javascript-->
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="/business/assets/js/widgets.bundle.js"></script>
-<script src="/business/assets/js/custom/widgets.js"></script>
+<!-- Main JS -->
+<script src="/business/assets/js/main.js"></script>
+
+<!-- Page JS -->
+<script src="/business/assets/js/app-ecommerce-dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
     var csrf_token = "{{csrf_token()}}";
 </script>
@@ -90,68 +75,15 @@
     }
 </style>
 <script src="/business/assets/js/custom.js"></script>
-<script>
-    $('.messageContentButton').on('click', function (){
-        let title = $(this).data('title');
-        let content = $(this).data('content');
-        $('#notificationTitle').text(title);
-        $('#notificationMessage').text(content);
-        $('#notification_detail_modal').modal('show');
-    });
-</script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.60/inputmask/jquery.inputmask.js"></script>
 <script>
-    $(document).ready(function(){
-        $("#validatorPhone").inputmask({
-            mask: "9999 999 9999",
+    $(document).ready(function () {
+        $(".phone").inputmask({
+            mask: "999 999 9999",
         });
     });
 </script>
-@if(!request()->routeIs('business.setup.*'))
-    <script>
-        var button = document.querySelector('#kt_share_earn_link_copy_button');
-        var input = document.querySelector('#kt_share_earn_link_input');
-        var clipboard = new ClipboardJS(button);
 
-        if (clipboard) {
-            //  Copy text to clipboard. For more info check the plugin's documentation: https://clipboardjs.com/
-            clipboard.on('success', function(e) {
-                var buttonCaption = button.innerHTML;
-                //Add bgcolor
-                input.classList.add('bg-success');
-                input.classList.add('text-inverse-success');
-
-                button.innerHTML = 'Kopyalandı!';
-
-                setTimeout(function() {
-                    button.innerHTML = buttonCaption;
-
-                    // Remove bgcolor
-                    input.classList.remove('bg-success');
-                    input.classList.remove('text-inverse-success');
-                }, 3000);  // 3seconds
-
-                e.clearSelection();
-            });
-        }
-
-
-    </script>
-    <script>
-       var forbiddenArea = $('.forbiddenArea');
-       if(forbiddenArea.length > 0){
-           /*Swal.fire({
-               title: 'Yetkisiz Erişim',
-               icon: 'error',
-               html: "Bu alana erişim sağlama için paket yükseltmeniz gerekmektedir.",
-               confirmButtonText: "Tamam"
-           }).then(function (res){
-                if(res.isConfirmed){
-                    window.location.href = "{{url()->previous()}}"
-                }
-           });*/
-       }
-    </script>
-@endif
 @yield('scripts')

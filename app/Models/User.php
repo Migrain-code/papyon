@@ -44,4 +44,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function places()
+    {
+        return $this->hasMany(Place::class, 'user_id', 'id');
+    }
+
+    public function place()
+    {
+        return $this->places()->where('is_default')->first();
+    }
 }

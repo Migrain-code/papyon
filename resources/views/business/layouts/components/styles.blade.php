@@ -1,111 +1,37 @@
-<link rel="shortcut icon" href="{{image(setting('speed_favicon'))}}">
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/business/assets/img/favicon/favicon.ico" />
 
-<!--begin::Fonts(mandatory for all pages)-->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-<!--end::Fonts-->
-<!--begin::Vendor Stylesheets(used for this page only)-->
-<link href="/business/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
-<link href="/business/assets/plugins/custom/vis-timeline/vis-timeline.bundle.css" rel="stylesheet" type="text/css" />
-<!--end::Vendor Stylesheets-->
-<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
-<link href="/business/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-<link href="/business/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-<link href="/business/assets/css/custom.css" rel="stylesheet" type="text/css" />
-<style>
-    .pulse-button {
-        cursor: pointer;
-        position: relative;
-        z-index: 1;
-    }
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
+    rel="stylesheet" />
 
-    .pulse-button::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        border-radius: 20px;
-        width: 75%;
-        height: 30px;
-        opacity: 0.6;
-        z-index: -1;
-        transform: translate(-50%, -50%) scale(1);
-        animation: pulse 2s infinite;
-    }
+<!-- Icons -->
+<link rel="stylesheet" href="/business/assets/vendor/fonts/fontawesome.css" />
+<link rel="stylesheet" href="/business/assets/vendor/fonts/tabler-icons.css" />
+<link rel="stylesheet" href="/business/assets/vendor/fonts/flag-icons.css" />
 
-    @keyframes pulse {
-        0% {
-            transform: translate(-50%, -50%) scale(1);
-            box-shadow: 0 0 0 0 rgba(114, 57, 244, 0.7);
-        }
-        70% {
-            transform: translate(-50%, -50%) scale(1.5);
-            box-shadow: 0 0 15px 30px rgba(114, 57, 244, 0);
-        }
-        100% {
-            transform: translate(-50%, -50%) scale(1);
-            box-shadow: 0 0 0 0 rgba(114, 57, 244, 0);
-        }
-    }
-</style>
-<style>
+<!-- Core CSS -->
+<link rel="stylesheet" href="/business/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+<link rel="stylesheet" href="/business/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+<link rel="stylesheet" href="/business/assets/css/demo.css" />
 
-    ::-webkit-scrollbar{
-        width: 5px;
-    }
-    ::-webkit-scrollbar-thumb{
-        background: #0095e8;
-        border-radius: 10px;
-    }
-    ::-webkit-scrollbar-track{
-        background: #1e1e2d;
-    }
-    .scroll-x{
-        overflow-y: hidden;
-    }
-    .scroll-x::-webkit-scrollbar {
-        width: 5px; /* Scrollbar genişliği */
-        height: 5px;
-    }
-    .hover-scroll-x::-webkit-scrollbar {
-        width: 5px; /* Scrollbar genişliği */
-        height: 5px;
-    }
-    .scroll-y::-webkit-scrollbar {
-        width: 5px; /* Scrollbar genişliği */
-        height: 5px;
-    }
-    .scroll-y::-webkit-scrollbar-track {
-        background: #1e1e2d;
-    }
-    @media (max-width: 876px) {
-        .form-check-input.delete {
-            display: none;
-        }
-        table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control, table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
-            position: relative;
-            padding-left: 0px;
-            cursor: pointer;
-        }
-        table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before{
-            height: 1.70rem !important;
-            width: 1.70rem !important;
-        }
-        #goSalon{
-            display: none;
-        }
-        .customMenu{
-            display: none;
-        }
-        .btn.btn-primary{
-            padding: 5px 12px !important;
-        }
-        .btn.btn-danger{
-            padding: 5px 12px !important;
-        }
-        .stepperDisplay{
-            display: none !important;
-        }
-    }
-</style>
-<!--end::Global Stylesheets Bundle-->
+<!-- Vendors CSS -->
+<link rel="stylesheet" href="/business/assets/vendor/libs/node-waves/node-waves.css" />
+<link rel="stylesheet" href="/business/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+<link rel="stylesheet" href="/business/assets/vendor/libs/typeahead-js/typeahead.css" />
+<link rel="stylesheet" href="/business/assets/vendor/libs/apex-charts/apex-charts.css" />
+<link rel="stylesheet" href="/business/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+<link rel="stylesheet" href="/business/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+<link rel="stylesheet" href="/business/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+<link rel="stylesheet" href="/business/assets/vendor/libs/select2/select2.css" />
+<!-- Helpers -->
+<script src="/business/assets/vendor/js/helpers.js"></script>
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+<script src="/business/assets/vendor/js/template-customizer.js"></script>
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script src="/business/assets/js/config.js"></script>
 @yield('styles')
