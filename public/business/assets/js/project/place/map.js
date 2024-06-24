@@ -51,7 +51,7 @@ function initAutocomplete() {
     // Adres arama işlevselliği
     const input = document.getElementById("searchInput");
     const searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     map.addListener("bounds_changed", () => {
         searchBox.setBounds(map.getBounds());

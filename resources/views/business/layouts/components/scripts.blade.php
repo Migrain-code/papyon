@@ -22,7 +22,16 @@
 <!-- Page JS -->
 <script src="/business/assets/js/app-ecommerce-dashboard.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<style>
+    body.swal2-toast-shown .swal2-container {
+        z-index: 1200;
+        box-sizing: border-box;
+        width: 360px;
+        max-width: 100%;
+        background-color: rgba(0, 0, 0, 0);
+        pointer-events: none;
+    }
+</style>
 <script>
     var csrf_token = "{{csrf_token()}}";
 </script>

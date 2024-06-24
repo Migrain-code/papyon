@@ -28,7 +28,7 @@
             <div class="w-px-400 mx-auto">
                 <!-- Logo -->
                 <div class="app-brand mb-4">
-                    <a href="index.html" class="app-brand-link gap-2">
+                    <a href="/" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
                   <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -60,15 +60,20 @@
                 <!-- /Logo -->
                 <h3 class="mb-1">Welcome to Vuexy! 👋</h3>
                 <p class="mb-4">Please sign-in to your account and start the adventure</p>
-
-                <form id="formAuthentication" class="mb-3" action="index.html" method="GET">
+                @if($errors->any())
+                    @foreach ($errors->all() as $error)
+                        {{$error}}
+                    @endforeach
+                @endif
+                <form id="formAuthentication" class="mb-3" action="{{route('login')}}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email or Username</label>
                         <input
                             type="text"
                             class="form-control"
                             id="email"
-                            name="email-username"
+                            name="email"
                             placeholder="Enter your email or username"
                             autofocus />
                     </div>
@@ -92,7 +97,7 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="remember-me" />
+                            <input class="form-check-input" name="remember_me" type="checkbox" id="remember-me" />
                             <label class="form-check-label" for="remember-me"> Remember Me </label>
                         </div>
                     </div>

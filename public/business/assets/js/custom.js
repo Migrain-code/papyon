@@ -5,11 +5,6 @@ $(document).on('click', '.delete-btn', function () {
     let content = $(this).data('content')
     let title = $(this).data('title')
     let id = $(this).data('object-id')
-    let delete_type = true;
-
-    if ($(this).data('delete-type')){
-        delete_type = $(this).data('delete-type');
-    }
 
     Swal.fire({
         title: 'İşlemi Yapmak İstiyormusun',
@@ -33,7 +28,7 @@ $(document).on('click', '.delete-btn', function () {
                     'model': model,
                     'content': content,
                     'title': title,
-                    'delete_type': delete_type,
+
                 },
                 dataType: "JSON",
                 success: function (res) {
@@ -50,12 +45,6 @@ $(document).on('click', '.delete-btn', function () {
                                 location.reload();
                             }, 700);
                         }
-                        else{
-                            if ($('#datatable').length > 0 && $.fn.DataTable.isDataTable('#datatable')) {
-                                $('#datatable').DataTable().ajax.reload();
-                            }
-                        }
-
                     }
                     else {
                         Swal.fire({

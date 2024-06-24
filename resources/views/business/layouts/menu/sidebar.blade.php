@@ -57,7 +57,7 @@
 
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="layouts-collapsed-menu.html" class="menu-link">
+                    <a href="{{route('business.place.index')}}" class="menu-link">
                         <div data-i18n="Mekan Listesi">Mekan Listesi</div>
                     </a>
                 </li>
@@ -68,7 +68,13 @@
                 </li>
             </ul>
         </li>
-
+        <!-- Layouts -->
+        <li class="menu-item">
+            <a href="{{route('business.table.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-table"></i>
+                <div data-i18n="Masalar">Masalar</div>
+            </a>
+        </li>
 
     </ul>
 </aside>

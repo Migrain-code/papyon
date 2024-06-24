@@ -6,19 +6,7 @@
     <link rel="stylesheet" href="/business/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css" />
     <link rel="stylesheet" href="/business/assets/vendor/libs/jquery-timepicker/jquery-timepicker.css" />
     <link rel="stylesheet" href="/business/assets/vendor/libs/pickr/pickr-themes.css" />
-    <style>
-        #searchInput{
-            position: absolute;
-            left: 177px;
-            top: 8px !important;
-            width: 67%;
-            height: 40px;
-            border-radius: 15px;
-            padding: 5px;
-            border: 1px solid #2f3349;
-            outline: 0px;
-        }
-    </style>
+
 @endsection
 
 @section('content')
@@ -50,7 +38,8 @@
                 <!-- Multi Column with Form Separator -->
                 <div class="card my-4">
                     <h5 class="card-header" data-i18n="Mekan Oluşturma Sihirbazı">Mekan Oluşturma Sihirbazı</h5>
-                    <form class="card-body">
+                    <form class="card-body" method="post" action="{{route('business.place.store')}}" enctype="multipart/form-data">
+                        @csrf
                         @include('business.place.create.steps.step-1')
                         @include('business.place.create.steps.step-2')
                         @include('business.place.create.steps.step-3')
@@ -60,8 +49,8 @@
                         @include('business.place.create.steps.step-7')
 
                         <div class="pt-4">
-                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                            <button type="reset" class="btn btn-label-secondary">Cancel</button>
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Oluştur</button>
+                            <button type="button" onclick="location.reload()" class="btn btn-label-secondary">Temizle</button>
                         </div>
                     </form>
                 </div>
@@ -72,6 +61,60 @@
 
 @endsection
 @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.registerArea .switch-input').on('change', function() {
+                // Get the parent registerArea of the clicked switch
+                var registerArea = $(this).closest('.registerArea');
+
+                // Find the callArea within this registerArea
+                var callArea = registerArea.find('.callArea');
+
+                // Toggle visibility based on the checkbox state
+                if ($(this).is(':checked')) {
+                    callArea.show();
+                } else {
+                    callArea.hide();
+                }
+            });
+        });
+        function toggleCallArea(checkbox, areaId) {
+            //var callArea = document.getElementById(areaId);
+            if (checkbox.checked) {
+                alert('Bu işlem için lütfen telefon numarası alanını doldurunuz');
+            }
+        }
+        $('[name="place_name"]').on('keyup', function (){
+            $.ajax({
+                url: '/api/check-slug',
+                type: "GET",
+                data: {
+                    'name' : $(this).val(),
+                },
+                dataType: "JSON",
+                success: function (res) {
+                    var placeLink = $('#placeLink');
+                    if(res.status === "error"){
+                        placeLink.css('border-bottom', '1px solid red');
+                        Swal.fire({
+                            text: res.message,
+                            icon: res.status,
+                            buttonsStyling: false,
+                            confirmButtonText: "Tamam, devam et!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
+                    } else{
+                        placeLink.css('border-bottom', '1px solid green');
+                        placeLink.val(res.link);
+                    }
+
+
+                }
+            });
+        });
+    </script>
     <!-- Vendors JS -->
     <script src="/business/assets/vendor/libs/cleavejs/cleave.js"></script>
     <script src="/business/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
@@ -89,4 +132,6 @@
     <script src="/business/assets/js/project/place/add.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcMXrk2ldIslFsanG5wUm5EuuTjkLfl8U&libraries=places&callback=initAutocomplete" async defer></script>
     <script src="/business/assets/js/project/place/map.js"></script>
+
+
 @endsection
