@@ -10,6 +10,10 @@ class Place extends Model
     use HasFactory;
     protected $casts = ['other_languages' => 'object'];
 
+    public function menus() // Çalışma Saatleri
+    {
+        return $this->hasMany(Menu::class, 'place_id', 'id');
+    }
     public function regions() // Çalışma Saatleri
     {
         return $this->hasMany(Region::class, 'place_id', 'id');
