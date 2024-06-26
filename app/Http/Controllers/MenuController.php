@@ -64,7 +64,9 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        return view('business.menu.edit.index', compact('menu'));
+        $categories = $menu->categories;
+
+        return view('business.menu.edit.index', compact('menu', 'categories'));
     }
 
     /**

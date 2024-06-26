@@ -78,11 +78,94 @@
         </div>
     </div>
     @include('business.menu.modals.select-product-modal')
+    @include('business.menu.modals.add-menu-category')
+    @include('business.menu.modals.add-menu-product')
 @endsection
 @section('scripts')
 
     <script src="/business/assets/vendor/libs/sortablejs/sortable.js"></script>
     <!-- Page JS -->
     <script src="/business/assets/js/extended-ui-drag-and-drop.js"></script>
+    <script>
+        $('#categorImageCheck').on('change', function (){
+           var imageInputArea = document.getElementById('imageInputContainer');
+           if($(this).is(':checked')){
+               imageInputArea.style.display = "block";
+           } else{
+               imageInputArea.style.display = "none";
+               $('#categoryImage').val("");
+           }
+        });
+        $('#productImageCheck').on('change', function (){
+            var productImageInputArea = document.getElementById('productImageInputContainer');
+            if($(this).is(':checked')){
+                productImageInputArea.style.display = "block";
+            } else{
+                productImageInputArea.style.display = "none";
+                $('#productImage').val("");
+            }
+        });
+    </script>
+    <script>
+        var categoryId = "";
+        var menuId = "";
+        $('.addCategory').on('click', function (){
+           categoryId = $(this).data('category-id');
+           menuId = $(this).data('menu-id');
+           var modal = new bootstrap.Modal(document.querySelector('#addMenuProductModal'));
 
+           modal.show();
+        });
+
+        $('#submitButton').on('click', function (){
+            var formData = new FormData();
+            formData.append("_token", csrf_token);
+            formData.append("product_name", $('[name="product_name"]').val());
+            formData.append("product_description", $('[name="product_description"]').val());
+            formData.append("category_id", categoryId);
+            formData.append("menu_id", menuId);
+            formData.append("product_image", $('[name="product_image"]')[0].files[0]);
+            $.ajax({
+                url: '/business/menu-category-product',
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: "JSON",
+                success: function (res) {
+                    Toast.fire({
+                        icon: res.status,
+                        title: res.message,
+                    });
+
+                    if(res.status === "success"){
+                        setTimeout(function (){
+                            location.reload();
+                        }, 3000);
+                    }
+                },
+                error: function (xhr) {
+                    submitButton.disabled = false;
+                    var errorMessage = "<ul>";
+                    xhr.responseJSON.errors.forEach(function (error) {
+                        errorMessage += "<li>" + error + "</li>";
+                    });
+                    errorMessage += "</ul>";
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Hata!',
+                        html: errorMessage,
+                        buttonsStyling: false,
+                        confirmButtonText: "Tamam",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            });
+        });
+
+
+    </script>
 @endsection

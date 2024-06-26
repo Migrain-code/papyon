@@ -75,6 +75,12 @@
                 <div data-i18n="Masalar">Masalar</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{route('business.menu.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-book"></i>
+                <div data-i18n="Menü">Menü</div>
+            </a>
+        </li>
 
     </ul>
 </aside>
