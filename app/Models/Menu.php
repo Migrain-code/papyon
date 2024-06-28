@@ -12,6 +12,6 @@ class Menu extends Model
 
     public function categories()
     {
-        return $this->hasMany(MenuCategory::class, 'menu_id', 'id');
+        return $this->hasMany(MenuCategory::class, 'menu_id', 'id')->orderBy('order_number', 'asc');
     }
 }

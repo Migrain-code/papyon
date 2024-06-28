@@ -21,6 +21,10 @@ Route::middleware('auth:web')->group(function (){
         Route::resource('menu', MenuController::class);
         Route::resource('menu-category', MenuCategoryController::class);
         Route::resource('menu-category-product', MenuCategoryProductController::class);
+
+        Route::post('/update-category-order', [MenuCategoryController::class, 'updateOrder'])->name('category.updateOrder');
+        Route::post('/update-product-order', [MenuCategoryProductController::class, 'updateOrder'])->name('product.updateOrder');
+
         Route::get('download/{region}/zip', [TableController::class, 'downloadZip'])->name('downloadRegion');
         Route::get('download/{table}/table', [TableController::class, 'downloadTable'])->name('downloadTable');
     });

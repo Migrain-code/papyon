@@ -82,6 +82,10 @@
         font-weight: 700 !important;
 
     }
+
+     div:where(.swal2-container) {
+         z-index: 1100 !important;
+     }
 </style>
 <script src="/business/assets/js/custom.js"></script>
 

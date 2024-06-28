@@ -16,23 +16,25 @@
                         <input type="text" id="nameBasic" name="name" class="form-control" placeholder="Örn. Menü 1">
                     </div>
                 </div>
-                <div class="row">
-                    <label class="switch switch-lg mb-4">
-                        <input type="checkbox" class="switch-input" id="categorImageCheck">
-                        <span class="switch-toggle-slider">
+                @if($themeId != 4)
+                    <div class="row">
+                        <label class="switch switch-lg mb-4">
+                            <input type="checkbox" class="switch-input" id="categorImageCheck">
+                            <span class="switch-toggle-slider">
                                     <span class="switch-on"><i class="ti ti-check"></i></span>
                                     <span class="switch-off"><i class="ti ti-x"></i></span>
                                 </span>
-                        <span class="switch-label">Görselli Kategori</span>
-                    </label>
+                            <span class="switch-label">Görselli Kategori</span>
+                        </label>
 
-                </div>
-                <div class="row" style="display: none" id="imageInputContainer">
-                    <div class="col mb-4">
-                        <label for="categoryImage" class="form-label">Kategori Görseli</label>
-                        <input type="file" id="categoryImage" name="category_image" class="form-control" placeholder="">
                     </div>
-                </div>
+                    <div class="row" style="display: none" id="imageInputContainer">
+                        <div class="col mb-4">
+                            <label for="categoryImage" class="form-label">Kategori Görseli</label>
+                            <input type="file" id="categoryImage" name="category_image" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                @endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Kapat</button>

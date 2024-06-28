@@ -203,7 +203,7 @@ function create_html_delete_button($model, $id, $title, $content, $route, $isRel
 }
 function create_html_icon_delete_button($model, $id, $title, $content, $route, $isReload)
 {
-    return html()->i('')->class('cursor-pointer ti ti-trash ti-md me-2 delete-btn')
+    return html()->i('')->class('cursor-pointer ti ti-trash ti-md me-2 text-danger delete-btn')
         ->attribute('data-toggle', 'popover')
         ->attribute('data-object-id', $id)
         ->attribute('data-route', $route)

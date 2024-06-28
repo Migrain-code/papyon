@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class MenuCategoryController extends Controller
 {
+    public function updateOrder(Request $request)
+    {
+        foreach ($request->order as $order) {
+            MenuCategory::where('id', $order['id'])->update(['order_number' => $order['position']]);
+        }
+        return response()->json(['status' => 'success']);
+    }
     /**
      * Store a newly created resource in storage.
      */
