@@ -14,6 +14,7 @@ class MenuCategoryController extends Controller
         }
         return response()->json(['status' => 'success']);
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -22,10 +23,10 @@ class MenuCategoryController extends Controller
         $menuCategory = new MenuCategory();
         $menuCategory->menu_id = $request->input('menu_id');
         $menuCategory->name = $request->input('name');
-        if ($request->hasFile('category_image')){
+        if ($request->hasFile('category_image')) {
             $menuCategory->image = $request->file('category_image')->store('menuCategoryImages');
         }
-        if ($menuCategory->save()){
+        if ($menuCategory->save()) {
             return to_route('business.menu.edit', $request->input('menu_id'))->with('response', [
                 'status' => "success",
                 'message' => "Kategori Başarılı Bir Şekilde Eklendi"
@@ -38,15 +39,23 @@ class MenuCategoryController extends Controller
      */
     public function show(MenuCategory $menuCategory)
     {
-        //
+        return response()->json($menuCategory);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MenuCategory $menuCategory)
+    public function edit(MenuCategory $menuCategory, Request $request)
     {
-        //
+        $menuCategory->status = $request->is_checked == "true";
+        if ($menuCategory->save()) {
+            $menuCategory->products()->update(['status' => $menuCategory->status]);
+            return response()->json([
+                'status' => "success",
+                'message' => "Kategori durumu başarılı bir şekilde güncellendi"
+            ]);
+        }
+
     }
 
     /**
@@ -54,7 +63,14 @@ class MenuCategoryController extends Controller
      */
     public function update(Request $request, MenuCategory $menuCategory)
     {
-        //
+        $menuCategory->name = $request->input('name');
+        if ($menuCategory->save()) {
+            return response()->json([
+                'status' => "success",
+                'message' => "Kategori bilgisi başarılı bir şekilde güncellendi"
+            ]);
+        }
+
     }
 
     /**
@@ -63,10 +79,10 @@ class MenuCategoryController extends Controller
     public function destroy(MenuCategory $menuCategory)
     {
         $menuCategory->products()->delete();
-        if ($menuCategory->delete()){
+        if ($menuCategory->delete()) {
             return response()->json([
-               'status' => "success",
-               'message' => "Kategori ve içerisindeki ürünler başarılı bir şekilde silindi"
+                'status' => "success",
+                'message' => "Kategori ve içerisindeki ürünler başarılı bir şekilde silindi"
             ]);
         }
     }

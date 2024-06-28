@@ -39,38 +39,7 @@
                     <!-- User Content -->
                     <div class="card-body order-0 order-md-1">
                         <!-- User Pills -->
-                        <ul class="nav nav-pills flex-column flex-md-row mb-4 mt-4 ms-2">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="javascript:void(0);">
-                                    <i class="ti ti-user-check ti-xs me-1"></i>
-                                    Menü İçeriği
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="app-user-view-security.html">
-                                    <i class="ti ti-switch-2 ti-xs me-1"></i>
-                                    Mevcut Durumu
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="app-user-view-billing.html">
-                                    <i class="ti ti-currency-dollar ti-xs me-1"></i>
-                                    Pop-up Banner
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="app-user-view-notifications.html">
-                                    <i class="ti ti-lock ti-xs me-1"></i>
-                                    Şifre Koruma
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="app-user-view-connections.html">
-                                    <i class="ti ti-link ti-xs me-1"></i>
-                                    Raporlar
-                                </a>
-                            </li>
-                        </ul>
+                        @include('business.menu.edit.nav')
                         <!--/ User Pills -->
                         @include('business.menu.edit.tabs.menu-content')
                     </div>
@@ -79,10 +48,12 @@
             </div>
             <!-- View sales -->
         </div>
+
     </div>
-    @include('business.menu.modals.select-product-modal')
     @include('business.menu.modals.add-menu-category')
     @include('business.menu.modals.add-menu-product')
+    @include('business.menu.modals.update-menu-category')
+
 @endsection
 @section('scripts')
 
@@ -93,5 +64,5 @@
     </script>
     <!-- Page JS -->
     <script src="/business/assets/js/project/product/listing.js"></script>
-
+    <script src="/business/assets/js/project/product/category.js"></script>
 @endsection

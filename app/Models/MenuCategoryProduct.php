@@ -9,6 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MenuCategoryProduct extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ["order_number"];
+    protected $fillable = ["order_number", "status"];
 
 }

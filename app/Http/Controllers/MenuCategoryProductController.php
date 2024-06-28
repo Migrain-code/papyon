@@ -52,7 +52,13 @@ class MenuCategoryProductController extends Controller
      */
     public function edit(MenuCategoryProduct $menuCategoryProduct)
     {
-        //
+        $menuCategoryProduct->status = !$menuCategoryProduct->status;
+        if ($menuCategoryProduct->save()) {
+            return response()->json([
+                'status' => "success",
+                'message' => "Ürün durumu başarılı bir şekilde güncellendi"
+            ]);
+        }
     }
 
     /**

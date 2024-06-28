@@ -20,7 +20,7 @@
                                                 </span>
                                         </button>
                                         <i class="cursor-pointer ti ti-square-rounded-plus-filled ti-md me-2 text-success addProduct" data-menu-id="{{$category->menu_id}}" data-category-id="{{$category->id}}"></i>
-                                        <i class="cursor-pointer ti ti-edit-circle ti-md text-warning me-2"></i>
+                                        <i class="cursor-pointer ti ti-edit-circle ti-md text-warning me-2 editCategory" data-category-id="{{$category->id}}"></i>
                                         {!! create_html_icon_delete_button('MenuCategory', $category->id, 'Kategori', 'Kategori kaydını silmek istediğinize emin misiniz? Kategori içerisindeki ürünler de silinecektir', route('business.menu-category.destroy', $category->id), true) !!}
                                     </h2>
                                     <div style="visibility: visible;" id="categories-{{$category->id}}" class="accordion-collapse collapse">
