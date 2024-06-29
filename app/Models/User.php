@@ -52,6 +52,6 @@ class User extends Authenticatable
 
     public function place()
     {
-        return $this->places()->where('is_default')->first();
+        return $this->places()->where('is_default', 1)->first();
     }
 }

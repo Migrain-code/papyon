@@ -26,7 +26,7 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place::orderBy('order_number', 'asc')->whereStatus(1)->paginate(6);
+        $places = $this->user->places()->orderBy('order_number', 'asc')->whereStatus(1)->paginate(6);
         return view('business.place.index', compact('places'));
     }
 
@@ -103,11 +103,28 @@ class PlaceController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Set Default Place
      */
     public function show(Place $place)
     {
-        //
+        $this->user->places()->update(['is_default' => 0]);
+        $place->is_default = 1;
+        if ($place->save()){
+            return to_route('business.place.index')->with('response', [
+                'status' => "success",
+                'message' => $place->name ." Adlı Mekana Geçiş Yaptınız"
+            ]);
+        }
+    }
+
+    public function clonePlace(Place $place)
+    {
+        $place->clone();
+        return to_route('business.place.index')->with('response', [
+            'status' => "success",
+            'message' => $place->name ." Adlı Mekanı Kopyaladınız"
+        ]);
+
     }
 
     /**

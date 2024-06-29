@@ -20,13 +20,14 @@ class TableController extends Controller
     public function __construct()
     {
         $this->user = auth('web')->user();
+        $this->business = $this->user->place();
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $place = Place::find(1);
+        $place = $this->business;
         $regions = $place->regions;
         return view('business.table.index', compact('regions'));
     }
@@ -51,7 +52,7 @@ class TableController extends Controller
                'message' => "Bölge Bulunamadı"
             ]);
         }
-        $place = Place::find(1);
+        $place = $this->business;
         if($request->filled('table_single')){
             $uniqueString = (string) Str::uuid();
             $table = new Table();

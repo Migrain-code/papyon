@@ -10,14 +10,21 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
+    private $business;
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = auth('web')->user();
+        $this->business = $this->user->place();
+    }
     /**
      * Menu List
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
      */
     public function index()
     {
-        $place = Place::find(1);
-        $menus = $place->menus;
+        $menus = $this->business->menus;
         /*if ($menus->count() == 1){
             return to_route('business.menu.edit', $menus->first()->id);
         }*/
@@ -131,7 +138,7 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        $place = Place::find(1);
+        $place = $this->business;
         $menu = new Menu();
         $menu->place_id = $place->id;
         $menu->name = $request->input('name');

@@ -71,8 +71,8 @@
                                                     <i class="ti ti-dots-vertical ti-sm text-muted"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="teamMemberList" style="">
-                                                    <a class="dropdown-item" href="javascript:void(0);">Bu Mekana Geçiş Yap</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Bu Mekanı Kopyala</a>
+                                                    <a class="dropdown-item" href="{{route('business.place.show', $place->id)}}">Bu Mekana Geçiş Yap</a>
+                                                    <a class="dropdown-item" href="{{route('business.place.clone', $place->id)}}">Bu Mekanı Kopyala</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Gün Sonu Raporu</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Aylık Raporu</a>
                                                     <a class="dropdown-item" href="javascript:void(0);">Paylaş</a>

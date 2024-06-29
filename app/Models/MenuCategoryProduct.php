@@ -11,4 +11,8 @@ class MenuCategoryProduct extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = ["order_number", "status"];
 
+    public function category()
+    {
+        return $this->hasOne(MenuCategory::class, 'id', 'category_id');
+    }
 }

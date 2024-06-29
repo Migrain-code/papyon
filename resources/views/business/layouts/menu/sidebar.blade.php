@@ -81,6 +81,11 @@
                 <div data-i18n="Menü">Menü</div>
             </a>
         </li>
-
+        <li class="menu-item">
+            <a href="{{route('business.excel.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-database-import"></i>
+                <div data-i18n="Import/Export">Import/Export</div>
+            </a>
+        </li>
     </ul>
 </aside>

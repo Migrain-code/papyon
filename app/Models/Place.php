@@ -9,10 +9,14 @@ class Place extends Model
 {
     use HasFactory;
     protected $casts = ['other_languages' => 'object'];
-
+    protected $fillable = ['is_default'];
     public function menus() // Çalışma Saatleri
     {
         return $this->hasMany(Menu::class, 'place_id', 'id');
+    }
+    public function activeMenu()
+    {
+        return $this->menus()->where('is_default', 1)->first();
     }
     public function regions() // Çalışma Saatleri
     {
@@ -50,5 +54,47 @@ class Place extends Model
         $service->package_order_phone = $serviceData["package_order_phone"];
         $service->delivery_fee = $serviceData["delivery_fee"];
         $service->save();
+    }
+
+    public function clone()
+    {
+        $newPlace = $this->replicate();
+        $newPlace->name = $this->name . ' (Kopya)';
+        $newPlace->is_default = 0;
+        if ($newPlace->save()){
+            // İlişkili menüleri klonlama
+            foreach ($this->menus as $menu) {
+                $menu->clone($newPlace);
+            }
+
+            // İlişkili bölgeleri klonlama
+            foreach ($this->regions as $region) {
+                $newRegion = $region->replicate();
+                $newRegion->place_id = $newPlace->id; // Yeni place_id ile güncelle
+                $newRegion->save();
+            }
+
+            // İlişkili çalışma saatlerini klonlama
+            foreach ($this->workTimes as $workTime) {
+                $newWorkTime = $workTime->replicate();
+                $newWorkTime->place_id = $newPlace->id; // Yeni place_id ile güncelle
+                $newWorkTime->save();
+            }
+
+            // İlişkili Wi-Fi bilgilerini klonlama
+            if ($this->wifi) {
+                $newWifi = $this->wifi->replicate();
+                $newWifi->place_id = $newPlace->id; // Yeni place_id ile güncelle
+                $newWifi->save();
+            }
+
+            // İlişkili servis seçeneklerini klonlama
+            if ($this->services) {
+                $newServices = $this->services->replicate();
+                $newServices->place_id = $newPlace->id; // Yeni place_id ile güncelle
+                $newServices->save();
+            }
+        }
+
     }
 }

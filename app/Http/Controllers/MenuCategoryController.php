@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class MenuCategoryController extends Controller
 {
+    
     public function updateOrder(Request $request)
     {
         foreach ($request->order as $order) {

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\MenuCategoryProductController;
 use App\Http\Controllers\MenuPasswordController;
+use App\Http\Controllers\ExcelController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,6 +19,9 @@ Route::middleware('auth:web')->group(function (){
 
     Route::prefix('business')->as('business.')->group(function (){
         Route::resource('place', PlaceController::class);
+        Route::prefix('place/{place}')->as('place.')->group(function (){
+            Route::get('clone', [PlaceController::class, 'clonePlace'])->name('clone');
+        });
         Route::resource('table', TableController::class);
         Route::resource('menu', MenuController::class);
         Route::prefix('menu/{menu}')->as('menu.')->group(function (){{
@@ -34,6 +38,13 @@ Route::middleware('auth:web')->group(function (){
         Route::resource('menu-category', MenuCategoryController::class);
         Route::resource('menu-category-product', MenuCategoryProductController::class);
 
+        Route::prefix('excel')->as('excel.')->group(function (){
+            Route::get('/import-export', [ExcelController::class, 'index'])->name('index');
+            Route::get('/category-export', [ExcelController::class, 'categoryExport'])->name('category.export');
+            Route::post('/category-import', [ExcelController::class, 'categoryImport'])->name('category.import');
+            Route::post('/product-import', [ExcelController::class, 'productImport'])->name('product.import');
+            Route::get('/product-export', [ExcelController::class, 'productExport'])->name('product.export');
+        });
         Route::post('/update-category-order', [MenuCategoryController::class, 'updateOrder'])->name('category.updateOrder');
         Route::post('/update-product-order', [MenuCategoryProductController::class, 'updateOrder'])->name('product.updateOrder');
 

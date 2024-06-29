@@ -47,12 +47,7 @@ function maskPhone($phone){
 }
 function authUser()
 {
-    if (auth('official')->check()) {
-        return auth('official')->user();
-    }
-    else{
-        return auth('personel')->user();
-    }
+    return auth()->user();
 }
 
 function calculateTotal($services)
