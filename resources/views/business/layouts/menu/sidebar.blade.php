@@ -87,5 +87,11 @@
                 <div data-i18n="Import/Export">Import/Export</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{route('business.claim.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-shopping-cart"></i>
+                <div data-i18n="Talepler">Talepler</div>
+            </a>
+        </li>
     </ul>
 </aside>

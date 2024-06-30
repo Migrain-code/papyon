@@ -40,13 +40,8 @@ class Menu extends Model
             $newCategory = $category->replicate();
             $newCategory->menu_id = $newMenu->id; // Yeni menu_id ile güncelle
             $newCategory->save();
-        }
 
-        // İlişkili ürünleri klonlama
-        foreach ($this->products as $product) {
-            $newProduct = $product->replicate();
-            $newProduct->menu_id = $newMenu->id; // Yeni menu_id ile güncelle
-            $newProduct->save();
+            $category->clone($newMenu, $newCategory);
         }
 
         // İlişkili banner'ı klonlama

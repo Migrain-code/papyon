@@ -14,7 +14,7 @@ $(function () {
   // E-commerce Products datatable
   if (dt_details_table.length) {
     var dt_products = dt_details_table.DataTable({
-      ajax: assetsPath + 'json/ecommerce-order-details.json', // JSON file to add data
+      data: tableDatas,
       columns: [
         // columns according to JSON
         { data: 'id' },
@@ -61,13 +61,7 @@ $(function () {
             if ($image) {
               // For Product image
               var $output =
-                '<img src="' +
-                assetsPath +
-                'img/products/' +
-                $image +
-                '" alt="product-' +
-                $name +
-                '" class="rounded-2">';
+                '<img class="rounded-2" style="object-fit: cover" src="' + $image + '">';
             } else {
               // For Product badge
               var stateNum = Math.floor(Math.random() * 6);
@@ -81,18 +75,12 @@ $(function () {
             // Creates full output for Product name and product_brand
             var $row_output =
               '<div class="d-flex justify-content-start align-items-center text-nowrap">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar me-2">' +
-              $output +
-              '</div>' +
-              '</div>' +
+
               '<div class="d-flex flex-column">' +
               '<h6 class="text-body mb-0">' +
               $name +
               '</h6>' +
-              '<small class="text-muted">' +
-              $product_brand +
-              '</small>' +
+
               '</div>' +
               '</div>';
             return $row_output;
@@ -105,7 +93,7 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             var $price = full['price'];
-            var $output = '<span>$' + $price + '</span>';
+            var $output = '<span>' +priceTypeIcon + $price + '</span>';
             return $output;
           }
         },
@@ -127,10 +115,26 @@ $(function () {
           orderable: false,
           render: function (data, type, full, meta) {
             var $total = full['qty'] * full['price'];
-            var $output = '<h6 class="mb-0">$' + $total + '</h6>';
+            var $output = '<h6 class="mb-0 calculateProductTotal" data-product-total="'+$total+'">'+priceTypeIcon + $total + '</h6>';
             return $output;
           }
-        }
+        },
+          {
+              // Actions
+              targets: 6,
+              title: 'Actions',
+              orderable: false,
+              render: function (data, type, full, meta) {
+                  return (
+                      '<a href="javascript:;" data-product-id="'+full.id+'" data-quantity="'+full.qty+'" data-price="'+full.price+'" class="btn btn-sm btn-icon editProduct">' +
+                      '<i class="text-primary ti ti-edit-circle ti-md"></i></a>' +
+                      '<i class="cursor-pointer ti ti-trash ti-md me-2 text-danger delete-btn" ' +
+                      'data-toggle="popover" data-object-id="'+full.id+'" data-route="/business/order/'+orderId+'" ' +
+                      'data-model="App\\Models\\MenuCategory" data-content="Bu ürünü bu siparişten silmek istediğinize emin misiniz" ' +
+                      'data-reload="1" data-title="Ürün"></i>'
+                  );
+              }
+          }
       ],
       order: [2, ''], //set any columns order asc/desc
       dom: 't',
@@ -140,7 +144,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Details of ' + data['full_name'];
+              return 'Sipariş Detayı ' + data['full_name'];
             }
           }),
           type: 'column',
@@ -224,6 +228,4 @@ $(function () {
     return currentYear;
   }
 
-  var year = getCurrentYear();
-  document.getElementById('orderYear').innerHTML = year;
 })();

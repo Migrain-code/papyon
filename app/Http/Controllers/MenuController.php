@@ -24,6 +24,7 @@ class MenuController extends Controller
      */
     public function index()
     {
+
         $menus = $this->business->menus;
         /*if ($menus->count() == 1){
             return to_route('business.menu.edit', $menus->first()->id);

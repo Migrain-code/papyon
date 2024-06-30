@@ -5,89 +5,14 @@
 'use strict';
 
 $(function () {
-  var dt_scrollable_table = $('.dt-scrollableTable'),
-    dt_fixedheader_table = $('.dt-fixedheader'),
-    dt_fixedcolumns_table = $('.dt-fixedcolumns'),
-    dt_select_table = $('.dt-select-table');
-
-  // Scrollable
-  // --------------------------------------------------------------------
-
-  if (dt_scrollable_table.length) {
-    var dt_scrollableTable = dt_scrollable_table.DataTable({
-      ajax: assetsPath + 'json/table-datatable.json',
-      columns: [
-        { data: 'full_name' },
-        { data: 'post' },
-        { data: 'email' },
-        { data: 'city' },
-        { data: 'start_date' },
-        { data: 'salary' },
-        { data: 'age' },
-        { data: 'experience' },
-        { data: '' },
-        { data: '' }
-      ],
-      columnDefs: [
-        {
-          // Label
-          targets: -2,
-          render: function (data, type, full, meta) {
-            var $status_number = full['status'];
-            var $status = {
-              1: { title: 'Current', class: 'bg-label-primary' },
-              2: { title: 'Professional', class: ' bg-label-success' },
-              3: { title: 'Rejected', class: ' bg-label-danger' },
-              4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
-            };
-            if (typeof $status[$status_number] === 'undefined') {
-              return data;
-            }
-            return (
-              '<span class="badge ' + $status[$status_number].class + '">' + $status[$status_number].title + '</span>'
-            );
-          }
-        },
-        {
-          // Actions
-          targets: -1,
-          title: 'Actions',
-          searchable: false,
-          orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<div class="d-inline-block">' +
-              '<a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="text-primary ti ti-dots-vertical"></i></a>' +
-              '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              '<a href="javascript:;" class="dropdown-item">Details</a>' +
-              '<a href="javascript:;" class="dropdown-item">Archive</a>' +
-              '<div class="dropdown-divider"></div>' +
-              '<a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>' +
-              '</div>' +
-              '</div>' +
-              '<a href="javascript:;" class="item-edit text-body"><i class="text-primary ti ti-pencil"></i></a>'
-            );
-          }
-        }
-      ],
-      // Scroll options
-      scrollY: '300px',
-      scrollX: true,
-      dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      initComplete: function (settings, json) {
-        // Add the mti-n1 class to the first row in tbody
-        dt_scrollable_table.find('tbody tr:first').addClass('border-top-0');
-      }
-    });
-  }
+  var dt_fixedheader_table = $('.dt-fixedheader');
 
   // FixedHeader
   // --------------------------------------------------------------------
 
   if (dt_fixedheader_table.length) {
     var dt_fixedheader = dt_fixedheader_table.DataTable({
-      ajax: assetsPath + 'json/table-datatable.json',
+      data: tableDatas,
       columns: [
         { data: '' },
         { data: 'id' },
@@ -183,11 +108,13 @@ $(function () {
             // var $rand_num = Math.floor(Math.random() * 5) + 1;
             var $status_number = full['status'];
             var $status = {
-              1: { title: 'Current', class: 'bg-label-primary' },
-              2: { title: 'Professional', class: ' bg-label-success' },
-              3: { title: 'Rejected', class: ' bg-label-danger' },
-              4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
+              1: { title: 'Sipariş Oluşturuldu', class: 'bg-label-primary' },
+              2: { title: 'Onaylandı', class: 'bg-label-success' },
+              3: { title: 'Yola Çıktı', class: ' bg-label-secondary' },
+              4: { title: 'İptal Edildi', class: ' bg-label-danger' },
+              5: { title: 'Teslim Edilemedi', class: ' bg-label-warning' },
+              6: { title: 'Teslim Edildi', class: ' bg-label-info' },
+              7: { title: 'Tamamlandı', class: ' bg-label-success' }
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -203,17 +130,22 @@ $(function () {
           title: 'Actions',
           orderable: false,
           render: function (data, type, full, meta) {
+
             return (
               '<div class="d-inline-block">' +
               '<a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="text-primary ti ti-dots-vertical"></i></a>' +
               '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              '<a href="javascript:;" class="dropdown-item">Details</a>' +
-              '<a href="javascript:;" class="dropdown-item">Archive</a>' +
+              '<a href="javascript:;" class="dropdown-item">Onayla</a>' +
+              '<a href="javascript:;" class="dropdown-item">İptal Et</a>' +
+              '<a href="javascript:;" class="dropdown-item">Kuryede</a>' +
+              '<a href="javascript:;" class="dropdown-item">Teslim Et</a>' +
+              '<a href="javascript:;" class="dropdown-item">Tamamla</a>' +
               '<div class="dropdown-divider"></div>' +
-              '<a href="javascript:;" class="dropdown-item text-danger delete-record">Delete</a>' +
+              '<a href="javascript:;" class="dropdown-item text-danger delete-record">Sil</a>' +
               '</div>' +
               '</div>' +
-              '<a href="javascript:;" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-pencil"></i></a>'
+              '<a href="javascript:;" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-pencil"></i></a>' +
+              '<a href="/business/order/' + full.id + '" class="btn btn-sm btn-icon"><i class="text-primary ti ti-eye"></i></a>'
             );
           }
         }
@@ -227,7 +159,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Details of ' + data['full_name'];
+              return 'Sipariş Detayı ' + data['full_name'];
             }
           }),
           type: 'column',
@@ -264,146 +196,48 @@ $(function () {
     }
   }
 
-  // FixedColumns
-  // --------------------------------------------------------------------
-
-  if (dt_fixedcolumns_table.length) {
-    var dt_fixedcolumns = dt_fixedcolumns_table.DataTable({
-      ajax: assetsPath + 'json/table-datatable.json',
-      columns: [
-        { data: 'full_name' },
-        { data: 'post' },
-        { data: 'email' },
-        { data: 'city' },
-        { data: 'start_date' },
-        { data: 'salary' },
-        { data: 'age' },
-        { data: 'experience' },
-        { data: 'status' },
-        { data: 'id' }
-      ],
-      columnDefs: [
-        {
-          // Label
-          targets: -2,
-          render: function (data, type, full, meta) {
-            var $status_number = full['status'];
-            var $status = {
-              1: { title: 'Current', class: 'bg-label-primary' },
-              2: { title: 'Professional', class: ' bg-label-success' },
-              3: { title: 'Rejected', class: ' bg-label-danger' },
-              4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
-            };
-            if (typeof $status[$status_number] === 'undefined') {
-              return data;
-            }
-            return (
-              '<span class="badge ' + $status[$status_number].class + '">' + $status[$status_number].title + '</span>'
-            );
-          }
-        },
-        {
-          // Actions
-          targets: -1,
-          title: 'Actions',
-          searchable: false,
-          orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<div class="d-inline-block">' +
-              '<a href="javascript:;" class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="text-primary ti ti-dots-vertical"></i></a>' +
-              '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              '<a href="javascript:;" class="dropdown-item">Details</a>' +
-              '<a href="javascript:;" class="dropdown-item">Archive</a>' +
-              '<div class="dropdown-divider"></div>' +
-              '<a href="javascript:;" class="dropdown-item text-danger delete-record"></i>Delete</a>' +
-              '</div>' +
-              '</div>' +
-              '<a href="javascript:;" class="item-edit text-body"><i class="text-primary ti ti-pencil"></i></a>'
-            );
-          }
-        }
-      ],
-      dom: '<"d-flex justify-content-between align-items-center row"<"col-sm-12 col-md-2 d-flex"f><"col-sm-12 col-md-10 d-none"i>>t',
-      scrollY: 300,
-      scrollX: true,
-      scrollCollapse: true,
-      paging: false,
-      info: false,
-      // Fixed column option
-      fixedColumns: true,
-      initComplete: function (settings, json) {
-        // Add the mti-n1 class to the first row in tbody
-        dt_fixedcolumns_table.find('tbody tr:first').addClass('border-top-0');
-      }
-    });
-  }
-
-  // Select
-  // --------------------------------------------------------------------
-
-  if (dt_select_table.length) {
-    var dt_select = dt_select_table.DataTable({
-      ajax: assetsPath + 'json/table-datatable.json',
-      columns: [
-        { data: 'id' },
-        { data: 'full_name' },
-        { data: 'post' },
-        { data: 'email' },
-        { data: 'city' },
-        { data: 'start_date' },
-        { data: 'salary' },
-        { data: 'status' }
-      ],
-      columnDefs: [
-        {
-          // For Checkboxes
-          targets: 0,
-          searchable: false,
-          orderable: false,
-          render: function () {
-            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-          },
-          checkboxes: {
-            selectRow: true,
-            selectAllRender: '<input type="checkbox" class="form-check-input">'
-          }
-        },
-        {
-          // Label
-          targets: -1,
-          render: function (data, type, full, meta) {
-            var $status_number = full['status'];
-            var $status = {
-              1: { title: 'Current', class: 'bg-label-primary' },
-              2: { title: 'Professional', class: ' bg-label-success' },
-              3: { title: 'Rejected', class: ' bg-label-danger' },
-              4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
-            };
-            if (typeof $status[$status_number] === 'undefined') {
-              return data;
-            }
-            return (
-              '<span class="badge ' + $status[$status_number].class + '">' + $status[$status_number].title + '</span>'
-            );
-          }
-        }
-      ],
-      order: [[1, 'desc']],
-      dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      select: {
-        // Select style
-        style: 'multi'
-      }
-    });
-  }
-
   // Filter form control to default size
   // ? setTimeout used for multilingual table initialization
   setTimeout(() => {
     $('.dataTables_filter .form-control').removeClass('form-control-sm');
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 200);
+
+  $('.item-show').on('click', function (){
+        var orderId = $(this).data('order-id');
+        var orderModal = new bootstrap.Modal(document.querySelector('#orderDetailModal'));
+      $.ajax({
+          url: '/business/order/'+orderId,
+          type: "GET",
+          dataType: "JSON",
+          success: function (res) {
+              $('#orderId').text('#'+orderId);
+              $('#nameSurname').text(res.name);
+              $('#phoneNumber').text(res.phone);
+              $('#paymentType').text(res.paymentType);
+              $('#createdAt').text(res.created_at);
+              $('#totalPayed').text(res.totalPrice);
+              orderModal.show();
+          },
+          error: function (xhr) {
+
+              var errorMessage = "<ul>";
+              xhr.responseJSON.errors.forEach(function (error) {
+                  errorMessage += "<li>" + error + "</li>";
+              });
+              errorMessage += "</ul>";
+
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Hata!',
+                  html: errorMessage,
+                  buttonsStyling: false,
+                  confirmButtonText: "Tamam",
+                  customClass: {
+                      confirmButton: "btn btn-primary"
+                  }
+              });
+          }
+      });
+  });
 });

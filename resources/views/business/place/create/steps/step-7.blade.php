@@ -5,6 +5,22 @@
 </div>
 <div class="row g-3">
     <div class="row g-3">
+        <div class="d-flex" style="max-width: 500px">
+            <div class="col">
+                <label>Masadan Sipariş</label>
+            </div>
+            <div class="col">
+                <label class="switch switch-lg">
+                    <input type="checkbox" class="switch-input" name="table_order">
+                    <span class="switch-toggle-slider">
+                    <span class="switch-on"><i class="ti ti-check"></i></span>
+                    <span class="switch-off"><i class="ti ti-x"></i></span>
+                </span>
+                    <span class="switch-label">Kapalı</span>
+                </label>
+            </div>
+        </div>
+        <hr>
         <!-- Garson Çağır -->
         <div class="d-flex" style="max-width: 500px">
             <div class="col">

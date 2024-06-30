@@ -9,6 +9,8 @@ use App\Http\Controllers\MenuCategoryController;
 use App\Http\Controllers\MenuCategoryProductController;
 use App\Http\Controllers\MenuPasswordController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\ClaimController;
+use App\Http\Controllers\OrderController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -37,7 +39,13 @@ Route::middleware('auth:web')->group(function (){
         }});
         Route::resource('menu-category', MenuCategoryController::class);
         Route::resource('menu-category-product', MenuCategoryProductController::class);
-
+        Route::resource('claim', ClaimController::class);
+        Route::resource('order', OrderController::class);
+        Route::prefix('order/{order}')->as('order.')->group(function (){
+            Route::post('update-discount', [OrderController::class, 'updateDiscount'])->name('discount.update');
+            Route::post('add-product', [OrderController::class, 'addProduct'])->name('addProduct');
+            Route::post('get-payment', [OrderController::class, 'getPayment'])->name('getPayment');
+        });
         Route::prefix('excel')->as('excel.')->group(function (){
             Route::get('/import-export', [ExcelController::class, 'index'])->name('index');
             Route::get('/category-export', [ExcelController::class, 'categoryExport'])->name('category.export');

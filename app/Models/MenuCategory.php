@@ -14,4 +14,15 @@ class MenuCategory extends Model
     {
         return $this->hasMany(MenuCategoryProduct::class, 'category_id', 'id')->orderBy('order_number', 'asc');
     }
+
+    public function clone($newMenu, $newCategory)
+    {
+        // İlişkili ürünleri klonlama
+        foreach ($this->products as $product) {
+            $newProduct = $product->replicate();
+            $newProduct->menu_id = $newMenu->id; // Yeni menu_id ile güncelle
+            $newProduct->category_id = $newCategory->id; // Yeni menu_id ile güncelle
+            $newProduct->save();
+        }
+    }
 }

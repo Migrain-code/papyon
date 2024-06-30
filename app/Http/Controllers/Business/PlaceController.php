@@ -81,6 +81,7 @@ class PlaceController extends Controller
 
 
         $serviceData = $request->only([
+            'table_order',
             'call_a_waiter',
             'request_account',
             'call_a_valet',
