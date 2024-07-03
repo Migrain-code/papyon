@@ -28,7 +28,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Talepler /</span> Sipariş Talepleri</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Talepler /</span>Paket Sipariş Talepleri</h4>
         <div class="row">
             <!-- View sales -->
             <div class="col-12">
@@ -37,7 +37,7 @@
                         <div class="col-7">
                             <div class="card-body text-nowrap">
                                 <h5 class="card-title mb-0">Talepler! 🎉</h5>
-                                <p class="mb-2">İletilen Tüm talepleri listeleyin</p>
+                                <p class="mb-2">İletilen Tüm paket sipariş taleplerini listeleyin</p>
                                 <h4 class="text-primary mb-1"></h4>
                                 <a href="{{route('business.claim.index')}}" class="btn btn-primary">Siparişler</a>
                             </div>
@@ -64,7 +64,7 @@
                         <!--/ User Pills -->
                         <!-- Fixed Header -->
                         <div class="card">
-                            <h5 class="card-header">Fixed Header</h5>
+                            <h5 class="card-header">Paket Siparişleri</h5>
                             <div class="card-datatable table-responsive">
                                 <table class="dt-fixedheader table">
                                     <thead>

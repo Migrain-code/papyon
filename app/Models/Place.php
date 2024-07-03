@@ -28,6 +28,15 @@ class Place extends Model
         return $this->hasMany(PlaceWorkTime::class, 'place_id', 'id');
     }
 
+    public function orders() // Siparişler
+    {
+        return $this->hasMany(Order::class, 'place_id', 'id');
+    }
+    public function claims() // Siparişler
+    {
+        return $this->hasMany(Claim::class, 'place_id', 'id');
+    }
+
     public function wifi() // wifi
     {
         return $this->hasOne(PlaceWifi::class, 'place_id', 'id');
@@ -56,6 +65,23 @@ class Place extends Model
         $service->save();
     }
 
+    public function totalClaims()
+    {
+        $ordersCount = $this->orders->where('status', 0)->count();
+        $packetCount = $this->orders->where('status', 0)->where('order_type', 0)->count();
+        $taxiCount = $this->claims->where('type_id', 0)->where('status', 0)->count();
+        $valeCount = $this->claims->where('type_id', 1)->where('status', 0)->count();
+        $waiterCount = $this->claims->where('type_id', 2)->where('status', 0)->count();
+        $claims = [
+            'orderCount' => $ordersCount,
+            'packetCount' => $packetCount,
+            'taxiCount' => $taxiCount,
+            'valeCount' => $valeCount,
+            'waiterCount' => $waiterCount,
+        ];
+
+        return $claims;
+    }
     public function clone()
     {
         $newPlace = $this->replicate();

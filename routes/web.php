@@ -40,6 +40,12 @@ Route::middleware('auth:web')->group(function (){
         Route::resource('menu-category', MenuCategoryController::class);
         Route::resource('menu-category-product', MenuCategoryProductController::class);
         Route::resource('claim', ClaimController::class);
+        Route::prefix('claims')->as('claim.')->group(function (){
+            Route::get('taxi', [ClaimController::class, 'taxi'])->name('taxi');
+            Route::get('vale', [ClaimController::class, 'vale'])->name('vale');
+            Route::get('waiter', [ClaimController::class, 'waiter'])->name('waiter');
+            Route::get('packet', [ClaimController::class, 'packet'])->name('packet');
+        });
         Route::resource('order', OrderController::class);
         Route::prefix('order/{order}')->as('order.')->group(function (){
             Route::post('update-discount', [OrderController::class, 'updateDiscount'])->name('discount.update');

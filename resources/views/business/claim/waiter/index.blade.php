@@ -28,7 +28,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Talepler /</span> Sipariş Talepleri</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Talepler /</span> Vale Talepleri</h4>
         <div class="row">
             <!-- View sales -->
             <div class="col-12">
@@ -37,9 +37,9 @@
                         <div class="col-7">
                             <div class="card-body text-nowrap">
                                 <h5 class="card-title mb-0">Talepler! 🎉</h5>
-                                <p class="mb-2">İletilen Tüm talepleri listeleyin</p>
+                                <p class="mb-2">İletilen Tüm Vale taleplerini listeleyin</p>
                                 <h4 class="text-primary mb-1"></h4>
-                                <a href="{{route('business.claim.index')}}" class="btn btn-primary">Siparişler</a>
+                                <a href="{{route('business.claim.taxi')}}" class="btn btn-primary">Taxi Talepleri</a>
                             </div>
                         </div>
                         <div class="col-5 text-center text-sm-left">
@@ -60,29 +60,25 @@
                         <!-- User Pills -->
                         @include('business.claim.nav')
 
-
                         <!--/ User Pills -->
                         <!-- Fixed Header -->
                         <div class="card">
-                            <h5 class="card-header">Fixed Header</h5>
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Vale Talepleri</h5>
+                            </div>
                             <div class="card-datatable table-responsive">
-                                <table class="dt-fixedheader table">
-                                    <thead>
+                                <table class="datatables-products table">
+                                    <thead class="border-top">
                                         <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>Sipariş Kodu</th>
+                                            <th>ID</th>
                                             <th>Ad Soyad</th>
-                                            <th>Ödeme Türü</th>
-                                            <th>Tarih</th>
-                                            <th>Toplam Tutar</th>
+                                            <th>Telefon</th>
                                             <th>Durum</th>
-                                            <th>Action</th>
+                                            <th>Masa</th>
+                                            <th>Tarih</th>
+                                            <th>İşlemler</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -93,30 +89,25 @@
             </div>
             <!-- View sales -->
         </div>
-
+        <input type="hidden" id="typeId" name="typeId" value="1">
     </div>
     @include('business.claim.modals.order-detail')
 @endsection
 @section('scripts')
+
     <script>
-        var tableDatas = [];
-        @foreach($orders as $order)
-            $newData = {
-                "id": {{$order->id}},
-                "avatar": "",
-                "full_name": "{{$order->name}}",
-                "post": "{{$order->phone}}",
-                "email": "{{$order->payment_type_id}}",
-                "city": "asdad",
-                "start_date": "{{$order->created_at->format('d.m.Y H:i')}}",
-                "salary": "{{formatPrice($order->total)}}",
-                "age": "61",
-                "experience": "1 Year",
-                "status": {{$order->status}}
-            }
-            tableDatas.push($newData);
-        @endforeach
+        var DATA_URL = "{{route('business.claim.datatable')}}?typeId=2";
+        var DATA_COLUMNS = [
+            {data: 'id'},
+            {data: 'name'},
+            {data: 'phone'},
+            {data: 'status'},
+            {data: 'table_id'},
+            {data: 'created_at'},
+            {data: 'action'}
+        ];
+
     </script>
-    <script src="/business/assets/js/tables-datatables-extensions.js"></script>
+    <script src="/business/assets/js/app-ecommerce-product-list.js"></script>
 
 @endsection

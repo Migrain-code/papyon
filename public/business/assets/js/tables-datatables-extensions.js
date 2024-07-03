@@ -108,6 +108,7 @@ $(function () {
             // var $rand_num = Math.floor(Math.random() * 5) + 1;
             var $status_number = full['status'];
             var $status = {
+              0: { title: 'Sipariş Beklemede', class: 'bg-label-warning' },
               1: { title: 'Sipariş Oluşturuldu', class: 'bg-label-primary' },
               2: { title: 'Onaylandı', class: 'bg-label-success' },
               3: { title: 'Yola Çıktı', class: ' bg-label-secondary' },
