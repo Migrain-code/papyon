@@ -11,6 +11,8 @@ use App\Http\Controllers\MenuPasswordController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RegionController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,6 +27,7 @@ Route::middleware('auth:web')->group(function (){
             Route::get('clone', [PlaceController::class, 'clonePlace'])->name('clone');
         });
         Route::resource('table', TableController::class);
+        Route::resource('region', RegionController::class);
         Route::resource('menu', MenuController::class);
         Route::prefix('menu/{menu}')->as('menu.')->group(function (){{
             Route::get('status', [MenuController::class, 'statusView'])->name('status');

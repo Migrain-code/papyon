@@ -206,7 +206,19 @@ function create_html_delete_button($model, $id, $title, $content, $route, $isRel
         ->attribute('data-reload', $isReload)
         ->attribute('data-title', $title);
 }
-
+function create_html_delete_big_button($model, $id, $title, $content, $route, $isReload)
+{
+    return html()->button(html()->i('')->class('fa fa-trash'))
+        ->class('btn btn-danger me-1 mb-3 delete-btn')
+        ->attribute('data-toggle', 'popover')
+        ->attribute('data-object-id', $id)
+        ->attribute('data-route', $route)
+        ->attribute('data-model', 'App\Models\\' . str_replace('App\Models\\', '', $model))
+        ->attribute('data-content', $content)
+        //->attribute('data-delete-type', $deleteType)
+        ->attribute('data-reload', $isReload)
+        ->attribute('data-title', $title);
+}
 function create_html_icon_delete_button($model, $id, $title, $content, $route, $isReload)
 {
     return html()->i('')->class('cursor-pointer ti ti-trash ti-md me-2 text-danger delete-btn')

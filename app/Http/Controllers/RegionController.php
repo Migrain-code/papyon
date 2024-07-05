@@ -7,52 +7,43 @@ use Illuminate\Http\Request;
 
 class RegionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    private $business;
+    private $user;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function __construct()
     {
-        //
+        $this->user = auth('web')->user();
+        $this->business = $this->user->place();
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $region = new Region();
+        $region->place_id = $this->business->id;
+        $region->name = $request->input('region_name');
+        if ($region->save()){
+            return back()->with('response', [
+               'status' => "success",
+               'message' => "Bölge Eklendi"
+            ]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Region $region)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Region $region)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Region $region)
     {
-        //
+        $region->name = $request->input('region_new_name');
+        if ($region->save()){
+            return back()->with('response', [
+                'status' => "success",
+                'message' => "Bölge Bilgisi Güncellendi"
+            ]);
+        }
     }
 
     /**
@@ -60,6 +51,12 @@ class RegionController extends Controller
      */
     public function destroy(Region $region)
     {
-        //
+        $region->tables()->delete();
+        if ($region->delete()){
+            return response()->json([
+               'status' => "success",
+               'message' => "Bölge Kaydı ve İçerisindeki Masalar Silindi",
+            ]);
+        }
     }
 }

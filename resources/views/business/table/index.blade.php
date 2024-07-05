@@ -61,7 +61,7 @@
                         <h5 class="mb-1">Masalar ve Bölgeler</h5>
                         <p class="text-muted mb-0">Mekanınıza Kayıt Edilmiş Tüm Bölgeler Ve Masalar</p>
                     </div>
-
+                    <button class="btn btn-label-primary" data-bs-toggle="modal" data-bs-target="#addRegionModal">Bölge Ekle</button>
                 </div>
                 <div class="card-body">
                     <div class="row gy-4 mb-4">
@@ -88,6 +88,12 @@
                                                     <i class="fa fa-print me-2"></i>
                                                     İndir
                                                 </a>
+                                                <button class="btn btn-success mb-3 editRegionButton" data-url="{{route('business.region.update', $region->id)}}" data-name="{{$region->name}}">
+                                                    <i class="fa fa-edit me-2"></i>
+                                                    Düzenle
+                                                </button>
+                                                {!! create_html_delete_big_button('Region', $region->id,'Bölge','Bölge kaydını silmek istediğinize emin misiniz? Bölgeyi Sildiğinizde Altındaki Masalarda Silinecektir.',route('business.region.destroy', $region->id),true)!!}
+
                                             </div>
                                             <div class="row">
                                                @foreach($region->tables as $table)
@@ -138,6 +144,8 @@
         </div>
     </div>
     @include('business.table.modals.add-table')
+    @include('business.table.modals.add-region')
+    @include('business.table.modals.edit-region')
 @endsection
 @section('scripts')
     <script>
@@ -163,5 +171,15 @@
                 }
             });
         }
+
+        $('.editRegionButton').on('click', function (){
+           var dataUrl = $(this).data('url');
+           var dataName = $(this).data('name');
+
+           var modal = new bootstrap.Modal(document.querySelector('#editRegionModal'));
+           $('[name="region_new_name"]').val(dataName);
+           $('#editRegionForm').attr('action', dataUrl);
+           modal.show();
+        });
     </script>
 @endsection
