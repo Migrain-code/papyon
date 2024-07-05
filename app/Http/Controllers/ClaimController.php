@@ -11,8 +11,8 @@ class ClaimController extends Controller
 {
     private $business;
     private $user;
-
     private $claims;
+
     public function __construct()
     {
         $this->user = auth('web')->user();
@@ -51,8 +51,8 @@ class ClaimController extends Controller
     public function packet()
     {
         $claims = $this->claims;
-        $orders = $this->business->orders()->where('order_type', 0)->get();
-        return view('business.claim.packet.index', compact('orders', 'claims'));
+
+        return view('business.claim.packet.index', compact( 'claims'));
     }
 
     /**
@@ -64,11 +64,17 @@ class ClaimController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Update Claim Status
      */
-    public function show(Claim $claim)
+    public function show(Claim $claim, Request $request)
     {
-        //
+        $claim->status = $request->statusCode;
+        if ($claim->save()){
+            return response()->json([
+               'status' => "success",
+               'message' => "Talep Durumu Güncellendi"
+            ]);
+        }
     }
 
     /**
@@ -100,7 +106,7 @@ class ClaimController extends Controller
         $claims = Claim::where('type_id', $request->typeId)->latest();
         return DataTables::of($claims)
             ->editColumn('id', function ($q) {
-                return createCheckbox($q->id, 'Claim', 'Müşterileri');
+                return createCheckbox($q->id, 'Claim', 'Siparişler', 'orderChecks');
             })
             ->editColumn('name', function ($q) {
                 return createName(route('business.claim.edit', $q->id), $q->name);
@@ -119,8 +125,25 @@ class ClaimController extends Controller
             })
             ->addColumn('action', function ($q) {
                 $html = "";
-                $html .= create_edit_button(route('business.claim.edit', $q->id));
-                $html .= create_delete_button('Claim', $q->id, 'Talep', 'Talep Kaydını Silmek İstediğinize Eminmisiniz? Kayıt Sadece İşletmenizden Silinecektir');
+                //$html .= create_edit_button(route('business.claim.edit', $q->id));
+                $buttons = [
+                   [
+                         'buttonText' => "Onayla",
+                         'buttonLink' => null,
+                         'id' => 1,
+                   ],
+                   [
+                        'buttonText' => "İptal Et",
+                        'buttonLink' => null,
+                        'id' => 2,
+                   ],
+                   [
+                        'buttonText' => "Tamamla",
+                        'buttonLink' => null,
+                        'id' => 3,
+                   ],
+                ];
+                $html.= create_dropdown_button($buttons, $q->id, 'updateStatus');
 
                 return $html;
             })

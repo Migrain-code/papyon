@@ -48,6 +48,7 @@ Route::middleware('auth:web')->group(function (){
         });
         Route::resource('order', OrderController::class);
         Route::prefix('order/{order}')->as('order.')->group(function (){
+            Route::get('detail', [OrderController::class, 'detail'])->name('detail');
             Route::post('update-discount', [OrderController::class, 'updateDiscount'])->name('discount.update');
             Route::post('add-product', [OrderController::class, 'addProduct'])->name('addProduct');
             Route::post('get-payment', [OrderController::class, 'getPayment'])->name('getPayment');
@@ -64,5 +65,9 @@ Route::middleware('auth:web')->group(function (){
 
         Route::get('download/{region}/zip', [TableController::class, 'downloadZip'])->name('downloadRegion');
         Route::get('download/{table}/table', [TableController::class, 'downloadTable'])->name('downloadTable');
+
+        Route::prefix('ajax')->group(function (){
+           Route::post('all-delete-object', [\App\Http\Controllers\AjaxController::class, 'allDelete']);
+        });
     });
 });

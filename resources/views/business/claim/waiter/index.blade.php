@@ -28,7 +28,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Talepler /</span> Vale Talepleri</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Talepler /</span> Garson Talepleri</h4>
         <div class="row">
             <!-- View sales -->
             <div class="col-12">
@@ -37,9 +37,9 @@
                         <div class="col-7">
                             <div class="card-body text-nowrap">
                                 <h5 class="card-title mb-0">Talepler! 🎉</h5>
-                                <p class="mb-2">İletilen Tüm Vale taleplerini listeleyin</p>
+                                <p class="mb-2">İletilen Tüm Garson taleplerini listeleyin</p>
                                 <h4 class="text-primary mb-1"></h4>
-                                <a href="{{route('business.claim.taxi')}}" class="btn btn-primary">Taxi Talepleri</a>
+                                <a href="{{route('business.claim.waiter')}}" class="btn btn-primary">Garson Talepleri</a>
                             </div>
                         </div>
                         <div class="col-5 text-center text-sm-left">
@@ -63,14 +63,21 @@
                         <!--/ User Pills -->
                         <!-- Fixed Header -->
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Vale Talepleri</h5>
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div class="card-title">
+                                    <h4 >Garson Talepleri</h4>
+                                </div>
+                                <x-table-all-delete-button title="Garson Taleplerini" model="App\Models\Claim"></x-table-all-delete-button>
                             </div>
                             <div class="card-datatable table-responsive">
-                                <table class="datatables-products table">
+                                <table class="datatables-products table" id="datatable">
                                     <thead class="border-top">
                                         <tr>
-                                            <th>ID</th>
+                                            <th>
+                                                <div>
+                                                    <input class="form-check-input" id="serviceAllSelect" type="checkbox">
+                                                </div>
+                                            </th>
                                             <th>Ad Soyad</th>
                                             <th>Telefon</th>
                                             <th>Durum</th>
@@ -106,8 +113,9 @@
             {data: 'created_at'},
             {data: 'action'}
         ];
-
+        var updateUrl = "claim";
     </script>
     <script src="/business/assets/js/app-ecommerce-product-list.js"></script>
+    <script src="/business/assets/js/project/claim/update-status.js"></script>
 
 @endsection

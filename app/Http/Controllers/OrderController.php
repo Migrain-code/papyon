@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\OrderDetailResource;
+use App\Models\Claim;
 use App\Models\MenuCategoryProduct;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -10,10 +11,30 @@ use Yajra\DataTables\DataTables;
 
 class OrderController extends Controller
 {
+    private $business;
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = auth('web')->user();
+        $this->business = $this->user->place();
+
+    }
     /**
      * Display the specified resource.
      */
-    public function show(Order $order)
+    public function show(Order $order, Request $request)
+    {
+        $order->status = $request->statusCode;
+        if ($order->save()){
+            return response()->json([
+                'status' => "success",
+                'message' => "Sipariş Durumu Güncellendi"
+            ]);
+        }
+    }
+
+    public function detail(Order $order)
     {
         // return response()->json(OrderDetailResource::make($order));
         $place = authUser()->place();
@@ -21,8 +42,8 @@ class OrderController extends Controller
         $products = $place->activeMenu()->products;
 
         return view('business.order.detail.index', compact('order', 'regions', 'products'));
-    }
 
+    }
     /**
      * Show the form for editing the specified resource.
      */
@@ -183,5 +204,73 @@ class OrderController extends Controller
                 'message' => "Ödeme Alındı. Sipariş tamamlandı"
             ]);
         }
+    }
+
+    public function datatable(Request $request)
+    {
+        $claims = $this->business->orders()->when($request->filled('typeId'), function ($q){
+            $q->where('order_type', 0);
+        })->get();
+        return DataTables::of($claims)
+            ->editColumn('id', function ($q) {
+                return createCheckbox($q->id, 'Order', 'Siparişler', 'orderChecks');
+            })
+            ->editColumn('name', function ($q) {
+                return $q->name;
+            })
+            ->editColumn('phone', function ($q) {
+                return createPhone($q->phone, formatPhone($q->phone));
+            })
+            ->editColumn('total', function ($q) {
+                return formatPrice($q->total);
+            })
+            ->editColumn('status', function ($q) {
+                return $q->orderStatus('icon');
+            })
+            ->editColumn('created_at', function ($q) {
+                return $q->created_at->format('d.m.Y H:i');
+            })
+            ->addColumn('action', function ($q) {
+                $html = "";
+                $buttons = [
+                    [
+                        'buttonText' => "Düzenle",
+                        'buttonLink' => route('business.order.detail', $q->id),
+                        'id' => 0,
+                    ],
+                    [
+                        'buttonText' => "Onayla",
+                        'buttonLink' => null,
+                        'id' => 1,
+                    ],
+                    [
+                        'buttonText' => "İptal Et",
+                        'buttonLink' => null,
+                        'id' => 2,
+                    ],
+                    [
+                        'buttonText' => "Kuryede",
+                        'buttonLink' => null,
+                        'id' => 3,
+                    ],
+                    [
+                        'buttonText' => "Teslim Edildi",
+                        'buttonLink' => null,
+                        'id' => 4,
+                    ],
+                    [
+                        'buttonText' => "Tamamlandı",
+                        'buttonLink' => null,
+                        'id' => 5,
+                    ],
+
+                ];
+                $html.= create_dropdown_button($buttons, $q->id, 'updateStatus');
+
+                return $html;
+            })
+            ->rawColumns(['id', 'action', 'name', 'status'])
+            ->make(true);
+
     }
 }

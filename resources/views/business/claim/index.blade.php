@@ -64,20 +64,27 @@
                         <!--/ User Pills -->
                         <!-- Fixed Header -->
                         <div class="card">
-                            <h5 class="card-header">Fixed Header</h5>
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <div class="card-title">
+                                    <h4 >Siparişler</h4>
+                                </div>
+                                <x-table-all-delete-button title="Siparişleri" model="App\Models\Order"></x-table-all-delete-button>
+                            </div>
                             <div class="card-datatable table-responsive">
-                                <table class="dt-fixedheader table">
+                                <table class="datatables-products table" id="datatable">
                                     <thead>
                                         <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>Sipariş Kodu</th>
+                                            <th>
+                                                <div>
+                                                    <input class="form-check-input" id="serviceAllSelect" type="checkbox">
+                                                </div>
+                                            </th>
                                             <th>Ad Soyad</th>
-                                            <th>Ödeme Türü</th>
-                                            <th>Tarih</th>
-                                            <th>Toplam Tutar</th>
+                                            <th>Telefon</th>
                                             <th>Durum</th>
-                                            <th>Action</th>
+                                            <th>Toplam Tutar</th>
+                                            <th>Tarih</th>
+                                            <th>İşlemler</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,24 +106,18 @@
 @endsection
 @section('scripts')
     <script>
-        var tableDatas = [];
-        @foreach($orders as $order)
-            $newData = {
-                "id": {{$order->id}},
-                "avatar": "",
-                "full_name": "{{$order->name}}",
-                "post": "{{$order->phone}}",
-                "email": "{{$order->payment_type_id}}",
-                "city": "asdad",
-                "start_date": "{{$order->created_at->format('d.m.Y H:i')}}",
-                "salary": "{{formatPrice($order->total)}}",
-                "age": "61",
-                "experience": "1 Year",
-                "status": {{$order->status}}
-            }
-            tableDatas.push($newData);
-        @endforeach
+        var DATA_URL = "{{route('business.order.datatable')}}";
+        var DATA_COLUMNS = [
+            {data: 'id'},
+            {data: 'name'},
+            {data: 'phone'},
+            {data: 'status'},
+            {data: 'total'},
+            {data: 'created_at'},
+            {data: 'action'}
+        ];
+        var updateUrl = "order";
     </script>
-    <script src="/business/assets/js/tables-datatables-extensions.js"></script>
-
+    <script src="/business/assets/js/app-ecommerce-product-list.js"></script>
+    <script src="/business/assets/js/project/claim/update-status.js"></script>
 @endsection

@@ -22,10 +22,11 @@ $(function () {
             order: [2, 'asc'], //set any columns order asc/desc
             lengthMenu: [7, 10, 20, 50, 70, 100], //for length of menu
             language: {
+                "url": "https://cdn.datatables.net/plug-ins/1.11.2/i18n/tr.json",
                 sLengthMenu: '_MENU_',
                 search: '',
                 searchPlaceholder: 'Taleplerde Ara',
-                info: 'Displaying _START_ to _END_ of _TOTAL_ entries'
+                info: '_TOTAL_ kayıttan _START_ ile _END_ arasındakiler gösteriliyor'
             },
 
         });

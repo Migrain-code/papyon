@@ -19,6 +19,16 @@ class Claim extends Model
             "name" => "Talep Onaylandı",
             "icon" => '<span class="badge bg-label-success">Talep Onaylandı</span>',
         ],
+        2 => [
+            "id" => 2,
+            "name" => "Talep İptal Edildi",
+            "icon" => '<span class="badge bg-label-danger">Talep İptal Edildi</span>',
+        ],
+        3 => [
+            "id" => 3,
+            "name" => "Talep Tamamlandı",
+            "icon" => '<span class="badge bg-label-success">Talep Tamamlandı</span>',
+        ],
     ];
 
     const TYPE_LIST = [
