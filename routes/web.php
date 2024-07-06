@@ -12,15 +12,15 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RegionController;
-
+use App\Http\Controllers\SwiperAdvertController;
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::middleware('auth:web')->group(function (){
+Route::middleware(['auth:web', 'twoFactor'])->group(function (){
     Route::get('/home', [HomeController::class, 'index'])->name('business.home');
-
+    Route::get('/2FA-verification', [HomeController::class, 'twoFactorShow'])->name('business.twoFactor');
     Route::prefix('business')->as('business.')->group(function (){
         Route::resource('place', PlaceController::class);
         Route::prefix('place/{place}')->as('place.')->group(function (){
@@ -69,6 +69,16 @@ Route::middleware('auth:web')->group(function (){
         Route::get('download/{region}/zip', [TableController::class, 'downloadZip'])->name('downloadRegion');
         Route::get('download/{table}/table', [TableController::class, 'downloadTable'])->name('downloadTable');
 
+        Route::resource('swiper-advert', SwiperAdvertController::class);
+
+        Route::prefix('setting')->as('setting.')->group(function (){
+            Route::get('/',  [\App\Http\Controllers\SettingController::class, 'index'])->name('index');
+            Route::get('/security',  [\App\Http\Controllers\SettingController::class, 'security'])->name('security');
+            Route::post('/update-password',  [\App\Http\Controllers\SettingController::class, 'changePassword'])->name('updatePassword');
+            Route::post('/enable-two-factor-authentication', [\App\Http\Controllers\SettingController::class, 'activeTwoFactorAuth'])->name('twoFactorActive');
+            Route::post('/disable-factor-authentication', [\App\Http\Controllers\SettingController::class, 'passiveTwoFactorAuth'])->name('disableTwoFactor');
+
+        });
         Route::prefix('ajax')->group(function (){
            Route::post('all-delete-object', [\App\Http\Controllers\AjaxController::class, 'allDelete']);
         });

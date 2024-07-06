@@ -4,7 +4,7 @@ $(document).on('click', '.updateStatus', function () {
 
     Swal.fire({
         title: 'İşlemi Yapmak İstiyormusun',
-        text: 'Talep Durumunu Güncellemek İstiyormusunuz.',
+        text: 'Durumu Güncellemek İstiyormusunuz.',
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

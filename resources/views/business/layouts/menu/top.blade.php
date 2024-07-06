@@ -481,10 +481,13 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+                        <a class="dropdown-item" href="javascript:void(0)" onclick="$('#logoutForm').submit()">
                             <i class="ti ti-logout me-2 ti-sm"></i>
                             <span class="align-middle">Log Out</span>
                         </a>
+                        <form type="hidden" method="post" id="logoutForm" action="{{route('logout')}}">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </li>

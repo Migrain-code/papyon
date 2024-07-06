@@ -10,5 +10,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('business.home.index');
+        //return view('business.auth.two-factor');
     }
+
+    public function twoFactorShow()
+    {
+        return view('business.auth.two-factor');
+    }
+
 }

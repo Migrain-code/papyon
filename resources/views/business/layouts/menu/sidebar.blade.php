@@ -93,5 +93,11 @@
                 <div data-i18n="Talepler">Talepler</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{route('business.swiper-advert.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-discount"></i>
+                <div data-i18n="Kampanyalar">Kampanyalar</div>
+            </a>
+        </li>
     </ul>
 </aside>

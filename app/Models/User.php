@@ -6,11 +6,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
-
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
     /**
      * The attributes that are mass assignable.
      *
@@ -53,5 +56,40 @@ class User extends Authenticatable
     public function place()
     {
         return $this->places()->where('is_default', 1)->first();
+    }
+
+    public function orderCount()
+    {
+        $orderCount = $this->places()
+            ->withCount(['orders' => function ($query) {
+                $query->whereIn('status', [4, 5]);
+            }])
+            ->get()
+            ->sum('orders_count');
+        return $orderCount;
+    }
+
+    public function orderTotal()
+    {
+        $totalRevenue = $this->places()
+            ->with(['orders' => function ($query) {
+                $query->whereIn('status', [4, 5]);
+            }])
+            ->get()
+            ->flatMap(function ($place) {
+                return $place->orders;
+            })
+            ->sum('total');
+
+        return $totalRevenue;
+    }
+
+    public function advertCount()
+    {
+        $advertCount = $this->places()
+            ->withCount(['adverts'])
+            ->get()
+            ->sum('adverts_count');
+        return $advertCount;
     }
 }

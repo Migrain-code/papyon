@@ -37,6 +37,11 @@ class Place extends Model
         return $this->hasMany(Claim::class, 'place_id', 'id');
     }
 
+    public function adverts() // Reklamlar
+    {
+        return $this->hasMany(SwiperAdvert::class, 'place_id', 'id');
+    }
+
     public function wifi() // wifi
     {
         return $this->hasOne(PlaceWifi::class, 'place_id', 'id');

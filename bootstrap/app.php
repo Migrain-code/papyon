@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias(['twoFactor' => \App\Http\Middleware\CheckTwoFactorEnable::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
