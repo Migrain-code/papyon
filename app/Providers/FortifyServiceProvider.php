@@ -39,13 +39,6 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::registerView(function (){
             return view('business.auth.register');
         });
-        Fortify::twoFactorChallengeView(function () {
-            return view('business.auth.two-factor-challenge');
-        });
-
-        Fortify::confirmPasswordView(function () {
-            return view('business.auth.password.confirm');
-        });
 
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);

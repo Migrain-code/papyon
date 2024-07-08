@@ -99,5 +99,11 @@
                 <div data-i18n="Kampanyalar">Kampanyalar</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{route('business.setting.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-settings"></i>
+                <div data-i18n="Ayarlar">Ayarlar</div>
+            </a>
+        </li>
     </ul>
 </aside>

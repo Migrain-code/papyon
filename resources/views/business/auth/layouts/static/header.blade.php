@@ -47,6 +47,7 @@
     <!-- Page -->
     <link rel="stylesheet" href="/business/assets/vendor/css/pages/page-auth.css" />
 
+    @yield('styles')
     <!-- Helpers -->
     <script href="/business/assets/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->

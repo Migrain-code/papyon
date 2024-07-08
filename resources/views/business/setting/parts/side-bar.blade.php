@@ -58,14 +58,7 @@
                         <span class="badge bg-label-success">Aktif</span>
                     </li>
                 </ul>
-                <div class="d-flex justify-content-center">
-                    <a
-                        href="javascript:;"
-                        class="btn btn-primary me-3"
-                        data-bs-target="#editUser"
-                        data-bs-toggle="modal"
-                    >Profili Düzenle</a>
-                </div>
+
             </div>
         </div>
     </div>

@@ -11,14 +11,10 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link py-2" href="app-ecommerce-customer-details-billing.html"
-        ><i class="ti ti-file-invoice me-1"></i>Faturalar</a
-        >
+        <a class="nav-link py-2 @if(request()->routeIs('business.setting.invoice')) active @endif" href="{{route('business.setting.invoice')}}"><i class="ti ti-file-invoice me-1"></i>Faturalar</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link py-2" href="app-ecommerce-customer-details-notifications.html"
-        ><i class="ti ti-bell me-1"></i>Bildirim İzinleri</a
-        >
+        <a class="nav-link py-2 @if(request()->routeIs('business.setting.notificationPermission')) active @endif" href="{{route('business.setting.notificationPermission')}}"><i class="ti ti-bell me-1"></i>Bildirim İzinleri</a>
     </li>
 </ul>
 <!--/ Customer Pills -->

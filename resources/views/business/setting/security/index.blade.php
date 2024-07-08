@@ -23,14 +23,20 @@
                 <h4 class="mb-1">Müşteri Numaranız #{{$user->id}}</h4>
                 <p class="mb-0">Kayıt Tarihi : {{$user->created_at->translatedFormat('d F Y h:i')}}</p>
             </div>
-            <a class="btn btn-label-success text-success">Profili Düzenle</a>
+            <a class="btn btn-label-success text-success"  data-bs-toggle="modal" data-bs-target="#editUser">Profili Düzenle</a>
         </div>
        <div class="row">
            @include('business.setting.parts.side-bar')
            @include('business.setting.security.parts.content')
+           @include('business.setting.security.modals.add-phone')
        </div>
     </div>
+    @include('business.setting.modals.edit-user-info-modal')
+
 @endsection
 @section('scripts')
-
+    <script src="/business/assets/vendor/libs/cleavejs/cleave.js"></script>
+    <script src="/business/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+    <!-- Page JS -->
+    <script src="/business/assets/js/modal-enable-otp.js"></script>
 @endsection

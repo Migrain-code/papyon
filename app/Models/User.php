@@ -13,7 +13,6 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    use TwoFactorAuthenticatable;
     /**
      * The attributes that are mass assignable.
      *
@@ -48,9 +47,18 @@ class User extends Authenticatable
         ];
     }
 
+    public function notificationPermission()
+    {
+        return $this->hasOne(NotificationPermission::class, 'user_id', 'id');
+    }
     public function places()
     {
         return $this->hasMany(Place::class, 'user_id', 'id');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(PacketOrder::class, 'user_id', 'id');
     }
 
     public function place()

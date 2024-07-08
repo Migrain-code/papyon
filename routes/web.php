@@ -19,8 +19,15 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth:web', 'twoFactor'])->group(function (){
-    Route::get('/home', [HomeController::class, 'index'])->name('business.home');
+    Route::post('cikis-yap', [HomeController::class, 'logout'])->name('business.logout');
     Route::get('/2FA-verification', [HomeController::class, 'twoFactorShow'])->name('business.twoFactor');
+    Route::post('/2FA-verification', [HomeController::class, 'twoFactorSms'])->name('business.twoFactor.verify');
+    Route::get('/2FA-verification-resend', [HomeController::class, 'resendCode'])
+        ->name('business.twoFactor.resend')
+        ->middleware('throttle:3,4'); // 1. parametre istek sayısı 2.dakika;
+
+    Route::get('/home', [HomeController::class, 'index'])->name('business.home');
+
     Route::prefix('business')->as('business.')->group(function (){
         Route::resource('place', PlaceController::class);
         Route::prefix('place/{place}')->as('place.')->group(function (){
@@ -73,10 +80,16 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
 
         Route::prefix('setting')->as('setting.')->group(function (){
             Route::get('/',  [\App\Http\Controllers\SettingController::class, 'index'])->name('index');
+            /** --------------------------Güvenlik Rotaları --------------------------------- */
             Route::get('/security',  [\App\Http\Controllers\SettingController::class, 'security'])->name('security');
             Route::post('/update-password',  [\App\Http\Controllers\SettingController::class, 'changePassword'])->name('updatePassword');
             Route::post('/enable-two-factor-authentication', [\App\Http\Controllers\SettingController::class, 'activeTwoFactorAuth'])->name('twoFactorActive');
             Route::post('/disable-factor-authentication', [\App\Http\Controllers\SettingController::class, 'passiveTwoFactorAuth'])->name('disableTwoFactor');
+            /** -------------------------- Faturalar --------------------------------- */
+            Route::get('/invoice',  [\App\Http\Controllers\SettingController::class, 'invoice'])->name('invoice');
+            Route::get('/bildirim-izinleri',  [\App\Http\Controllers\SettingController::class, 'notificationPermission'])->name('notificationPermission');
+            Route::post('/bildirim-izinleri-guncelle',  [\App\Http\Controllers\SettingController::class, 'notificationPermissionUpdate'])->name('notificationPermission.update');
+            Route::post('/update-info',  [\App\Http\Controllers\SettingController::class, 'updateInfo'])->name('updateInfo');
 
         });
         Route::prefix('ajax')->group(function (){

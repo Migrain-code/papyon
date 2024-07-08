@@ -417,7 +417,7 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="../../assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                        <img src="{{storage(authUser()->image)}}" alt class="h-auto rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -426,12 +426,12 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="../../assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                                        <img src="{{storage(authUser()->image)}}" alt class="h-auto rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block">John Doe</span>
-                                    <small class="text-muted">Admin</small>
+                                    <span class="fw-medium d-block">{{authUser()->name}}</span>
+                                    <small class="text-muted">Yönetici</small>
                                 </div>
                             </div>
                         </a>
@@ -440,25 +440,24 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-profile-user.html">
-                            <i class="ti ti-user-check me-2 ti-sm"></i>
-                            <span class="align-middle">My Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                        <a class="dropdown-item" href="{{route('business.setting.index')}}">
                             <i class="ti ti-settings me-2 ti-sm"></i>
-                            <span class="align-middle">Settings</span>
+                            <span class="align-middle">Ayarlar</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-account-settings-billing.html">
+                        <a class="dropdown-item" href="{{route('business.setting.security')}}">
+                            <i class="ti ti-user-check me-2 ti-sm"></i>
+                            <span class="align-middle">Güvenlik</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="{{route('business.setting.invoice')}}">
                         <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20"
-                          >2</span
-                          >
+                              <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
+                              <span class="flex-grow-1 align-middle">Faturalar</span>
+
                         </span>
                         </a>
                     </li>
@@ -468,13 +467,13 @@
                     <li>
                         <a class="dropdown-item" href="pages-faq.html">
                             <i class="ti ti-help me-2 ti-sm"></i>
-                            <span class="align-middle">FAQ</span>
+                            <span class="align-middle">Destek</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-pricing.html">
-                            <i class="ti ti-currency-dollar me-2 ti-sm"></i>
-                            <span class="align-middle">Pricing</span>
+                            <i class="ti ti-shopping-cart me-2 ti-sm"></i>
+                            <span class="align-middle">Abonelik Paketleri</span>
                         </a>
                     </li>
                     <li>
@@ -483,9 +482,9 @@
                     <li>
                         <a class="dropdown-item" href="javascript:void(0)" onclick="$('#logoutForm').submit()">
                             <i class="ti ti-logout me-2 ti-sm"></i>
-                            <span class="align-middle">Log Out</span>
+                            <span class="align-middle">Çıkış Yap</span>
                         </a>
-                        <form type="hidden" method="post" id="logoutForm" action="{{route('logout')}}">
+                        <form type="hidden" method="post" id="logoutForm" action="{{route('business.logout')}}">
                             @csrf
                         </form>
                     </li>
