@@ -18,4 +18,9 @@ class PacketOrder extends Model
     {
         return (($this->price * 20) / 100);
     }
+
+    public function packet()
+    {
+        return $this->hasOne(Package::class, 'id', 'package_id');
+    }
 }

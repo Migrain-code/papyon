@@ -15,4 +15,19 @@ class MenuCategoryProduct extends Model
     {
         return $this->hasOne(MenuCategory::class, 'id', 'category_id');
     }
+
+    public function otherProducts()
+    {
+        return $this->hasMany(OtherProduct::class, 'product_id', 'id');
+    }
+
+    public function allergens()
+    {
+        return $this->hasMany(ProductAllergen::class, 'product_id', 'id');
+    }
+
+    public function units()
+    {
+        return $this->hasMany(ProductUnit::class, 'product_id', 'id');
+    }
 }

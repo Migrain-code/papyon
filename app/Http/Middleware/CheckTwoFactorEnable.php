@@ -39,6 +39,7 @@ class CheckTwoFactorEnable
             $user->save();
 
             Sms::send($user->phone,  'Papyon sistemine giriş için doğrulama kodunuz: '.$user->sms_code);
+            //Sms::send($user->phone,  'Papyon sistemine giriş için doğrulama kodunuz: '.$user->sms_code);
         }
 
     }

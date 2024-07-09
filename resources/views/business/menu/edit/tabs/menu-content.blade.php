@@ -19,7 +19,7 @@
                                                    {{$category->name}}
                                                 </span>
                                         </button>
-                                        <i class="cursor-pointer ti ti-square-rounded-plus-filled ti-md me-2 text-success addProduct" data-menu-id="{{$category->menu_id}}" data-category-id="{{$category->id}}"></i>
+                                        <a href="{{route('business.menuCategory.create', $category->id)}}" class="cursor-pointer ti ti-square-rounded-plus-filled ti-md me-2 text-success addProduct" data-menu-id="{{$category->menu_id}}" data-category-id="{{$category->id}}"></a>
                                         <i class="cursor-pointer ti ti-edit-circle ti-md text-warning me-2 editCategory" data-category-id="{{$category->id}}"></i>
                                         {!! create_html_icon_delete_button('MenuCategory', $category->id, 'Kategori', 'Kategori kaydını silmek istediğinize emin misiniz? Kategori içerisindeki ürünler de silinecektir', route('business.menu-category.destroy', $category->id), true) !!}
                                     </h2>
@@ -38,7 +38,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="d-flex">
-                                                            <i class="cursor-pointer ti ti-edit ti-md me-2 text-warning editProduct" data-product-id="{{$product->id}}"></i>
+                                                            <a href="{{route('business.menu-category-product.show', $product->id)}}" class="cursor-pointer ti ti-edit ti-md me-2 text-warning" data-product-id="{{$product->id}}"></a>
                                                             {!! create_html_icon_delete_button('MenuCategoryProduct', $product->id, 'Ürün', 'Ürün kaydını silmek istediğinize emin misiniz?', route('business.menu-category-product.destroy', $product->id), true) !!}
                                                         </div>
                                                     </div>

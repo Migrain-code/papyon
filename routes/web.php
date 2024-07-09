@@ -13,10 +13,16 @@ use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SwiperAdvertController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ContractController;
+use App\Http\Controllers\SubscribtionController;
+use App\Http\Controllers\PlaceUnitController;
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/packet/{package}/callback/{user}', [SubscribtionController::class, 'callback'])->name('business.subscribtion.payment.callback');
 
 Route::middleware(['auth:web', 'twoFactor'])->group(function (){
     Route::post('cikis-yap', [HomeController::class, 'logout'])->name('business.logout');
@@ -36,6 +42,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
         Route::resource('table', TableController::class);
         Route::resource('region', RegionController::class);
         Route::resource('menu', MenuController::class);
+        Route::resource('place-unit', PlaceUnitController::class);
         Route::prefix('menu/{menu}')->as('menu.')->group(function (){{
             Route::get('status', [MenuController::class, 'statusView'])->name('status');
             Route::post('update/price', [MenuController::class, 'updatePrice'])->name('updatePrice');
@@ -49,6 +56,10 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
         }});
         Route::resource('menu-category', MenuCategoryController::class);
         Route::resource('menu-category-product', MenuCategoryProductController::class);
+        Route::prefix('menu-category/{category}')->as('menuCategory.')->group(function (){
+            Route::get('/create', [MenuCategoryProductController::class, 'create'])->name('create');
+            Route::post('/create-product', [MenuCategoryProductController::class, 'store'])->name('store');
+        });
         Route::resource('claim', ClaimController::class);
         Route::prefix('claims')->as('claim.')->group(function (){
             Route::get('taxi', [ClaimController::class, 'taxi'])->name('taxi');
@@ -78,20 +89,33 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
 
         Route::resource('swiper-advert', SwiperAdvertController::class);
 
+        /** ----------------------------- Kullanıcı Ayarları ----------------------------  **/
         Route::prefix('setting')->as('setting.')->group(function (){
-            Route::get('/',  [\App\Http\Controllers\SettingController::class, 'index'])->name('index');
+            Route::get('/',  [SettingController::class, 'index'])->name('index');
             /** --------------------------Güvenlik Rotaları --------------------------------- */
-            Route::get('/security',  [\App\Http\Controllers\SettingController::class, 'security'])->name('security');
-            Route::post('/update-password',  [\App\Http\Controllers\SettingController::class, 'changePassword'])->name('updatePassword');
-            Route::post('/enable-two-factor-authentication', [\App\Http\Controllers\SettingController::class, 'activeTwoFactorAuth'])->name('twoFactorActive');
-            Route::post('/disable-factor-authentication', [\App\Http\Controllers\SettingController::class, 'passiveTwoFactorAuth'])->name('disableTwoFactor');
+            Route::get('/security',  [SettingController::class, 'security'])->name('security');
+            Route::post('/update-password',  [SettingController::class, 'changePassword'])->name('updatePassword');
+            Route::post('/enable-two-factor-authentication', [SettingController::class, 'activeTwoFactorAuth'])->name('twoFactorActive');
+            Route::post('/disable-factor-authentication', [SettingController::class, 'passiveTwoFactorAuth'])->name('disableTwoFactor');
             /** -------------------------- Faturalar --------------------------------- */
-            Route::get('/invoice',  [\App\Http\Controllers\SettingController::class, 'invoice'])->name('invoice');
-            Route::get('/bildirim-izinleri',  [\App\Http\Controllers\SettingController::class, 'notificationPermission'])->name('notificationPermission');
-            Route::post('/bildirim-izinleri-guncelle',  [\App\Http\Controllers\SettingController::class, 'notificationPermissionUpdate'])->name('notificationPermission.update');
-            Route::post('/update-info',  [\App\Http\Controllers\SettingController::class, 'updateInfo'])->name('updateInfo');
+            Route::get('/invoice',  [SettingController::class, 'invoice'])->name('invoice');
+            Route::get('/bildirim-izinleri',  [SettingController::class, 'notificationPermission'])->name('notificationPermission');
+            Route::post('/bildirim-izinleri-guncelle',  [SettingController::class, 'notificationPermissionUpdate'])->name('notificationPermission.update');
+            Route::post('/update-info',  [SettingController::class, 'updateInfo'])->name('updateInfo');
+        });
+
+        Route::resource('announcement', AnnouncementController::class);
+        Route::resource('contract', ContractController::class);
+
+        Route::prefix('subscribtion')->as('subscribtion.')->group(function (){
+            Route::get('/', [SubscribtionController::class, 'index'])->name('index');
+            Route::get('/{slug}/satin-al', [SubscribtionController::class, 'payForm'])->name('payForm');
+            Route::post('/{slug}/odeme-yap', [SubscribtionController::class, 'pay'])->name('pay');
+            Route::get('/odeme-basarili', [SubscribtionController::class, 'success'])->name('payment.success');
+            Route::get('/odeme-basarisiz', [SubscribtionController::class, 'fail'])->name('payment.fail');
 
         });
+
         Route::prefix('ajax')->group(function (){
            Route::post('all-delete-object', [\App\Http\Controllers\AjaxController::class, 'allDelete']);
         });

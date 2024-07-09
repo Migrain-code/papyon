@@ -26,8 +26,8 @@ class ProductAddRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'menu_id' => 'required',
-            'category_id' => 'required',
+            //'menu_id' => 'required',
+            //'category_id' => 'required',
             'product_name' => 'required',
             //'product_description' => 'required',
             'price' => 'required',

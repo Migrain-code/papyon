@@ -44,4 +44,17 @@ class Sms
         return $response;
     }
 
+    public static function sendWhatsAppMessage($number, $message)
+    {
+
+        // Telefon numarasını ve mesajı URL kodlama
+        $encodedMessage = urlencode($message);
+
+        // WhatsApp linkini oluşturma
+        //$whatsappLink = "https://wa.me/$number?text=$encodedMessage";
+        $whatsappLink = "whatsapp://send?phone=+90 $number&text=$encodedMessage";
+        // Kullanıcıyı WhatsApp linkine yönlendirme
+        header("Location: $whatsappLink");
+        exit();
+    }
 }

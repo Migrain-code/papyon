@@ -5,11 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Product\ProductAddRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Http\Resources\ProductDetailResource;
+use App\Models\Allergen;
+use App\Models\MenuCategory;
 use App\Models\MenuCategoryProduct;
+use App\Models\OtherProduct;
+use App\Models\ProductAllergen;
+use App\Models\ProductUnit;
 use Illuminate\Http\Request;
 
 class MenuCategoryProductController extends Controller
 {
+    private $business;
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = auth('web')->user();
+        $this->business = $this->user->place();
+    }
+    public function create(MenuCategory $category)
+    {
+        $categories = $category->menu->categories;
+        $allergens = Allergen::whereStatus(1)->get();
+        $menu = $category->menu;
+        return view('business.menu.product.create', compact('categories', 'allergens', 'menu', 'category'));
+    }
     public function updateOrder(Request $request)
     {
         foreach ($request->order as $order) {
@@ -20,19 +40,53 @@ class MenuCategoryProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductAddRequest $request)
+    public function store(MenuCategory $category, ProductAddRequest $request)
     {
-        $menuCategory = new MenuCategoryProduct();
-        $menuCategory->menu_id = $request->input('menu_id');
-        $menuCategory->category_id = $request->input('category_id');
-        $menuCategory->name = $request->input('product_name');
-        $menuCategory->description = $request->input('product_description');
-        $menuCategory->price = $request->input('price');
+        //$request->dd();
+        $menuCategoryProduct = new MenuCategoryProduct();
+        $menuCategoryProduct->menu_id = $category->menu_id;
+        $menuCategoryProduct->category_id = $category->id;
+        $menuCategoryProduct->name = $request->input('product_name');
+        $menuCategoryProduct->description = $request->input('product_description');
+        $menuCategoryProduct->price = $request->input('price');
+        $menuCategoryProduct->calorie_total = $request->input('calorie');
+        $menuCategoryProduct->cookie_time = $request->input('cooking_time');
+
+        $otherProducts = $request->other_products;
+
         if ($request->hasFile('product_image')){
-            $menuCategory->image = $request->file('product_image')->store('menuCategoryProductImages');
+            $menuCategoryProduct->image = $request->file('product_image')->store('menuCategoryProductImages');
         }
-        if ($menuCategory->save()){
-            return response()->json([
+        if ($menuCategoryProduct->save()){
+
+            if (isset($otherProducts) && count($otherProducts) > 0){
+                foreach ($otherProducts as $otherProductId){
+                    $otherProduct = new OtherProduct();
+                    $otherProduct->product_id = $menuCategoryProduct->id;
+                    $otherProduct->added_product_id = $otherProductId;
+                    $otherProduct->save();
+                }
+            }
+            $unitPrices = $request->input('group-a');
+            if (isset($unitPrices) && count($unitPrices) > 0){
+                foreach ($unitPrices as $unitPrice){
+                    $productUnit = new ProductUnit();
+                    $productUnit->product_id = $menuCategoryProduct->id;
+                    $productUnit->unit_id = $unitPrice["added_unit"];
+                    $productUnit->price = $unitPrice["added_price"];
+                    $productUnit->save();
+                }
+            }
+            $allergens = $request->allergens;
+            if (isset($allergens) && count($allergens) > 0){
+                foreach ($allergens as $allergenId){
+                    $productAllergen = new ProductAllergen();
+                    $productAllergen->allergen_id = $allergenId;
+                    $productAllergen->product_id = $menuCategoryProduct->id;
+                    $productAllergen->save();
+                }
+            }
+            return to_route('business.menu.edit', $category->menu_id)->with('response',[
                 'status' => "success",
                 'message' => "Ürün Başarılı Bir Şekilde Eklendi"
             ]);
@@ -44,7 +98,14 @@ class MenuCategoryProductController extends Controller
      */
     public function show(MenuCategoryProduct $menuCategoryProduct)
     {
-        return response()->json(ProductDetailResource::make($menuCategoryProduct));
+        $category = $menuCategoryProduct->category;
+        $menu = $menuCategoryProduct->category->menu;
+        $categories = $menu->categories;
+        $allergens = Allergen::whereStatus(1)->get();
+        $units = $menuCategoryProduct->units;
+        $placeUnits = $this->business->units;
+
+        return view('business.menu.product.edit', compact('menuCategoryProduct', 'categories', 'allergens', 'category', 'units','placeUnits'));
     }
 
     /**
@@ -66,16 +127,59 @@ class MenuCategoryProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, MenuCategoryProduct $menuCategoryProduct)
     {
+        //$request->dd();
         $menuCategoryProduct->name = $request->input('product_name');
         $menuCategoryProduct->description = $request->input('product_description');
         $menuCategoryProduct->price = $request->input('price');
+        $menuCategoryProduct->calorie_total = $request->input('calorie');
+        $menuCategoryProduct->calorie_total = $request->input('calorie');
+        $menuCategoryProduct->cookie_time = $request->input('cooking_time');
+
         if ($request->hasFile('product_image')){
             $menuCategoryProduct->image = $request->file('product_image')->store('menuCategoryProductImages');
         }
         if ($menuCategoryProduct->save()){
-            return response()->json([
+            $otherProducts = $request->other_products;
+            if (isset($otherProducts) && count($otherProducts) > 0){
+                $menuCategoryProduct->otherProducts()->delete();
+                foreach ($otherProducts as $otherProductId){
+                    $otherProduct = new OtherProduct();
+                    $otherProduct->product_id = $menuCategoryProduct->id;
+                    $otherProduct->added_product_id = $otherProductId;
+                    $otherProduct->save();
+                }
+            } else{
+                $menuCategoryProduct->otherProducts()->delete();
+            }
+
+            $unitPrices = $request->input('group-a');
+            if (isset($unitPrices) && count($unitPrices) > 0){
+                $menuCategoryProduct->units()->delete();
+                foreach ($unitPrices as $unitPrice){
+                    $productUnit = new ProductUnit();
+                    $productUnit->product_id = $menuCategoryProduct->id;
+                    $productUnit->unit_id = $unitPrice["added_unit"];
+                    $productUnit->price = $unitPrice["added_price"];
+                    $productUnit->save();
+                }
+            } else{
+                $menuCategoryProduct->units()->delete();
+            }
+            $allergens = $request->allergens;
+            if (isset($allergens) && count($allergens) > 0){
+                $menuCategoryProduct->allergens()->delete();
+                foreach ($allergens as $allergenId){
+                    $productAllergen = new ProductAllergen();
+                    $productAllergen->allergen_id = $allergenId;
+                    $productAllergen->product_id = $menuCategoryProduct->id;
+                    $productAllergen->save();
+                }
+            } else{
+                $menuCategoryProduct->allergens()->delete();
+            }
+            return to_route('business.menu.edit', $menuCategoryProduct->category->menu_id)->with('response',[
                 'status' => "success",
-                'message' => "Ürün Bilgileri Başarılı Bir Şekilde Güncellendi"
+                'message' => "Ürün Başarılı Bir Şekilde Güncellendi"
             ]);
         }
     }

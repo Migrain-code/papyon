@@ -51,7 +51,6 @@
 
     </div>
     @include('business.menu.modals.add-menu-category')
-    @include('business.menu.modals.add-menu-product')
     @include('business.menu.modals.update-menu-category')
 
 @endsection
@@ -65,4 +64,5 @@
     <!-- Page JS -->
     <script src="/business/assets/js/project/product/listing.js"></script>
     <script src="/business/assets/js/project/product/category.js"></script>
+
 @endsection

@@ -10,7 +10,7 @@ class Place extends Model
     use HasFactory;
     protected $casts = ['other_languages' => 'object'];
     protected $fillable = ['is_default'];
-    public function menus() // Çalışma Saatleri
+    public function menus()
     {
         return $this->hasMany(Menu::class, 'place_id', 'id');
     }
@@ -18,11 +18,19 @@ class Place extends Model
     {
         return $this->menus()->where('is_default', 1)->first();
     }
-    public function regions() // Çalışma Saatleri
+    public function regions()
     {
         return $this->hasMany(Region::class, 'place_id', 'id');
     }
 
+    public function units()
+    {
+        return $this->hasMany(PlaceUnit::class, 'place_id', 'id')->orderBy('id', 'asc');
+    }
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class, 'place_id', 'id');
+    }
     public function workTimes() // Çalışma Saatleri
     {
         return $this->hasMany(PlaceWorkTime::class, 'place_id', 'id');

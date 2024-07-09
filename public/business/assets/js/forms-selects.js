@@ -7,7 +7,8 @@
 $(function () {
   const selectPicker = $('.selectpicker'),
     select2 = $('.select2'),
-    select2Icons = $('.select2-icons');
+    select2Icons = $('.select2-icons'),
+    select2Icons1 = $('.select2-icons-1');
 
   // Bootstrap Select
   // --------------------------------------------------------------------
@@ -49,4 +50,24 @@ $(function () {
       }
     });
   }
+
+    if (select2Icons1.length) {
+        // custom template to render icons
+        function renderIcons(option) {
+            if (!option.id) {
+                return option.text;
+            }
+            var $icon = "<img src='" + $(option.element).data('icon') + "' class='me-2' style='width: 20px;height: 20px;'>" + option.text;
+
+            return $icon;
+        }
+        select2Icons1.wrap('<div class="position-relative"></div>').select2({
+            dropdownParent: select2Icons1.parent(),
+            templateResult: renderIcons,
+            templateSelection: renderIcons,
+            escapeMarkup: function (es) {
+                return es;
+            }
+        });
+    }
 });

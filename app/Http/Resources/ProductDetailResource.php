@@ -19,6 +19,8 @@ class ProductDetailResource extends JsonResource
           'description' => $this->description,
           'price' => $this->price,
           'image' => isset($this->image) ? storage($this->image) : null,
+          'others' => $this->otherProducts,
+          'allergens' => $this->allergens,
         ];
     }
 }

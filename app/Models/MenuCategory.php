@@ -14,6 +14,10 @@ class MenuCategory extends Model
     {
         return $this->hasMany(MenuCategoryProduct::class, 'category_id', 'id')->orderBy('order_number', 'asc');
     }
+    public function menu()
+    {
+        return $this->hasOne(Menu::class, 'id', 'menu_id');
+    }
 
     public function clone($newMenu, $newCategory)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Allergen;
 use App\Models\Menu;
 use App\Models\MenuCategoryProduct;
 use App\Models\MenuPopupBanner;
@@ -165,8 +166,8 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         $categories = $menu->categories;
-
-        return view('business.menu.edit.index', compact('menu', 'categories'));
+        $allergens = Allergen::whereStatus(1)->get();
+        return view('business.menu.edit.index', compact('menu', 'categories', 'allergens'));
     }
 
     /**

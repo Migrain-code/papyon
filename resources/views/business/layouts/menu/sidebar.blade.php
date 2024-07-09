@@ -100,6 +100,18 @@
             </a>
         </li>
         <li class="menu-item">
+            <a href="{{route('business.announcement.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-speakerphone"></i>
+                <div data-i18n="Duyurular">Duyurular</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{route('business.contract.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-writing-sign"></i>
+                <div data-i18n="Sözleşmeler">Sözleşmeler</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="{{route('business.setting.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-settings"></i>
                 <div data-i18n="Ayarlar">Ayarlar</div>

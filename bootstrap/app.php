@@ -13,7 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(['twoFactor' => \App\Http\Middleware\CheckTwoFactorEnable::class]);
+        $middleware->validateCsrfTokens(except: [
+            '/packet/*/callback/*',
+        ]);
     })
+
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

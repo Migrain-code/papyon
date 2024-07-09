@@ -17,12 +17,12 @@
                 <div class="row">
                     <div class="col mb-4">
                         <label for="nameBasic" class="form-label">Ürün Fiyatı</label>
-                        <input type="text" id="nameBasic" name="price" class="form-control" placeholder="Örn. Menü 1">
+                        <input type="number" id="nameBasic" name="price" class="form-control" placeholder="Örn. Menü 1">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col mb-4">
-                        <label for="nameBasic" class="form-label">Ürün Açıklaması</label>
+                        <label for="nameBasic" class="form-label">Ürün Açıklaması </label>
                         <textarea type="text" id="nameBasic" name="product_description" class="form-control" placeholder="Örn. Menü 1"></textarea>
                     </div>
                 </div>
@@ -49,7 +49,29 @@
                         </div>
                     </div>
                 @endif
+                <div class="col-md-12 mb-4">
+                    <label for="select2Icons" class="form-label">Yanında İyi Gider</label>
+                    <select id="select2Icons" name="other_products[]" multiple class="select2-icons form-select">
+                        @foreach($categories as $category)
+                            <optgroup label="{{$category->name}}">
+                                @foreach($category->products as $product)
+                                    <option value="{{$product->id}}" data-icon="ti ti-shopping-bag">{{$product->name}}</option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
 
+
+                    </select>
+                </div>
+
+                <div class="col-md-12 mb-4">
+                    <label for="select2Allergens" class="form-label">Alerjenler</label>
+                    <select id="select2Allergens" name="allergens[]" multiple class="select2-icons-1 form-select">
+                        @foreach($allergens as $allergen)
+                            <option value="{{$allergen->id}}" data-icon="/business/assets/img/icon-test.svg">{{$allergen->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Kapat</button>

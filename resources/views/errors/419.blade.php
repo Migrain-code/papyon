@@ -3,7 +3,7 @@
     <script>
 
         document.addEventListener("DOMContentLoaded", function() {
-            window.location.href = "{{ route('loginTypes') }}";
+            location.reload();
         });
     </script>
     </body>
