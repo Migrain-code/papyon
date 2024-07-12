@@ -1,12 +1,4 @@
-$('#categorImageCheck').on('change', function (){
-    var imageInputArea = document.getElementById('imageInputContainer');
-    if($(this).is(':checked')){
-        imageInputArea.style.display = "block";
-    } else{
-        imageInputArea.style.display = "none";
-        $('#categoryImage').val("");
-    }
-});
+
 $('#productImageCheck').on('change', function (){
     var productImageInputArea = document.getElementById('productImageInputContainer');
     if($(this).is(':checked')){

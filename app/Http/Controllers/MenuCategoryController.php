@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class MenuCategoryController extends Controller
 {
-    
+
     public function updateOrder(Request $request)
     {
         foreach ($request->order as $order) {
@@ -65,6 +65,9 @@ class MenuCategoryController extends Controller
     public function update(Request $request, MenuCategory $menuCategory)
     {
         $menuCategory->name = $request->input('name');
+        if ($request->hasFile('product_image')) {
+            $menuCategory->image = $request->file('product_image')->store('menuCategoryImages');
+        }
         if ($menuCategory->save()) {
             return response()->json([
                 'status' => "success",

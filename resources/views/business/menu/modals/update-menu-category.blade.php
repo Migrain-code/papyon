@@ -14,7 +14,7 @@
                            <input type="text" id="nameBasic" name="category_name" class="form-control" placeholder="Örn. Menü 1">
                        </div>
                    </div>
-                    <div id="allImageInputContainer" style="display: none">
+                    <div id="allImageInputContainer" style="display: block">
                         <div class="row">
                             <label class="switch switch-lg mb-4">
                                 <input type="checkbox" class="switch-input" id="categoryImageCheck">

@@ -6,7 +6,7 @@
 
 @section('content')
     @php
-        $themeId = 4;
+        $themeId = 1;
     @endphp
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Menüler /</span> Menü Detayı / Görünütlenen Menü ({{$menu->name}})</h4>

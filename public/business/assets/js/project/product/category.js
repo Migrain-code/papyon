@@ -54,9 +54,10 @@ $('#categoryUpdateButton').on('click', function (){
     formData.append('_method', 'PUT');
     formData.append("name", $('[name="category_name"]').val());
 
-    /*if($('[name="product_image"]').length > 0){
-        formData.append("product_image", $('[name="product_image"]')[0].files[0]);
-    }*/
+    if($('[name="update_category_image"]').length > 0){
+
+        formData.append("product_image", $('[name="update_category_image"]')[0].files[0]);
+    }
     $.ajax({
         url: '/business/menu-category/'+category_id,
         type: "POST",
@@ -99,4 +100,14 @@ $('#categoryUpdateButton').on('click', function (){
 
 
 
+});
+$('#categoryImageCheck').on('change', function (){
+
+    var imageInputArea = document.getElementById('updateImageInputContainer');
+    if($(this).is(':checked')){
+        imageInputArea.style.display = "block";
+    } else{
+        imageInputArea.style.display = "none";
+        $('#categoryImage').val("");
+    }
 });

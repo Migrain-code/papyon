@@ -49,7 +49,10 @@ class Place extends Model
     {
         return $this->hasMany(SwiperAdvert::class, 'place_id', 'id');
     }
-
+    public function activeAdverts() // Reklamlar
+    {
+        return $this->adverts()->where('status', 1);
+    }
     public function wifi() // wifi
     {
         return $this->hasOne(PlaceWifi::class, 'place_id', 'id');

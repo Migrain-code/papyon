@@ -7,6 +7,36 @@ use Illuminate\Support\Str;
 use Spatie\Html\Elements\A;
 use Spatie\Html\Elements\Div;
 
+function generateWifiQrCode($ssid, $password, $encryption = 'WPA')
+{
+    // Format the text for the WiFi QR code
+    $wifiText = "WIFI:T:{$encryption};S:{$ssid};P:{$password};;";
+
+    $qrCode = new QrCode($wifiText);
+    $qrCode->setSize(1200);
+    $writer = new PngWriter();
+    $result = $writer->write($qrCode);
+
+    // Get the image data
+    $imageData = $result->getString();
+
+    // Convert image data to base64
+    $base64Image = base64_encode($imageData);
+
+    return "data:image/png;base64,".$base64Image;
+}
+function generateTextQrCode($text)
+{
+    $qrCode = new QrCode($text);
+    $qrCode->setSize(1200);
+    $writer = new PngWriter();
+    $result = $writer->write($qrCode);
+    $imageData = $result->getString();
+
+    // Convert image data to base64
+    $base64Image = base64_encode($imageData);
+    return "data:image/png;base64,".$base64Image;
+}
 function generateQrCode($text, $folderName, $fileName, $place_id)
 {
     $qrCode = new QrCode($text);
@@ -26,6 +56,10 @@ function generateQrCode($text, $folderName, $fileName, $place_id)
     return $newFilePath;
 }
 
+function instagramLink($username)
+{
+    return "https://www.instagram.com/". $username;
+}
 function storage($path): string
 {
     return asset('storage/' . $path);

@@ -18,10 +18,15 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\SubscribtionController;
 use App\Http\Controllers\PlaceUnitController;
+use App\Http\Controllers\QrMenuController;
+use App\Http\Controllers\CartController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::prefix('qr-menu')->group(function (){
+    Route::get('/', [QrMenuController::class, 'index']);
+    Route::post('/add-to-cart', [QrMenuController::class, 'addToCart']);
+});
 Route::post('/packet/{package}/callback/{user}', [SubscribtionController::class, 'callback'])->name('business.subscribtion.payment.callback');
 
 Route::middleware(['auth:web', 'twoFactor'])->group(function (){
