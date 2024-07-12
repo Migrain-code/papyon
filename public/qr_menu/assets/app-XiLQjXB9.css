@@ -244,25 +244,37 @@ body a {
     gap: 5px
 }
 
-.footer .item svg {
+.footer .menu ul li a i{
     height: 25px;
     width: 25px;
     stroke: none !important;
-    fill: #d0d1d2
+    font-size: 25px;
+    color: #e0483d;
 }
+.footer .menu ul span i{
+    height: 25px;
+    width: 25px;
+    stroke: none !important;
+    font-size: 25px;
+    color: #e0483d;
+ }
 
 .footer .item p {
-    margin: 0;
-    color: #d0d1d2;
-    text-align: center
+    text-align: center;
+    color: #00000096;
+    font-weight: 500;
 }
 
-@media screen and (max-width: 462px) {
-    .footer .item p {
-        font-size: 9px
-    }
+.footer .show-menu li a span{
+    color: var(--theme-font-color);
+}
+.footer .show-menu li i.ti{
+    color: var(--theme-font-color);
 }
 
+.footer .show-menu ul .cart {
+    color: black !important;
+}
 .footer #toggleMenu {
     position: relative
 }
@@ -290,7 +302,8 @@ body a {
     right: 0;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    padding-bottom: 20px
+    padding-bottom: 20px;
+    box-shadow: 1px 3px 15px #00000052;
 }
 
 .footer .menu ul {
@@ -326,7 +339,9 @@ body a {
 }
 
 .footer .menu ul span {
-    text-align: center
+    text-align: center;
+    color: #00000096;
+    font-weight: 500;
 }
 
 .footer .menu ul svg {
@@ -343,24 +358,31 @@ body a {
 .footer .menu ul .cart {
     position: absolute;
     top: -10px;
-    right: 10px;
-    background-color: #e0483d;
+    right: 8px;
+    background-color: #f24a3d;
     padding-left: 5px;
     padding-right: 5px;
     border-radius: 50%;
-    font-size: 10px
+    font-size: 10px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
 .footer .menu .close-button {
     position: absolute;
-    top: -18px;
-    right: 45%;
-    width: 30px;
-    height: 30px;
+    top: -13px;
+    right: 50%;
+    width: 23px;
+    height: 23px;
     color: #e0483d !important;
     fill: #e0483d !important;
     stroke-width: 2px;
     border-radius: 50%;
+    transform: translate(56%, -0%);
 }
 
 .footer .menu .close-button path {
@@ -649,7 +671,8 @@ body a {
 
 .card-style-1 .bottom .title {
     font-family: Roboto Medium, sans-serif;
-    font-size: 1rem
+    font-size: 1rem;
+    color: #757575;
 }
 
 .card-style-1 .bottom .price {
@@ -1020,6 +1043,7 @@ body a {
 }
 
 .categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button:not(.collapsed):after {
+    display: none;
     background-image: url("/qr_menu/assets/images/arrow.svg");
 }
 
@@ -1069,11 +1093,12 @@ body a {
 }
 
 .checkout {
-    padding-bottom: 60px
+    padding-bottom: 60px;
+    padding-top: 15px
 }
 
 .checkout .title {
-    color: #000;
+    color: #5d5b5b;
     font-weight: 700
 }
 
@@ -1096,9 +1121,9 @@ body a {
 
 .checkout .summary {
     margin: 10px auto;
-    border: 1px solid #949493;
-    padding: 7px;
-    border-radius: 10px
+    border-radius: 10px;
+    background: white;
+    padding: 15px;
 }
 
 .checkout .summary .item {
@@ -1106,27 +1131,36 @@ body a {
     justify-content: space-between;
     align-items: center;
     margin: 10px auto;
-    border-bottom: 1px solid #949493;
-    padding-bottom: 10px
+    border-bottom: 1px dashed #94939385;
+    padding-bottom: 10px;
 }
 
 .checkout .summary .item .title {
     color: #757575
 }
-
 .checkout .summary .item .quantity {
     display: flex;
     align-items: center;
     gap: 15px;
     color: #e0483d;
-    border: 1px solid #949493;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 15px
+    border: 1px solid #adacac85;
+    border-radius: 12px;
+    padding: 5px;
 }
-
+.checkout .summary .subtotal {
+    margin-top: 15px;
+}
 .checkout .summary .item .quantity span {
-    font-size: 1rem
+    font-size: 1rem;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    background: #e0483d14;
+    border-radius: 50%;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
 }
 
 .checkout .summary .item .price {
@@ -1153,14 +1187,17 @@ body a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #949493;
-    margin-bottom: 10px
+    border-bottom: 1px solid #94939385;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .checkout .summary .subtotal .bottomsaws {
     display: flex;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 .checkout .summary .subtotal .bottomsaws p {

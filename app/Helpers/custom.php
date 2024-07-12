@@ -89,13 +89,11 @@ function authUser()
     return auth()->user();
 }
 
-function calculateTotal($services)
+function calculateCart($carts)
 {
     $total = 0;
-    foreach ($services as $service) {
-        if ($service->service) {
-            $total += $service->service->price;
-        }
+    foreach ($carts as $cart) {
+       $total += ($cart->product->price * $cart->qty);
     }
     return $total;
 }

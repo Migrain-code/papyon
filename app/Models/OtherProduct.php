@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OtherProduct extends Model
 {
     use HasFactory;
+
+    public function product()
+    {
+        return $this->hasOne(MenuCategoryProduct::class, 'id', 'added_product_id');
+    }
 }

@@ -5,13 +5,24 @@
     /* border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color); */
 }
 .categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button {
-    padding: 0 20px;
+    padding: 35px 20px;
     background-color: var(--theme-accordion-bg-color);
     background-size: cover;
     background-position: center;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
 }
-
+.accordion-button::after {
+    display: none;
+}
+.categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button .column span {
+    color: var(--theme-font-color);
+    font-family: Roboto Medium, sans-serif;
+    font-size: 2rem;
+    padding-left: 10px;
+    text-shadow:2px 2px 4px rgb(0 0 0 / 67%);
+}
  .cardContent{
      margin-bottom: 15px;
      border-radius: 20px;

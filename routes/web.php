@@ -20,12 +20,15 @@ use App\Http\Controllers\SubscribtionController;
 use App\Http\Controllers\PlaceUnitController;
 use App\Http\Controllers\QrMenuController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\MenuDesignController;
 Route::get('/', function () {
     return view('welcome');
 });
 Route::prefix('qr-menu')->group(function (){
     Route::get('/', [QrMenuController::class, 'index']);
     Route::post('/add-to-cart', [QrMenuController::class, 'addToCart']);
+    Route::get('/check-out', [QrMenuController::class, 'checkOut']);
+    Route::get('/get-cart', [QrMenuController::class, 'getCart']);
 });
 Route::post('/packet/{package}/callback/{user}', [SubscribtionController::class, 'callback'])->name('business.subscribtion.payment.callback');
 
@@ -120,6 +123,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
             Route::get('/odeme-basarisiz', [SubscribtionController::class, 'fail'])->name('payment.fail');
 
         });
+        Route::resource('menu-design', MenuDesignController::class);
 
         Route::prefix('ajax')->group(function (){
            Route::post('all-delete-object', [\App\Http\Controllers\AjaxController::class, 'allDelete']);

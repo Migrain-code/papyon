@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     use HasFactory;
+
+    public function product()
+    {
+        return $this->hasOne(MenuCategoryProduct::class, 'id', 'product_id');
+    }
 }

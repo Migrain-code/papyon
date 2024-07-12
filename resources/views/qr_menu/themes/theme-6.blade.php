@@ -1,17 +1,7 @@
 @extends('qr_menu.layouts.master')
 @section('title', '')
 @section('styles')
-    <style>
-        .categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button {
-            padding: 20px 20px;
-            background-color: var(--theme-accordion-bg-color);
-            background-size: cover;
-            background-position: center;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-        }
-    </style>
+
 @endsection
 @section('content')
     @php
@@ -28,14 +18,16 @@
                 @foreach($categories as $category)
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button @if($loop->index > 0) collapsed  @endif" data-bs-toggle="collapse"
+                            <button class="accordion-button @if($loop->index > 0) collapsed  @endif" style="background-image: url('/qr_menu/assets/images/test.jpg')" data-bs-toggle="collapse"
                                     data-bs-target="#collapse{{ $category->id }}" aria-expanded="true"
                                     aria-controls="collapse{{ $category->id }}">
+
                                 <div class="column">
                                     <span>
                                        {{$category->name}}
                                     </span>
                                     <span>
+
                                     </span>
                                 </div>
                             </button>
@@ -44,7 +36,7 @@
                             <div class="accordion-body">
                                 <div class="content" style="margin-top: 0px">
 
-                                   @foreach($category->products as $product)
+                                    @foreach($category->products as $product)
                                         <div class="card cardContent ">
                                             <div class="card-body position-relative">
                                                 <span class="calorieAre">
@@ -83,7 +75,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                   @endforeach
+                                    @endforeach
 
                                 </div>
                             </div>
@@ -119,15 +111,15 @@
                         title: response.message,
                     });
                     if(response.status == "success"){
-                      //  button.css('transform', 'rotate(135deg)'); // Use the stored reference
-                       // button.css('color', 'red');
+                        //  button.css('transform', 'rotate(135deg)'); // Use the stored reference
+                        // button.css('color', 'red');
                         $('.cart').text(response.cartCount);
                         var audio = document.getElementById('success-sound');
                         // Sesi çal
                         audio.play();
                     } else{
-                       // button.css('transform', 'rotate(0deg)');
-                      //  button.css('color', 'var(--theme-product-button-color)');
+                        // button.css('transform', 'rotate(0deg)');
+                        //  button.css('color', 'var(--theme-product-button-color)');
                         $('.cart').text(response.cartCount);
 
                     }

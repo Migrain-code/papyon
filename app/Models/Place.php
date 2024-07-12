@@ -49,6 +49,33 @@ class Place extends Model
     {
         return $this->hasMany(SwiperAdvert::class, 'place_id', 'id');
     }
+
+    public function menuOrders() // Menü sıralaması
+    {
+        return $this->hasMany(MenuDesign::class, 'place_id', 'id')->orderBy('order_number', 'asc');
+    }
+
+    public function activeMenus() // Menü sıralaması
+    {
+        return $this->menuOrders()->where('status', 1);
+    }
+
+    public function createMenu()
+    {
+        if ($this->menuOrders->count() == 0){
+            $menuNames = MenuDesign::MENU_LIST;
+
+            foreach ($menuNames as $index => $menu){
+                $menuOrder = new MenuDesign();
+                $menuOrder->place_id = $this->id;
+                $menuOrder->name = $menu["name"];
+                $menuOrder->menu_id = $index;
+                $menuOrder->order_number = $index;
+                $menuOrder->save();
+            }
+
+        }
+    }
     public function activeAdverts() // Reklamlar
     {
         return $this->adverts()->where('status', 1);

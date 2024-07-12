@@ -117,5 +117,11 @@
                 <div data-i18n="Ayarlar">Ayarlar</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{route('business.menu-design.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-settings"></i>
+                <div data-i18n="Tema Ayarları">Tema Ayarları</div>
+            </a>
+        </li>
     </ul>
 </aside>
