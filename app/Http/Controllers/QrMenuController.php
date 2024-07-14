@@ -194,7 +194,7 @@ class QrMenuController extends Controller
                 $customer = $customer . "Masa: " . $this->table->name . "\n";
                 $customer = $customer . "Not: " . $order->note . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
-                return redirect()->to('https://wa.me/+90 ' . $this->place->sercices->table_phone . '?text=' . urlencode($message));
+                return redirect()->to('https://wa.me/+90 ' . $this->place->services->table_phone . '?text=' . urlencode($message));
 
             }
            return to_route('order.detail', $order->id)->with('response',[
