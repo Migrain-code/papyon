@@ -192,8 +192,8 @@ Sipariş için teşekkürler.";
                 $customer = $customer . "Masa Numarası: " . $this->table->name . "\n";
                 $customer = $customer . "Not: " . $order->note . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
-                dd($message);
-                //return redirect()->to('https://wa.me/' . $this->place->services->table_phone . '?text=' . urlencode($message));
+
+                return redirect()->to('https://wa.me/' . $this->place->services->table_phone . '?text=' . urlencode($message));
 
             }
            return to_route('order.detail', $order->id)->with('response',[
