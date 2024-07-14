@@ -169,7 +169,7 @@ class QrMenuController extends Controller
             foreach ($this->cart as $cart){
                 $cart->delete();
             }
-            if (isset($this->place->sercices->table_phone)) {
+            if (isset($this->place->services->table_phone)) {
                 $message = "Yeni Sipariş: (#{ORDER_ID})
 
                             {ORDER_DETAILS}
