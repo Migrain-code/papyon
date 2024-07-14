@@ -169,21 +169,32 @@ class QrMenuController extends Controller
             foreach ($this->cart as $cart){
                 $cart->delete();
             }
-            if (true) {
-                $message = "Yeni Sipariş Talebi: {ORDER_ID}
+            if (isset($this->place->sercices->table_phone)) {
+                $message = "Yeni Sipariş: (#{ORDER_ID})
 
-				*Masa Bilgileri*
+                            {ORDER_DETAILS}
 
-				Masa Adı: {CUSTOMER_DETAILS}
+                            Toplam Fiyat: *{ORDER_TOTAL}*
 
-				-----------------------------
+                            *Müşteri Bilgileri*
+                            {CUSTOMER_DETAILS}
 
-				Garson talebi için teşekkürler.";
-                $message = str_replace('{ORDER_ID}', strtotime(date('d-m-Y')), $message);
+                            -----------------------------
+                            Sipariş için teşekkürler.";
+                $message = str_replace('{ORDER_ID}', $order->id, $message);
+                $products = '';
+                foreach ($order->cart as $cart) {
+                    $products = $products . $cart->name . " - " . $cart->quantity . " Adet" . "\n";
+                }
+                $message = str_replace('{ORDER_DETAILS}', $products, $message);
+                $message = str_replace('{ORDER_TOTAL}', $order->total . " TL", $message);
                 $customer = '';
-                $customer = $customer . "Test" . "\n";
+                $customer = $customer . "Ad Soyad: " . $this->table->name . "\n";
+                $customer = $customer . "Telefon: " . "" . "\n";
+                $customer = $customer . "Masa: " . $this->table->name . "\n";
+                $customer = $customer . "Not: " . $order->note . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
-                return redirect()->to('https://wa.me/' . "+90" . strval("5422735353") . '?text=' . urlencode($message));
+                return redirect()->to('https://wa.me/+90 ' . $this->place->sercices->table_phone . '?text=' . urlencode($message));
 
             }
            return to_route('order.detail', $order->id)->with('response',[
