@@ -1099,7 +1099,20 @@ body a {
 
 .checkout .title {
     color: #5d5b5b;
-    font-weight: 700
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.checkout .paymentType{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+.checkout .otherInfos{
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
 }
 
 .checkout .topest {
@@ -1109,14 +1122,15 @@ body a {
 }
 
 .checkout .topest .link {
-    display: flex;
-    align-items: flex-end;
-    gap: 2px
+    gap: 2px;
+    color: white;
+    padding: 5px;
+    border-radius: 15px;
+    background: #757575;
 }
 
-.checkout .topest .link svg {
-    width: 20px;
-    height: 20px
+.checkout .topest .link i {
+   font-size: 15px;
 }
 
 .checkout .summary {
@@ -1222,17 +1236,20 @@ body a {
 }
 
 .checkout .orderType {
-    padding: 10px;
     margin: 10px auto;
-    border: 1px solid #949493;
+    border: none;
     border-radius: 10px;
     display: flex;
     font-weight: 700;
-    flex-direction: column
+    flex-direction: column;
+    background: white;
+    padding: 15px;
 }
 
 .checkout .orderType input[type=radio] {
-    accent-color: #232323
+    accent-color: #232323;
+    width: 30px;
+    height: 18px;
 }
 
 .checkout .orderType_selection {
@@ -1241,7 +1258,7 @@ body a {
     gap: 30px;
     margin-top: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #949493
+    border-bottom: 1px dashed #cfcfcf;
 }
 
 .checkout .orderType_selection label span {
@@ -1276,17 +1293,19 @@ body a {
 .checkout .otherInfos .formItem textarea {
     flex: 1;
     background: none;
-    border: 1px solid #949493;
+    border: 1px solid #cfcfcf;
     border-radius: 7px;
-    padding: 10px
+    padding: 10px;
+    outline: 0px;
 }
 
 .checkout .otherInfos .formItem input {
     width: 100%;
     background: none;
     padding: 10px;
-    border: 1px solid #949493;
-    border-radius: 7px
+    border: 1px solid #cfcfcf;
+    border-radius: 7px;
+    outline: 0px;
 }
 
 .checkout .otherInfos .formItem input::placeholder {
@@ -1313,7 +1332,8 @@ body a {
     padding: 10px;
     border-radius: 5px;
     border: none;
-    margin: 10px auto
+    margin: 10px auto;
+    font-size: 14px;
 }
 
 .checkout .bottomsaw div:first-of-type button svg {
@@ -1446,16 +1466,15 @@ body a {
 }
 
 .waiter .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     color: #fff;
-    min-width: 100%
+    min-width: 100%;
+    background: var(--theme-background-color);
+    padding: 15px;
+    border-radius: 15px;
 }
 
 .waiter .content svg {

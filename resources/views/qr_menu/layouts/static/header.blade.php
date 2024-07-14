@@ -49,7 +49,7 @@
     @endphp
 
 <header class="header" style="{{$styles}}" >
-    <div class="left" id="popStack">
+    <a href="{{url()->previous()}}" class="left" id="popStack">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="35.356" viewBox="0 0 22 35.356">
             <g id="Group_22" data-name="Group 22" transform="translate(-5403 -3653.322)">
                 <path id="Path_18" data-name="Path 18"
@@ -57,7 +57,7 @@
                       fill="#f3f3f1" />
             </g>
         </svg>
-    </div>
+    </a>
     <div class="middle">
         <a href="/">
             <svg style="width: 150px;" xmlns="http://www.w3.org/2000/svg" id="katman_2" data-name="katman 2" viewBox="0 0 339.81 77.95">

@@ -67,7 +67,7 @@
                                                         <div class="d-flex text-end justify-content-end flex-column">
                                                             <div class="col">
                                                                 @if($addToCartButton)
-                                                                    <button type="button" class="addToCardButton" data-product="{{$product->id}}">
+                                                                    <button type="button" class="addToCardButton addToCartButton" data-product="{{$product->id}}">
                                                                         <svg  xmlns="http://www.w3.org/2000/svg" width="40"  height="40"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-circle-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4.929 4.929a10 10 0 1 1 14.141 14.141a10 10 0 0 1 -14.14 -14.14zm8.071 4.071a1 1 0 1 0 -2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 1 0 0 -2h-2v-2z" /></svg>
                                                                     </button>
                                                                 @endif
@@ -93,7 +93,6 @@
             </div>
         </div>
     </section>
-    <audio id="success-sound" src="/qr_menu/assets/audio/pebble.mp3" preload="auto"></audio>
 
 @endsection
 
@@ -101,41 +100,5 @@
     <style>
 
     </style>
-    <script>
-        var newData;
-        $('.addToCardButton').on('click', function() {
-            var product_id = $(this).data('product');
-            var button = $(this);
-            $.ajax({
-                url: '/qr-menu/add-to-cart',
-                method: 'POST',
-                data: {
-                    _token: csrf_token,
-                    product_id: product_id,
-                },
-                success: function(response) {
-                    Toast.fire({
-                        icon: response.status,
-                        title: response.message,
-                    });
-                    if(response.status == "success"){
-                      //  button.css('transform', 'rotate(135deg)'); // Use the stored reference
-                       // button.css('color', 'red');
-                        $('.cart').text(response.cartCount);
-                        var audio = document.getElementById('success-sound');
-                        // Sesi çal
-                        audio.play();
-                    } else{
-                       // button.css('transform', 'rotate(0deg)');
-                      //  button.css('color', 'var(--theme-product-button-color)');
-                        $('.cart').text(response.cartCount);
 
-                    }
-                },
-                error: function(xhr) {
-                    console.error('Ekleme Hata Oluştu:', xhr);
-                }
-            });
-        });
-    </script>
 @endsection

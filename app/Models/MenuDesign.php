@@ -14,7 +14,7 @@ class MenuDesign extends Model
             "id" => 1,
             "name" => "Kategoriler",
             "icon" => '<i class="ti ti-category-filled"></i>',
-            "route" => "javascript:void(0)"
+            "route" => "/qr-menu"
         ],
         [
             "id" => 2,
@@ -87,6 +87,12 @@ class MenuDesign extends Model
             "name" => "Whatsapp",
             "icon" => '<i class="ti ti-brand-whatsapp"></i>',
             "route" => "javascript:void(0)"
+        ],
+        [
+            "id" => 14,
+            "name" => "Sipariş Takibi",
+            "icon" => '<i class="ti ti-search"></i>',
+            "route" => "/qr-menu/order/search"
         ],
     ];
 

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+    protected $casts=[
+      'cart' => "object"
+    ];
     const PAYMENT_STATUS = [
         0 => [
             "id" => 0,

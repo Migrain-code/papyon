@@ -1,4 +1,6 @@
+<div style="color: #e0483d;margin-top: 30px;margin-left: 5px;"  class="title">{{ __('Yanında İyi Gider') }}</div>
 <div class="relateds">
+
     @foreach ($otherProducts as $otherProduct)
         <div class="card-style-1">
             <a href="">

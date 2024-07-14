@@ -98,5 +98,18 @@
         });
     });
 </script>
+<script>
+    var counter = 0;
+    $(document).on('keyup', '.phone', function (){
+        if ($(this).val().startsWith('0')) {
+            counter++;
+            $(this).val("");
+            if(counter == 3){
+                alert('Telefon Numaranızın Başına "0" Eklemeden Yazınız');
+                counter = 0;
+            }
+        }
+    });
 
+</script>
 @yield('scripts')

@@ -147,4 +147,10 @@
         selectElement.insertBefore(placeholderOption, selectElement.firstChild);
     });
 </script>
+<audio id="success-sound" src="/qr_menu/assets/audio/pebble.mp3" preload="auto"></audio>
+<audio id="card-delete-sound" src="/qr_menu/assets/audio/trash_cart.wav" preload="auto"></audio>
+@if(!request()->routeIs('order.detail'))
+    <script src="/qr_menu/assets/js/cart.js"></script>
+@endif
+
 @yield('scripts')

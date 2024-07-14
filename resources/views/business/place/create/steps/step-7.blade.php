@@ -5,58 +5,104 @@
 </div>
 <div class="row g-3">
     <div class="row g-3">
-        <div class="d-flex" style="max-width: 500px">
-            <div class="col">
-                <label>Masadan Sipariş</label>
+        <div class="d-flex d-flex flex-column">
+            <div class="registerArea" style="max-width: 490px">
+                <div class="d-flex flex-row">
+                    <div class="col">
+                        <label>Masadan Sipariş</label>
+                    </div>
+                    <div class="col">
+                        <label class="switch switch-lg">
+                            <input type="checkbox" class="switch-input" name="Masadan Sipariş" onchange="toggleCallArea(this, 'table-order-area')">
+                            <span class="switch-toggle-slider">
+                        <span class="switch-on"><i class="ti ti-check"></i></span>
+                        <span class="switch-off"><i class="ti ti-x"></i></span>
+                    </span>
+                            <span class="switch-label">Kapalı</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="callArea " id="table-order-area" style="display: none">
+                    <div class="d-flex flex-row justify-content-start my-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" data-disable="true" type="radio" name="order_type" id="inlineRadio1" value="0" />
+                            <label class="form-check-label" for="inlineRadio1">Sipariş Ver</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" data-disable="false" type="radio" name="order_type" id="inlineRadio1" value="1" />
+                            <label class="form-check-label" for="inlineRadio1">Whatsapp Sipariş</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="callArea2" id="table-phone-area"  style="display: none">
+
+                    <div class="col" style="max-width: 240px">
+                        <label>Telefon Numarası</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="table_phone" class="form-control phone" placeholder="örn. 555 555 5555">
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <label class="switch switch-lg">
-                    <input type="checkbox" class="switch-input" name="table_order">
-                    <span class="switch-toggle-slider">
-                    <span class="switch-on"><i class="ti ti-check"></i></span>
-                    <span class="switch-off"><i class="ti ti-x"></i></span>
-                </span>
-                    <span class="switch-label">Kapalı</span>
-                </label>
-            </div>
-        </div>
-        <hr>
-        <!-- Garson Çağır -->
-        <div class="d-flex" style="max-width: 500px">
-            <div class="col">
-                <label>Garson Çağır</label>
-            </div>
-            <div class="col">
-                <label class="switch switch-lg">
-                    <input type="checkbox" class="switch-input" name="call_a_waiter">
-                    <span class="switch-toggle-slider">
-                    <span class="switch-on"><i class="ti ti-check"></i></span>
-                    <span class="switch-off"><i class="ti ti-x"></i></span>
-                </span>
-                    <span class="switch-label">Kapalı</span>
-                </label>
-            </div>
+
         </div>
         <hr>
 
-        <!-- Hesap İste -->
-        <div class="d-flex" style="max-width: 500px">
-            <div class="col">
-                <label>Hesap İste</label>
+        <!-- Garson Çağır Yeni -->
+        <div class="d-flex flex-column registerArea" style="max-width: 500px">
+            <div class="d-flex flex-row">
+                <div class="col">
+                    <label>Garson Çağır</label>
+                </div>
+                <div class="col">
+                    <label class="switch switch-lg">
+                        <input type="checkbox" class="switch-input" name="call_a_waiter" onchange="toggleCallArea(this, 'waiter-call-area')">
+                        <span class="switch-toggle-slider">
+                        <span class="switch-on"><i class="ti ti-check"></i></span>
+                        <span class="switch-off"><i class="ti ti-x"></i></span>
+                    </span>
+                        <span class="switch-label">Kapalı</span>
+                    </label>
+                </div>
             </div>
-            <div class="col">
-                <label class="switch switch-lg">
-                    <input type="checkbox" class="switch-input" name="request_account">
-                    <span class="switch-toggle-slider">
-                    <span class="switch-on"><i class="ti ti-check"></i></span>
-                    <span class="switch-off"><i class="ti ti-x"></i></span>
-                </span>
-                    <span class="switch-label">Kapalı</span>
-                </label>
+            <div class="mt-3 callArea" id="waiter-call-area" style="display: none;">
+                <div class="col" style="max-width: 240px">
+                    <label>Telefon Numarası</label>
+                </div>
+                <div class="col">
+                    <input type="text" name="call_a_waiter_phone" class="form-control phone" placeholder="örn. 555 555 5555">
+                </div>
             </div>
         </div>
         <hr>
-
+        <!-- Hesap İste Yeni -->
+        <div class="d-flex flex-column registerArea" style="max-width: 500px">
+            <div class="d-flex flex-row">
+                <div class="col">
+                    <label>Hesap İste</label>
+                </div>
+                <div class="col">
+                    <label class="switch switch-lg">
+                        <input type="checkbox" class="switch-input" name="request_account" onchange="toggleCallArea(this, 'wallet-call-area')">
+                        <span class="switch-toggle-slider">
+                        <span class="switch-on"><i class="ti ti-check"></i></span>
+                        <span class="switch-off"><i class="ti ti-x"></i></span>
+                    </span>
+                        <span class="switch-label">Kapalı</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mt-3 callArea" id="wallet-call-area" style="display: none;">
+                <div class="col" style="max-width: 240px">
+                    <label>Telefon Numarası</label>
+                </div>
+                <div class="col">
+                    <input type="text" name="request_account_phone" class="form-control phone" placeholder="örn. 555 555 5555">
+                </div>
+            </div>
+        </div>
+        <hr>
         <!-- Vale Çağır -->
         <div class="d-flex flex-column registerArea" style="max-width: 500px">
             <div class="d-flex flex-row">

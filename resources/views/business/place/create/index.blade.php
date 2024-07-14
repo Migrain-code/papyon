@@ -69,19 +69,37 @@
 
                 // Find the callArea within this registerArea
                 var callArea = registerArea.find('.callArea');
-
+                var callArea2 = registerArea.find('.callArea2');
                 // Toggle visibility based on the checkbox state
                 if ($(this).is(':checked')) {
                     callArea.show();
+
                 } else {
                     callArea.hide();
+                    if(callArea2){
+                        callArea2.hide();
+                    }
+                }
+            });
+            $('.form-check-input').on('change', function() {
+                // Get the parent registerArea of the clicked switch
+                var registerArea = $(this).closest('.registerArea');
+
+                // Find the callArea within this registerArea
+                var callArea2 = registerArea.find('.callArea2');
+
+                // Toggle visibility based on the checkbox state
+                if ($(this).data('disable')) {
+                    callArea2.hide();
+                } else {
+                    callArea2.show();
                 }
             });
         });
         function toggleCallArea(checkbox, areaId) {
             //var callArea = document.getElementById(areaId);
             if (checkbox.checked) {
-                alert('Bu işlem için lütfen telefon numarası alanını doldurunuz');
+               // alert('Bu işlem için lütfen telefon numarası alanını doldurunuz');
             }
         }
         $('[name="place_name"]').on('keyup', function (){

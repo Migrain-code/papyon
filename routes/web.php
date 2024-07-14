@@ -25,10 +25,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::prefix('qr-menu')->group(function (){
-    Route::get('/', [QrMenuController::class, 'index']);
+    Route::get('/', [QrMenuController::class, 'index'])->name('menu.index');
     Route::post('/add-to-cart', [QrMenuController::class, 'addToCart']);
     Route::get('/check-out', [QrMenuController::class, 'checkOut']);
     Route::get('/get-cart', [QrMenuController::class, 'getCart']);
+    Route::post('/empty-cart', [QrMenuController::class, 'emptyCart']);
+    Route::post('/order-create', [QrMenuController::class, 'orderCreate'])->name('order.create');
+    Route::get('/order/{order}/detail', [QrMenuController::class, 'orderDetail'])->name('order.detail');
+    Route::get('/order/search', [QrMenuController::class, 'orderSearchShow']);
+    Route::post('/order-search', [QrMenuController::class, 'orderSearch'])->name('order.search');
 });
 Route::post('/packet/{package}/callback/{user}', [SubscribtionController::class, 'callback'])->name('business.subscribtion.payment.callback');
 
