@@ -166,21 +166,21 @@ class QrMenuController extends Controller
             }
            $order->cart = $orderCart;
            $order->save();
-            foreach ($this->cart as $cart){
+            /*foreach ($this->cart as $cart){
                 $cart->delete();
-            }
+            }*/
             if (isset($this->place->services->table_phone)) {
                 $message = "Yeni Sipariş: (#{ORDER_ID})
 
-                            {ORDER_DETAILS}
+{ORDER_DETAILS}
 
-                            Toplam Fiyat: *{ORDER_TOTAL}*
+Toplam Fiyat: *{ORDER_TOTAL}*
 
-                            *Müşteri Bilgileri*
-                            {CUSTOMER_DETAILS}
+*Masa Bilgileri*
+{CUSTOMER_DETAILS}
 
-                            -----------------------------
-                            Sipariş için teşekkürler.";
+-----------------------------
+Sipariş için teşekkürler.";
                 $message = str_replace('{ORDER_ID}', $order->id, $message);
                 $products = '';
                 foreach ($order->cart as $cart) {
@@ -189,12 +189,11 @@ class QrMenuController extends Controller
                 $message = str_replace('{ORDER_DETAILS}', $products, $message);
                 $message = str_replace('{ORDER_TOTAL}', $order->total . " TL", $message);
                 $customer = '';
-                $customer = $customer . "Ad Soyad: " . $this->table->name . "\n";
-                $customer = $customer . "Telefon: " . "" . "\n";
-                $customer = $customer . "Masa: " . $this->table->name . "\n";
+                $customer = $customer . "Masa Numarası: " . $this->table->name . "\n";
                 $customer = $customer . "Not: " . $order->note . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
-                return redirect()->to('https://wa.me/' . $this->place->services->table_phone . '?text=' . urlencode($message));
+                dd($message);
+                //return redirect()->to('https://wa.me/' . $this->place->services->table_phone . '?text=' . urlencode($message));
 
             }
            return to_route('order.detail', $order->id)->with('response',[
