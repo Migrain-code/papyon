@@ -160,9 +160,52 @@
         selectElement.insertBefore(placeholderOption, selectElement.firstChild);
     });
 </script>
+<script>
+    const swiper = new Swiper('#mainPageSwiper', {
+        loop: true,
+        /*     autoplay: {
+                delay: 5000,
+            }, */
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+    });
+
+</script>
+<script>
+    const swiper2 = new Swiper('#mainPageSwiper2', {
+        loop: true,
+        /*     autoplay: {
+                        delay: 5000,
+                }, */
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+    });
+</script>
 <audio id="success-sound" src="/qr_menu/assets/audio/pebble.mp3" preload="auto"></audio>
 <audio id="card-delete-sound" src="/qr_menu/assets/audio/trash_cart.wav" preload="auto"></audio>
+<script>
+    $(document).ready(function() {
+        $('#copyButton').on('click', function() {
+            var wifiPassword = $('#wifiPassword').text();
+            navigator.clipboard.writeText(wifiPassword);
+            Toast.fire({
+                icon: 'success',
+                title: 'Şifre Kopyalandı',
+            });
+            $(this).text("Şifre Kopyalandı");
+        });
+    });
+</script>
 @if(!request()->routeIs('order.detail'))
+    <script>
+        var cartAddUrl = '{{route('addToCart', $place->slug)}}';
+        var cartFetchUrl = '{{route('getCart', $place->slug)}}';
+        var emptyCartUrl = '{{route('emptyCart', $place->slug)}}';
+    </script>
     <script src="/qr_menu/assets/js/cart.js"></script>
 @endif
 

@@ -1,5 +1,5 @@
 @extends('qr_menu.layouts.master')
-@section('title', '')
+@section('title', 'Çalışma Saatleri')
 @section('styles')
     <style>
         .checkout .summary .item .title b {

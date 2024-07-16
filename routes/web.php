@@ -22,31 +22,33 @@ use App\Http\Controllers\QrMenuController;
 use App\Http\Controllers\CartController;
 use \App\Http\Controllers\PlaceMenuController;
 use App\Http\Controllers\MenuDesignController;
+use App\Http\Controllers\SuggestionController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('place/{slug}', [PlaceMenuController::class, 'index']);
+Route::get('mekan/{slug}', [PlaceMenuController::class, 'index'])->name('place.show');
 Route::get('table/{code}', [PlaceMenuController::class, 'table']);
 Route::middleware('checkPlace')->group(function (){
-    Route::prefix('qr-menu')->group(function (){
-        Route::get('/', [QrMenuController::class, 'index'])->name('menu.index');
-        Route::post('/add-to-cart', [QrMenuController::class, 'addToCart']);
-        Route::get('/check-out', [QrMenuController::class, 'checkOut']);
-        Route::get('/get-cart', [QrMenuController::class, 'getCart']);
-        Route::post('/empty-cart', [QrMenuController::class, 'emptyCart']);
-        Route::post('/order-create', [QrMenuController::class, 'orderCreate'])->name('order.create');
-        Route::get('/order/{order}/detail', [QrMenuController::class, 'orderDetail'])->name('order.detail');
-        Route::get('/order/search', [QrMenuController::class, 'orderSearchShow']);
-        Route::post('/order-search', [QrMenuController::class, 'orderSearch'])->name('order.search');
-        Route::post('/call/vale', [QrMenuController::class, 'callVale'])->name('call.vale');
-        Route::post('/call/taxi', [QrMenuController::class, 'callTaxi'])->name('call.taxi');
-        Route::get('/call/waiter', [QrMenuController::class, 'callWaiter'])->name('call.waiter');
-        Route::get('/call/account', [QrMenuController::class, 'callAccount'])->name('call.account');
-        Route::get('/working-hours', [QrMenuController::class, 'workingHours']);
-        Route::get('/contracts', [QrMenuController::class, 'contracts']);
-        Route::get('/contract/{slug}', [QrMenuController::class, 'contractDetail'])->name('contract.detail');
-        Route::get('/announcement', [QrMenuController::class, 'announcement']);
-
+    Route::prefix("mekan/{slug}")->group(function (){
+            Route::get('/anasayfa', [QrMenuController::class, 'index'])->name('menu.index');
+            Route::post('/add-to-cart', [QrMenuController::class, 'addToCart'])->name('addToCart');
+            Route::get('/get-cart', [QrMenuController::class, 'getCart'])->name('getCart');
+            Route::get('/check-out', [QrMenuController::class, 'checkOut'])->name('menu.checkOut');
+            Route::post('/empty-cart', [QrMenuController::class, 'emptyCart'])->name('emptyCart');
+            Route::post('/order-create', [QrMenuController::class, 'orderCreate'])->name('order.create');
+            Route::get('/order/{order}/detail', [QrMenuController::class, 'orderDetail'])->name('order.detail');
+            Route::get('/order/search', [QrMenuController::class, 'orderSearchShow'])->name('orderSearchShow');
+            Route::post('/order-search', [QrMenuController::class, 'orderSearch'])->name('order.search');
+            Route::post('/call/vale', [QrMenuController::class, 'callVale'])->name('call.vale');
+            Route::post('/call/taxi', [QrMenuController::class, 'callTaxi'])->name('call.taxi');
+            Route::get('/call/waiter', [QrMenuController::class, 'callWaiter'])->name('call.waiter');
+            Route::get('/call/account', [QrMenuController::class, 'callAccount'])->name('call.account');
+            Route::get('/working-hours', [QrMenuController::class, 'workingHours'])->name('menu.workingHours');
+            Route::get('/contracts', [QrMenuController::class, 'contracts'])->name('menu.contracts');
+            Route::get('/contract/{contract_slug}', [QrMenuController::class, 'contractDetail'])->name('contract.detail');
+            Route::get('/announcement', [QrMenuController::class, 'announcement'])->name('menu.announcement');
+            Route::get('/suggestions', [QrMenuController::class, 'suggestion'])->name('menu.suggestion');
+            Route::post('/suggestion/save', [QrMenuController::class, 'suggestionSave'])->name('menu.suggestion.post');
     });
     Route::get('/notify', [PlaceMenuController::class, 'notify'])->name('notify');
 });
@@ -135,6 +137,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
 
         Route::resource('announcement', AnnouncementController::class);
         Route::resource('contract', ContractController::class);
+        Route::resource('suggestion', SuggestionController::class);
 
         Route::prefix('subscribtion')->as('subscribtion.')->group(function (){
             Route::get('/', [SubscribtionController::class, 'index'])->name('index');

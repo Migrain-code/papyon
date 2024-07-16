@@ -12,6 +12,7 @@
 
                     @endphp
                     <li>
+
                         <a href="{{$route}}" id="{{$menu->getMenu("id")}}">
                             {!! $menu->getMenu('icon') !!}
                             <span>{{ __($menu->getMenu('name')) }}</span></a>
@@ -76,7 +77,7 @@
             <div class="top">
                 <p>{{ __('Vale çağırmak için araç plakanızı girmeniz gerekmektedir.') }}</p>
             </div>
-            <form action="{{route('call.vale')}}" method="post">
+            <form action="{{route('call.vale', $place->slug)}}" method="post">
                 @csrf
                 <div class="middle">
                     <span>{{ __('Araç Plakanız') }}</span>
@@ -130,7 +131,7 @@
             <div class="top">
                 <p>{{ __('Taxi çağırmak için Ad Soyad bilginizi girmeniz gerekmektedir.') }}</p>
             </div>
-            <form action="{{route('call.taxi')}}" method="post">
+            <form action="{{route('call.taxi', $place->slug)}}" method="post">
                 @csrf
                 <div class="middle">
                     <span>{{ __('Adınız Soyadınız') }}</span>

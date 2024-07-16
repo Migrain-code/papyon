@@ -1127,6 +1127,7 @@ body a {
     padding: 5px;
     border-radius: 15px;
     background: #757575;
+    cursor: pointer;
 }
 
 .checkout .topest .link i {

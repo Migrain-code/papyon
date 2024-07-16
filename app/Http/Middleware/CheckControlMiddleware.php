@@ -18,6 +18,9 @@ class CheckControlMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $place = Session::get('place');
+        if (!isset($place->slug)){
+            abort(404);
+        }
         $menu = $place->activeMenu();
         $products = $menu->products;
         $categories = $menu->categories;
@@ -34,7 +37,7 @@ class CheckControlMiddleware
             if ($request->routeIs('notify')){
                 return $next($request);
             } else{
-                return to_route('notify')->with('response', [
+                return to_route('notify',$place->slug)->with('response', [
                     'status' => "error",
                     'message' => "İşletme Bu Tarihte Hizmet Vermemektedir"
                 ]);
@@ -43,7 +46,7 @@ class CheckControlMiddleware
             if ($request->routeIs('notify')){
                 return $next($request);
             } else{
-                return to_route('notify')->with('response', [
+                return to_route('notify', $place->slug)->with('response', [
                     'status' => "error",
                     'message' => "İşletme Mesai Sattleri Dışında Hizmet Vermemektedir"
                 ]);

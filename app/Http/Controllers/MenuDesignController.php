@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MenuDesign;
+use App\Models\ThemeColor;
 use Illuminate\Http\Request;
 
 class MenuDesignController extends Controller
@@ -32,7 +33,16 @@ class MenuDesignController extends Controller
      */
     public function create()
     {
-        //
+        $place = $this->business;
+        $menuDesign = MenuDesign::first();
+        $colors = $place->colors;
+        $newColors = [];
+        foreach ($colors as $color){
+            $newColors[$color->name] = $color->value;
+        }
+        $colors = collect($newColors);
+
+        return view('business.theme.tabs.color', compact('place', 'menuDesign', 'colors'));
     }
 
     /**
@@ -72,7 +82,29 @@ class MenuDesignController extends Controller
      */
     public function update(Request $request, MenuDesign $menuDesign)
     {
-        //
+        //$request->dd();
+        foreach ($request->except(['_token', '_method']) as $key => $item) {
+
+            $query = ThemeColor::query()->whereName($key)->first();
+            if ($query) {
+                if ($query->value != $item) {
+                    $query->name = $key;
+                    $query->value = $item;
+                    $query->save();
+                }
+            } else {
+                $newQuery = new ThemeColor();
+                $newQuery->place_id = $this->business->id;
+                $newQuery->name = $key;
+                $newQuery->value = $item;
+                $newQuery->save();
+            }
+        }
+
+        return back()->with('response', [
+            'status'=>"success",
+            'message'=>"Ayarlar Güncellendi"
+        ]);
     }
 
     /**

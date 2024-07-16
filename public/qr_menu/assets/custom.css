@@ -224,3 +224,46 @@
     padding: 10px;
     font-family: Roboto Black, sans-serif;
 }
+.btn-copy {
+    background-color: var(--theme-background-color);
+    outline: 0px;
+    color: var(--theme-font-color);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 15px;
+}
+.pointArea{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+    justify-content: end;
+}
+.star-rating input {
+    display: none;
+}
+.star-rating label {
+    font-size: 2em;
+    color: lightgray;
+    cursor: pointer;
+}
+.star-rating input:checked ~ label {
+    color: gold;
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: gold;
+}
+.confirmButton{
+    font-size: 15px;
+    background: var(--theme-product-button-color);
+    color: var(--theme-font-color);
+    border: none;
+    min-width: 150px;
+    padding: 10px;
+    border-radius: 15px;
+    margin: auto;
+}

@@ -1,5 +1,5 @@
 <div class="otherInfos">
-    <form id="orderCreateForm" method="post" action="{{route('order.create')}}">
+    <form id="orderCreateForm" method="post" action="{{route('order.create', $place->slug)}}">
         @csrf
         <div class="title">{{ __('Doğrulama Kodu Belirleyin') }}</div>
 

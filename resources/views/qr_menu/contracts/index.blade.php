@@ -1,5 +1,5 @@
 @extends('qr_menu.layouts.master')
-@section('title', '')
+@section('title', 'Sözleşmeler')
 @section('styles')
     <style>
         .checkout .summary .item .title b {
@@ -20,8 +20,8 @@
             <div class="work-items">
                 @foreach($contracts as $contract)
                     <div class="item">
-                        <a href="{{route('contract.detail', $contract->slug)}}" class="title">{{$contract->title}}</a>
-                        <a href="{{route('contract.detail', $contract->slug)}}" class="quantity">
+                        <a href="{{route('contract.detail', [$place->slug, $contract->slug])}}" class="title">{{$contract->title}}</a>
+                        <a href="{{route('contract.detail', [$place->slug, $contract->slug])}}" class="quantity">
                             <b>İncele</b>
                         </a>
                     </div>

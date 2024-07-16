@@ -1,5 +1,5 @@
 @extends('qr_menu.layouts.master')
-@section('title', '')
+@section('title', 'Uyarı')
 @section('styles')
     <style>
         .bg-label-warning {
@@ -53,7 +53,7 @@
                 </h2>
                 <h2> {{session('response.message')}}</h2>
             @endif
-                <a href="{{route('menu.index')}}">
+                <a href="{{route('menu.index', $place->slug)}}">
                     <button class="btn btn-secondary returnMenu" type="button">
                         {{ __('Menüye Dön') }}
                     </button>

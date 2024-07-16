@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 function fetchCart(dataDiscount = 0) {
     $.ajax({
-        url: '/qr-menu/get-cart',
+        url: cartFetchUrl,
         type: 'GET',
         dataType: 'json',
         data: {
@@ -56,7 +56,7 @@ $(document).on('click', '.addToCartButton', function () {
     var product_id = $(this).data('product');
     var button = $(this);
     $.ajax({
-        url: '/qr-menu/add-to-cart',
+        url: cartAddUrl,
         method: 'POST',
         data: {
             _token: csrf_token,
@@ -115,7 +115,7 @@ $(document).on('click', '.deleteToCartButton', function () {
 });
 $(document).on('click', '.emptyCartButton', function () {
     $.ajax({
-        url: '/qr-menu/empty-cart',
+        url: emptyCartUrl,
         method: 'POST',
         data: {
             _token: csrf_token,

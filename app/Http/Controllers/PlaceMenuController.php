@@ -13,7 +13,7 @@ class PlaceMenuController extends Controller
     {
         $place = Place::whereSlug($slug)->first();
         Session::put('place', $place);
-        return to_route('menu.index');
+        return to_route('menu.index', $place->slug);
     }
 
     public function table($code)
@@ -21,7 +21,7 @@ class PlaceMenuController extends Controller
         $table = Table::where('qr_name', $code)->first();
         Session::put('table', $table);
         Session::put('place', $table->place);
-        return to_route('menu.index');
+        return to_route('menu.index', $table->place->slug);
     }
 
     public function notify()

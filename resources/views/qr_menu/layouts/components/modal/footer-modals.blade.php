@@ -9,11 +9,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="message">
+
                         @if(isset($place->wifi))
                             <img src="{{generateWifiQrCode($place->wifi->name,$place->wifi->pass)}}" class="w-100 mb-3">
                             {{__(" Wifi Adı")}} : <b> {{ $place->wifi->name }}</b> <br>
-                            {{__(" Wifi Şifre")}} : <b> {{ $place->wifi->pass }}</b>
-                            <button class="btn btn-primary mt-2">Şifreyi Kopyala</button>
+                            {{__(" Wifi Şifre")}} : <b id="wifiPassword"> {{ $place->wifi->pass }}</b>
+                            <button class="btn-copy mt-2" id="copyButton">Şifreyi Kopyala</button>
                         @endif
 
                     </div>
@@ -44,3 +45,4 @@
         </div>
     </div>
 </div>
+

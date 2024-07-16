@@ -53,9 +53,9 @@
                 </div>
                 <div class="card-body">
                     <div class="row gy-4 mb-4">
-                        @include('business.theme.edit.nav')
+                        @include('business.theme.menu.nav')
                         <!--/ User Pills -->
-                        @include('business.theme.edit.tabs.menu-content')
+                        @include('business.theme.tabs.menu-content')
 
 
                     </div>

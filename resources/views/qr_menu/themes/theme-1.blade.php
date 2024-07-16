@@ -59,30 +59,4 @@
 @endsection
 
 @section('scripts')
-    <script>
-        const swiper = new Swiper('#mainPageSwiper', {
-            loop: true,
-            /*     autoplay: {
-                    delay: 5000,
-                }, */
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-        });
-
-    </script>
-    <script>
-        const swiper2 = new Swiper('#mainPageSwiper2', {
-            loop: true,
-            /*     autoplay: {
-                            delay: 5000,
-                    }, */
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-        });
-    </script>
-
 @endsection

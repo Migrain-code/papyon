@@ -2,8 +2,7 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                Kategoriler
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuCategoryModal">Kategori Ekle</button>
+                Menüler
             </div>
             <div class="card-body">
                 <div class="row">

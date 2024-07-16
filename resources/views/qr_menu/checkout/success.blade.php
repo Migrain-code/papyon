@@ -52,7 +52,7 @@
                         Sipariş Bilgileri
                     </h2>
                     <h2>{!! $order->orderStatus('name') !!}</h2>
-                    <a href="{{route('menu.index')}}">
+                    <a href="{{route('menu.index', $place->slug)}}">
                         <button class="btn btn-secondary returnMenu" type="button">
                             {{ __('Menüye Dön') }}
                         </button>
@@ -60,7 +60,7 @@
                 @else
                     <h2 style="text-align: center;">Siparişiniz Oluşturuldu</h2>
                     <h2>{{ __('Teşekkürler...') }}</h2>
-                    <a href="">
+                    <a href="{{route('menu.index', $place->slug)}}">
                         <button class="btn btn-secondary returnMenu" type="button">
                             {{ __('Menüye Dön') }}
                         </button>

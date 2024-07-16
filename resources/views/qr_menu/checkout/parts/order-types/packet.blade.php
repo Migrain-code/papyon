@@ -1,4 +1,4 @@
-<form action="{{route('order.create')}}" id="packetOrderForm" method="post">
+<form action="{{route('order.create', $place->slug)}}" id="packetOrderForm" method="post">
     @csrf
 <div class="orderType">
     <div class="title">{{ __('Sipariş Tipi') }}</div>

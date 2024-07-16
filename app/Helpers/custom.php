@@ -74,7 +74,6 @@ function setting($key)
 {
     return config('settings.' . $key);
 }
-
 function maskPhone($phone)
 {
     if (strlen($phone) > 10) {
@@ -83,7 +82,11 @@ function maskPhone($phone)
     }
     return $phone;
 }
-
+function hexToRgb($hex){
+    list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+    $rgbColor = "rgb($r, $g, $b)";
+    return $rgbColor;
+}
 function authUser()
 {
     return auth()->user();

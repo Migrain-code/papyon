@@ -11,6 +11,9 @@ use App\Models\Order;
 use App\Models\OtherProduct;
 use App\Models\Place;
 
+use App\Models\Suggestion;
+use App\Models\SuggestionQuestion;
+use App\Models\SwiperAdvert;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -18,65 +21,75 @@ use Illuminate\Support\Facades\Session;
 
 class QrMenuController extends Controller
 {
-    private $place, $table, $themeId, $menu, $categories, $swipers, $products, $cart;
+    private $place, $table, $themeId, $cart;
 
     public function __construct(Request $request)
     {
         $this->place = Session::get('place');
         $this->themeId = $this->place->theme_id;
-        $this->menu = $this->place->activeMenu();
-        $this->products = $this->menu->products;
-        $this->categories = $this->menu->categories;
-        $this->swipers = $this->place->activeAdverts;
         $this->table = Session::get('table');
+
         $this->cart = Cart::where('ip_address', $request->ip())->when(isset($this->table), function ($query) {
             $query->where('table_id', $this->table->id);
         })->get();
-
-        if ($this->place->checkCloseDay()){
-            $title = "İşletme Bugün Kapalı";
-            $description = "İşletme Bugün Hizmet Vermemektedir";
-            return view('qr_menu.alert.index', compact('title', 'description'));
-        }
     }
 
     public function index()
     {
-        $categories = $this->categories;
-        $swipers = $this->swipers;
-        $products = $this->products;
-        $place = $this->place;
-        $cartProducts = $this->cart->pluck('product_id')->toArray();
-        $productCount = $this->cart->sum('qty');
-        $menuOrders = $this->place->activeMenus;
+        $swipers = SwiperAdvert::where('status', 1)->where('place_id', $this->place->id)->get();
+
         \Illuminate\Support\Facades\Session::forget('searchType');
-        return view('qr_menu.themes.theme-' . $this->themeId, compact('categories', 'swipers', 'products', 'place', 'cartProducts', 'productCount', 'menuOrders'));
+        return view('qr_menu.themes.theme-' . $this->themeId, compact('swipers'));
     }
 
     public function workingHours()
     {
-        $place = $this->place;
-        $categories = $this->categories;
-        $footerVisibility = true;
-        $menuOrders = $this->place->activeMenus;
-        $workTimes = $place->workTimes;
-        return view('qr_menu.work-time.index', compact('place', 'categories', 'footerVisibility', 'menuOrders', 'workTimes'));
+        $workTimes = $this->place->workTimes;
+        return view('qr_menu.work-time.index', compact('workTimes'));
     }
     public function contracts()
     {
         $contracts = $this->place->contracts->where('status', 1);
-
         return view('qr_menu.contracts.index', compact('contracts'));
     }
-    public function contractDetail($slug)
+    public function contractDetail($slug, $contractSlug)
     {
-        $contract = $this->place->contracts->where('status', 1)->where('slug', $slug)->first();
+        $contract = $this->place->contracts->where('status', 1)->where('slug', $contractSlug)->first();
         return view('qr_menu.contracts.detail', compact('contract'));
     }
     public function announcement()
     {
         $announcements = Announcement::where('place_id', $this->place->id)->where('status', 1)->get();
         return view('qr_menu.announcement.index', compact('announcements'));
+    }
+
+    public function suggestion()
+    {
+        if (!isset($this->table)){
+            return to_route('menu.index', $this->place->slug)->with('response', [
+                'status' => "error",
+                'message' => "Değerlendirme sadece masadan yapılabilir!"
+            ]);
+        }
+        $suggestions = SuggestionQuestion::where('place_id', $this->place->id)->where('status', 1)->get();
+        return view('qr_menu.suggestion.index', compact('suggestions'));
+    }
+
+    public function suggestionSave(Request $request)
+    {
+        $suggestion = new Suggestion();
+        $suggestion->place_id = $this->place->id;
+        if (isset($this->table)){
+            $suggestion->table_id = $this->table->id;
+        }
+        $suggestion->rating = $request->rating;
+        $suggestion->comment = $request->order_note;
+        $suggestion->save();
+
+        return to_route('menu.index', $this->place->slug)->with('response', [
+            'status' => "success",
+            'message' => "Değerlendirmeniz için teşekkürler!"
+        ]);
     }
     public function addToCart(Request $request)
     {
@@ -131,15 +144,11 @@ class QrMenuController extends Controller
 
     public function checkOut()
     {
-        $place = $this->place;
-        $categories = $this->categories;
-        $footerVisibility = true;
-        $menuOrders = $this->place->activeMenus;
         $cartProducts = $this->cart->pluck('product_id')->toArray();
         $otherProducts = OtherProduct::whereIn('product_id', $cartProducts)->get();
         $table = $this->table;
 
-        return view('qr_menu.checkout.index', compact('place', 'categories', 'footerVisibility', 'menuOrders', 'otherProducts', 'table'));
+        return view('qr_menu.checkout.index', compact('otherProducts', 'table'));
     }
 
     public function getCart(Request $request)
@@ -188,7 +197,7 @@ class QrMenuController extends Controller
         }
         $cart = $this->cart;
         if ($cart->count() == 0){
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "error",
                 'message' => "Sepete Ürün Eklemeden Sipariş Veremezsiniz."
             ]);
@@ -200,7 +209,7 @@ class QrMenuController extends Controller
         if ($whatsappStatus) {
             return redirect()->to('https://wa.me/' . clearPhone($phone) . '?text=' . urlencode($message));
         } else {
-            return to_route('order.detail', $message)->with('response', [
+            return to_route('order.detail', $this->place->slug)->with('response', [
                 'status' => "success",
                 'message' => "Siparişiniz Oluşturuldu. Sipariş Durumunu Buradan Kontrol Edebilirsiniz."
             ]);
@@ -262,22 +271,15 @@ class QrMenuController extends Controller
         return $message;
     }
 
-    public function orderDetail(Order $order)
+    public function orderDetail(Request $request, $place, Order $order)
     {
-        $place = $this->place;
-        $categories = $this->categories;
-        $footerVisibility = true;
         $menuOrders = $this->place->activeMenus;
-        return view('qr_menu.checkout.success', compact('order', 'place', 'categories', 'footerVisibility', 'menuOrders'));
+        return view('qr_menu.checkout.success', compact('order', 'menuOrders'));
     }
 
     public function orderSearchShow()
     {
-        $place = $this->place;
-        $categories = $this->categories;
-        $footerVisibility = true;
-        $menuOrders = $this->place->activeMenus;
-        return view('qr_menu.checkout.search', compact('place', 'categories', 'footerVisibility', 'menuOrders'));
+        return view('qr_menu.checkout.search');
     }
 
     public function orderSearch(Request $request)
@@ -290,7 +292,7 @@ class QrMenuController extends Controller
             ]);
         }
         \Illuminate\Support\Facades\Session::put('searchType', true);
-        return to_route('order.detail', $order->id);
+        return to_route('order.detail', [$this->place->slug, $order->id]);
     }
 
     public function createOrderMessage($order)
@@ -362,12 +364,12 @@ Sipariş için teşekkürler.";
                 $message = str_replace('{ORDER_ID}', strtotime(date('d-m-Y')), $message);
                 return redirect()->to('https://wa.me/' . clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "success",
                 'message' => "Vale Çağırıldı"
             ]);
         } else {
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "error",
                 'message' => "Vale çağırımı sadece masa üzerinden yapılabilir."
             ]);
@@ -404,12 +406,12 @@ Sipariş için teşekkürler.";
                 $message = str_replace('{ORDER_ID}', strtotime(date('d-m-Y')), $message);
                 return redirect()->to('https://wa.me/' . clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "success",
                 'message' => "Taxi Çağırıldı"
             ]);
         } else {
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "error",
                 'message' => "Taxi çağırımı sadece masa üzerinden yapılabilir."
             ]);
@@ -440,12 +442,12 @@ Sipariş için teşekkürler.";
                 $message = str_replace('{ORDER_ID}', strtotime(date('d-m-Y')), $message);
                 return redirect()->to('https://wa.me/' . clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "success",
                 'message' => "Hesap isteme talebiniz alındı"
             ]);
         } else {
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "error",
                 'message' => "Hesap isteme çağırımı sadece masa üzerinden yapılabilir."
             ]);
@@ -477,12 +479,12 @@ Sipariş için teşekkürler.";
                 $message = str_replace('{ORDER_ID}', strtotime(date('d-m-Y')), $message);
                 return redirect()->to('https://wa.me/' . clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "success",
                 'message' => "Garson Çağırıldı"
             ]);
         } else {
-            return to_route('menu.index')->with('response', [
+            return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "error",
                 'message' => "Garson çağırımı sadece masa üzerinden yapılabilir."
             ]);

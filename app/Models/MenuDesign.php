@@ -14,13 +14,13 @@ class MenuDesign extends Model
             "id" => 1,
             "name" => "Kategoriler",
             "icon" => '<i class="ti ti-category-filled"></i>',
-            "route" => "/qr-menu"
+            "route" => ""
         ],
         [
             "id" => 2,
             "name" => "Hesap İste",
             "icon" => '<i class="ti ti-wallet"></i>',
-            "route" => "/qr-menu/call/account"
+            "route" => "/call/account"
         ],
         [
             "id" => "toggleMenu",
@@ -32,13 +32,13 @@ class MenuDesign extends Model
             "id" => 4,
             "name" => "Garson Çağır",
             "icon" => '<i class="ti ti-table-down"></i>',
-            "route" => "/qr-menu/call/waiter"
+            "route" => "/call/waiter"
         ],
         [
             "id" => 'cartArea',
             "name" => "Sepet",
             "icon" => '<i class="ti ti-shopping-cart"></i><span class="cart">0</span>',
-            "route" => "/qr-menu/check-out"
+            "route" => "/check-out"
         ],
         [
             "id" => 'callTaxiButton',
@@ -62,7 +62,7 @@ class MenuDesign extends Model
             "id" => 9,
             "name" => "Sözleşmeler",
             "icon" => '<i class="ti ti-contract"></i>',
-            "route" => "/qr-menu/contracts"
+            "route" => "/contracts"
         ],
         [
             "id" => 10,
@@ -74,25 +74,107 @@ class MenuDesign extends Model
             "id" => 11,
             "name" => "Duyurular",
             "icon" => '<i class="ti ti-bell"></i>',
-            "route" => "/qr-menu/announcement"
+            "route" => "/announcement"
         ],
         [
             "id" => 12,
             "name" => "Çalışma Saatleri",
             "icon" => '<i class="ti ti-clock-hour-3"></i>',
-            "route" => "/qr-menu/working-hours"
+            "route" => "/working-hours"
         ],
         [
             "id" => 13,
             "name" => "Sipariş Takibi",
             "icon" => '<i class="ti ti-search"></i>',
-            "route" => "/qr-menu/order/search"
+            "route" => "/order/search"
         ],
     ];
 
     public function getMenu($type)
     {
-        return self::MENU_LIST[$this->menu_id][$type];
+        $slug = \Illuminate\Support\Facades\Session::get('place')->slug;
+
+        $menuList = [
+            [
+                "id" => 1,
+                "name" => "Kategoriler",
+                "icon" => '<i class="ti ti-category-filled"></i>',
+                "route" => route('menu.index', $slug)
+            ],
+            [
+                "id" => 2,
+                "name" => "Hesap İste",
+                "icon" => '<i class="ti ti-wallet"></i>',
+                "route" => route('call.account', $slug)
+            ],
+            [
+                "id" => "toggleMenu",
+                "name" => "Menü",
+                "icon" => ' <div id="menuRedLine"></div><i class="ti ti-menu-4"></i>',
+                "route" => "javascript:void(0)"
+            ],
+            [
+                "id" => 4,
+                "name" => "Garson Çağır",
+                "icon" => '<i class="ti ti-table-down"></i>',
+                "route" => route('call.waiter', $slug)
+            ],
+            [
+                "id" => 'cartArea',
+                "name" => "Sepet",
+                "icon" => '<i class="ti ti-shopping-cart"></i><span class="cart">0</span>',
+                "route" => route('menu.checkOut', $slug)
+            ],
+            [
+                "id" => 'callTaxiButton',
+                "name" => "Taksi Çağır",
+                "icon" => '<i class="ti ti-car"></i>',
+                "route" => "javascript:void(0)"
+            ],
+            [
+                "id" => 'callWaiterButton',
+                "name" => "Vale Çağır",
+                "icon" => '<i class="ti ti-user-pin"></i>',
+                "route" => 'javascript:void(0)'
+            ],
+            [
+                "id" => 8,
+                "name" => "Görüş",
+                "icon" => '<i class="ti ti-message"></i>',
+                "route" => route('menu.suggestion', $slug)
+            ],
+            [
+                "id" => 9,
+                "name" => "Sözleşmeler",
+                "icon" => '<i class="ti ti-contract"></i>',
+                "route" => route('menu.contracts', $slug)
+            ],
+            [
+                "id" => 10,
+                "name" => "Yol Tarifi",
+                "icon" => '<i class="ti ti-navigation"></i>',
+                "route" => "https://www.google.com/maps?q=lat,long"
+            ],
+            [
+                "id" => 11,
+                "name" => "Duyurular",
+                "icon" => '<i class="ti ti-bell"></i>',
+                "route" => route('menu.announcement', $slug)
+            ],
+            [
+                "id" => 12,
+                "name" => "Çalışma Saatleri",
+                "icon" => '<i class="ti ti-clock-hour-3"></i>',
+                "route" => route('menu.workingHours', $slug)
+            ],
+            [
+                "id" => 13,
+                "name" => "Sipariş Takibi",
+                "icon" => '<i class="ti ti-search"></i>',
+                "route" => route('orderSearchShow', $slug)
+            ],
+        ];
+        return $menuList[$this->menu_id][$type];
     }
 
 }

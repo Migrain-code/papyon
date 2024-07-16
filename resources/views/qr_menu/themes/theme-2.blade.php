@@ -1,5 +1,6 @@
 @extends('qr_menu.layouts.master')
-@section('title', '')
+@section('title', 'QR Menü')
+@section('description', 'QR Menü')
 @section('styles')
     <style>
         .categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button {
@@ -17,14 +18,13 @@
     </style>
 @endsection
 @section('content')
-    @php
-        $addToCartButton = true;
-        $footerVisibility = true;
-    @endphp
+    @if($swipers->count() > 0)
+        @include('qr_menu.themes.parts.swiper')
+    @endif
+
     <section class="categories_page_categories-2" style="padding-bottom: 100px;">
         <div class="top">
-            <div class="title">Kategoriler</div>
-            <div class="link">Öne Çıkan Kategorileri Gör ></div>
+            <div class="title"><b>Kategoriler</b></div>
         </div>
         <div class="content">
             <div class="accordion" id="accordionExample">
@@ -69,14 +69,14 @@
                                                     <div class="col">
                                                         <div class="d-flex text-end justify-content-end flex-column">
                                                             <div class="col">
-                                                                @if($addToCartButton)
+                                                                @if($place->services->package_order)
                                                                     <button type="button" class="addToCardButton addToCartButton" data-product="{{$product->id}}">
                                                                         <svg  xmlns="http://www.w3.org/2000/svg" width="40"  height="40"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-circle-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4.929 4.929a10 10 0 1 1 14.141 14.141a10 10 0 0 1 -14.14 -14.14zm8.071 4.071a1 1 0 1 0 -2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 1 0 0 -2h-2v-2z" /></svg>
                                                                     </button>
                                                                 @endif
                                                             </div>
                                                             <div class="col">
-                                                                <div class="title" style="font-size: 1.2rem;@if($addToCartButton) margin-top: 23px; @endif">
+                                                                <div class="title" style="font-size: 1.2rem;@if($place->services->package_order) margin-top: 23px; @endif">
                                                                     {{$product->price}} TL
                                                                 </div>
                                                             </div>
@@ -96,12 +96,43 @@
             </div>
         </div>
     </section>
+    @if(isset($menu->banner))
+        <div class="dialogModal">
+            <div class="modal fade" id="popupBannerModal" data-bs-backdrop="static" data-bs-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content"  style="border: none">
 
+                        <div class="modal-body " @if($menu->banner->banner_type == 1 || $menu->banner->banner_type == 2) style="border-radius: 7px;min-height: 250px;background-image: url('{{storage($menu->banner->image)}}') !important;background-size: cover;" @endif >
+                            <button type="button" class="btn-close closeButton" style="position: absolute;
+                                    right: 10px;
+                                    top: 10px;
+                                    padding: 5px;" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        @if($menu->banner->banner_type == 1 || $menu->banner->banner_type == 3)
+                            <div class="modal-footer" style="justify-content: start;padding: 20px;">
+                                <div class="text-start" style="overflow-wrap: anywhere;"> {{ $menu->banner->description }}</div>
+                            </div>
+                        @endif
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('scripts')
-    <style>
-
-    </style>
+    @if(isset($menu->banner))
+        <script>
+            if (!localStorage.getItem('modalShown')) {
+                var productModal = new bootstrap.Modal(document.querySelector('#popupBannerModal'));
+                productModal.show();
+                localStorage.setItem('modalShown', 'true');
+            }
+        </script>
+    @endif
 
 @endsection

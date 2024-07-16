@@ -1,5 +1,5 @@
 @extends('qr_menu.layouts.master')
-@section('title', '')
+@section('title', 'Sipariş Takibi')
 @section('styles')
     <style>
         .waiter .content .formItem {
@@ -28,7 +28,7 @@
 @endsection
 @section('content')
     <section class="waiter">
-        <form class="content" method="post" action="{{route('order.search')}}">
+        <form class="content" method="post" action="{{route('order.search', $place->slug)}}">
             @csrf
             <div class="d-flex justify-content-center align-items-center gap-0">
                 <b style="font-size: 21px">Sipariş Takibi</b>

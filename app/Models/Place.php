@@ -91,6 +91,14 @@ class Place extends Model
     {
         return $this->hasMany(SwiperAdvert::class, 'place_id', 'id');
     }
+    public function suggestions() // Görüş ve Öneriler
+    {
+        return $this->hasMany(Suggestion::class, 'place_id', 'id');
+    }
+    public function colors() // Renkler
+    {
+        return $this->hasMany(ThemeColor::class, 'place_id', 'id');
+    }
 
     public function menuOrders() // Menü sıralaması
     {
