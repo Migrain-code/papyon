@@ -3,8 +3,13 @@
 namespace App\Providers;
 
 use App\Core\CustomResourceRegistrar;
+use App\Models\Cart;
+use App\Models\Place;
+use App\Models\Table;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

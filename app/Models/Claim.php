@@ -47,6 +47,11 @@ class Claim extends Model
             "name" => "Garson Talebi",
             "icon" => '<span class="badge bg-label-success">Garson Talebi</span>',
         ],
+        3 => [
+            "id" => 1,
+            "name" => "Hesap Talebi",
+            "icon" => '<span class="badge bg-label-success">Hesap Talebi</span>',
+        ],
     ];
     public function status($type)
     {

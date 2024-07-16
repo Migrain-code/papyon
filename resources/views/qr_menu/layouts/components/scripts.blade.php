@@ -18,7 +18,7 @@
             $("#menuRedLine").toggleClass("d-none");
             $("#toggleAdvice").siblings().toggleClass("d-none");
         })
-        $(".callWaiterButton").click(function() {
+        $("#callWaiterButton").click(function() {
             $(".callWaiter").toggleClass("callWaiterShow");
             $(".layer").toggleClass("modal-backdrop fade show");
         })
@@ -29,6 +29,19 @@
             $(".callWaiter").toggleClass("callWaiterShow");
             $(".layer").toggleClass("modal-backdrop fade show");
         })
+
+        $("#callTaxiButton").click(function() {
+            $(".callTaxi").toggleClass("callTaxiShow");
+            $(".layer").toggleClass("modal-backdrop fade show");
+        })
+        $(".callTaxiButtonFromMain").click(function() {
+            $(".callTaxi").toggleClass("callTaxiShow");
+        })
+        $(".close-button-taxi").click(function() {
+            $(".callTaxi").toggleClass("callTaxiShow");
+            $(".layer").toggleClass("modal-backdrop fade show");
+        });
+
         $("#popStack").click(function() {
             window?.history?.back();
         })

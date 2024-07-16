@@ -20,7 +20,7 @@ class MenuDesign extends Model
             "id" => 2,
             "name" => "Hesap İste",
             "icon" => '<i class="ti ti-wallet"></i>',
-            "route" => "javascript:void(0)"
+            "route" => "/qr-menu/call/account"
         ],
         [
             "id" => "toggleMenu",
@@ -32,25 +32,25 @@ class MenuDesign extends Model
             "id" => 4,
             "name" => "Garson Çağır",
             "icon" => '<i class="ti ti-table-down"></i>',
-            "route" => "javascript:void(0)"
+            "route" => "/qr-menu/call/waiter"
         ],
         [
-            "id" => 5,
+            "id" => 'cartArea',
             "name" => "Sepet",
             "icon" => '<i class="ti ti-shopping-cart"></i><span class="cart">0</span>',
             "route" => "/qr-menu/check-out"
         ],
         [
-            "id" => 6,
+            "id" => 'callTaxiButton',
             "name" => "Taksi Çağır",
             "icon" => '<i class="ti ti-car"></i>',
             "route" => "javascript:void(0)"
         ],
         [
-            "id" => 7,
+            "id" => 'callWaiterButton',
             "name" => "Vale Çağır",
             "icon" => '<i class="ti ti-user-pin"></i>',
-            "route" => "javascript:void(0)"
+            "route" => 'javascript:void(0)'
         ],
         [
             "id" => 8,
@@ -62,34 +62,28 @@ class MenuDesign extends Model
             "id" => 9,
             "name" => "Sözleşmeler",
             "icon" => '<i class="ti ti-contract"></i>',
-            "route" => "javascript:void(0)"
+            "route" => "/qr-menu/contracts"
         ],
         [
             "id" => 10,
             "name" => "Yol Tarifi",
             "icon" => '<i class="ti ti-navigation"></i>',
-            "route" => "javascript:void(0)"
+            "route" => "https://www.google.com/maps?q=lat,long"
         ],
         [
             "id" => 11,
             "name" => "Duyurular",
             "icon" => '<i class="ti ti-bell"></i>',
-            "route" => "javascript:void(0)"
+            "route" => "/qr-menu/announcement"
         ],
         [
             "id" => 12,
             "name" => "Çalışma Saatleri",
             "icon" => '<i class="ti ti-clock-hour-3"></i>',
-            "route" => "javascript:void(0)"
+            "route" => "/qr-menu/working-hours"
         ],
         [
             "id" => 13,
-            "name" => "Whatsapp",
-            "icon" => '<i class="ti ti-brand-whatsapp"></i>',
-            "route" => "javascript:void(0)"
-        ],
-        [
-            "id" => 14,
             "name" => "Sipariş Takibi",
             "icon" => '<i class="ti ti-search"></i>',
             "route" => "/qr-menu/order/search"

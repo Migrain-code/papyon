@@ -78,7 +78,7 @@
                                                     <input class="form-check-input" id="serviceAllSelect" type="checkbox">
                                                 </div>
                                             </th>
-                                            <th>Ad Soyad</th>
+                                            <th>Ad / Masa</th>
                                             <th>Telefon</th>
                                             <th>Durum</th>
                                             <th>Masa</th>

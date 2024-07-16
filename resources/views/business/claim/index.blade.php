@@ -79,8 +79,8 @@
                                                     <input class="form-check-input" id="serviceAllSelect" type="checkbox">
                                                 </div>
                                             </th>
-                                            <th>Ad Soyad</th>
-                                            <th>Telefon</th>
+                                            <th>Ad / Masa</th>
+                                            <th>Sipariş Türü</th>
                                             <th>Durum</th>
                                             <th>Toplam Tutar</th>
                                             <th>Tarih</th>
@@ -110,7 +110,7 @@
         var DATA_COLUMNS = [
             {data: 'id'},
             {data: 'name'},
-            {data: 'phone'},
+            {data: 'order_type'},
             {data: 'status'},
             {data: 'total'},
             {data: 'created_at'},

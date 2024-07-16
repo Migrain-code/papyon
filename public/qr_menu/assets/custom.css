@@ -148,3 +148,79 @@
     padding: 15px;
     padding-bottom: 90px;
 }
+.footer .callWaiter .middle .formItem input{
+    width: 100%;
+    background: none;
+    padding: 10px;
+    border: 1px solid #cfcfcf;
+    border-radius: 7px;
+    outline: 0px;
+    min-width: 200px;
+}
+
+.footer .callTaxi {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: fixed;
+    background-color: #fff;
+    padding: 30px;
+    bottom: -500px;
+    left: 0;
+    right: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transition: bottom .5s ease;
+    z-index: 1052;
+}.footer .callTaxiShow {
+     bottom: 0 !important;
+ }
+.footer .callTaxi .plate {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.footer .callTaxi .close-button-taxi {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+}
+.footer .callTaxi .top p {
+    text-align: center;
+    color: #000;
+    padding: 0 30px;
+    margin: 40px auto auto;
+}
+.footer .callTaxi .middle {
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-weight: 700;
+}
+.footer .callTaxi .middle .formItem input {
+    width: 100%;
+    background: none;
+    padding: 10px;
+    border: 1px solid #cfcfcf;
+    border-radius: 7px;
+    outline: 0px;
+    min-width: 200px;
+}
+.footer .callTaxi a button {
+    width: 100%;
+    background-color: #e0483d;
+    color: #fff;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: Roboto Black, sans-serif;
+}

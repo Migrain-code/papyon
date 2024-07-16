@@ -109,7 +109,12 @@ class ClaimController extends Controller
                 return createCheckbox($q->id, 'Claim', 'Siparişler', 'orderChecks');
             })
             ->editColumn('name', function ($q) {
-                return createName(route('business.claim.edit', $q->id), $q->name);
+                if (isset($q->table_id)){
+                    return createName(route('business.claim.edit', $q->id), $q->table->name);
+                } else{
+                    return createName(route('business.claim.edit', $q->id), $q->name);
+                }
+
             })
             ->editColumn('phone', function ($q) {
                 return createPhone($q->phone, formatPhone($q->phone));

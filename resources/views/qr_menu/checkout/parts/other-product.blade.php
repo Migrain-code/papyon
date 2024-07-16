@@ -3,7 +3,7 @@
 
     @foreach ($otherProducts as $otherProduct)
         <div class="card-style-1">
-            <a href="">
+            <a href="javascript:void(0)">
                 <div class="top">
                     <img src="{{storage($otherProduct->product->image)}}" alt="">
                     @if(false)
@@ -29,21 +29,21 @@
                         <p>
                             ₺ {{$otherProduct->product->price}}
                         </p>
-                        <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="61.479" height="61.479" viewBox="0 0 61.479 61.479">
-                        <g id="Group_3412" data-name="Group 3412" transform="translate(-7714.521 -5540.625)">
-                            <g id="Group_3410" data-name="Group 3410">
-                                <rect id="Rectangle_3349" data-name="Rectangle 3349" width="61.479" height="61.479"
-                                      rx="9.484" transform="translate(7714.521 5540.625)" fill="#e0483d" />
-                            </g>
-                            <g id="Group_3411" data-name="Group 3411">
-                                <path id="Path_3871" data-name="Path 3871"
-                                      d="M7761.809,5569.416h-12.894v-12.894h-6.068v12.894h-12.894v6.068h12.894v12.894h6.068v-12.894h12.894Z"
-                                      fill="#f3f3f1" />
-                            </g>
-                        </g>
-                    </svg>
-                </span>
+                        <span class="addToCartButton" data-product="{{$otherProduct->product->id}}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="61.479" height="61.479" viewBox="0 0 61.479 61.479">
+                                <g id="Group_3412" data-name="Group 3412" transform="translate(-7714.521 -5540.625)">
+                                    <g id="Group_3410" data-name="Group 3410">
+                                        <rect id="Rectangle_3349" data-name="Rectangle 3349" width="61.479" height="61.479"
+                                              rx="9.484" transform="translate(7714.521 5540.625)" fill="#e0483d" />
+                                    </g>
+                                    <g id="Group_3411" data-name="Group 3411">
+                                        <path id="Path_3871" data-name="Path 3871"
+                                              d="M7761.809,5569.416h-12.894v-12.894h-6.068v12.894h-12.894v6.068h12.894v12.894h6.068v-12.894h12.894Z"
+                                              fill="#f3f3f1" />
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
                     </div>
                 </div>
             </a>

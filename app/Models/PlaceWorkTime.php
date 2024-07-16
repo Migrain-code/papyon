@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PlaceWorkTime extends Model
 {
     use HasFactory;
+
+    public function day()
+    {
+        return $this->hasOne(DayList::class, 'id', 'day_id');
+    }
 }

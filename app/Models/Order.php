@@ -37,7 +37,7 @@ class Order extends Model
         2 => [
             "id" => 1,
             "name" => "İptal Edildi",
-            "icon" => '<span class="badge bg-label-warning">İptal Edildi</span>',
+            "icon" => '<span class="badge bg-label-danger">İptal Edildi</span>',
         ],
         3 => [
             "id" => 1,

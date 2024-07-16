@@ -14,10 +14,12 @@
                 <span class="discount-amount">{{ "0" }} </span>
             </p>
         </div>
+
         <div class="dere">
             <p>{{ __('Kurye') }}</p>
-            <p class="delivery-amount">0</p>
+            <p class="delivery-amount">0.00₺</p>
         </div>
+
         <div class="bottomsaws">
             <p>{{ __('Toplam Tutar') }}</p>
             <p class="total-amount">{{ "0" }}</p>

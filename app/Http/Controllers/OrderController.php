@@ -218,6 +218,9 @@ class OrderController extends Controller
             ->editColumn('name', function ($q) {
                 return $q->name;
             })
+            ->editColumn('order_type', function ($q){
+                return $q->orderType('name');
+            })
             ->editColumn('phone', function ($q) {
                 return createPhone($q->phone, formatPhone($q->phone));
             })

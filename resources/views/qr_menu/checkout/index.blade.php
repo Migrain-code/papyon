@@ -28,5 +28,10 @@
 @endsection
 
 @section('scripts')
-
+    <script>
+        $(document).on('change', '[name="order_type_id"]', function (){
+            var discountTotal = $(this).data('discount');
+            fetchCart(discountTotal);
+        });
+    </script>
 @endsection

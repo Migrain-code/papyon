@@ -312,9 +312,9 @@ function create_custom_route_switch($id, $checked, $model, $column, $route): \Sp
 function formatPrice($price)
 {
     // Fiyatı iki ondalık basamağa yuvarlamadan kes
-    $formattedPrice = floor($price * 100) / 100;
+   // $formattedPrice = floor($price * 100) / 100;
     // Sayıyı iki ondalık basamakla formatla
-    $formattedPrice = number_format($formattedPrice, 2, '.', '') . " ₺";
+    $formattedPrice = number_format($price, 2) . " ₺";
     return $formattedPrice;
 }
 

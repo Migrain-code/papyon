@@ -1,7 +1,32 @@
 @extends('qr_menu.layouts.master')
 @section('title', '')
 @section('styles')
-
+    <style>
+        .bg-label-warning {
+            background-color: #fff1e3 !important;
+            color: #ff9f43 !important;
+        }
+        .bg-label-success {
+            background-color: #dff7e9 !important;
+            color: #28c76f !important;
+        }
+        .bg-label-danger {
+            background-color: #fce5e6 !important;
+            color: #ea5455 !important;
+        }
+        .bg-label-secondary {
+            background-color: #f2f2f3 !important;
+            color: #a8aaae !important;
+        }
+        .bg-label-info {
+            background-color: #d9f8fc !important;
+            color: #00cfe8 !important;
+        }
+        .bg-label-success {
+            background-color: #dff7e9 !important;
+            color: #28c76f !important;
+        }
+    </style>
 @endsection
 @section('content')
     <section class="waiter">
@@ -23,8 +48,10 @@
                     </g>
                 </svg>
                 @if(session('searchType'))
-                    <h2 style="text-align: center;">Sipariş bilgileriniz</h2>
-                    <h2></h2>
+                    <h2 style="text-align: center;">
+                        Sipariş Bilgileri
+                    </h2>
+                    <h2>{!! $order->orderStatus('name') !!}</h2>
                     <a href="{{route('menu.index')}}">
                         <button class="btn btn-secondary returnMenu" type="button">
                             {{ __('Menüye Dön') }}

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Place extends Model
 {
@@ -31,9 +32,50 @@ class Place extends Model
     {
         return $this->hasMany(Contract::class, 'place_id', 'id');
     }
+
     public function workTimes() // Çalışma Saatleri
     {
         return $this->hasMany(PlaceWorkTime::class, 'place_id', 'id');
+    }
+    public function announcements() // Duyurular
+    {
+        return $this->hasMany(Announcement::class, 'place_id', 'id');
+    }
+
+    public function checkCloseDay()
+    {
+        $day = $this->workTimes()->where('day_id', Carbon::now()->dayOfWeek)->first();
+        if ($day->status == 0) {
+            return true; //kapalı
+        }
+        return false;
+    }
+
+    public function checkClock()
+    {
+        $day = $this->workTimes()->where('day_id', Carbon::now()->dayOfWeek)->first();
+
+        if (!$day) {
+            return true;
+        }
+
+        $currentTime = Carbon::now();
+        $startTime = Carbon::parse($day->start_time);
+        $endTime = Carbon::parse($day->end_time);
+
+        if ($startTime->lt($endTime)) {
+            // Normal case where start time is before end time on the same day
+            if ($currentTime->between($startTime, $endTime)) {
+                return false;
+            }
+        } else {
+            // Case where the working hours span past midnight
+            if ($currentTime->gte($startTime) || $currentTime->lte($endTime)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function orders() // Siparişler

@@ -1,17 +1,21 @@
 $(document).ready(function () {
     fetchCart();
 });
-function fetchCart(){
+
+function fetchCart(dataDiscount = 0) {
     $.ajax({
         url: '/qr-menu/get-cart',
         type: 'GET',
         dataType: 'json',
+        data: {
+            'discount': dataDiscount,
+        },
         success: function (data) {
             var totalProductCount = 0;
             var itemsHtml = '';
-            if( data.products.length > 0){
+            if (data.products.length > 0) {
                 data.products.forEach(function (item) {
-                    totalProductCount+=item.qty;
+                    totalProductCount += item.qty;
                     itemsHtml += `
                                 <div class="item">
                                     <div class="title">${item.name} <br>
@@ -26,7 +30,7 @@ function fetchCart(){
                 });
                 $('.orderCreateButton').css('display', 'block');
 
-            } else{
+            } else {
                 itemsHtml += `<div class="alert alert-warning text-center">Sepetiniz Boş</div>`;
                 $('.orderCreateButton').css('display', 'none');
             }
@@ -46,7 +50,8 @@ function fetchCart(){
         }
     });
 }
-$(document).on('click', '.addToCartButton', function() {
+
+$(document).on('click', '.addToCartButton', function () {
 
     var product_id = $(this).data('product');
     var button = $(this);
@@ -57,24 +62,24 @@ $(document).on('click', '.addToCartButton', function() {
             _token: csrf_token,
             product_id: product_id,
         },
-        success: function(response) {
+        success: function (response) {
             /*Toast.fire({
                 icon: response.status,
                 title: response.message,
             });*/
-            if(response.status == "success"){
+            if (response.status == "success") {
                 var audio = document.getElementById('success-sound');
                 // Sesi çal
                 audio.play();
                 fetchCart();
             }
         },
-        error: function(xhr) {
+        error: function (xhr) {
             console.error('Ekleme Hata Oluştu:', xhr);
         }
     });
 });
-$(document).on('click', '.deleteToCartButton', function() {
+$(document).on('click', '.deleteToCartButton', function () {
 
     var product_id = $(this).data('product');
     var button = $(this);
@@ -87,47 +92,47 @@ $(document).on('click', '.deleteToCartButton', function() {
             product_id: product_id,
             product_delete: true,
         },
-        success: function(response) {
+        success: function (response) {
             /*Toast.fire({
                 icon: response.status,
                 title: response.message,
             });*/
-            if(response.status == "success"){
+            if (response.status == "success") {
 
                 // Sesi çal
                 audio.play();
                 fetchCart();
             }
-            if(response.status == "info"){
+            if (response.status == "info") {
                 audio.play();
                 fetchCart();
             }
         },
-        error: function(xhr) {
+        error: function (xhr) {
             console.error('Ekleme Hata Oluştu:', xhr);
         }
     });
 });
-$(document).on('click', '.emptyCartButton', function() {
+$(document).on('click', '.emptyCartButton', function () {
     $.ajax({
         url: '/qr-menu/empty-cart',
         method: 'POST',
         data: {
             _token: csrf_token,
         },
-        success: function(response) {
+        success: function (response) {
             Toast.fire({
                 icon: response.status,
                 title: response.message,
             });
-            if(response.status == "success"){
+            if (response.status == "success") {
                 var audioEmpty = document.getElementById('card-delete-sound');
                 audioEmpty.play();
 
                 fetchCart();
             }
         },
-        error: function(xhr) {
+        error: function (xhr) {
             console.error('Ekleme Hata Oluştu:', xhr);
         }
     });

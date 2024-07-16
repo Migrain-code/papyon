@@ -7,7 +7,7 @@
             <input type="text" name="verify_code" placeholder="Sipariş Durumunu Bu Kod İle Kontrol Edeceksiniz">
         </div>
         <div class="title">{{ __('Sipariş Notu') }}</div>
-        <input type="hidden" name="order_type" value="table_order">
+        <input type="hidden" name="order_type_id" value="1">
 
         <div class="formItem">
             <textarea class="" name="order_note" placeholder="Sipariş Notunuzu Buraya Yazınız" id="" cols="30" rows="10"></textarea>

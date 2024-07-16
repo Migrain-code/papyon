@@ -11,6 +11,9 @@
             display: flex;
             justify-content: center;
         }
+        #cartArea{
+            position: relative;
+        }
     </style>
 @endsection
 @section('content')
