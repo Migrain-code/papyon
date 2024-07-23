@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MenuDesign extends Model
 {
     use HasFactory;
-
+    protected $fillable = ["status"];
     const MENU_LIST = [
         [
             "id" => 1,

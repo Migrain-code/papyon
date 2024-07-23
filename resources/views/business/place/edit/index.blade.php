@@ -1,5 +1,5 @@
 @extends('business.layouts.master')
-@section('title', 'Mekan Düzenle')
+@section('title', 'Mekan Ekle')
 @section('styles')
     <link rel="stylesheet" href="/business/assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="/business/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css" />
@@ -18,10 +18,10 @@
                     <div class="d-flex align-items-end row">
                         <div class="col-7">
                             <div class="card-body text-nowrap">
-                                <h5 class="card-title mb-0">Mekan Düzenleme Sihirbazı! 🎉</h5>
-                                <p class="mb-2">Şimdi Mekan Bilgilerinizi Güncelleyin</p>
+                                <h5 class="card-title mb-0">Mekan Oluşturma Sihirbazı! 🎉</h5>
+                                <p class="mb-2">Şimdi yeni mekanınızı ekleyin</p>
                                 <h4 class="text-primary mb-1"></h4>
-                                <a href="{{route('business.place.index')}}" class="btn btn-primary">Mekanlarım</a>
+                                <a href="javascript:;" class="btn btn-primary">Mekanlarım</a>
                             </div>
                         </div>
                         <div class="col-5 text-center text-sm-left">
@@ -38,19 +38,20 @@
                 <!-- Multi Column with Form Separator -->
                 <div class="card my-4">
                     <h5 class="card-header" data-i18n="Mekan Oluşturma Sihirbazı">Mekan Oluşturma Sihirbazı</h5>
-                    <form class="card-body" method="post" action="{{route('business.place.store')}}" enctype="multipart/form-data">
+                    <form class="card-body" method="post" action="{{route('business.place.update', $place->id)}}" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         @include('business.place.edit.steps.step-1')
                         @include('business.place.edit.steps.step-2')
                         @include('business.place.edit.steps.step-3')
                         @include('business.place.edit.steps.step-4')
                         @include('business.place.edit.steps.step-5')
                         @include('business.place.edit.steps.step-6')
+
                         @include('business.place.edit.steps.step-7')
 
                         <div class="pt-4">
-                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Güncelle</button>
-                            <button type="button" onclick="location.reload()" class="btn btn-label-secondary">Temizle</button>
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1">Kaydet</button>
                         </div>
                     </form>
                 </div>
@@ -69,19 +70,37 @@
 
                 // Find the callArea within this registerArea
                 var callArea = registerArea.find('.callArea');
-
+                var callArea2 = registerArea.find('.callArea2');
                 // Toggle visibility based on the checkbox state
                 if ($(this).is(':checked')) {
                     callArea.show();
+
                 } else {
                     callArea.hide();
+                    if(callArea2){
+                        callArea2.hide();
+                    }
+                }
+            });
+            $('.form-check-input').on('change', function() {
+                // Get the parent registerArea of the clicked switch
+                var registerArea = $(this).closest('.registerArea');
+
+                // Find the callArea within this registerArea
+                var callArea2 = registerArea.find('.callArea2');
+
+                // Toggle visibility based on the checkbox state
+                if ($(this).data('disable')) {
+                    callArea2.hide();
+                } else {
+                    callArea2.show();
                 }
             });
         });
         function toggleCallArea(checkbox, areaId) {
             //var callArea = document.getElementById(areaId);
             if (checkbox.checked) {
-                alert('Bu işlem için lütfen telefon numarası alanını doldurunuz');
+                // alert('Bu işlem için lütfen telefon numarası alanını doldurunuz');
             }
         }
         $('[name="place_name"]').on('keyup', function (){
@@ -131,6 +150,11 @@
     <script src="/business/assets/vendor/libs/pickr/pickr.js"></script>
     <script src="/business/assets/js/project/place/add.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcMXrk2ldIslFsanG5wUm5EuuTjkLfl8U&libraries=places&callback=initAutocomplete" async defer></script>
+    <script>
+        var defaultLatitude = '{{$place->latitude}}';
+        var defaultLongitude = '{{$place->longitude}}';
+
+    </script>
     <script src="/business/assets/js/project/place/map.js"></script>
 
 

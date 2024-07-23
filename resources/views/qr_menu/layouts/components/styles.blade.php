@@ -8,20 +8,25 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 @php
-    $accordionBodyColor = str_replace(array('rgb(', ')'), '', "rgb(224 72 61)");
+    $accordionBodyColor = str_replace(array('rgb(', ')'), '', hexToRgb($colors->get('category_bg')));
  @endphp
 <style>
     :root {
-        --theme-background-color: #e0483d;
-        --theme-link-color: #e0483d;
-        --theme-category-color: #2ecc71;
-        --theme-font-color: #fcfcfc;
-        --theme-accordion-bg-color: rgb(224 72 61);
-        --theme-accordion-body-color: {{$accordionBodyColor}};
-        --theme-product-font-color: #686868;
-        --theme-product-button-color: #e0483d;
-        --font-size: 16px;
-        --spacing: 8px;
+        --top_menu_bg: {{$colors->get('top_menu_bg')}};
+        --top_menu_font: {{$colors->get('top_menu_font')}};
+        --bottom_menu_bg: {{$colors->get('bottom_menu_bg')}};
+        --bottom_menu_font: {{$colors->get('bottom_menu_font')}};
+        --bottom_menu_bg_close: {{$colors->get('bottom_menu_bg_close')}};
+        --bottom_menu_font_close: {{$colors->get('bottom_menu_font_close')}};
+        --category_button_bg: {{$colors->get('category_button_bg')}};
+        --category_button_font: {{$colors->get('category_button_font')}};
+        --category_bg: {{$accordionBodyColor}};
+        --product_card_bg: {{$colors->get('product_card_bg')}};
+        --product_card_font: {{$colors->get('product_card_font')}};
+        --product_card_time_bg: {{$colors->get('product_card_time_bg')}};
+        --product_card_time_font: {{$colors->get('product_card_time_font')}};
+        --product_card_add_button_bg: {{$colors->get('product_card_add_button_bg')}};
+        --product_card_add_button_font: {{$colors->get('product_card_add_button_font')}};
     }
 </style>
 <link rel="stylesheet" href="/qr_menu/assets/app-XiLQjXB9.css">

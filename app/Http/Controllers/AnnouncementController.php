@@ -114,7 +114,7 @@ class AnnouncementController extends Controller
 
     public function datatable()
     {
-        $adverts = Announcement::all();
+        $adverts = $this->business->announcements;
         return DataTables::of($adverts)
             ->editColumn('id', function ($q) {
                 return createCheckbox($q->id, 'Announcement', 'Duyurları', 'orderChecks');

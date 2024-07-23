@@ -42,9 +42,9 @@
         <label class="form-label" for="multicol-country">Ana Para Birimi</label>
         <select id="multicol-currency" name="price_type" class="select2 form-select" data-allow-clear="true">
             <option value="">Select</option>
-            <option value="en" selected>Dollar</option>
-            <option value="tr" selected>Türk Lirası</option>
-            <option value="de">Euro</option>
+            <option value="$" selected>Dollar</option>
+            <option value="₺" selected>Türk Lirası</option>
+            <option value="€">Euro</option>
 
         </select>
     </div>

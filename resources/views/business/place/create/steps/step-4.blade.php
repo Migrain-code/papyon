@@ -2,7 +2,7 @@
 <h6>4. Çalışma Saatleri</h6>
 
 @foreach($dayList as $day)
-    <div class="row g-3">
+    <div class="row align-items-center g-3">
         <div class="d-flex" style="max-width: 500px">
             <div class="col">
                 <label>{{$day->name}}</label>

@@ -6,6 +6,19 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link @if(request()->routeIs('business.souce.index')) active @endif" href="{{route('business.souce.index')}}">
+            <i class="ti ti-tools-kitchen"></i>
+            Soslar
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @if(request()->routeIs('business.material.index')) active @endif" href="{{route('business.material.index')}}">
+            <i class="ti ti-stack-push"></i>
+            Malzemeler
+        </a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link @if(request()->routeIs('business.menu.status')) active @endif" href="{{route('business.menu.status', $menu->id)}}">
             <i class="ti ti-switch-2 ti-xs me-1"></i>
             Mevcut Durumu

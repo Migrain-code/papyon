@@ -75,47 +75,6 @@
 @endsection
 @section('scripts')
 
-    <script>
-        var orderId = '{{$order->id}}'
-        var priceTypeIcon = "₺"
-        var tableDatas = [];
-        var orderDiscount = parseFloat({{$order->discount}});
-        @foreach(json_decode($order->cart) as $order)
-
-            $newData = {
-            "id": {{$order->id}},
-            "product_name": "{{$order->name}}",
-            "product_info": "{{$order->quantity}} Ürün",
-            "image": "{{storage($order->image)}}",
-            "qty": {{$order->quantity}},
-            "price": {{$order->price}}
-        }
-        tableDatas.push($newData);
-        @endforeach
-
-        $(document).ready(function() {
-            setTimeout(function (){
-                let subTotal = 0;
-
-                $('.calculateProductTotal').each(function() {
-                    const productTotal = parseFloat($(this).data('product-total'));
-
-                    // Eğer productTotal geçerli bir sayı ise toplamı güncelleyelim.
-                    if (!isNaN(productTotal)) {
-
-                        subTotal += productTotal;
-                    }
-                });
-
-                let discountTotal = (subTotal * orderDiscount) / 100;
-                let total = subTotal - discountTotal;
-                $('#subTotalPrice').text(priceTypeIcon+ subTotal);
-                $('#totalPrice').text(priceTypeIcon+ total);
-                $('#orderDiscount').text(priceTypeIcon+ discountTotal);
-            }, 200);
-
-        });
-    </script>
     <script src="/business/assets/vendor/libs/@form-validation/popular.js"></script>
     <script src="/business/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
     <script src="/business/assets/vendor/libs/@form-validation/auto-focus.js"></script>

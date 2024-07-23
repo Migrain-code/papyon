@@ -6,7 +6,7 @@
 }
 .categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button {
     padding: 35px 20px;
-    background-color: var(--theme-accordion-bg-color);
+    background-color: var(--category_button_bg);
     background-size: cover;
     background-position: center;
     border-radius: 10px;
@@ -17,16 +17,16 @@
     display: none;
 }
 .categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button .column span {
-    color: var(--theme-font-color);
+    color: var(--category_button_font);
     font-family: Roboto Medium, sans-serif;
     font-size: 2rem;
     padding-left: 10px;
-    text-shadow:2px 2px 4px rgb(0 0 0 / 67%);
+    text-shadow:2px 2px 4px rgb(0 0 0 / 50%);
 }
  .cardContent{
      margin-bottom: 15px;
      border-radius: 20px;
-     background: #ffffffcf;
+     background: var(--product_card_bg);
      border: none;
      box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.15);
  }
@@ -37,7 +37,7 @@
     background: none;
     border: none;
     transition: 0.3s;
-    color: var(--theme-product-button-color);
+    color: var(--product_card_add_button_bg);
 }
 /*.addToCardButton svg{
     color: var(--theme-product-button-color);
@@ -46,10 +46,10 @@
     position: absolute;
     left: 12px !important;
     top: -10px !important;
-    background: var(--theme-background-color);
+    background: var(--product_card_time_bg);
     font-size: 11px !important;
     padding: 5px;
-    color: var(--theme-font-color);
+    color: var(--product_card_time_font);
     border-radius: 7px !important;
     font-weight: 500;
     display: flex;
@@ -225,9 +225,9 @@
     font-family: Roboto Black, sans-serif;
 }
 .btn-copy {
-    background-color: var(--theme-background-color);
+    background-color: var(--top_menu_bg);
     outline: 0px;
-    color: var(--theme-font-color);
+    color: var(--top_menu_font);
     border: none;
     padding: 5px 15px;
     border-radius: 15px;
@@ -259,11 +259,83 @@
 }
 .confirmButton{
     font-size: 15px;
-    background: var(--theme-product-button-color);
-    color: var(--theme-font-color);
+    background: var(--product_card_add_button_bg);
+    color: var(--product_card_add_button_font);
     border: none;
     min-width: 150px;
     padding: 10px;
     border-radius: 15px;
     margin: auto;
+}
+
+.mt-30{
+    margin-top: 30px;
+}
+.content-container .meals .top .title{
+    color: #757575;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px;
+}
+.content-container{
+    padding-bottom: 90px;
+}
+.columnButtons{
+    font-size: 20px;
+    border:none;
+    color: var(--product_card_add_button_bg);
+}
+.checkbox-container {
+    display: flex;
+    gap: 10px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 15px;
+    user-select: none;
+    border: 1px solid #615f5f54;
+    padding: 8px;
+    border-radius: 12px;
+    color: #757575;
+    justify-content: center;
+}
+
+.checkbox-item input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-item .checkmark {
+    content: "✕";
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    margin-right: 0px;
+    color: black;
+}
+.checkbox-item input:checked + .checkmark::after {
+    content: "✕";
+    color: red;
+    font-size: 16px;
+    margin-right: 3px;
+}
+.checkbox-item input:checked + .checkmark {
+    color: red;
+}
+
+.checkbox-item input:checked + .checkmark + span {
+    color: red;
+}
+.deleteToCartButton{
+    cursor: pointer;
+}
+.addToCartButton{
+    cursor: pointer;
 }

@@ -9,6 +9,8 @@ class Cart extends Model
 {
     use HasFactory;
 
+    protected $casts = ['materials' => "object", 'sauces' => "object"];
+
     public function product()
     {
         return $this->hasOne(MenuCategoryProduct::class, 'id', 'product_id');

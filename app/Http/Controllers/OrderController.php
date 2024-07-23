@@ -171,7 +171,7 @@ class OrderController extends Controller
     {
         $findProduct = MenuCategoryProduct::find($request->product_id);
         $productQuantity = $request->product_qty;
-        $cart = json_decode($order->cart);
+        $cart = $order->cart;
         $product = [
             "id" => $findProduct->id,
             "name" => $findProduct->name,
@@ -185,7 +185,7 @@ class OrderController extends Controller
         ];
 
         $cart[] = $product;
-        $order->cart = json_encode($cart);
+        $order->cart = $cart;
         if ($order->save()) {
             return back()->with('response', [
                 'status' => "success",

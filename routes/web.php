@@ -23,6 +23,9 @@ use App\Http\Controllers\CartController;
 use \App\Http\Controllers\PlaceMenuController;
 use App\Http\Controllers\MenuDesignController;
 use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\SouceController;
+use App\Http\Controllers\MaterialController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -49,6 +52,8 @@ Route::middleware('checkPlace')->group(function (){
             Route::get('/announcement', [QrMenuController::class, 'announcement'])->name('menu.announcement');
             Route::get('/suggestions', [QrMenuController::class, 'suggestion'])->name('menu.suggestion');
             Route::post('/suggestion/save', [QrMenuController::class, 'suggestionSave'])->name('menu.suggestion.post');
+            Route::get('/category/{category}', [QrMenuController::class, 'category'])->name('category');
+            Route::get('/product/{product}/detail', [QrMenuController::class, 'product'])->name('productDetail');
     });
     Route::get('/notify', [PlaceMenuController::class, 'notify'])->name('notify');
 });
@@ -135,6 +140,8 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
             Route::post('/update-info',  [SettingController::class, 'updateInfo'])->name('updateInfo');
         });
 
+        Route::resource('souce', SouceController::class);
+        Route::resource('material', MaterialController::class);
         Route::resource('announcement', AnnouncementController::class);
         Route::resource('contract', ContractController::class);
         Route::resource('suggestion', SuggestionController::class);

@@ -5,7 +5,7 @@
     <style>
         .categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button {
             padding: 20px 20px;
-            background-color: var(--theme-accordion-bg-color);
+            background-color: var(--category_button_bg);
             background-size: cover;
             background-position: center;
             border-radius: 10px;
@@ -50,12 +50,18 @@
                                    @foreach($category->products as $product)
                                         <div class="card cardContent ">
                                             <div class="card-body position-relative">
-                                                <span class="calorieAre">
-                                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="15"  height="15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>
-                                                150 kcal.
-                                                  <svg  xmlns="http://www.w3.org/2000/svg" style="margin-left: 4px;margin-bottom: -1px;"  width="15"  height="15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-alarm"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M12 10l0 3l2 0" /><path d="M7 4l-2.75 2" /><path d="M17 4l2.75 2" /></svg>
-                                                 150 dk.
-                                                </span>
+                                                @if($product->calorie_total || $product->cookie_time)
+                                                    <span class="calorieAre">
+                                                        @if($product->calorie_total)
+                                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="15"  height="15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>
+                                                            {{$product->calorie_total}} kcal.
+                                                        @endif
+                                                        @if($product->cookie_time)
+                                                            <svg  xmlns="http://www.w3.org/2000/svg" style="margin-left: 4px;margin-bottom: -1px;"  width="15"  height="15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1.5"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-alarm"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M12 10l0 3l2 0" /><path d="M7 4l-2.75 2" /><path d="M17 4l2.75 2" /></svg>
+                                                            {{$product->cookie_time}} dk.
+                                                        @endif
+                                                    </span>
+                                                @endif
 
                                                 <div class="d-flex align-items-center justify-content-between">
                                                     <div class="col">

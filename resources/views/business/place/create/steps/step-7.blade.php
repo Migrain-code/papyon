@@ -13,7 +13,7 @@
                     </div>
                     <div class="col">
                         <label class="switch switch-lg">
-                            <input type="checkbox" class="switch-input" name="Masadan Sipariş" onchange="toggleCallArea(this, 'table-order-area')">
+                            <input type="checkbox" class="switch-input" name="table_order" onchange="toggleCallArea(this, 'table-order-area')">
                             <span class="switch-toggle-slider">
                         <span class="switch-on"><i class="ti ti-check"></i></span>
                         <span class="switch-off"><i class="ti ti-x"></i></span>

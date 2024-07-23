@@ -4,9 +4,7 @@
 @endsection
 
 @section('content')
-    @php
-        $themeId = 4;
-    @endphp
+
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Ürünler/</span> Ürün Ekle</h4>
 
@@ -89,7 +87,7 @@
                                </div>
                            </div>
 
-                           @if($themeId != 4)
+
                                <div class="row">
                                    <label class="switch switch-lg mb-4">
                                        <input type="checkbox" class="switch-input" id="productImageCheck">
@@ -110,7 +108,7 @@
                                        <input type="file" id="productImage" name="product_image" class="form-control" placeholder="">
                                    </div>
                                </div>
-                           @endif
+
                            <div class="col-md-12 mb-4">
                                <label for="select2Icons" class="form-label">Yanında İyi Gider</label>
                                <select id="select2Icons" name="other_products[]" multiple class="select2-icons form-select">
@@ -233,4 +231,16 @@
         var unitAddUrl = "{{route('business.place-unit.store')}}";
     </script>
     <script src="/business/assets/js/project/product/add-unit.js"></script>
+    <script>
+        $('#productImageCheck').on('change', function (){
+            var productImageInputArea = document.getElementById('productImageInputContainer');
+            if($(this).is(':checked')){
+                productImageInputArea.style.display = "block";
+            } else{
+                productImageInputArea.style.display = "none";
+                $('#productImage').val("");
+            }
+        });
+
+    </script>
 @endsection

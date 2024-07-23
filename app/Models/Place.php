@@ -9,16 +9,20 @@ use Illuminate\Support\Carbon;
 class Place extends Model
 {
     use HasFactory;
+
     protected $casts = ['other_languages' => 'object'];
     protected $fillable = ['is_default'];
+
     public function menus()
     {
         return $this->hasMany(Menu::class, 'place_id', 'id');
     }
+
     public function activeMenu()
     {
         return $this->menus()->where('is_default', 1)->first();
     }
+
     public function regions()
     {
         return $this->hasMany(Region::class, 'place_id', 'id');
@@ -28,6 +32,7 @@ class Place extends Model
     {
         return $this->hasMany(PlaceUnit::class, 'place_id', 'id')->orderBy('id', 'asc');
     }
+
     public function contracts()
     {
         return $this->hasMany(Contract::class, 'place_id', 'id');
@@ -35,11 +40,21 @@ class Place extends Model
 
     public function workTimes() // Çalışma Saatleri
     {
-        return $this->hasMany(PlaceWorkTime::class, 'place_id', 'id');
+        return $this->hasMany(PlaceWorkTime::class, 'place_id', 'id')->orderBy('id', 'asc');
     }
+
     public function announcements() // Duyurular
     {
         return $this->hasMany(Announcement::class, 'place_id', 'id');
+    }
+    public function souces() // soslar
+    {
+        return $this->hasMany(Souce::class, 'place_id', 'id');
+    }
+
+    public function materials() // malzemeler
+    {
+        return $this->hasMany(Material::class, 'place_id', 'id');
     }
 
     public function checkCloseDay()
@@ -82,6 +97,7 @@ class Place extends Model
     {
         return $this->hasMany(Order::class, 'place_id', 'id');
     }
+
     public function claims() // Siparişler
     {
         return $this->hasMany(Claim::class, 'place_id', 'id');
@@ -91,10 +107,12 @@ class Place extends Model
     {
         return $this->hasMany(SwiperAdvert::class, 'place_id', 'id');
     }
+
     public function suggestions() // Görüş ve Öneriler
     {
         return $this->hasMany(Suggestion::class, 'place_id', 'id');
     }
+
     public function colors() // Renkler
     {
         return $this->hasMany(ThemeColor::class, 'place_id', 'id');
@@ -112,10 +130,10 @@ class Place extends Model
 
     public function createMenu()
     {
-        if ($this->menuOrders->count() == 0){
+        if ($this->menuOrders->count() == 0) {
             $menuNames = MenuDesign::MENU_LIST;
 
-            foreach ($menuNames as $index => $menu){
+            foreach ($menuNames as $index => $menu) {
                 $menuOrder = new MenuDesign();
                 $menuOrder->place_id = $this->id;
                 $menuOrder->name = $menu["name"];
@@ -126,10 +144,12 @@ class Place extends Model
 
         }
     }
+
     public function activeAdverts() // Reklamlar
     {
         return $this->adverts()->where('status', 1);
     }
+
     public function wifi() // wifi
     {
         return $this->hasOne(PlaceWifi::class, 'place_id', 'id');
@@ -144,16 +164,75 @@ class Place extends Model
     {
         $service = new Service();
         $service->place_id = $this->id;
+        //Garon Çağır
         $service->call_a_waiter = isset($serviceData["call_a_waiter"]);
+        $service->call_a_waiter_phone = isset($serviceData["call_a_waiter"]) ? clearPhone($serviceData["call_a_waiter_phone"]) : null;
+        // Masaya Sipariş
+        $service->order_type = $serviceData["order_type"];
+        $service->table_phone = clearPhone($serviceData["table_phone"]);
+
+        //Hesap İste
         $service->request_account = isset($serviceData["request_account"]);
+        $service->request_account_phone = isset($serviceData["request_account"]) ? clearPhone($serviceData["request_account_phone"]) : null;
+
+        //Vale Çağır
         $service->call_a_valet = isset($serviceData["call_a_valet"]);
-        $service->valet_phone = $serviceData["valet_phone"];
+        $service->valet_phone = isset($serviceData["call_a_valet"]) ? clearPhone($serviceData["valet_phone"]) : null;
+
+        //Taxi Çağır
         $service->call_a_taxi = isset($serviceData["call_a_taxi"]);
-        $service->taxi_phone = $serviceData["taxi_phone"];
+        $service->taxi_phone = isset($serviceData["call_a_taxi"]) ? clearPhone($serviceData["taxi_phone"]) : null;
+
+        //Gel Al Sipariş
         $service->take_away_order = isset($serviceData["take_away_order"]);
-        $service->take_away_phone = $serviceData["take_away_phone"];
+        $service->take_away_phone = isset($serviceData["take_away_order"]) ? clearPhone($serviceData["take_away_phone"]) : null;
+
+        //Paket Sipariş
         $service->package_order = isset($serviceData["package_order"]);
-        $service->package_order_phone = $serviceData["package_order_phone"];
+        $service->package_order_phone = isset($serviceData["package_order"]) ? clearPhone($serviceData["package_order_phone"]) : null;
+
+        // Teslimat Ücreti
+        $service->delivery_fee = $serviceData["delivery_fee"];
+        $service->save();
+    }
+
+    public function updateService($serviceData)
+    {
+        $service = $this->services;
+
+        //Garson Çağır
+        $service->call_a_waiter = isset($serviceData["call_a_waiter"]);
+        $service->call_a_waiter_phone = isset($serviceData["call_a_waiter"]) ? clearPhone($serviceData["call_a_waiter_phone"]) : null;
+        $this->menuOrders()->where('menu_id', 3)->first()->update(['status' =>  isset($serviceData["call_a_waiter"])]);
+
+        // Masaya Sipariş
+        $service->order_type = $serviceData["order_type"];
+        $service->table_phone = clearPhone($serviceData["table_phone"]);
+
+        //Hesap İste
+        $service->request_account = isset($serviceData["request_account"]);
+        $service->request_account_phone = isset($serviceData["request_account"]) ? clearPhone($serviceData["request_account_phone"]) : null;
+        $this->menuOrders()->where('menu_id', 1)->first()->update(['status' =>  isset($serviceData["request_account"])]);
+
+        //Vale Çağır
+        $service->call_a_valet = isset($serviceData["call_a_valet"]);
+        $service->valet_phone = isset($serviceData["call_a_valet"]) ? clearPhone($serviceData["valet_phone"]) : null;
+        $this->menuOrders()->where('menu_id', 6)->first()->update(['status' =>  isset($serviceData["call_a_valet"])]);
+
+        //Taxi Çağır
+        $service->call_a_taxi = isset($serviceData["call_a_taxi"]);
+        $service->taxi_phone = isset($serviceData["call_a_taxi"]) ? clearPhone($serviceData["taxi_phone"]) : null;
+        $this->menuOrders()->where('menu_id', 5)->first()->update(['status' =>  isset($serviceData["call_a_taxi"])]);
+
+        //Gel Al Sipariş
+        $service->take_away_order = isset($serviceData["take_away_order"]);
+        $service->take_away_phone = isset($serviceData["take_away_order"]) ? clearPhone($serviceData["take_away_phone"]) : null;
+
+        //Paket Sipariş
+        $service->package_order = isset($serviceData["package_order"]);
+        $service->package_order_phone = isset($serviceData["package_order"]) ? clearPhone($serviceData["package_order_phone"]) : null;
+
+        // Teslimat Ücreti
         $service->delivery_fee = $serviceData["delivery_fee"];
         $service->save();
     }
@@ -175,12 +254,13 @@ class Place extends Model
 
         return $claims;
     }
+
     public function clone()
     {
         $newPlace = $this->replicate();
         $newPlace->name = $this->name . ' (Kopya)';
         $newPlace->is_default = 0;
-        if ($newPlace->save()){
+        if ($newPlace->save()) {
             // İlişkili menüleri klonlama
             foreach ($this->menus as $menu) {
                 $menu->clone($newPlace);

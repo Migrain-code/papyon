@@ -19,7 +19,7 @@ $(function () {
         // columns according to JSON
         { data: 'id' },
         { data: 'id' },
-        { data: 'product_name' },
+        { data: 'product_name'},
         { data: 'price' },
         { data: 'qty' },
         { data: '' }

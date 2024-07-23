@@ -26,6 +26,12 @@ class CheckControlMiddleware
         $categories = $menu->categories;
         $swipers = $place->activeAdverts;
         $menuOrders = $place->activeMenus;
+        $colors = $place->colors;
+        $newColors = [];
+        foreach ($colors as $color){
+            $newColors[$color->name] = $color->value;
+        }
+        $colors = collect($newColors);
         View::share('place', $place);
         View::share('menu', $menu);
         View::share('products', $products);
@@ -33,6 +39,7 @@ class CheckControlMiddleware
         View::share('swipers', $swipers);
         View::share('footerVisibility', true);
         View::share('menuOrders', $menuOrders);
+        View::share('colors', $colors);
         if ($place->checkCloseDay()){
             if ($request->routeIs('notify')){
                 return $next($request);

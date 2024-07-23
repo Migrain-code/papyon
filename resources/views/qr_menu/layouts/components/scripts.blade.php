@@ -163,9 +163,10 @@
 <script>
     const swiper = new Swiper('#mainPageSwiper', {
         loop: true,
-        /*     autoplay: {
-                delay: 5000,
-            }, */
+        autoplay: {
+            delay: 1700, // Her slaytın gösterilme süresi (ms)
+            disableOnInteraction: false, // Kullanıcı etkileşiminden sonra otomatik oynatmayı durdurmaz
+        },
         pagination: {
             el: '.swiper-pagination',
         },
@@ -176,9 +177,10 @@
 <script>
     const swiper2 = new Swiper('#mainPageSwiper2', {
         loop: true,
-        /*     autoplay: {
-                        delay: 5000,
-                }, */
+        autoplay: {
+            delay: 1700, // Her slaytın gösterilme süresi (ms)
+            disableOnInteraction: false, // Kullanıcı etkileşiminden sonra otomatik oynatmayı durdurmaz
+        },
         pagination: {
             el: '.swiper-pagination',
         },

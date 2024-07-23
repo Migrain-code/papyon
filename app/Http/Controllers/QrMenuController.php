@@ -7,6 +7,8 @@ use App\Models\Announcement;
 use App\Models\Cart;
 use App\Models\Claim;
 use App\Models\Contract;
+use App\Models\MenuCategory;
+use App\Models\MenuCategoryProduct;
 use App\Models\Order;
 use App\Models\OtherProduct;
 use App\Models\Place;
@@ -42,6 +44,15 @@ class QrMenuController extends Controller
         return view('qr_menu.themes.theme-' . $this->themeId, compact('swipers'));
     }
 
+    public function category($place, MenuCategory $category)
+    {
+        $products = $category->products;
+        return view('qr_menu.category.index', compact('products', 'category'));
+    }
+    public function product($place, MenuCategoryProduct $product)
+    {
+        return view('qr_menu.product.index', compact('product'));
+    }
     public function workingHours()
     {
         $workTimes = $this->place->workTimes;
@@ -95,6 +106,8 @@ class QrMenuController extends Controller
     {
         $existProduct = $this->cart->where('place_id', $this->place->id)
             ->where('product_id', $request->product_id)
+            ->where('sauces', 'like', $request->sauces)
+            ->where('materials', 'like', $request->materials)
             ->where('ip_address', $request->ip())
             ->when(isset($this->table), function ($query) {
                 $query->where('table_id', $this->table->id);
@@ -127,6 +140,8 @@ class QrMenuController extends Controller
             $cart->product_id = $request->product_id;
             $cart->place_id = $this->place->id;
             $cart->ip_address = $request->ip();
+            $cart->materials = $request->materials;
+            $cart->sauces = $request->sauces;
             if (isset($this->table)) {
                 $cart->table_id = $this->table->id;
             }
@@ -218,6 +233,7 @@ class QrMenuController extends Controller
 
     public function tableOrderCreate($request, $cart, $generalTotal)
     {
+
         $order = new Order();
         $order->place_id = $this->place->id;
         $order->status = 0;
@@ -231,10 +247,10 @@ class QrMenuController extends Controller
                 "image" => $cartProduct->product->image,
                 "price" => $cartProduct->product->price,
                 "total" => $cartProduct->product->price * $cartProduct->qty,
-                "sauces" => [],
+                "sauces" => isset($cartProduct->sauces) ? json_encode($cartProduct->sauces) : [],
                 "discount" => 0,
                 "quantity" => $cartProduct->qty,
-                "materials" => []
+                "materials" => isset($cartProduct->materials) ? json_encode($cartProduct->materials) : []
             ];
         }
         $order->cart = $orderCart;

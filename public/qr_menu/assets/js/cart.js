@@ -52,7 +52,17 @@ function fetchCart(dataDiscount = 0) {
 }
 
 $(document).on('click', '.addToCartButton', function () {
+// Gather selected materials
+    var selectedMaterials = [];
+    $('input[name="materials[]"]:checked').each(function() {
+        selectedMaterials.push($(this).siblings('span').text()); // Assuming you want the material name
+    });
 
+    // Gather selected sauces
+    var selectedSauces = [];
+    $('input[name="sauce_ids[]"]:checked').each(function() {
+        selectedSauces.push($(this).siblings('label').text()); // Assuming you want the sauce name
+    });
     var product_id = $(this).data('product');
     var button = $(this);
     $.ajax({
@@ -61,6 +71,8 @@ $(document).on('click', '.addToCartButton', function () {
         data: {
             _token: csrf_token,
             product_id: product_id,
+            materials: selectedMaterials,
+            sauces: selectedSauces,
         },
         success: function (response) {
             /*Toast.fire({
@@ -85,7 +97,7 @@ $(document).on('click', '.deleteToCartButton', function () {
     var button = $(this);
     var audio = document.getElementById('success-sound');
     $.ajax({
-        url: '/qr-menu/add-to-cart',
+        url: cartAddUrl,
         method: 'POST',
         data: {
             _token: csrf_token,
@@ -135,5 +147,18 @@ $(document).on('click', '.emptyCartButton', function () {
         error: function (xhr) {
             console.error('Ekleme Hata Oluştu:', xhr);
         }
+    });
+});
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        const target = document.querySelector(this.getAttribute('href'));
+        const offset = 125; // Menü yüksekliği
+
+        window.scrollTo({
+            top: target.offsetTop - offset,
+            behavior: 'smooth'
+        });
     });
 });

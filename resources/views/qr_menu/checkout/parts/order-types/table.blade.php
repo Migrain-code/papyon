@@ -16,13 +16,13 @@
 </div>
 <div class="bottomsaw">
     <div>
-        @if(isset($place->services->table_phone))
+        @if(isset($place->services->table_phone) && $place->services->order_type == 1)
             <button class="orderCreateButton" onclick="$('#orderCreateForm').submit()">
                 <i class="ti ti-brand-whatsapp"></i>
                 {{ __('Whatsapp İle Sipariş') }}
             </button>
         @else
-            <button class="orderCreateButton" style="background-color: var(--theme-background-color);min-width: 185px;" onclick="$('#orderCreateForm').submit()">
+            <button class="orderCreateButton" style="background-color: var(--top_menu_bg);min-width: 185px;" onclick="$('#orderCreateForm').submit()">
                 <i class="ti ti-shopping-bag"></i>
                 {{ __('Sipariş Ver') }}
             </button>

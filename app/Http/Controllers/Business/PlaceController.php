@@ -81,9 +81,12 @@ class PlaceController extends Controller
 
 
         $serviceData = $request->only([
-            'table_order',
             'call_a_waiter',
+            'call_a_waiter_phone',
+            'order_type',
+            'table_phone',
             'request_account',
+            'request_account_phone',
             'call_a_valet',
             'valet_phone',
             'call_a_taxi',
@@ -134,8 +137,9 @@ class PlaceController extends Controller
     public function edit(Place $place)
     {
         $dayList = DayList::all();
+        $workTimes = $place->workTimes;
 
-        return view('business.place.edit.index', compact('place', 'dayList'));
+        return view('business.place.edit.index', compact('place', 'dayList', 'workTimes'));
     }
 
     /**
@@ -143,7 +147,65 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        //
+        //$request->dd();
+        $place->name = $request->input('place_name');
+        $place->slug = Str::slug($request->input('place_link'));
+        $place->instagram = $request->input('instagram');
+        $place->price_type = $request->input('price_type');
+        $place->other_languages = $request->other_languages;
+        $place->main_language = $request->input('main_language');
+        $place->theme_id = $request->input('theme_id');
+        $place->address = $request->input('address');
+        $place->latitude = $request->input('latitude');
+        $place->longitude = $request->input('longitude');
+        $place->maps_embed = $request->embed;
+        if ($request->hasFile('logo')){
+            $place->logo = $request->file('logo')->store('placeLogos');
+
+        }
+        $place->save();
+
+        $dayList = DayList::all();
+        $place->workTimes()->delete();
+        foreach ($dayList as $day){
+            $workTime = new PlaceWorkTime();
+            $workTime->place_id = $place->id;
+            $workTime->day_id = $day->id;
+            $workTime->status = in_array($day->id, $request->day_opened);
+            $workTime->start_time = $request->day_open_clock[$day->id];
+            $workTime->end_time = $request->day_close_clock[$day->id];
+            $workTime->save();
+        }
+
+        $placeWifi = $place->wifi;
+        $placeWifi->pass = $request->input('wifi_password');
+        $placeWifi->pass = $request->input('wifi_name');
+        $placeWifi->save();
+
+        $serviceData = $request->only([
+            'call_a_waiter',
+            'call_a_waiter_phone',
+            'order_type',
+            'table_phone',
+            'request_account',
+            'request_account_phone',
+            'call_a_valet',
+            'valet_phone',
+            'call_a_taxi',
+            'taxi_phone',
+            'take_away_order',
+            'take_away_phone',
+            'package_order',
+            'package_order_phone',
+            'delivery_fee'
+        ]);
+
+        $serviceData['place_id'] = $place->id;
+        $place->updateService($serviceData);
+        return to_route('business.place.index')->with('response', [
+            'status' => "success",
+            'message' => "Mekan Bilgileriniz Güncellendi"
+        ]);
     }
 
     /**

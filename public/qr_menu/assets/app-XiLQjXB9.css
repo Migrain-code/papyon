@@ -1,7 +1,6 @@
 @import "https://fonts.cdnfonts.com/css/helvetica-neue-55";
 @import "https://fonts.cdnfonts.com/css/roboto";
-@import "https://db.onlinewebfonts.com/c/8b2760b7bcaf4e2cdbb6cacec092b91b?family=MuseoSans-900";
-@import "https://db.onlinewebfonts.com/c/db5b61bb35666123265d9a2672d91fc3?family=CCGlitterGirlGossip+Bold";
+
 
 body {
     background-color: #f3f3f1;
@@ -54,7 +53,7 @@ body a {
 .dialogModal .closeButton {
     opacity: 1;
     border-radius: 20px;
-    background-color: var(--theme-background-color);
+    background-color: var(--top_menu_bg);
     --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e")
 }
 
@@ -89,6 +88,7 @@ body a {
 
 .card-style-2 .top {
     min-width: 100px;
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -107,8 +107,9 @@ body a {
 }
 
 .card-style-2 .bottom .title {
-    font-size: 10px;
-    color: #f78628
+    font-size: 14px;
+    color: var(--top_menu_bg);
+    font-weight: bold;
 }
 
 .modal-backdrop {
@@ -116,7 +117,7 @@ body a {
 }
 
 .header {
-    background-color: var(--theme-background-color);
+    background-color: var(--top_menu_bg);
     min-height: 125px;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -191,7 +192,7 @@ body a {
 }
 
 .header .bottomss .item {
-    background-color: #fff;
+    background-color: var(--top_menu_font);
     border-radius: 50%;
 }
 
@@ -200,7 +201,7 @@ body a {
     height: 40px;
     width: 40px;
     padding: 7px;
-    color: var(--theme-background-color);
+    color: var(--top_menu_bg);
     /* border: 1px solid #A3ACB8; */
 }
 
@@ -249,14 +250,14 @@ body a {
     width: 25px;
     stroke: none !important;
     font-size: 25px;
-    color: #e0483d;
+    color: var(--bottom_menu_font_close);
 }
 .footer .menu ul span i{
     height: 25px;
     width: 25px;
     stroke: none !important;
     font-size: 25px;
-    color: #e0483d;
+    color: var(--bottom_menu_font_close);;
  }
 
 .footer .item p {
@@ -281,7 +282,7 @@ body a {
 
 .footer #toggleMenu div {
     position: absolute;
-    background-color: var(--theme-background-color);
+    background-color: var(--bottom_menu_bg);
     top: -22px;
     height: 6px;
     width: 43px;
@@ -292,7 +293,7 @@ body a {
 .footer .menu {
     display: flex;
     flex-direction: column;
-    background-color: #f3f3f1;
+    background-color: var(--bottom_menu_bg_close);
     position: fixed;
     z-index: 1051;
     bottom: -192px;
@@ -378,34 +379,34 @@ body a {
     right: 50%;
     width: 23px;
     height: 23px;
-    color: #e0483d !important;
-    fill: #e0483d !important;
+    color: var(--bottom_menu_font) !important;
+    fill: var(--bottom_menu_bg) !important;
     stroke-width: 2px;
     border-radius: 50%;
     transform: translate(56%, -0%);
 }
 
 .footer .menu .close-button path {
-    fill: var(--theme-font-color);
-    color: var(--theme-background-color);
+    fill: var(--bottom_menu_bg);
+    color: var(--bottom_menu_font);
 }
 
 .footer .menu .close-button circle {
-    fill: #e0483d !important
+    fill: var(--top_menu_bg) !important
 }
 
 .footer .show-menu {
-    background-color: var(--theme-background-color);
+    background-color: var(--bottom_menu_bg);
     bottom: 0;
     height: auto
 }
 
 .footer .show-menu li a {
-    color: var(--theme-font-color);
+    color: var(--bottom_menu_font);
 }
 
 .footer .show-menu li a svg {
-    fill: var(--theme-font-color)
+    fill: var(--bottom_menu_font)
 }
 
 .footer .show-menu li .item svg {
@@ -599,7 +600,8 @@ body a {
 .meals .top {
     display: flex;
     align-items: center;
-    justify-content: space-between
+    justify-content: space-between;
+    border-bottom: 1px solid #7575751f;
 }
 
 .meals .top .link {
@@ -625,7 +627,9 @@ body a {
 .card-style-1 {
     display: flex;
     flex-direction: column;
-    background-color: #fff
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 2px;
 }
 
 .card-style-1 .top {
@@ -672,7 +676,7 @@ body a {
 .card-style-1 .bottom .title {
     font-family: Roboto Medium, sans-serif;
     font-size: 1rem;
-    color: #757575;
+    color: var(--product_card_font);
 }
 
 .card-style-1 .bottom .price {
@@ -682,17 +686,19 @@ body a {
 }
 
 .card-style-1 .bottom .price span {
-    background: none
+    background: none;
 }
 
 .card-style-1 .bottom .price svg {
-    width: 20px;
-    height: 20px
+
+    width: 25px;
+    height: 25px;
+    border-radius: 15px;
 }
 
 .card-style-1 .bottom .price p {
     font-size: 1rem;
-    color: #e0483d;
+    color: var(--product_card_font);
     font-family: Roboto Medium, sans-serif
 }
 
@@ -1052,18 +1058,18 @@ body a {
 }
 
 .categories_page_categories-2 .content .accordion .accordion-item .accordion-body {
-    background-color: rgba(var(--theme-accordion-body-color) / 10%);
+    background-color: rgba(var(--category_bg), 10%);
 }
 
 .categories_page_categories-2 .content .accordion .accordion-item .accordion-body .content .title {
-    color: var(--theme-product-font-color);
+    color: var(--product_card_font);
     font-size: 1.3rem;
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     margin-top: 5px;
 }
 
 .categories_page_categories-2 .content .accordion .accordion-item .accordion-body .content .description {
-    color: var(--theme-product-font-color);
+    color: var(--product_card_font);
 }
 
 .categories_page_categories-2 .content .accordion .accordion-item .accordion-body .content .add {
@@ -1157,7 +1163,7 @@ body a {
     display: flex;
     align-items: center;
     gap: 15px;
-    color: #e0483d;
+    color: var(--top_menu_bg);
     border: 1px solid #adacac85;
     border-radius: 12px;
     padding: 5px;
@@ -1473,7 +1479,7 @@ body a {
     flex-direction: column;
     color: #fff;
     min-width: 100%;
-    background: var(--theme-background-color);
+    background: var(--top_menu_bg);;
     padding: 15px;
     border-radius: 15px;
 }
@@ -1606,9 +1612,12 @@ body a {
     align-items: center;
     gap: 10px;
     justify-content: center;
-    margin: 20px auto
+    margin: 20px auto;
+    font-size: 18px;
 }
-
+.product_detail button i{
+    font-size: 18px;
+}
 .product_detail button svg {
     width: 40px;
     height: 40px
@@ -1654,34 +1663,30 @@ body a {
     gap: 20px
 }
 
-.product_detail .sausos .accordion {
+.product_detail .sausos{
     --bs-accordion-bg: #e5e5e5
 }
 
-.product_detail .sausos .accordion .accordion-item .accordion-header {
-    border-bottom: 1px solid #c7c8c9
-}
-
-.product_detail .sausos .accordion .accordion-item .accordion-header .accordion-button {
+.product_detail .sausos {
     background: none;
     margin: 0;
     font-size: 14px;
     color: #000
 }
 
-.product_detail .sausos .accordion .accordion-item .accordion-body {
+.product_detail .sausos {
     display: grid;
     grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px
 }
 
-.product_detail .sausos .accordion .accordion-item .accordion-body .item {
+.product_detail .sausos .item {
     display: flex;
     align-items: center;
     gap: 10px
 }
 
-.product_detail .sausos .accordion .accordion-item .accordion-body input[type=checkbox] {
+.product_detail .sausos input[type=checkbox] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -1693,7 +1698,7 @@ body a {
     transition: border-color .3s ease-in-out
 }
 
-.product_detail .sausos .accordion .accordion-item .accordion-body input[type=checkbox]:before {
+.product_detail .sausos input[type=checkbox]:before {
     content: "";
     display: block;
     width: 10px;
@@ -1706,11 +1711,11 @@ body a {
     transform: translate(-50%, -50%)
 }
 
-.product_detail .sausos .accordion .accordion-item .accordion-body input[type=checkbox]:checked {
+.product_detail .sausos input[type=checkbox]:checked {
     border-color: #e0483d
 }
 
-.product_detail .sausos .accordion .accordion-item .accordion-body input[type=checkbox]:checked:before {
+.product_detail .sausos input[type=checkbox]:checked:before {
     background-color: #e0483d
 }
 

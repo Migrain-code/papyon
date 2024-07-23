@@ -7,4 +7,7 @@
             <input class="form-control" name="logo" type="file" id="formFile">
         </div>
     </div>
+    <div class="col-6" style="background: #dedede; padding: 15px">
+        <img src="{{storage($place->logo)}}" class="img-fluid w-100" style="max-width: 300px">
+    </div>
 </div>
