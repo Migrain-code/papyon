@@ -173,7 +173,7 @@ class OrderController extends Controller
         $productQuantity = $request->product_qty;
         $cart = $order->cart;
         $product = [
-            "id" => $findProduct->id,
+            "id" => uniqid(),
             "name" => $findProduct->name,
             "image" => $findProduct->image,
             "price" => $findProduct->price,
@@ -195,6 +195,25 @@ class OrderController extends Controller
 
     }
 
+    public function deleteProduct(Order $order, $productId)
+    {
+        $cart = $order->cart;
+        $newCart = [];
+        foreach ($cart as $item) {
+            if ($item->id != $productId) {
+                $newCart[] = $item;
+            }
+        }
+        $order->cart = $newCart;
+
+        // Güncellenmiş cart sütununu kaydedin
+        if ($order->save()) {
+            return response()->json([
+                'status' => "success",
+                'message' => "Ürün Siparişten Kaldırıldı"
+            ]);
+        }
+    }
     public function getPayment(Order $order){
         $order->payment_status = 1;
         $order->status = 5;

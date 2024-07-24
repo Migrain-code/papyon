@@ -242,7 +242,8 @@ class QrMenuController extends Controller
         $orderCart = [];
         foreach ($cart as $cartProduct) {
             $orderCart[] = [
-                "id" => $cartProduct->product_id,
+                "id" => $cartProduct->id,
+                "product_id" => $cartProduct->product_id,
                 "name" => $cartProduct->product->name,
                 "image" => $cartProduct->product->image,
                 "price" => $cartProduct->product->price,

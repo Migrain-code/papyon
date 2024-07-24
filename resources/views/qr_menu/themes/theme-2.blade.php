@@ -69,7 +69,7 @@
                                                             {{$product->name}}
                                                         </div>
                                                         <div class="description">
-                                                            {{$product->description}}
+                                                            {{\Illuminate\Support\Str::limit($product->description, 50)}}
                                                         </div>
                                                     </div>
                                                     <div class="col">

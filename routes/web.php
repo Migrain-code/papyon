@@ -109,6 +109,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
             Route::post('update-discount', [OrderController::class, 'updateDiscount'])->name('discount.update');
             Route::post('add-product', [OrderController::class, 'addProduct'])->name('addProduct');
             Route::post('get-payment', [OrderController::class, 'getPayment'])->name('getPayment');
+            Route::get('product/{id}/delete', [OrderController::class, 'deleteProduct'])->name('deleteProduct');
         });
         Route::prefix('excel')->as('excel.')->group(function (){
             Route::get('/import-export', [ExcelController::class, 'index'])->name('index');

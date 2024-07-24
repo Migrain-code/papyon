@@ -66,10 +66,10 @@
                                                 <div class="d-flex align-items-center justify-content-between">
                                                     <div class="col">
                                                         <div class="title">
-                                                            {{$product->name}}
+                                                          {{$product->name}}
                                                         </div>
                                                         <div class="description">
-                                                            {{$product->description}}
+                                                            {{\Illuminate\Support\Str::limit($product->description, 50)}}
                                                         </div>
                                                     </div>
                                                     <div class="col">

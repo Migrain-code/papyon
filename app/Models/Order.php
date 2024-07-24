@@ -101,4 +101,35 @@ class Order extends Model
     {
         return $this->hasOne(Table::class, 'id', 'table_id');
     }
+
+    public function calculateCartTotal()
+    {
+
+        $products = $this->cart;
+
+        $totalPrice = 0;
+        foreach ($products as $product){
+            $totalPrice += $product->total;
+        }
+        return $totalPrice;
+    }
+
+    public function discountTotal()
+    {
+        return ($this->calculateCartTotal() * $this->discount) / 100;
+    }
+
+    public function deliveryFee()
+    {
+        if ($this->order_type == 0){
+            return 15;
+        } else{
+            return 0;
+        }
+    }
+
+    public function total()
+    {
+        return ($this->calculateCartTotal() + $this->deliveryFee()) - $this->discountTotal();
+    }
 }
