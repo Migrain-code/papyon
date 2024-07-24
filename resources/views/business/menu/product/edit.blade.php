@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Ürünler/</span> Ürün Ekle</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Ürünler/</span> Ürün Düzenle</h4>
 
         <div class="app-academy">
             <div class="card p-0 mb-4">
@@ -129,6 +129,22 @@
                                <select id="select2Allergens" name="allergens[]" multiple class="select2-icons-1 form-select">
                                    @foreach($allergens as $allergen)
                                        <option value="{{$allergen->id}}" @selected(in_array($allergen->id, $menuCategoryProduct->allergens()->pluck('allergen_id')->toArray())) data-icon="{{storage($allergen->icon)}}">{{$allergen->name}}</option>
+                                   @endforeach
+                               </select>
+                           </div>
+                           <div class="col-md-12 mb-4">
+                               <label for="select2Sauces" class="form-label">Soslar</label>
+                               <select id="select2Sauces" name="sauces[]" multiple class="select2 form-select">
+                                   @foreach($sauces as $sauce)
+                                       <option value="{{$sauce->id}}" @selected(in_array($sauce->id, $menuCategoryProduct->sauces()->pluck('sauce_id')->toArray()))>{{$sauce->name}}</option>
+                                   @endforeach
+                               </select>
+                           </div>
+                           <div class="col-md-12 mb-4">
+                               <label for="select2Materials" class="form-label">Malzemeler</label>
+                               <select id="select2Materials" name="materials[]" multiple class="select2 form-select">
+                                   @foreach($materials as $material)
+                                       <option value="{{$material->id}}" @selected(in_array($material->id, $menuCategoryProduct->materials()->pluck('material_id')->toArray()))>{{$material->name}}</option>
                                    @endforeach
                                </select>
                            </div>

@@ -170,6 +170,20 @@ class MenuController extends Controller
         return view('business.menu.edit.index', compact('menu', 'categories', 'allergens'));
     }
 
+    public function useMenu(Menu $menu)
+    {
+        $menus = $this->business->menus()->get();
+        if ($menus->count() > 1){
+            $this->business->menus()->update(['is_default' => 0]);
+           $menu->is_default = 1;
+           $menu->save();
+        }
+        return to_route('business.menu.index')->with('response', [
+            'status' => "success",
+            'message' => "Mekanınızda yeni gelen müşterileriniz artık bu menüyü kullanacak"
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      */

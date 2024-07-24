@@ -317,7 +317,7 @@ function formatPrice($price)
     // Fiyatı iki ondalık basamağa yuvarlamadan kes
    // $formattedPrice = floor($price * 100) / 100;
     // Sayıyı iki ondalık basamakla formatla
-    $formattedPrice = number_format($price, 2) . " ₺";
+    $formattedPrice = number_format($price, 2) . " TL";
     return $formattedPrice;
 }
 

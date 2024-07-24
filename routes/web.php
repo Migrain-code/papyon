@@ -25,6 +25,7 @@ use App\Http\Controllers\MenuDesignController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\SouceController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\SuggestionQuestionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -74,15 +75,21 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
         Route::resource('place', PlaceController::class);
         Route::prefix('place/{place}')->as('place.')->group(function (){
             Route::get('clone', [PlaceController::class, 'clonePlace'])->name('clone');
+            Route::get('passive', [PlaceController::class, 'passive'])->name('passive');
+            Route::get('active', [PlaceController::class, 'active'])->name('active');
+            Route::get('todayReport', [PlaceController::class, 'todayReport'])->name('todayReport');
+
         });
         Route::resource('table', TableController::class);
         Route::resource('region', RegionController::class);
         Route::resource('menu', MenuController::class);
         Route::resource('place-unit', PlaceUnitController::class);
         Route::prefix('menu/{menu}')->as('menu.')->group(function (){{
+
             Route::get('status', [MenuController::class, 'statusView'])->name('status');
             Route::post('update/price', [MenuController::class, 'updatePrice'])->name('updatePrice');
             Route::get('pop-up-banner', [MenuController::class, 'popupView'])->name('popup');
+            Route::get('use-menu', [MenuController::class, 'useMenu'])->name('useMenu');
             Route::get('update-pop-up-status', [MenuController::class, 'updatePopupStatus'])->name('updatePopupStatus');
             Route::post('update-up-banner', [MenuController::class, 'updatePopup'])->name('updatePopup');
 
@@ -141,11 +148,12 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
             Route::post('/update-info',  [SettingController::class, 'updateInfo'])->name('updateInfo');
         });
 
-        Route::resource('souce', SouceController::class);
-        Route::resource('material', MaterialController::class);
+        Route::resource('souce', SouceController::class); //soslar
+        Route::resource('material', MaterialController::class); //malzemeler
         Route::resource('announcement', AnnouncementController::class);
         Route::resource('contract', ContractController::class);
         Route::resource('suggestion', SuggestionController::class);
+        Route::resource('suggestion-question', SuggestionQuestionController::class);
 
         Route::prefix('subscribtion')->as('subscribtion.')->group(function (){
             Route::get('/', [SubscribtionController::class, 'index'])->name('index');

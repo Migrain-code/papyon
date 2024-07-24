@@ -19,7 +19,6 @@ $(function () {
                 url: DATA_URL,
             },
             columns:DATA_COLUMNS,
-            order: [5, 'desc'], //set any columns order asc/desc
             lengthMenu: [7, 10, 20, 50, 70, 100], //for length of menu
             language: {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.2/i18n/tr.json",

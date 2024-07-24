@@ -10,6 +10,7 @@ use App\Models\PlaceWifi;
 use App\Models\PlaceWorkTime;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class PlaceController extends Controller
@@ -26,7 +27,7 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = $this->user->places()->orderBy('order_number', 'asc')->whereStatus(1)->paginate(6);
+        $places = $this->user->places()->orderBy('order_number', 'asc')/*->whereIn('status', [1,2])*/->paginate(6);
         return view('business.place.index', compact('places'));
     }
 
@@ -111,14 +112,23 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        $this->user->places()->update(['is_default' => 0]);
-        $place->is_default = 1;
-        if ($place->save()){
-            return to_route('business.place.index')->with('response', [
-                'status' => "success",
-                'message' => $place->name ." Adlı Mekana Geçiş Yaptınız"
+        if ($this->user->place()->id != $place->id){
+            $this->user->places()->update(['is_default' => 0]);
+            $place->is_default = 1;
+
+            if ($place->save()){
+                return to_route('business.place.index')->with('response', [
+                    'status' => "success",
+                    'message' => $place->name ." Adlı Mekana Geçiş Yaptınız"
+                ]);
+            }
+        } else{
+            return back()->with('response', [
+                'status' => "warning",
+                'message' =>"Aynı Mekanı Seçtiniz"
             ]);
         }
+
     }
 
     public function clonePlace(Place $place)
@@ -130,6 +140,68 @@ class PlaceController extends Controller
         ]);
 
     }
+
+    public function passive(Place $place)
+    {
+        $place->status = 2;
+        $place->save();
+        return back()->with('response', [
+            'status' => "success",
+            'message' => $place->name ." Adlı Mekanı Pasife Aldınız"
+        ]);
+    }
+    public function active(Place $place)
+    {
+        $place->status = 1;
+        $place->save();
+        return back()->with('response', [
+            'status' => "success",
+            'message' => $place->name ." Adlı Mekanı Yayına Aldınız"
+        ]);
+    }
+
+    public function todayReport(Place $place, Request $request)
+    {
+        $orders = $place->orders()->where('status', 5)
+            ->where('order_type', 0)
+            ->when(!$request->filled('date_range'), function ($q) use ($request) {
+              $q->whereDate('created_at', now()->toDateString());
+            })
+            ->when($request->filled('date_range'), function ($q) use ($request) {
+                $timePartition = explode('-', $request->date_range);
+                $startTime = Carbon::createFromFormat('d.m.Y', trim($timePartition[0]))->startOfDay();
+                $endTime = Carbon::createFromFormat('d.m.Y', trim($timePartition[1]))->endOfDay();
+
+                if ($startTime == $endTime){
+                    $q->whereDate('created_at', $startTime);
+                } else{
+                    $q->whereBetween('created_at', [$startTime, $endTime]);
+                }
+            })
+            ->get();
+        $case = [
+            'cashTotal' => 0,
+            'creditTotal' => 0,
+            'eftTotal' => 0,
+            'otherTotal' => 0,
+            'total' => 0,
+        ];
+        foreach ($orders as $order) {
+            if ($order->payment_type_id == 0) {
+                $case["cashTotal"] += $order->total();
+            } elseif ($order->payment_type_id == 1) {
+                $case["creditTotal"] += $order->total();
+            } elseif ($order->payment_type_id == 2) {
+                $case["eftTotal"] += $order->total();
+            } else {
+                $case["otherTotal"] += $order->total();
+            }
+        }
+        $case["total"] = $case["cashTotal"] + $case["creditTotal"] + $case["eftTotal"] + $case["otherTotal"];
+
+        return view('business.place.report.index', compact('place', 'case'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.

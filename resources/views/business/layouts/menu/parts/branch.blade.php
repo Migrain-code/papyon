@@ -4,21 +4,14 @@
         <i class="ti ti-status-change rounded-circle ti-md"></i>
     </a>
     <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-            <a class="dropdown-item" href="javascript:void(0);">
-                <span class="align-middle">Şube 1</span>
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="javascript:void(0);">
-                <span class="align-middle">Şube 2</span>
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-item" href="javascript:void(0);">
-                <span class="align-middle">Şube 3</span>
-            </a>
-        </li>
+        @foreach(authUser()->places as $place)
+            <li>
+                <a class="dropdown-item" href="{{route('business.place.show', $place->id)}}">
+                    <span class="align-middle">{{$place->name}}</span>
+                </a>
+            </li>
+        @endforeach
+
     </ul>
 </li>
 <!--/ Language -->

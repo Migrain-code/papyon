@@ -10,6 +10,8 @@ use App\Models\MenuCategory;
 use App\Models\MenuCategoryProduct;
 use App\Models\OtherProduct;
 use App\Models\ProductAllergen;
+use App\Models\ProductMaterial;
+use App\Models\ProductSouce;
 use App\Models\ProductUnit;
 use Illuminate\Http\Request;
 
@@ -28,7 +30,9 @@ class MenuCategoryProductController extends Controller
         $categories = $category->menu->categories;
         $allergens = Allergen::whereStatus(1)->get();
         $menu = $category->menu;
-        return view('business.menu.product.create', compact('categories', 'allergens', 'menu', 'category'));
+        $sauces = $this->business->souces;
+        $materials = $this->business->materials;
+        return view('business.menu.product.create', compact('categories', 'allergens', 'menu', 'category', 'sauces', 'materials'));
     }
     public function updateOrder(Request $request)
     {
@@ -42,7 +46,6 @@ class MenuCategoryProductController extends Controller
      */
     public function store(MenuCategory $category, ProductAddRequest $request)
     {
-        //$request->dd();
         $menuCategoryProduct = new MenuCategoryProduct();
         $menuCategoryProduct->menu_id = $category->menu_id;
         $menuCategoryProduct->category_id = $category->id;
@@ -86,6 +89,24 @@ class MenuCategoryProductController extends Controller
                     $productAllergen->save();
                 }
             }
+            $sauces = $request->sauces;
+            if (isset($sauces) && count($sauces) > 0){
+                foreach ($sauces as $sauceId){
+                    $productAllergen = new ProductSouce();
+                    $productAllergen->sauce_id = $sauceId;
+                    $productAllergen->product_id = $menuCategoryProduct->id;
+                    $productAllergen->save();
+                }
+            }
+            $materials = $request->materials;
+            if (isset($materials) && count($materials) > 0){
+                foreach ($materials as $materialId){
+                    $productAllergen = new ProductMaterial();
+                    $productAllergen->material_id = $materialId;
+                    $productAllergen->product_id = $menuCategoryProduct->id;
+                    $productAllergen->save();
+                }
+            }
             return to_route('business.menu.edit', $category->menu_id)->with('response',[
                 'status' => "success",
                 'message' => "Ürün Başarılı Bir Şekilde Eklendi"
@@ -104,8 +125,9 @@ class MenuCategoryProductController extends Controller
         $allergens = Allergen::whereStatus(1)->get();
         $units = $menuCategoryProduct->units;
         $placeUnits = $this->business->units;
-
-        return view('business.menu.product.edit', compact('menuCategoryProduct', 'categories', 'allergens', 'category', 'units','placeUnits'));
+        $sauces = $this->business->souces;
+        $materials = $this->business->materials;
+        return view('business.menu.product.edit', compact('menuCategoryProduct', 'categories', 'allergens', 'category', 'units','placeUnits', 'sauces', 'materials'));
     }
 
     /**
@@ -155,12 +177,16 @@ class MenuCategoryProductController extends Controller
             $unitPrices = $request->input('group-a');
             if (isset($unitPrices) && count($unitPrices) > 0){
                 $menuCategoryProduct->units()->delete();
+
                 foreach ($unitPrices as $unitPrice){
-                    $productUnit = new ProductUnit();
-                    $productUnit->product_id = $menuCategoryProduct->id;
-                    $productUnit->unit_id = $unitPrice["added_unit"];
-                    $productUnit->price = $unitPrice["added_price"];
-                    $productUnit->save();
+                    if (isset($unitPrice["added_unit"])){
+                        $productUnit = new ProductUnit();
+                        $productUnit->product_id = $menuCategoryProduct->id;
+                        $productUnit->unit_id = $unitPrice["added_unit"];
+                        $productUnit->price = $unitPrice["added_price"];
+                        $productUnit->save();
+                    }
+
                 }
             } else{
                 $menuCategoryProduct->units()->delete();
@@ -176,6 +202,31 @@ class MenuCategoryProductController extends Controller
                 }
             } else{
                 $menuCategoryProduct->allergens()->delete();
+            }
+
+            $sauces = $request->sauces;
+            if (isset($sauces) && count($sauces) > 0){
+                $menuCategoryProduct->sauces()->delete();
+                foreach ($sauces as $sauceId){
+                    $productAllergen = new ProductSouce();
+                    $productAllergen->sauce_id = $sauceId;
+                    $productAllergen->product_id = $menuCategoryProduct->id;
+                    $productAllergen->save();
+                }
+            } else{
+                $menuCategoryProduct->sauces()->delete();
+            }
+            $materials = $request->materials;
+            if (isset($materials) && count($materials) > 0){
+                $menuCategoryProduct->materials()->delete();
+                foreach ($materials as $materialId){
+                    $productAllergen = new ProductMaterial();
+                    $productAllergen->material_id = $materialId;
+                    $productAllergen->product_id = $menuCategoryProduct->id;
+                    $productAllergen->save();
+                }
+            } else{
+                $menuCategoryProduct->materials()->delete();
             }
             return to_route('business.menu.edit', $menuCategoryProduct->category->menu_id)->with('response',[
                 'status' => "success",

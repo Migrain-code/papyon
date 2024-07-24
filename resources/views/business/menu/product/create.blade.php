@@ -132,6 +132,22 @@
                                    @endforeach
                                </select>
                            </div>
+                           <div class="col-md-12 mb-4">
+                               <label for="select2Sauces" class="form-label">Soslar</label>
+                               <select id="select2Sauces" name="sauces[]" multiple class="select2 form-select">
+                                   @foreach($sauces as $sauce)
+                                       <option value="{{$sauce->id}}">{{$sauce->name}}</option>
+                                   @endforeach
+                               </select>
+                           </div>
+                           <div class="col-md-12 mb-4">
+                               <label for="select2Materials" class="form-label">Malzemeler</label>
+                               <select id="select2Materials" name="materials[]" multiple class="select2 form-select">
+                                   @foreach($materials as $material)
+                                       <option value="{{$material->id}}">{{$material->name}}</option>
+                                   @endforeach
+                               </select>
+                           </div>
                            <div class="col-12">
                                <div class="card">
                                    <h5 class="card-header d-flex justify-content-between">Fiyat Bilgileri

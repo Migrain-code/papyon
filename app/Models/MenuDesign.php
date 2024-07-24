@@ -177,4 +177,13 @@ class MenuDesign extends Model
         return $menuList[$this->menu_id][$type];
     }
 
+    public function clone($newPlace)
+    {
+        $menuOrder = new MenuDesign();
+        $menuOrder->place_id = $newPlace->id;
+        $menuOrder->name = $this->name;
+        $menuOrder->menu_id = $this->menu_id;
+        $menuOrder->order_number = $this->order_number;
+        $menuOrder->save();
+    }
 }

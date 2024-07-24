@@ -62,8 +62,7 @@
                                                 <i class="ti ti-dots-vertical ti-sm text-white"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="teamMemberList" style="">
-                                                <a class="dropdown-item" href="javascript:void(0);">Bu Menüyü Kullan</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Bu Menüyü Kopyala</a>
+                                                <a class="dropdown-item" href="{{route('business.menu.useMenu', $menu->id)}}">Bu Menüyü Kullan</a>
                                                 <a class="dropdown-item" href="{{route('business.menu.edit', $menu->id)}}">Düzenle</a>
                                                 <a class="dropdown-item" href="javascript:void(0);">Sil</a>
                                             </div>

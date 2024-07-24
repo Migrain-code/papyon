@@ -58,7 +58,7 @@
                                 <div class="card p-2 h-100 shadow-none border">
                                     <div class="card-body p-3 pt-2">
                                         <div class="rounded-2 text-center mb-3 position-relative" >
-                                            <img class="img-fluid rounded" src="{{asset('storage/'. $place->logo)}}" alt="tutor image 1"/>
+                                            <img class="img-fluid rounded" style="max-height: 250px;" src="{{generateTextQrCode(route('place.show', $place->slug))}}" alt="tutor image 1"/>
                                             <div class="dropdown position-absolute"
                                                  style="
                                                 right: 5px;
@@ -73,40 +73,46 @@
                                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="teamMemberList" style="">
                                                     <a class="dropdown-item" href="{{route('business.place.show', $place->id)}}">Bu Mekana Geçiş Yap</a>
                                                     <a class="dropdown-item" href="{{route('business.place.clone', $place->id)}}">Bu Mekanı Kopyala</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Gün Sonu Raporu</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Aylık Raporu</a>
-                                                    <a class="dropdown-item" href="javascript:void(0);">Paylaş</a>
+                                                    <a class="dropdown-item" href="{{route('business.place.todayReport', $place->id)}}">Kasa Raporu</a>
+                                                    <a class="dropdown-item" href="whatsapp://send?text={{urlencode(route('place.show', $place->slug))}}">Paylaş</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <span class="badge bg-label-primary">Premium Paket</span>
-                                            <h6 class="d-flex align-items-center justify-content-center gap-1 mb-0">
-                                                4.4 <span class="text-warning"><i class="ti ti-star-filled me-1 mt-n1"></i></span
-                                                ><span class="text-muted">(1.23k)</span>
-                                            </h6>
+                                            @if($place->status == 2)
+                                                <span class="badge bg-label-primary">Pasife Alındı</span>
+                                            @elseif($place->status == 1)
+                                                <span class="badge bg-label-success">Aktif</span>
+                                            @else
+                                                <span class="badge bg-label-danger">Kilitli Destek Ekibimiz ile İletişime geçiniz</span>
+                                            @endif
+
+
                                         </div>
                                         <a href="{{route('business.place.edit', $place->id)}}" class="h5">{{$place->name}}</a>
-                                        <p class="d-flex align-items-center mt-2"><i class="ti ti-clock me-2 mt-n1"></i>15 Gün Kaldı</p>
-                                        <div class="progress mb-4" style="height: 8px">
-                                            <div
-                                                class="progress-bar w-75"
-                                                role="progressbar"
-                                                aria-valuenow="25"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
+                                        <p class="d-flex align-items-center mt-2"><i class="ti ti-shopping-cart me-2 mt-n1"></i>{{$place->allClaim()}} Bekleyen Talep Var</p>
+
                                         <div class="d-flex flex-column flex-md-row gap-2 text-nowrap">
+                                            @if($place->status == 2)
+                                                <a
+                                                    class="app-academy-md-50 btn btn-label-success me-md-2 d-flex align-items-center"
+                                                    href="{{route('business.place.active', $place->id)}}">
+                                                    <i class="ti ti-rotate-clockwise-2 align-middle scaleX-n1-rtl me-2 mt-n1 ti-sm"></i
+                                                    ><span>Aktif Et</span>
+                                                </a>
+                                            @else
+                                                <a
+                                                    class="app-academy-md-50 btn btn-label-secondary me-md-2 d-flex align-items-center"
+                                                    href="{{route('business.place.passive', $place->id)}}">
+                                                    <i class="ti ti-rotate-clockwise-2 align-middle scaleX-n1-rtl me-2 mt-n1 ti-sm"></i
+                                                    ><span>Pasife Al</span>
+                                                </a>
+                                            @endif
+
                                             <a
-                                                class="app-academy-md-50 btn btn-label-secondary me-md-2 d-flex align-items-center"
-                                                href="app-academy-course-details.html">
-                                                <i class="ti ti-rotate-clockwise-2 align-middle scaleX-n1-rtl me-2 mt-n1 ti-sm"></i
-                                                ><span>Pasife Al</span>
-                                            </a>
-                                            <a
-                                                class="app-academy-md-50 btn btn-label-primary d-flex align-items-center"
-                                                href="app-academy-course-details.html">
-                                                <span class="me-2">Önizleme Modu</span>
+                                                class="app-academy-md-50 btn btn-label-primary d-flex align-items-center w-50"
+                                                href="{{route('business.place.edit', $place->id)}}">
+                                                <span class="me-2">Düzenle</span>
                                                 <i class="ti ti-chevron-right scaleX-n1-rtl ti-sm"></i>
                                             </a>
                                         </div>

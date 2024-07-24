@@ -97,7 +97,10 @@ class Place extends Model
     {
         return $this->hasMany(Order::class, 'place_id', 'id');
     }
-
+    public function visitors() // ziyaretçiler
+    {
+        return $this->hasMany(PlaceVisitor::class, 'place_id', 'id');
+    }
     public function claims() // Siparişler
     {
         return $this->hasMany(Claim::class, 'place_id', 'id');
@@ -111,6 +114,10 @@ class Place extends Model
     public function suggestions() // Görüş ve Öneriler
     {
         return $this->hasMany(Suggestion::class, 'place_id', 'id');
+    }
+    public function suggestionQuestions() // Görüş ve Öneriler
+    {
+        return $this->hasMany(SuggestionQuestion::class, 'place_id', 'id');
     }
 
     public function colors() // Renkler
@@ -254,7 +261,17 @@ class Place extends Model
 
         return $claims;
     }
+    public function allClaim()
+    {
+        $ordersCount = $this->orders->where('status', 0)->count();
+        $packetCount = $this->orders->where('status', 0)->where('order_type', 0)->count();
+        $taxiCount = $this->claims->where('type_id', 0)->where('status', 0)->count();
+        $valeCount = $this->claims->where('type_id', 1)->where('status', 0)->count();
+        $waiterCount = $this->claims->where('type_id', 2)->where('status', 0)->count();
+        $totalClaims = $ordersCount + $taxiCount + $valeCount + $waiterCount;
 
+        return $totalClaims;
+    }
     public function clone()
     {
         $newPlace = $this->replicate();
@@ -265,7 +282,14 @@ class Place extends Model
             foreach ($this->menus as $menu) {
                 $menu->clone($newPlace);
             }
-
+            // İlişkili menü tasarımız klonlama
+            foreach ($this->menuOrders as $menuo) {
+                $menuo->clone($newPlace);
+            }
+            // İlişkili menü renk klonlama
+            foreach ($this->colors as $color) {
+                $color->clone($newPlace);
+            }
             // İlişkili bölgeleri klonlama
             foreach ($this->regions as $region) {
                 $newRegion = $region->replicate();
