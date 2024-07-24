@@ -103,7 +103,7 @@ class ClaimController extends Controller
 
     public function datatable(Request $request)
     {
-        $claims = Claim::where('type_id', $request->typeId)->latest('created_at');
+        $claims = $this->business->claims()->where('type_id', $request->typeId)->latest('created_at');
         return DataTables::of($claims)
             ->editColumn('id', function ($q) {
                 return createCheckbox($q->id, 'Claim', 'Siparişler', 'orderChecks');
