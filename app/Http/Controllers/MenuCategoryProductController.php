@@ -46,6 +46,7 @@ class MenuCategoryProductController extends Controller
      */
     public function store(MenuCategory $category, ProductAddRequest $request)
     {
+
         $menuCategoryProduct = new MenuCategoryProduct();
         $menuCategoryProduct->menu_id = $category->menu_id;
         $menuCategoryProduct->category_id = $category->id;
@@ -57,11 +58,12 @@ class MenuCategoryProductController extends Controller
 
         $otherProducts = $request->other_products;
 
-        if ($request->hasFile('product_image')){
-            $menuCategoryProduct->image = $request->file('product_image')->store('menuCategoryProductImages');
-        }
-        if ($menuCategoryProduct->save()){
 
+        if ($menuCategoryProduct->save()){
+            if ($request->croppedImage && isset($request->croppedImage)){
+                $menuCategoryProduct->image = base64Convertor($request->croppedImage, 'menuCategoryProductImages');
+                $menuCategoryProduct->save();
+            }
             if (isset($otherProducts) && count($otherProducts) > 0){
                 foreach ($otherProducts as $otherProductId){
                     $otherProduct = new OtherProduct();
@@ -157,10 +159,11 @@ class MenuCategoryProductController extends Controller
         $menuCategoryProduct->calorie_total = $request->input('calorie');
         $menuCategoryProduct->cookie_time = $request->input('cooking_time');
 
-        if ($request->hasFile('product_image')){
-            $menuCategoryProduct->image = $request->file('product_image')->store('menuCategoryProductImages');
-        }
         if ($menuCategoryProduct->save()){
+            if ($request->croppedImage && isset($request->croppedImage)){
+                $menuCategoryProduct->image = base64Convertor($request->croppedImage, 'menuCategoryProductImages');
+                $menuCategoryProduct->save();
+            }
             $otherProducts = $request->other_products;
             if (isset($otherProducts) && count($otherProducts) > 0){
                 $menuCategoryProduct->otherProducts()->delete();

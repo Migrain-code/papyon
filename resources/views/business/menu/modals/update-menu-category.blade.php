@@ -17,7 +17,7 @@
                     <div id="allImageInputContainer" style="display: block">
                         <div class="row">
                             <label class="switch switch-lg mb-4">
-                                <input type="checkbox" class="switch-input" id="categoryImageCheck">
+                                <input type="checkbox" class="switch-input" id="categoryImageCheckUpdate">
                                 <span class="switch-toggle-slider">
                                 <span class="switch-on"><i class="ti ti-check"></i></span>
                                 <span class="switch-off"><i class="ti ti-x"></i></span>
@@ -31,6 +31,10 @@
                             <div class="col mb-4">
                                 <label for="categoryImage" class="form-label">Kategori Görseli</label>
                                 <input type="file" id="updateCategoryImage" name="update_category_image" class="form-control" placeholder="">
+                                <div class="my-4">
+                                    <img id="updateImage" src="" alt="Picture" style="display: none;max-width: 100%;">
+                                </div>
+                                <canvas id="updateCanvas" style="display: none;"></canvas>
                             </div>
                         </div>
                     </div>
@@ -38,7 +42,7 @@
                </div>
                <div class="modal-footer">
                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Kapat</button>
-                   <button type="button" id="categoryUpdateButton" class="btn btn-primary">Kaydet</button>
+                   <button type="button" id="update-crop-button" class="btn btn-primary">Kaydet</button>
                </div>
            </div>
     </div>

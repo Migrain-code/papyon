@@ -75,6 +75,15 @@ class HomeController extends Controller
         ]);
     }
 
+    public function markAsAllReadNotification(Request $request)
+    {
+        $user = $request->user();
+        $user->notifications()->update(['status' => 1]);
+        return back()->with('response', [
+            'status' => "success",
+            'message' => "Tüm Bildirimler Okundu Olarak İşaretlendi"
+        ]);
+    }
     public function logout(Request $request)
     {
         $user = $request->user();

@@ -60,13 +60,13 @@ class ProductAddRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
+   /* protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
             'status' => 'error',
             'message' => 'Doğrulama hatası',
             'errors' => $validator->errors()->all(),
         ], 422));
-    }
+    }*/
 
 }

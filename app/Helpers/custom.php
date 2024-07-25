@@ -321,7 +321,22 @@ function formatPrice($price)
     return $formattedPrice;
 }
 
+function base64Convertor($base64Image, $folderName = "uploads"){
+    $base64Image = str_replace('data:image/png;base64,', '', $base64Image);
+    $base64Image = str_replace(' ', '+', $base64Image);
 
+    // Base64 verisini decode edin
+    $imageData = base64_decode($base64Image);
+
+    // Dosya adını ve dizinini belirleyin
+    $fileName = Str::uuid() . '.png';
+    $filePath = $folderName.'/' . $fileName;
+
+    // Dosyayı kaydedin
+    \Illuminate\Support\Facades\Storage::put($filePath, $imageData);
+    $fileUrl = \Illuminate\Support\Facades\Storage::url($filePath);
+    return str_replace('/storage/', '', $fileUrl);
+}
 function create_dropdown_button($buttons, $id, $addedClass)
 {
     $newButtons = "";

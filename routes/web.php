@@ -70,6 +70,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
         ->middleware('throttle:3,4'); // 1. parametre istek sayısı 2.dakika;
 
     Route::get('/home', [HomeController::class, 'index'])->name('business.home');
+    Route::get('/markAsAllReadNotification', [HomeController::class, 'markAsAllReadNotification'])->name('business.markAsAllReadNotification');
 
     Route::prefix('business')->as('business.')->group(function (){
         Route::resource('place', PlaceController::class);

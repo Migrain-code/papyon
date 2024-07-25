@@ -66,6 +66,15 @@ class User extends Authenticatable
         return $this->hasMany(PacketOrder::class, 'user_id', 'id');
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(UserNotification::class, 'user_id', 'id');
+    }
+
+    public function unreadNotifications()
+    {
+        return $this->notifications()->where('status', 0);
+    }
     public function place()
     {
         return $this->places()->where('is_default', 1)->first();

@@ -1,6 +1,7 @@
 @extends('business.layouts.master')
 @section('title', 'Menü Detayı')
 @section('styles')
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.css">
 
 @endsection
 
@@ -64,5 +65,182 @@
     <!-- Page JS -->
     <script src="/business/assets/js/project/product/listing.js"></script>
     <script src="/business/assets/js/project/product/category.js"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInput = document.getElementById('categoryImage');
+            const image = document.getElementById('image');
+            const cropButton = document.getElementById('crop-button');
+            const canvas = document.getElementById('canvas');
+            let cropper;
 
+            fileInput.addEventListener('change', function (e) {
+                const files = e.target.files;
+                if (files && files.length > 0) {
+                    const file = files[0];
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        image.src = event.target.result;
+                        if (cropper) {
+                            cropper.destroy();
+                        }
+                        cropper = new Cropper(image, {
+                            aspectRatio: 2.25, // 600x400 oranı (3:2)
+                            viewMode: 1,
+                            minCropBoxWidth: 900,
+                            minCropBoxHeight: 400,
+                            ready() {
+                                cropper.setCropBoxData({ width: 900, height: 400 });
+                            }
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            cropButton.addEventListener('click', function () {
+                const croppedCanvas = cropper.getCroppedCanvas({
+                    width: 900,
+                    height: 400
+                });
+                canvas.style.display = 'none';
+                canvas.width = 900;
+                canvas.height = 400;
+                canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
+
+                croppedCanvas.toBlob(function (blob) {
+                    const formData = new FormData();
+                    formData.append('croppedImage', blob);
+                    formData.append('menu_id', '{{$menu->id}}')
+                    formData.append('name', $('[name="name"]').val())
+                    formData.append('_token', csrf_token);
+
+                    fetch('/business/menu-category', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === "success") {
+                                addCategoryModal.hide();
+                                Swal.fire({
+                                    title: 'Başarılı!',
+                                    text: data.message,
+                                    icon: 'success',
+                                    confirmButtonText: 'Tamam'
+                                });
+                                setTimeout(function (){
+                                    location.reload();
+                                }, 500);
+                            } else {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Bir hata oluştu.',
+                                    icon: 'error',
+                                    confirmButtonText: 'Tamam'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            Swal.fire({
+                                title: 'Hata!',
+                                text: 'Bir hata oluştu.',
+                                icon: 'error',
+                                confirmButtonText: 'Tamam'
+                            });
+                        });
+                });
+            });
+        });
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInput = document.getElementById('updateCategoryImage');
+            const image = document.getElementById('updateImage');
+            const cropButton = document.getElementById('update-crop-button');
+            const canvas = document.getElementById('updateCanvas');
+            let cropper;
+
+            fileInput.addEventListener('change', function (e) {
+                const files = e.target.files;
+                if (files && files.length > 0) {
+                    image.style.display = "block";
+                    const file = files[0];
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        image.src = event.target.result;
+                        if (cropper) {
+                            cropper.destroy();
+                        }
+                        cropper = new Cropper(image, {
+                            aspectRatio: 2.25, // 600x400 oranı (3:2)
+                            viewMode: 1,
+                            minCropBoxWidth: 900,
+                            minCropBoxHeight: 400,
+                            ready() {
+                                cropper.setCropBoxData({ width: 900, height: 400 });
+                            }
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            cropButton.addEventListener('click', function () {
+                const croppedCanvas = cropper.getCroppedCanvas({
+                    width: 900,
+                    height: 400
+                });
+                canvas.style.display = 'none';
+                canvas.width = 900;
+                canvas.height = 400;
+                canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
+
+                croppedCanvas.toBlob(function (blob) {
+                    const formData = new FormData();
+                    formData.append('croppedImage', blob);
+                    formData.append('_token', csrf_token);
+                    formData.append('_method', 'PUT');
+                    formData.append("name", $('[name="category_name"]').val());
+                    fetch('/business/menu-category/'+category_id, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === "success") {
+                                addCategoryModal.hide();
+                                Swal.fire({
+                                    title: 'Başarılı!',
+                                    text: data.message,
+                                    icon: 'success',
+                                    confirmButtonText: 'Tamam'
+                                });
+                                setTimeout(function (){
+                                    location.reload();
+                                }, 500);
+                            } else {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Bir hata oluştu.',
+                                    icon: 'error',
+                                    confirmButtonText: 'Tamam'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            Swal.fire({
+                                title: 'Hata!',
+                                text: 'Bir hata oluştu.',
+                                icon: 'error',
+                                confirmButtonText: 'Tamam'
+                            });
+                        });
+                });
+            });
+        });
+    </script>
 @endsection

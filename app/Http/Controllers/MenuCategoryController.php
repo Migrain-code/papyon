@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MenuCategoryResource;
 use App\Models\MenuCategory;
 use Illuminate\Http\Request;
 
@@ -24,11 +25,11 @@ class MenuCategoryController extends Controller
         $menuCategory = new MenuCategory();
         $menuCategory->menu_id = $request->input('menu_id');
         $menuCategory->name = $request->input('name');
-        if ($request->hasFile('category_image')) {
-            $menuCategory->image = $request->file('category_image')->store('menuCategoryImages');
+        if ($request->hasFile('croppedImage')) {
+            $menuCategory->image = $request->file('croppedImage')->store('menuCategoryImages');
         }
         if ($menuCategory->save()) {
-            return to_route('business.menu.edit', $request->input('menu_id'))->with('response', [
+            return response()->json([
                 'status' => "success",
                 'message' => "Kategori Başarılı Bir Şekilde Eklendi"
             ]);
@@ -40,7 +41,7 @@ class MenuCategoryController extends Controller
      */
     public function show(MenuCategory $menuCategory)
     {
-        return response()->json($menuCategory);
+        return response()->json(MenuCategoryResource::make($menuCategory));
     }
 
     /**
@@ -65,8 +66,8 @@ class MenuCategoryController extends Controller
     public function update(Request $request, MenuCategory $menuCategory)
     {
         $menuCategory->name = $request->input('name');
-        if ($request->hasFile('product_image')) {
-            $menuCategory->image = $request->file('product_image')->store('menuCategoryImages');
+        if ($request->hasFile('croppedImage')) {
+            $menuCategory->image = $request->file('croppedImage')->store('menuCategoryImages');
         }
         if ($menuCategory->save()) {
             return response()->json([

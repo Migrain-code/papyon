@@ -1,6 +1,15 @@
 @extends('business.layouts.master')
 @section('title', 'Menüler')
 @section('styles')
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.css">
+    <style>
+        .cropper-container {
+            max-width: 100%;
+            max-height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -54,7 +63,7 @@
                 </div>
                 <div class="card-body">
                    <div class="row gy-4 mb-4">
-                       <form method="post" action="{{route('business.menuCategory.store', $category->id)}}" enctype="multipart/form-data">
+                       <form method="post" action="{{route('business.menuCategory.store', $category->id)}}" id="productAddForm" enctype="multipart/form-data">
                             @csrf
                            <div class="row">
                                <div class="col mb-4">
@@ -104,9 +113,16 @@
                                        <div id="imageContainer">
 
                                        </div>
-                                       <label for="productImage" class="form-label">Ürün Görseli</label>
+                                       <label for="productImage" class="form-label">
+                                           Ürün Görseli
+                                           <span class="text-warning">(Lütfen Seçtiğiniz Görseli Çerçevenin Tam Ortasına Getirin. Tavsiye Edilen 190 * 150)</span>
+                                       </label>
                                        <input type="file" id="productImage" name="product_image" class="form-control" placeholder="">
+                                       <div class="my-4">
+                                           <img id="image" src="" alt="Picture" style="max-width: 100%;">
+                                       </div>
                                    </div>
+                                   <canvas id="canvas" style="display: none;"></canvas>
                                </div>
 
                            <div class="col-md-12 mb-4">
@@ -148,6 +164,7 @@
                                    @endforeach
                                </select>
                            </div>
+                           <input type="hidden" style="visibility: hidden" name="croppedImage" id="croppedInput">
                            <div class="col-12">
                                <div class="card">
                                    <h5 class="card-header d-flex justify-content-between">Fiyat Bilgileri
@@ -193,7 +210,7 @@
                            </div>
 
                            <div class="card-footer">
-                               <button type="submit" id="submitButton" class="btn btn-primary w-100">Kaydet</button>
+                               <button type="button" id="submitButton" class="btn btn-primary w-100">Kaydet</button>
                            </div>
                        </form>
 
@@ -211,6 +228,7 @@
     <script src="/business/assets/js/forms-selects.js"></script>
     <script src="/business/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
     <script src="/business/assets/js/forms-extras.js"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
     <script>
         $('#productImageCheck').on('change', function (){
             var productImageInputArea = document.getElementById('productImageInputContainer');
@@ -223,4 +241,75 @@
         });
 
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInput = document.getElementById('productImage');
+            const image = document.getElementById('image');
+            const cropButton = document.getElementById('submitButton');
+            const canvas = document.getElementById('canvas');
+            const croppedImageInput = document.getElementById('croppedInput');
+            let cropper;
+
+            fileInput.addEventListener('change', function (e) {
+                const files = e.target.files;
+                if (files && files.length > 0) {
+                    const file = files[0];
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        image.src = event.target.result;
+                        if (cropper) {
+                            cropper.destroy();
+                        }
+                        image.onload = function() {
+                            const imageWidth = image.naturalWidth;
+                            const imageHeight = image.naturalHeight;
+                            let scaledWidth = 190;
+                            let scaledHeight = 150;
+
+                            if (imageWidth / imageHeight > 190 / 150) {
+                                scaledHeight = 150;
+                                scaledWidth = (imageWidth / imageHeight) * 150;
+                            } else {
+                                scaledWidth = 190;
+                                scaledHeight = (imageHeight / imageWidth) * 190;
+                            }
+
+                            cropper = new Cropper(image, {
+                                aspectRatio: 1,
+                                viewMode: 1,
+                                minCropBoxWidth: 190,
+                                minCropBoxHeight: 150,
+                                ready() {
+                                    cropper.setCropBoxData({ left: 0, top: 0, width: 190, height: 150 });
+                                    cropper.setCanvasData({ left: 0, top: 0, width: scaledWidth, height: scaledHeight });
+                                }
+                            });
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            cropButton.addEventListener('click', function () {
+                const croppedCanvas = cropper.getCroppedCanvas({
+                    width: 190,
+                    height: 150
+                });
+                canvas.style.display = 'none';
+                canvas.width = 190;
+                canvas.height = 150;
+                canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
+
+                croppedCanvas.toBlob(function (blob) {
+                    const reader = new FileReader();
+                    reader.onloadend = function () {
+                        croppedImageInput.value = reader.result;
+                        $('#productAddForm').submit();
+                    };
+                    reader.readAsDataURL(blob);
+                });
+            });
+        });
+    </script>
+
 @endsection
