@@ -58,24 +58,37 @@
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h3 class="mb-1">Şifrenizi mi Unuttunuz 👋</h3>
-                    <p class="mb-4">E-posta adresinizi girin size bir bağlantı gönderelim</p>
+                    <h3 class="mb-1">Papyona Hoşgeldiniz 👋</h3>
+                    <p class="mb-4">Lütfen hesabınıza giriş yapın ve kullanmaya başlayın</p>
 
-                    <form id="formAuthentication" class="mb-3" action="{{ route('password.email') }}" method="POST">
+                    <form id="formAuthentication" class="mb-3" action="{{ route('password.update') }}" method="POST">
                         @csrf
+
+                        <input type="hidden" name="email" value="{{request()->email}}">
+                        <input type="hidden" name="token" value="{{request()->token}}">
                         <div class="mb-3">
-                            <label for="email" class="form-label">E-posta</label>
+                            <label for="email" class="form-label">Şifre</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 id="email"
-                                name="email"
-                                placeholder="E-posta adresinizi giriniz"
+                                name="password"
+                                placeholder="Yeni Şifrenizi giriniz"
+                                autofocus />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Şifre Tekrar</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="email"
+                                name="password_confirmation"
+                                placeholder="Yeni Şifrenizi Tekrar giriniz"
                                 autofocus />
                         </div>
 
 
-                        <button class="btn btn-primary d-grid w-100">E-posta Gönder</button>
+                        <button class="btn btn-primary d-grid w-100">Şifremi Güncelle</button>
                     </form>
 
                     <p class="text-center">

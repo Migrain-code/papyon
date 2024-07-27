@@ -26,10 +26,17 @@ use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\SouceController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\SuggestionQuestionController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\PasswordResetController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('front.index');
+Route::get('ozellikler', [\App\Http\Controllers\Frontend\HomeController::class, 'proparties'])->name('property.index');
+Route::get('sss', [\App\Http\Controllers\Frontend\HomeController::class, 'faq'])->name('faq.index');
+Route::get('entegrasyonlar', [\App\Http\Controllers\Frontend\HomeController::class, 'entegration'])->name('entegration.index');
+Route::get('package', [\App\Http\Controllers\Frontend\HomeController::class, 'package'])->name('package.index');
+Route::get('is-birligi', [\App\Http\Controllers\Frontend\HomeController::class, 'partnership'])->name('partnership.index');
+Route::get('iletisim', [\App\Http\Controllers\Frontend\HomeController::class, 'contact'])->name('contact.index');
+
 Route::get('mekan/{slug}', [PlaceMenuController::class, 'index'])->name('place.show');
 Route::get('table/{code}', [PlaceMenuController::class, 'table']);
 Route::middleware('checkPlace')->group(function (){
@@ -58,6 +65,12 @@ Route::middleware('checkPlace')->group(function (){
     });
     Route::get('/notify', [PlaceMenuController::class, 'notify'])->name('notify');
 });
+
+// Parola sıfırlama bağlantısı isteği
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// Parola sıfırlama
+Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
 
 Route::post('/packet/{package}/callback/{user}', [SubscribtionController::class, 'callback'])->name('business.subscribtion.payment.callback');
 

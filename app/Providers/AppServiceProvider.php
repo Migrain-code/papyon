@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Core\CustomResourceRegistrar;
 use App\Models\Cart;
+use App\Models\City;
 use App\Models\Place;
 use App\Models\Table;
 use Illuminate\Pagination\Paginator;

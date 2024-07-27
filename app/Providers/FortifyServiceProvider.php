@@ -39,6 +39,12 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::registerView(function (){
             return view('business.auth.register');
         });
+        Fortify::resetPasswordView(function ($request){
+            return view('business.auth.password.reset', ['request' => $request]);
+        });
+        Fortify::requestPasswordResetLinkView(function () {
+            return view('business.auth.password.confirm');
+        });
 
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
