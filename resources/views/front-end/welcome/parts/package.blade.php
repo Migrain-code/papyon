@@ -2,14 +2,14 @@
     <div class="container">
         <div class="packages">
             <div class="packages_top_title">
-                Paketler &amp; Özellikleri
+                {{setting('section_5_title')}}
             </div>
             <div class="packages_middle_title">
-                30 gün boyunca ÜCRETSİZ deneyin!
+                {{setting('section_5_sub_title')}}
                 <div class="qr_menu_card_title_line"></div>
             </div>
             <div class="packages_sub_title">
-                Kredi kartı gerekmez ve devam etmek zorunda değilsiniz.
+                {{setting('section_5_min_title')}}
             </div>
             <div class="packages_page_extra">
                 <div class="packages_buttons">

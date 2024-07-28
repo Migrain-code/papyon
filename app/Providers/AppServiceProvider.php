@@ -6,6 +6,7 @@ use App\Core\CustomResourceRegistrar;
 use App\Models\Cart;
 use App\Models\City;
 use App\Models\Place;
+use App\Models\Setting;
 use App\Models\Table;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFour();
         $registrar = new CustomResourceRegistrar($this->app['router']);
+        foreach (Setting::all() as $item) {
+            $settings[$item->name] = $item->value;
+        }
 
+        \Config::set('settings', $settings);
         $this->app->bind('Illuminate\Routing\ResourceRegistrar', function () use ($registrar) {
             return $registrar;
         });

@@ -1,5 +1,13 @@
 @extends('front-end.layouts.master')
 @section('title', 'Anasayfa')
+@section('styles')
+    <style>
+        iframe{
+            max-width: 1300px;
+            border-radius: 30px;
+        }
+    </style>
+@endsection
 @section('content')
     @include('front-end.welcome.parts.banner')
     @include('front-end.welcome.parts.cards')

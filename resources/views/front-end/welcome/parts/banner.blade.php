@@ -2,78 +2,55 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="home_page_banner_left p-5">
+            @php
+                $text = "";
+                foreach (explode('-', setting('section_1_title')) as $str){
+                    $text .= $str." &amp; ";
+                }
 
-
-            <h3 class="typewrite" data-period="2000" data-type='[&quot;TEST &amp; TEST TEST &amp; TEST TEST &amp;TEST&quot;]'>
+            @endphp
+            <h3 class="typewrite" data-period="2000" data-type='[&quot;{!! $text !!} &quot;]'>
                 <span class="wrap"></span>
             </h3>
 
             <div class="home_page_banner_left_second">
-                <h3>Menüye Bakmanın </h3>
+                <h3>{{setting('section_2_title')}} </h3>
             </div>
             <div class="home_page_banner_left_third">
-                <h3>Yeni Tarzı </h3>
+                <h3>{{setting('section_3_title')}} </h3>
             </div>
             <div class="home_page_banner_left_list">
+                @php
+                    $proparties = explode('-', setting('section_1_proparties'));
+                @endphp
                 <ul>
-                    <li><span><svg version="1.2" baseprofile="tiny" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor">
+                    @foreach($proparties as $prop)
+                        <li><span><svg version="1.2" baseprofile="tiny" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor">
                                             <path d="M16.972 6.251c-.967-.538-2.185-.188-2.72.777l-3.713 6.682-2.125-2.125c-.781-.781-2.047-.781-2.828 0-.781.781-.781 2.047 0 2.828l4 4c.378.379.888.587 1.414.587l.277-.02c.621-.087 1.166-.46 1.471-1.009l5-9c.537-.966.189-2.183-.776-2.72z">
                                             </path>
                                         </svg></span>
-                        <p>En İyi Fiyat Garantisi </p>
-                    </li>
-                    <li><span><svg version="1.2" baseprofile="tiny" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor">
-                                            <path d="M16.972 6.251c-.967-.538-2.185-.188-2.72.777l-3.713 6.682-2.125-2.125c-.781-.781-2.047-.781-2.828 0-.781.781-.781 2.047 0 2.828l4 4c.378.379.888.587 1.414.587l.277-.02c.621-.087 1.166-.46 1.471-1.009l5-9c.537-.966.189-2.183-.776-2.72z">
-                                            </path>
-                                        </svg></span>
-                        <p> Ücretsiz Demo Fırsatı </p>
-                    </li>
-                    <li><span><svg version="1.2" baseprofile="tiny" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor">
-                                            <path d="M16.972 6.251c-.967-.538-2.185-.188-2.72.777l-3.713 6.682-2.125-2.125c-.781-.781-2.047-.781-2.828 0-.781.781-.781 2.047 0 2.828l4 4c.378.379.888.587 1.414.587l.277-.02c.621-.087 1.166-.46 1.471-1.009l5-9c.537-.966.189-2.183-.776-2.72z">
-                                            </path>
-                                        </svg></span>
-                        <p> Kurulum Derdi Yok </p>
-                    </li>
-                    <li><span><svg version="1.2" baseprofile="tiny" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor">
-                                            <path d="M16.972 6.251c-.967-.538-2.185-.188-2.72.777l-3.713 6.682-2.125-2.125c-.781-.781-2.047-.781-2.828 0-.781.781-.781 2.047 0 2.828l4 4c.378.379.888.587 1.414.587l.277-.02c.621-.087 1.166-.46 1.471-1.009l5-9c.537-.966.189-2.183-.776-2.72z">
-                                            </path>
-                                        </svg></span>
-                        <p> Hızlı Kolay  Düşük Maliyet </p>
-                    </li>
-                    <li><span><svg version="1.2" baseprofile="tiny" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor">
-                                            <path d="M16.972 6.251c-.967-.538-2.185-.188-2.72.777l-3.713 6.682-2.125-2.125c-.781-.781-2.047-.781-2.828 0-.781.781-.781 2.047 0 2.828l4 4c.378.379.888.587 1.414.587l.277-.02c.621-.087 1.166-.46 1.471-1.009l5-9c.537-.966.189-2.183-.776-2.72z">
-                                            </path>
-                                        </svg></span>
-                        <p> Hızlı  Kolay  Düşük Maliyet </p>
-                    </li>
-                    <li><span><svg version="1.2" baseprofile="tiny" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor">
-                                            <path d="M16.972 6.251c-.967-.538-2.185-.188-2.72.777l-3.713 6.682-2.125-2.125c-.781-.781-2.047-.781-2.828 0-.781.781-.781 2.047 0 2.828l4 4c.378.379.888.587 1.414.587l.277-.02c.621-.087 1.166-.46 1.471-1.009l5-9c.537-.966.189-2.183-.776-2.72z">
-                                            </path>
-                                        </svg></span>
-                        <p> %100 Memnuniyet Garantisi </p>
-                    </li>
-                    <li><span><svg version="1.2" baseprofile="tiny" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor">
-                                            <path d="M16.972 6.251c-.967-.538-2.185-.188-2.72.777l-3.713 6.682-2.125-2.125c-.781-.781-2.047-.781-2.828 0-.781.781-.781 2.047 0 2.828l4 4c.378.379.888.587 1.414.587l.277-.02c.621-.087 1.166-.46 1.471-1.009l5-9c.537-.966.189-2.183-.776-2.72z">
-                                            </path>
-                                        </svg></span>
-                        <p> test </p>
-                    </li>
+                            <p>{{trim($prop)}} </p>
+                        </li>
+                    @endforeach
+
+
+
                 </ul>
             </div>
             <div class="home_page_banner_left_forth">
                 <div>
-                    <button data-bs-toggle="" data-bs-target="" class="third_button" style="">
-                        Ücretsiz QR Menü Oluştur
-                    </button>
-                    <button style="" class="secondary_button">
-                        Sizi Arayalım
-                    </button>
+                    <a href="{{setting('section_1_purple_button_link')}}" class="third_button" style="">
+                       {{setting('section_1_purple_button_text')}}
+                    </a>
+                    <a href="{{setting('section_1_white_button_link')}}" class="secondary_button">
+                        {{setting('section_1_white_button_text')}}
+                    </a>
                 </div>
-                <span>15 gün ücretsiz dene. Kredi kartı gerekmez</span>
+                <span>  {{setting('section_1_mini_title')}}</span>
             </div>
         </div>
         <div class="home_page_banner_right p-5">
-            <img src="/front/assets/images/1709132059_banner_image.svg" alt="">
+            <img src="{{storage(setting('section_1_image'))}}" alt="">
         </div>
     </div>
 </section>

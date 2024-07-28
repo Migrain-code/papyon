@@ -1,3 +1,10 @@
+var routeUrl = "";
+
+if (typeof statusUrl !== 'undefined') {
+    routeUrl = statusUrl;
+} else {
+    routeUrl = "business"
+}
 $(document).on('click', '.updateStatus', function () {
     let statusCode = $(this).data('update-id')
     let claimId = $(this).data('element-id')
@@ -15,7 +22,7 @@ $(document).on('click', '.updateStatus', function () {
         if (result.isConfirmed) {
 
             $.ajax({
-                url: '/business/' + updateUrl + '/' + claimId,
+                url: '/'+routeUrl+'/' + updateUrl + '/' + claimId,
                 type: "GET",
                 data: {
                     "_token": csrf_token,
@@ -101,7 +108,7 @@ $(document).on('click', '#deleteSubmitButton', function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/business/ajax/all-delete-object',
+                url: '/'+routeUrl+'/ajax/all-delete-object',
                 type: "POST",
                 data: {
                     "_token": csrf_token,

@@ -103,51 +103,46 @@
         <div class="qr_menu_desc">
             <div class="qr_menu_desc_left">
 
-                <h4>Dakikalar İçerisinde Dijital Menünüz Hazır</h4><h6><strong>1.Ücretsiz Üye Olun</strong></h6><p>www.papyoon.com.tr üzerinden vitrin’e girin. Geçerli bir e-posta girin, işletme adını girin ve giriş için şifre belirleyin</p><h6><strong>2. Dijital Menü Oluşturun</strong></h6><p>Kategorileri başlıklarını ve alt ürünleri ekleyin. Örneğin; Kahvaltılar / Serpme Kahvaltı</p><h6><strong>3. QR Kodu Masalara Yerleştirin</strong></h6><p>QR kodu masalarım sekmesinden indirin ve baskı alın. Artız hazırsınız; kullanmaya başlayın.</p>
-
-                <button data-bs-toggle="" data-bs-target="" class="third_button" style="">
-                    Şimdi QR Menüsü Oluştur
-                </button>
+                <h4>{{setting('step_3_title')}}</h4>
+                <div>{!! setting('step_3_description') !!}</div>
+                <a href="{{setting('step_3_btn_link')}}" data-bs-toggle="" data-bs-target="" class="third_button" style="">
+                    {{setting('step_3_btn_text')}}
+                </a>
             </div>
             <div class="qr_menu_desc_right">
-                <img src="/front/assets/images/1709146902_qr_menu_image.svg" alt="">
+                <img src="{{storage(setting('step_3_image'))}}" alt="">
             </div>
         </div>
         <div class="qr_menu_how">
-            <div class="title">QR Menü Nasıl Yapılır?</div>
-            <div class="subtitle">
-                Online QR menü oluşturmak ve müşterilerinizin kullanımına açmak çok kolay</div>
+            <div class="title">{{setting('section_4_title')}}</div>
+            <div class="subtitle">{{setting('section_4_sub_title')}} </div>
             <div class="qr_menu_how_card">
                 <img src="/front/assets/images/vector.svg" alt="">
                 <div class="qr_menu_how_card_item">
                     <div class="qr_menu_how_card_item_top"><span>1</span></div>
                     <div class="qr_menu_how_card_item_middle">
-                        <h5>Planınızı Seçin
-                        </h5>
+                        <h5>{{setting('section_4_step_1_title')}}</h5>
                     </div>
                     <div class="qr_menu_how_card_item_bottom">
-                        İhtiyaçlarınıza en uygun planı seçin ve QR menünüzü kısıtlama olmadan 15 gün ücretsiz kullanın.
+                        {{setting('section_4_step_1_description')}}
                     </div>
                 </div>
                 <div class="qr_menu_how_card_item">
                     <div class="qr_menu_how_card_item_top"><span>2</span></div>
                     <div class="qr_menu_how_card_item_middle">
-                        <h5>Bilgilerinizi Girin
-                        </h5>
+                        <h5>{{setting('section_4_step_2_title')}}</h5>
                     </div>
                     <div class="qr_menu_how_card_item_bottom">
-                        Logonuzu yükleyin, mekan adını, telefon numarasını, adresini ve Instagram adresini girin.
+                        {{setting('section_4_step_2_description')}}
                     </div>
                 </div>
                 <div class="qr_menu_how_card_item">
                     <div class="qr_menu_how_card_item_top"><span>3</span></div>
                     <div class="qr_menu_how_card_item_middle">
-                        <h5>
-                            Kullanmaya Başlayın
-                        </h5>
+                        <h5>{{setting('section_4_step_3_title')}}</h5>
                     </div>
                     <div class="qr_menu_how_card_item_bottom">
-                        QR kodunuzun çıktısını alıp masaların üstüne yerleştirin. Müşterileriniz hemen kullanmaya başlasın.
+                        {{setting('section_4_step_3_description')}}
                     </div>
                 </div>
             </div>

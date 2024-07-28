@@ -31,6 +31,9 @@ use App\Http\Controllers\Auth\PasswordResetController;
 
 Route::get('/', [\App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('front.index');
 Route::get('ozellikler', [\App\Http\Controllers\Frontend\HomeController::class, 'proparties'])->name('property.index');
+Route::get('bloglar', [\App\Http\Controllers\Frontend\HomeController::class, 'blogs'])->name('blog.index');
+Route::get('blog/{slug}', [\App\Http\Controllers\Frontend\HomeController::class, 'blogCategory'])->name('blog.category');
+Route::get('blog/{slug}/detay', [\App\Http\Controllers\Frontend\HomeController::class, 'blogDetail'])->name('blog.detail');
 Route::get('sss', [\App\Http\Controllers\Frontend\HomeController::class, 'faq'])->name('faq.index');
 Route::get('entegrasyonlar', [\App\Http\Controllers\Frontend\HomeController::class, 'entegration'])->name('entegration.index');
 Route::get('package', [\App\Http\Controllers\Frontend\HomeController::class, 'package'])->name('package.index');
@@ -184,3 +187,35 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
         });
     });
 });
+
+Route::prefix('admin')->as('admin.')->group(function (){
+    Route::get('/login', [\App\Http\Controllers\Admin\LoginController::class, 'showLoginForm']);
+    Route::post('/login', [\App\Http\Controllers\Admin\LoginController::class, 'login'])->name('login');
+
+    Route::middleware(['auth:admin'])->group(function (){
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\LoginController::class, 'dashboard'])->name('dashboard');
+
+        Route::resource('place', \App\Http\Controllers\Admin\PlaceController::class);
+        Route::prefix('place/{place}')->as('place.')->group(function (){
+            Route::get('clone', [\App\Http\Controllers\Admin\PlaceController::class, 'clonePlace'])->name('clone');
+            Route::get('passive', [\App\Http\Controllers\Admin\PlaceController::class, 'passive'])->name('passive');
+            Route::get('active', [\App\Http\Controllers\Admin\PlaceController::class, 'active'])->name('active');
+            Route::get('todayReport', [\App\Http\Controllers\Admin\PlaceController::class, 'todayReport'])->name('todayReport');
+
+        });
+
+        Route::resource('blog', \App\Http\Controllers\BlogController::class);
+        Route::resource('blogCategory', \App\Http\Controllers\BlogCategoryController::class);
+
+        Route::prefix('mainpage')->as('mainpage.')->group(function (){
+            Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');
+        });
+
+        Route::prefix('ajax')->group(function (){
+            Route::post('all-delete-object', [\App\Http\Controllers\AjaxController::class, 'allDelete']);
+        });
+
+        Route::post('setting', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('setting.update');
+    });
+});
+

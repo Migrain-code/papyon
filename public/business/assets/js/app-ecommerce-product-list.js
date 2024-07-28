@@ -24,7 +24,7 @@ $(function () {
                 "url": "https://cdn.datatables.net/plug-ins/1.11.2/i18n/tr.json",
                 sLengthMenu: '_MENU_',
                 search: '',
-                searchPlaceholder: 'Taleplerde Ara',
+                searchPlaceholder: 'Ara',
                 info: '_TOTAL_ kayıttan _START_ ile _END_ arasındakiler gösteriliyor'
             },
             responsive: true,

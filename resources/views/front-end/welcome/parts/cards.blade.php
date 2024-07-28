@@ -1,36 +1,15 @@
-<section>
-    <div class="container">
-        <div class="main_page_swiper">
-            <div class="main_page_swiper_title">Binlerce İşletme Bizimle Güvende!</div>
-            <div class="main_page_swiper_subtitle">5000+ İşletme Bizimle Yıllardır Çalışmaktadır. </div>
-            <div class="swiper">
-                <div style="display: flex; align-items:flex-start;" class="swiper-wrapper">
-                    <!-- Slides -->
-                </div>
-                <!-- If we need pagination -->
-                <div class="swiper-pagination"></div>
 
-                <!-- If we need navigation buttons -->
-                <div class="swiper-button-prev-custom">
-                    <img src="/front/assets/images/swiper_left.svg" alt="	">
-                </div>
-                <div class="swiper-button-next-custom">
-                    <img src="/front/assets/images/swiper_left.svg" alt="	">
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>
 <section class="qr_menu_container">
     <div class="container">
         <div class="title">
-            QR Menü Özellikleri </div>
-        <div class="subtitle">
-            Hızlı, Pratik ve Kolay QR Menü&#039;nün Özelliklerini Keşfedin.
+            {{setting('section_2_first_title')}}
         </div>
-        <div class="qr_menu_container_cards">
+        <div class="subtitle">
+            {{setting('section_2_second_title')}}
+        </div>
+        {{--
+         özellikler alanı
+         <div class="qr_menu_container_cards">
             <div class="qr_menu_card">
                 <div>aaa</div>
                 <div class="qr_menu_card_title">
@@ -49,5 +28,6 @@
             </div>
 
         </div>
+         --}}
     </div>
 </section>
