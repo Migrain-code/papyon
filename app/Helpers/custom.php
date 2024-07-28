@@ -82,6 +82,15 @@ function maskPhone($phone)
     }
     return $phone;
 }
+function headers($html)
+{
+    $heads = [];
+    preg_match_all('/<h[1-5].*?>(.*?)<\/h[1-5]>/', $html, $matches);
+    foreach ($matches[1] as $match) {
+        $heads[] = $match;
+    }
+    return $heads;
+}
 function hexToRgb($hex){
     list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
     $rgbColor = "rgb($r, $g, $b)";

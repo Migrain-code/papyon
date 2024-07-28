@@ -55,8 +55,10 @@
                         </div>
                         <div class="bottom" style="gap: 0px">
                             <p>{{ $blog->created_at->format('d.m.Y')  }} </p>
-                            <h4>{{ $blog->title }}</h4>
-                            <p>{!! \Illuminate\Support\Str::limit($blog->description, 20) !!}</p>
+                            <h4 style="font-family: euclid-circular-a-semi-bold">{{ $blog->title }}</h4>
+                            <div style="font-size: 14px;" class="text-gray mt-2">
+                                {!! \Illuminate\Support\Str::limit(strip_tags($blog->description), 20) !!}
+                            </div>
                         </div>
                     </a>
                 @empty
@@ -93,4 +95,5 @@
             },
         })
     </script>
+
 @endsection

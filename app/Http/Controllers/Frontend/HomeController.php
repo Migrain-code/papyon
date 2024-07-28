@@ -39,7 +39,10 @@ class HomeController extends Controller
     public function blogDetail($slug)
     {
         $blog = Blog::whereSlug($slug)->whereStatus(1)->firstOrFail();
-        return view('front-end.blog.detail.index', compact('blog'));
+        $otherBlogs = $blog->category->blogs()->whereNot('id', $blog->id)->latest()->take(5)->get();
+        $heads = headers($blog->description);
+        $categories = BlogCategory::whereStatus(1)->get();
+        return view('front-end.blog.detail.index', compact('blog', 'heads', 'otherBlogs', 'categories'));
     }
     public function faq()
     {
