@@ -91,6 +91,11 @@
                         <div data-i18n="Blog Kategorileri">Blog Kategorileri</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{route('admin.feature.index')}}" class="menu-link">
+                        <div data-i18n="Özellikler">Özellikler</div>
+                    </a>
+                </li>
             </ul>
         </li>
 

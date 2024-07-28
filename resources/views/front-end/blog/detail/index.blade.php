@@ -106,12 +106,12 @@
                                 <div class="blogs_card">
                                     <a href="{{route('blog.detail', $row->slug)}}">
                                         <div class="blogs_card_left">
-                                            <img src="{{ storage($blog->image) }}" style="border-radius: 10px" alt="">
+                                            <img src="{{ storage($row->image) }}" style="border-radius: 10px" alt="">
                                         </div>
                                     </a>
                                     <a href="{{route('blog.detail', $row->slug)}}">
                                         <div class="blogs_card_right">
-                                            <h5>{{$blog->title}}</h5>
+                                            <h5>{{$row->title}}</h5>
                                         </div>
                                     </a>
                                 </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\City;
+use App\Models\Feature;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -15,11 +16,18 @@ class HomeController extends Controller
         return view('front-end.welcome.index');
     }
 
-    public function proparties()
+    public function features()
     {
-        return view('front-end.property.index');
+        $features = Feature::whereStatus(1)->latest()->paginate(8);
+        return view('front-end.property.index', compact('features'));
     }
-
+    public function featureDetail($slug)
+    {
+        $feature = Feature::whereStatus(1)->whereSlug($slug)->first();
+        $heads = headers($feature->description);
+        $otherFeatures = Feature::whereNot('id', $feature->id)->whereStatus(1)->latest()->take(5)->get();
+        return view('front-end.property.detail.index', compact('feature', 'heads', 'otherFeatures'));
+    }
     public function blogs()
     {
         $categories = BlogCategory::whereStatus(1)->get();

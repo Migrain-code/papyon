@@ -30,7 +30,8 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\PasswordResetController;
 
 Route::get('/', [\App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('front.index');
-Route::get('ozellikler', [\App\Http\Controllers\Frontend\HomeController::class, 'proparties'])->name('property.index');
+Route::get('ozellikler', [\App\Http\Controllers\Frontend\HomeController::class, 'features'])->name('property.index');
+Route::get('ozellikler/{slug}/detay', [\App\Http\Controllers\Frontend\HomeController::class, 'featureDetail'])->name('property.detail');
 Route::get('bloglar', [\App\Http\Controllers\Frontend\HomeController::class, 'blogs'])->name('blog.index');
 Route::get('blog/{slug}', [\App\Http\Controllers\Frontend\HomeController::class, 'blogCategory'])->name('blog.category');
 Route::get('blog/{slug}/detay', [\App\Http\Controllers\Frontend\HomeController::class, 'blogDetail'])->name('blog.detail');
@@ -206,6 +207,7 @@ Route::prefix('admin')->as('admin.')->group(function (){
 
         Route::resource('blog', \App\Http\Controllers\BlogController::class);
         Route::resource('blogCategory', \App\Http\Controllers\BlogCategoryController::class);
+        Route::resource('feature', \App\Http\Controllers\FeatureController::class);
 
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');

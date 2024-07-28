@@ -9,17 +9,17 @@
   // --------------------------------------------------------------------
   const fullToolbar = [
     [
-      {
-        font: []
-      },
-      {
-        size: []
-      }
+        {
+            font: ['sans-serif', 'serif', 'monospace',]
+        },
+        {
+            size: ['small', 'large', 'huge']
+        }
     ],
     ['bold', 'italic', 'underline', 'strike'],
     [
       {
-        color: []
+        color: ['red', 'black', 'white']
       },
       {
         background: []
@@ -40,6 +40,9 @@
       {
         header: '2'
       },
+        {
+            header: [3, 4, 5, 6, false]
+        },
       'blockquote',
       'code-block'
     ],
@@ -70,4 +73,5 @@
     },
     theme: 'snow'
   });
+
 })();
