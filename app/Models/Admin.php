@@ -15,4 +15,13 @@ class Admin extends Authenticatable
     {
         return PartnershipRequest::where('status', 0)->count();
     }
+
+    public function contactRequest()
+    {
+        return ContactRequest::where('status', 0)->count();
+    }
+    public function demoRequest()
+    {
+        return DemoRequest::where('status', 0)->count();
+    }
 }

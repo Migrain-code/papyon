@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\City;
+use App\Models\ContactRequest;
+use App\Models\Contract;
+use App\Models\DemoRequest;
 use App\Models\Entegration;
 use App\Models\Feature;
 use App\Models\Gallery;
@@ -115,5 +118,59 @@ class HomeController extends Controller
     public function contact()
     {
         return view('front-end.contact.index');
+    }
+
+    public function contactForm(Request $request)
+    {
+        $request->validate([
+            'name' => "required",
+            'mail' => "required",
+            'phone' => "required",
+            'subject' => "required",
+        ], [], [
+            'name' => "Ad Soyad",
+            'mail' => "E-posta",
+            'phone' => "Telefon",
+            'subject' => "Konu",
+        ]);
+        $contact = new ContactRequest();
+        $contact->name = $request->input('name');
+        $contact->mail = $request->input('mail');
+        $contact->phone = $request->input('phone');
+        $contact->subject = $request->input('subject');
+        $contact->message = $request->input('message');
+        if ($contact->save()){
+            return back()->with('response', [
+                'status' => "success",
+                'message' => "Talebiniz Tarafımıza iletildi en kısa sürede sizinle iletişime geçeceğiz"
+            ]);
+        }
+    }
+
+    public function demoRequest(Request $request)
+    {
+        $request->validate([
+            'name' => "required",
+            'mail' => "required",
+            'phone' => "required",
+            'company_name' => "required",
+        ], [], [
+            'name' => "Ad Soyad",
+            'mail' => "E-posta",
+            'phone' => "Telefon",
+            'company_name' => "Şirket Adı",
+        ]);
+        $contact = new DemoRequest();
+        $contact->name = $request->input('name');
+        $contact->mail = $request->input('mail');
+        $contact->phone = $request->input('phone');
+        $contact->company_name = $request->input('company_name');
+        $contact->note = $request->input('message');
+        if ($contact->save()){
+            return to_route('front.index')->with('response', [
+                'status' => "success",
+                'message' => "Talebiniz Tarafımıza iletildi en kısa sürede sizinle iletişime geçeceğiz"
+            ]);
+        }
     }
 }

@@ -7,10 +7,10 @@
     <section class="contacts_page_banner">
         <div class="container">
             <div class="title">
-                İletişim Bilgileri
+                {{setting('contact_section_1_title')}}
             </div>
             <img src="/front/assets/images/home_page_bottom.svg" alt="">
-            <div class="subtitle">Papyoon QR Menü İletişim
+            <div class="subtitle">{{setting('contact_section_1_sub_title')}}
             </div>
         </div>
     </section>
@@ -22,15 +22,15 @@
                     </h5>
                     <p>Aramak İsterseniz
                     </p>
-                    <p>0212 4682345
+                    <p>{{setting('contact_section_1_phone')}}
                     </p>
                 </div>
                 <div>
-                    <h5>1234 Ari Sokak
+                    <h5>Tanışmak İsterseniz
                     </h5>
-                    <p>Aramak İsterseniz
+                    <p>Adresimiz
                     </p>
-                    <p>Midyat İlçesi, Mardin Şehir
+                    <p>{{setting('contact_section_1_address')}}
                     </p>
                 </div>
                 <div>
@@ -38,28 +38,29 @@
                     </h5>
                     <p>Mail Adresimiz
                     </p>
-                    <p>hizlirandevu@gmail.com
+                    <p>{{setting('contact_section_1_email')}}
                     </p>
                 </div>
             </div>
             <div class="contact_page_contact_form">
                 <div class="left">
-                    <h5>Bizimle İletişime Geç</h5>
-                    <p>Aklındaki Soruları Yazabilirsin</p>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, mollitia dolores veniam
-                                                                                            doloremque</span>
-                    <form action="" method="post">
+                    <h5>{{setting('contact_section_2_title')}}</h5>
+                    <p>{{setting('contact_section_2_sub_title')}}</p>
+                    <span>{{setting('contact_section_2_description')}}</span>
+                    <form action="{{route('contact.form')}}" method="post">
+                        @csrf
                         <div class="form">
-                            <input type="text" required="" placeholder="Adınız*" name="name"><input type="text" name="surname" required="" placeholder="Soyadınız*">
+                            <input type="text" required="" placeholder="Adınız/Soyadınız" class="w-100" name="name">
                         </div>
                         <div class="form">
-                            <input type="text" required="" placeholder="Mail Adresi*" name="mail"><input type="text" name="phone" placeholder="Cep Telefonu">
+                            <input type="text" required="" class="w-100" placeholder="Mail Adresi*" name="mail">
+                            <input type="text" name="phone" class="w-100" placeholder="Cep Telefonu">
                         </div>
                         <div class="form">
                             <select name="subject" id="">
                                 <option value="info">Yazmak İstediğiniz Konu</option>
-                                <option value="info">Soru Sormak</option>
-                                <option value="info">Bilgi Almak</option>
+                                <option value="Soru Sormak">Soru Sormak</option>
+                                <option value="Bilgi Almak">Bilgi Almak</option>
                             </select>
                         </div>
                         <div class="form">
@@ -73,7 +74,7 @@
                     </form>
                 </div>
                 <div class="right">
-                    <img src="/front/assets/images/map.svg" alt="">
+                    {!! setting('contact_section_2_map') !!}
                 </div>
             </div>
 

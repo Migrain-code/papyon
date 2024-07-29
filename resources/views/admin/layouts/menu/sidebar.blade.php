@@ -106,6 +106,11 @@
                         <div data-i18n="Galeri">Galeri</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{route('admin.mainpage.contact')}}" class="menu-link">
+                        <div data-i18n="İletişim">İletişim</div>
+                    </a>
+                </li>
             </ul>
         </li>
 
@@ -114,6 +119,20 @@
                 <i class="menu-icon tf-icons ti ti-building"></i>
                 <div data-i18n="İş Ortaklığı">İş Ortaklığı</div>
                 <div class="badge bg-danger rounded-pill ms-auto">{{auth('admin')->user()->partnershipRequest()}}</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{route('admin.contact.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-message"></i>
+                <div data-i18n="İletişim">İletişim</div>
+                <div class="badge bg-danger rounded-pill ms-auto">{{auth('admin')->user()->contactRequest()}}</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{route('admin.demoRequest.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-message"></i>
+                <div data-i18n="Demo Talepleri">Demo Talepleri</div>
+                <div class="badge bg-danger rounded-pill ms-auto">{{auth('admin')->user()->demoRequest()}}</div>
             </a>
         </li>
         <li class="menu-item">

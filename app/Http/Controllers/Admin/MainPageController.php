@@ -11,4 +11,8 @@ class MainPageController extends Controller
     {
         return view('admin.mainpage.index');
     }
+    public function contact()
+    {
+        return view('admin.mainpage.contact.index');
+    }
 }

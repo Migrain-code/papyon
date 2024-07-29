@@ -10,18 +10,20 @@
                     <div class="left">
                         <h5>Bizimle İletişime Geç</h5>
                         <p>Aklındaki Soruları Yazabilirsin</p>
-                        <form action="" method="post">
+                        <form action="{{route('demoRequest')}}" method="post">
+                            @csrf
                             <div class="form">
-                                <input type="text" required="" placeholder="Adınız*" name="name"><input type="text" name="surname" required="" placeholder="Soyadınız*">
+                                <input type="text" style="color: white" required="" placeholder="Adınız*" name="name">
                             </div>
                             <div class="form">
-                                <input type="text" required="" placeholder="Mail Adresi*" name="mail"><input type="text" name="phone" placeholder="Cep Telefonu">
+                                <input type="text" style="color: white" required="" placeholder="Mail Adresi*" name="mail">
+                                <input type="text" style="color: white" name="phone" placeholder="Cep Telefonu">
                             </div>
                             <div class="form">
-                                <input type="text" placeholder="Şirket İsmi" name="company">
+                                <input type="text" style="color: white" placeholder="Şirket İsmi" name="company_name">
                             </div>
                             <div class="form">
-                                <textarea name="message" placeholder="Lütfen Buraya Yazın*" required="" id="" cols="30" rows="5"></textarea>
+                                <textarea name="message" style="color: white" placeholder="Lütfen Buraya Yazın*" required="" id="" cols="30" rows="5"></textarea>
                             </div>
                             <div class="form">
                                 <button style="width: 100%; max-width:100%;" class="third_button">

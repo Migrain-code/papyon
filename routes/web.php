@@ -42,8 +42,12 @@ Route::get('is-birligi', [\App\Http\Controllers\Frontend\HomeController::class, 
 Route::post('is-birligi', [\App\Http\Controllers\Frontend\HomeController::class, 'partnershipForm'])
     ->middleware('throttle:3,4') // 1. parametre istek sayısı 2.dakika. yani 4 dakikada 3 istek atabilir;
     ->name('partnership.store');
-Route::get('iletisim', [\App\Http\Controllers\Frontend\HomeController::class, 'contact'])
-    ->name('contact.index');
+Route::post('demo-request', [\App\Http\Controllers\Frontend\HomeController::class, 'demoRequest'])->name('demoRequest');
+
+Route::get('iletisim', [\App\Http\Controllers\Frontend\HomeController::class, 'contact'])->name('contact.index');
+Route::post('iletisim-formu', [\App\Http\Controllers\Frontend\HomeController::class, 'contactForm'])
+    ->middleware('throttle:3,4') // 1. parametre istek sayısı 2.dakika. yani 4 dakikada 3 istek atabilir;
+    ->name('contact.form');
 
 Route::get('mekan/{slug}', [PlaceMenuController::class, 'index'])->name('place.show');
 Route::get('table/{code}', [PlaceMenuController::class, 'table']);
@@ -215,9 +219,12 @@ Route::prefix('admin')->as('admin.')->group(function (){
         Route::resource('entegration', \App\Http\Controllers\EntegrationController::class);
         Route::resource('gallery', \App\Http\Controllers\GalleryController::class);
         Route::resource('partnership', \App\Http\Controllers\PartnershipRequestController::class);
+        Route::resource('contact', \App\Http\Controllers\ContactRequestController::class);
+        Route::resource('demoRequest', \App\Http\Controllers\DemoRequestController::class);
 
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');
+            Route::get('/contact', [\App\Http\Controllers\Admin\MainPageController::class, 'contact'])->name('contact');
         });
 
         Route::prefix('ajax')->group(function (){
