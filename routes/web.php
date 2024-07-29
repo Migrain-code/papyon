@@ -208,6 +208,8 @@ Route::prefix('admin')->as('admin.')->group(function (){
         Route::resource('blog', \App\Http\Controllers\BlogController::class);
         Route::resource('blogCategory', \App\Http\Controllers\BlogCategoryController::class);
         Route::resource('feature', \App\Http\Controllers\FeatureController::class);
+        Route::resource('entegration', \App\Http\Controllers\EntegrationController::class);
+        Route::resource('gallery', \App\Http\Controllers\GalleryController::class);
 
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');

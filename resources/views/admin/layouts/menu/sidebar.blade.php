@@ -96,6 +96,16 @@
                         <div data-i18n="Özellikler">Özellikler</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{route('admin.entegration.index')}}" class="menu-link">
+                        <div data-i18n="Entragrasyonlar">Entragrasyonlar</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{route('admin.gallery.index')}}" class="menu-link">
+                        <div data-i18n="Galeri">Galeri</div>
+                    </a>
+                </li>
             </ul>
         </li>
 

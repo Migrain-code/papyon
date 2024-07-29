@@ -132,7 +132,7 @@ $(document).on('click', '#deleteSubmitButton', function () {
                             text: res.message,
                             confirmButtonText: 'Tamam'
                         })
-
+                        updateContainer(0);
                         if ($('#datatable').length > 0 && $.fn.DataTable.isDataTable('#datatable')) {
                             $('#datatable').DataTable().ajax.reload();
                         }

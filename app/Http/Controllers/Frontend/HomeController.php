@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\City;
+use App\Models\Entegration;
 use App\Models\Feature;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -58,7 +60,9 @@ class HomeController extends Controller
     }
     public function entegration()
     {
-        return view('front-end.entegration.index');
+        $images = Gallery::where('status', 1)->latest()->take(10)->get();
+        $entegrations = Entegration::whereStatus(1)->get();
+        return view('front-end.entegration.index', compact('images', 'entegrations'));
     }
     public function package()
     {
