@@ -109,11 +109,11 @@
             </ul>
         </li>
 
-
         <li class="menu-item">
             <a href="{{route('admin.partnership.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-building"></i>
                 <div data-i18n="İş Ortaklığı">İş Ortaklığı</div>
+                <div class="badge bg-danger rounded-pill ms-auto">{{auth('admin')->user()->partnershipRequest()}}</div>
             </a>
         </li>
         <li class="menu-item">

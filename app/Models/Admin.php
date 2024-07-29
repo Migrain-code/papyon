@@ -10,4 +10,9 @@ use Illuminate\Notifications\Notifiable;
 class Admin extends Authenticatable
 {
     use HasFactory, HasFactory, Notifiable;
+
+    public function partnershipRequest()
+    {
+        return PartnershipRequest::where('status', 0)->count();
+    }
 }
