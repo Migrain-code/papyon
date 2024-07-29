@@ -15,26 +15,27 @@
     </section>
     <section class="dealership_page_form">
         <div class="container">
-            <form action="https://papyonqr.com/is-birligi" method="POST">
-                <input type="hidden" name="_token" value="k19R7fv2y5ouWv4uH7p7otyHEWXsHJr4328hZB1n" autocomplete="off">                    <div class="form">
-                    <input required="" name="name" type="text" placeholder="Ad/Soyad">
-                    <input name="phone" placeholder="Cep Telefonu Numarası" type="text">
+            <form action="{{route('partnership.store')}}" method="POST">
+               @csrf
+                <div class="form">
+                    <input name="name" value="{{old('name')}}" type="text" placeholder="Ad/Soyad" required>
+                    <input name="phone" value="{{old('phone')}}" placeholder="Cep Telefonu Numarası" type="text">
                 </div>
                 <div class="form">
-                    <input required="" name="email" type="email" placeholder="E-Mail Adresiniz">
-                    <input name="company_age" placeholder="Şirket Yaşınız" type="number">
+                    <input required="" name="email" value="{{old('email')}}" type="email" placeholder="E-Mail Adresiniz">
+                    <input name="company_age" value="{{old('company_age')}}" placeholder="Şirket Yaşınız" type="number">
                 </div>
                 <div class="form">
-                    <select name="city" required="" placeholder="Şehir Seçiniz">
+                    <select name="city_id" required="" placeholder="Şehir Seçiniz">
                         <option value="0">Şehir Seçiniz</option>
                         @foreach($cities as $city)
-                            <option value="{{$city->id}}">{{$city->name}}</option>
+                            <option value="{{$city->id}}" @selected(old('city_id') == $city->id)>{{$city->name}}</option>
                         @endforeach
                     </select>
                     <select name="customer_count" placeholder="Mevcut Müşteri Sayısı">
                         <option value="0">Mevcut Müşteri Sayısı</option>
                         @for($i = 1 ; $i <= 150; $i++)
-                            <option value="{{$i}}">{{$i}}</option>
+                            <option value="{{$i}}" @selected($i == old('customer_count'))>{{$i}}</option>
                         @endfor
                     </select>
                 </div>
@@ -42,16 +43,16 @@
                     <select name="target_customer_count">
                         <option value="0">Hedef Müşteri Sayısı</option>
                         @for($i = 1 ; $i <= 150; $i++)
-                            <option value="{{$i}}">{{$i}}</option>
+                            <option value="{{$i}}" @selected($i == old('target_customer_count'))>{{$i}}</option>
                         @endfor
                     </select>
-                    <input name="other_companies" type="text" placeholder="Bayilik Yaptığınız Diğer Firmalar">
+                    <input name="other_companies" value="{{old('other_companies')}}" type="text" placeholder="Bayilik Yaptığınız Diğer Firmalar">
                 </div>
                 <div class="form">
-                    <textarea name="note" id="" cols="30" rows="7" placeholder="Notunuz"></textarea>
+                    <textarea name="note" id="" cols="30" rows="7" placeholder="Notunuz">{{old('note')}}</textarea>
                 </div>
                 <div class="checkbox">
-                    <input type="checkbox" name="" required="" id="privacy-policiy">
+                    <input type="checkbox" name="terms" required="" style="width: 30px;height: 20px" id="privacy-policiy">
                     <label for="privacy-policiy">
                         Bu formu doldurarak, <a href="gizlilik-politikas%C4%B1.html">Papyoon Qr Menü Gizlilik Politikası ve Veri İşleme
                             İlkeleri’ni

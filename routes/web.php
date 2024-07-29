@@ -39,7 +39,11 @@ Route::get('sss', [\App\Http\Controllers\Frontend\HomeController::class, 'faq'])
 Route::get('entegrasyonlar', [\App\Http\Controllers\Frontend\HomeController::class, 'entegration'])->name('entegration.index');
 Route::get('package', [\App\Http\Controllers\Frontend\HomeController::class, 'package'])->name('package.index');
 Route::get('is-birligi', [\App\Http\Controllers\Frontend\HomeController::class, 'partnership'])->name('partnership.index');
-Route::get('iletisim', [\App\Http\Controllers\Frontend\HomeController::class, 'contact'])->name('contact.index');
+Route::post('is-birligi', [\App\Http\Controllers\Frontend\HomeController::class, 'partnershipForm'])
+    ->middleware('throttle:3,4') // 1. parametre istek sayısı 2.dakika. yani 4 dakikada 3 istek atabilir;
+    ->name('partnership.store');
+Route::get('iletisim', [\App\Http\Controllers\Frontend\HomeController::class, 'contact'])
+    ->name('contact.index');
 
 Route::get('mekan/{slug}', [PlaceMenuController::class, 'index'])->name('place.show');
 Route::get('table/{code}', [PlaceMenuController::class, 'table']);
@@ -84,7 +88,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
     Route::post('/2FA-verification', [HomeController::class, 'twoFactorSms'])->name('business.twoFactor.verify');
     Route::get('/2FA-verification-resend', [HomeController::class, 'resendCode'])
         ->name('business.twoFactor.resend')
-        ->middleware('throttle:3,4'); // 1. parametre istek sayısı 2.dakika;
+        ->middleware('throttle:3,4'); // 1. parametre istek sayısı 2.dakika. yani 4 dakikada 3 istek atabilir;
 
     Route::get('/home', [HomeController::class, 'index'])->name('business.home');
     Route::get('/markAsAllReadNotification', [HomeController::class, 'markAsAllReadNotification'])->name('business.markAsAllReadNotification');
@@ -210,6 +214,7 @@ Route::prefix('admin')->as('admin.')->group(function (){
         Route::resource('feature', \App\Http\Controllers\FeatureController::class);
         Route::resource('entegration', \App\Http\Controllers\EntegrationController::class);
         Route::resource('gallery', \App\Http\Controllers\GalleryController::class);
+        Route::resource('partnership', \App\Http\Controllers\PartnershipRequestController::class);
 
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');
