@@ -3,7 +3,7 @@
     <script>
 
         document.addEventListener("DOMContentLoaded", function() {
-            location.reload();
+           // location.reload();
         });
     </script>
     </body>

@@ -12,6 +12,8 @@ use App\Models\DemoRequest;
 use App\Models\Entegration;
 use App\Models\Feature;
 use App\Models\Gallery;
+use App\Models\Package;
+use App\Models\Page;
 use App\Models\PartnershipRequest;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,11 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('front-end.welcome.index');
+        $packages = Package::all();
+        $features = Feature::whereStatus(1)->latest()->take(4)->get();
+        $blogs = Blog::whereStatus(1)->latest()->take(5)->get();
+
+        return view('front-end.welcome.index', compact('packages', 'features', 'blogs'));
     }
 
     public function features()
@@ -62,6 +68,12 @@ class HomeController extends Controller
     {
         return view('front-end.faq.index');
     }
+
+    public function pageDetail($slug)
+    {
+        $page = Page::whereSlug($slug)->first();
+        return view('front-end.page.index', compact('page'));
+    }
     public function entegration()
     {
         $images = Gallery::where('status', 1)->latest()->take(10)->get();
@@ -70,7 +82,8 @@ class HomeController extends Controller
     }
     public function package()
     {
-        return view('front-end.package.index');
+        $packages = Package::all();
+        return view('front-end.package.index', compact('packages'));
     }
     public function partnership()
     {

@@ -1,5 +1,5 @@
 
-<div class="col-lg">
+<form class="col-lg" method="get" action="{{route('business.subscribtion.payForm', $package->slug)}}">
     <div class="card border rounded shadow-none @if($loop->index == 1) border-primary @else @if(authUser()->package_id == $package->id) border-success @endif @endif">
         <div class="card-body @if($loop->index == 1) position-relative @endif">
             @if($loop->index == 1)
@@ -19,25 +19,33 @@
 
             <div class="text-center">
                 <div class="d-flex justify-content-center">
-                    <sup class="h6 text-primary pricing-currency mt-3 mb-0 me-1">₺</sup>
-                    <h1 class="price-toggle price-yearly display-4 text-primary mb-0">{{$package->year_price}}</h1>
-                    <h1 class="price-toggle price-monthly display-4 text-primary mb-0 d-none">{{$package->price}}</h1>
-                    <sub class="h6 pricing-duration mt-auto mb-2 fw-normal text-muted">/aylık</sub>
+                    <h1 class="price-toggle price-monthly display-4 text-primary mb-0 ">{{$package->price}} TL</h1>
                 </div>
-                <small class="price-yearly price-yearly-toggle text-muted">₺ {{$package->total_price}} / yıllık</small>
             </div>
 
             <ul class="ps-3 my-4 pt-2">
                 @foreach($package->proparties as $propartie)
-                    <li class="mb-2">{{$propartie->name}}</li>
+                    <li class="mb-2 d-flex justify-content-between">
+                        {{$propartie->name}}  @if($propartie->price > 0) ({{"+".$propartie->price. " TL"}}) @endif
+                        @if($propartie->price > 0)
+                            <span class="me-4">
+                                <label class="switch switch-md ">
+                                    <input type="checkbox" name="added_proparties[]" value="{{$propartie->id}}" class="switch-input categorySwitch">
+                                    <span class="switch-toggle-slider">
+                                        <span class="switch-on bg-success"><i class="ti ti-check"></i></span>
+                                        <span class="switch-off"><i class="ti ti-x"></i></span>
+                                    </span>
+                                </label>
+                            </span>
+                        @endif
+                    </li>
                 @endforeach
             </ul>
-
             @if(authUser()->package_id == $package->id)
                 <a href="#" class="btn btn-label-success d-grid w-100">Mevcut Planınız</a>
             @else
-               <a href="{{route('business.subscribtion.payForm', $package->slug)}}" class="btn btn-label-primary d-grid w-100">Satın Al</a>
+               <button type="submit" class="btn btn-label-primary d-grid w-100">Satın Al</button>
             @endif
         </div>
     </div>
-</div>
+</form>

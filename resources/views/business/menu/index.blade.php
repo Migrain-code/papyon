@@ -81,7 +81,7 @@
                                                     </span>
                                                     </div>
                                                     <div>
-                                                        <h6 class="mb-0 text-nowrap">17</h6>
+                                                        <h6 class="mb-0 text-nowrap">{{$menu->categories->count()}}</h6>
                                                         <small>Kategori</small>
                                                     </div>
                                                 </div>
@@ -94,7 +94,7 @@
                                                     </span>
                                                     </div>
                                                     <div>
-                                                        <h6 class="mb-0 text-nowrap">25</h6>
+                                                        <h6 class="mb-0 text-nowrap">{{$menu->products->count()}}</h6>
                                                         <small>Ürün</small>
                                                     </div>
                                                 </div>

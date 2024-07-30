@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\PackagePropartie;
 use App\Models\PacketOrder;
 use App\Models\User;
 use App\Services\E_Invoice;
@@ -18,21 +19,27 @@ class SubscribtionController extends Controller
         $packages = Package::all();
         return view('business.subscription.index', compact('packages'));
     }
-    public function payForm($slug)
+
+    public function payForm($slug, Request $request)
     {
         $package = Package::whereSlug($slug)->first();
-        return view('business.subscription.payment.index', compact('package'));
+
+        $addedPrice = 0;
+        if (isset($request->added_proparties)) {
+            $addedPrice = PackagePropartie::whereIn('id', $request->added_proparties)->sum('price');
+        }
+        $total = $package->price + $addedPrice;
+        return view('business.subscription.payment.index', compact('package', 'addedPrice', 'total'));
     }
 
     public function pay($slug, Request $request)
     {
-
         $packet = Package::whereSlug($slug)->first();
-        $yearlyCheck = false;
+
         $amount = $packet->price;
-        if (isset($request->yearly_check)){
-            $yearlyCheck = true;
-            $amount = $packet->total_price;
+        if (isset($request->added_proparties)) {
+            $addedPrice = PackagePropartie::whereIn('id', $request->added_proparties)->sum('price');
+            $amount += $addedPrice;
         }
 
         $count = 1;
@@ -55,8 +62,8 @@ class SubscribtionController extends Controller
         $payment = new \App\Services\Iyzico();
         $payment->setConversationId(rand(1000, 10000000000));
         $payment->setPrice($amount);
-        $payment->setCallbackUrl(route('business.subscribtion.payment.callback', [$packet->id, authUser()->id]) . '?count=' . $count . '&kdv=' . $kdv .'&yearlyCheck=' . $yearlyCheck);
-        $payment->setCard($cardName,$cardNumber, $month, $year, $cvv);
+        $payment->setCallbackUrl(route('business.subscribtion.payment.callback', [$packet->id, authUser()->id]) . '?count=' . $count . '&kdv=' . $kdv);
+        $payment->setCard($cardName, $cardNumber, $month, $year, $cvv);
         $payment->setBuyer(authUser()->id, $name, $surname, authUser()->phone, authUser()->email);
         $payment->setShippingAddress();
         $payment->setBillingAddress();
@@ -73,6 +80,7 @@ class SubscribtionController extends Controller
 
         echo $response->getHtmlContent();
     }
+
     public function callback(Request $request, Package $package, User $user)
     {
         Auth::guard('web')->loginUsingId($user->id);
@@ -103,7 +111,7 @@ class SubscribtionController extends Controller
             $packetOrder->save();*/
             $user->package_id = $package->id;
             $user->start_time = now();
-            $user->end_time = now()->addDays($request->yearlyCheck == true ? 365 : 30);
+            $user->end_time = now()->addDays($package->day_count);
             $user->save();
 
             //$user->setPermission($packet->id);
@@ -118,16 +126,17 @@ class SubscribtionController extends Controller
         $invoiceGenerator = new E_Invoice();
         $invoiceGenerator->createCustomer($packetOrder->business_id, $packetOrder->business->name, $packetOrder->business->address);
         $invoiceGenerator->createAmount($originalPrice, $packetOrder->discount);
-        $invoiceGenerator->createProduct($packetOrder->package_id, $packetOrder->package->name. " Üyelik Paketi", $packetOrder->discount);
+        $invoiceGenerator->createProduct($packetOrder->package_id, $packetOrder->package->name . " Üyelik Paketi", $packetOrder->discount);
         $invoiceGenerator->createInvoice($packetOrder->id);
         $response = json_decode($invoiceGenerator->sendInvoice());
 
-        if ($response->error == ""){
+        if ($response->error == "") {
             return $response;
-        } else{
+        } else {
             return false;
         }
     }
+
     public function success(Request $request)
     {
         $order = PacketOrder::find($request->input('order-no'));

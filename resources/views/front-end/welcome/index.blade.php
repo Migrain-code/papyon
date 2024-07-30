@@ -6,7 +6,9 @@
             max-width: 1300px;
             border-radius: 30px;
         }
+
     </style>
+
 @endsection
 @section('content')
     @include('front-end.welcome.parts.banner')
@@ -73,7 +75,7 @@
     <script>
         const blogSwiper = new Swiper(".blog_swiper", {
             spaceBetween: 140,
-            slidesPerView: 3,
+           slidesPerView: 3,
             loop: true,
             autoplay: {
                 delay: 2200,

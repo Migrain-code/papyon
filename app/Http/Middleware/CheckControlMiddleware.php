@@ -19,9 +19,13 @@ class CheckControlMiddleware
     {
         $place = Session::get('place');
         if (!isset($place->slug)){
-            abort(404);
+            abort(503);
+        }
+        if ($place->setup_percentage < 80){
+            abort(503);
         }
         $menu = $place->activeMenu();
+
         $products = $menu->products;
         $categories = $menu->categories;
         $swipers = $place->activeAdverts;

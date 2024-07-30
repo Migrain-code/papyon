@@ -42,10 +42,10 @@
                         </path>
                     </svg></h5>
                 <p>
-                    <a href="giris-yap.html">Giriş Yap</a>
+                    <a href="{{route('login')}}">Giriş Yap</a>
                 </p>
                 <p>
-                    <a href="kaydol.html">KayıtOl</a>
+                    <a href="{{route('register')}}">KayıtOl</a>
                 </p>
                 <p>
                     <a href="sss.html">S.S.S</a>
@@ -69,12 +69,14 @@
                         </path>
                     </svg></h5>
                 <p><a href="index.htm">Hakkımızda</a></p>
-                <p><a href="iletisim.html">İletişim</a></p>
+                <p><a href="{{route('contact.index')}}">İletişim</a></p>
             </div>
         </div> <br>
         <div class="end">
             <div>
-                <a href="gizlilik-politikas%C4%B1.html">Gizlilik Koşulları</a><a href="gizlilik-politikas%C4%B1.html">Şartlar ve Koşullar</a>
+                @foreach($terms as $term)
+                    <a href="{{route('page.detail', $term->slug)}}">{{$term->title}}</a>
+                @endforeach
             </div>
             <div>© Papyoon Qr Menü Tüm hakları saklıdır.</div>
             <div>

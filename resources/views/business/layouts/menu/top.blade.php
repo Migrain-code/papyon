@@ -94,7 +94,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-pricing.html">
+                        <a class="dropdown-item" href="{{route('business.subscribtion.index')}}">
                             <i class="ti ti-shopping-cart me-2 ti-sm"></i>
                             <span class="align-middle">Abonelik Paketleri</span>
                         </a>

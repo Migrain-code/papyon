@@ -46,8 +46,7 @@
                 <li><a href="{{route('property.index')}}">Özellikler</a>
                     <img src="/front/assets/images/circle.svg" alt="">
                 </li>
-                <li><a href="{{route('entegration.index')}}">Entegrasyon</a> <img src="/front/assets/images/circle.svg" alt="">
-                </li>
+
                 <li><a href="{{route('package.index')}}">Paketler</a> <img src="/front/assets/images/circle.svg" alt="">
                 </li>
                 <li><a href="{{route('partnership.index')}}">İş Ortaklığı</a> <img src="/front/assets/images/circle.svg" alt=""></li>

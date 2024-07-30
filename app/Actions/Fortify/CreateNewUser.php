@@ -2,9 +2,11 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Place;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
@@ -31,10 +33,21 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'start_time' => now()->toDateTimeString(),
+            'end_time' => now()->addDays(30)->toDateTimeString(),
+            'status' => 1
         ]);
+        $place = new Place();
+        $place->name = "1. Mekan";
+        $place->slug = Str::slug("1. Mekan");
+        $place->is_default = 1;
+        $place->user_id = $user->id;
+        $place->save();
+
+        return $user;
     }
 }

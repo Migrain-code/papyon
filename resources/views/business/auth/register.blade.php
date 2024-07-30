@@ -1,4 +1,5 @@
 @extends('business.auth.layouts.master')
+@section('title', 'Kayıt Ol')
 @section('content')
 <div class="authentication-wrapper authentication-cover authentication-bg">
     <div class="authentication-inner row">
@@ -28,7 +29,7 @@
             <div class="w-px-400 mx-auto">
                 <!-- Logo -->
                 <div class="app-brand mb-4">
-                    <a href="index.html" class="app-brand-link gap-2">
+                    <a href="/" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
                   <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -58,8 +59,8 @@
                     </a>
                 </div>
                 <!-- /Logo -->
-                <h3 class="mb-1">Adventure starts here 🚀</h3>
-                <p class="mb-4">Make your app management easy and fun!</p>
+                <h3 class="mb-1">Papyon Qr Menüye Katılın 🚀</h3>
+                <p class="mb-4">Siparişlerinizi hızlı takip edin!</p>
                 @if($errors->any())
                     @foreach ($errors->all() as $error)
                        {{$error}}
@@ -68,21 +69,21 @@
                 <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
+                        <label for="username" class="form-label">Ad Soyad</label>
                         <input
                             type="text"
                             class="form-control"
                             id="username"
                             name="name"
-                            placeholder="Enter your username"
+                            placeholder="Adınızı ve soyadınızı giriniz"
                             autofocus />
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" />
+                        <label for="email" class="form-label">E-posta</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="E-posta Adresinizi Giriniz" />
                     </div>
                     <div class="mb-3 form-password-toggle">
-                        <label class="form-label" for="password">Password</label>
+                        <label class="form-label" for="password">Şifre</label>
                         <div class="input-group input-group-merge">
                             <input
                                 type="password"
@@ -111,38 +112,24 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
                             <label class="form-check-label" for="terms-conditions">
-                                I agree to
-                                <a href="javascript:void(0);">privacy policy & terms</a>
+                                Papyon
+                                @foreach($terms as $term)
+                                    <a href="{{route('page.detail', $term->slug)}}" target="_blank">{{$term->title. " ,"}}</a>
+                                @endforeach
+                                sözleşmelerini okudum, kabul ediyorum.
                             </label>
                         </div>
                     </div>
-                    <button class="btn btn-primary d-grid w-100">Sign up</button>
+                    <button class="btn btn-primary d-grid w-100">Kayıt Ol</button>
                 </form>
 
                 <p class="text-center">
-                    <span>Already have an account?</span>
-                    <a href="auth-login-cover.html">
-                        <span>Sign in instead</span>
+                    <span>{{__('Zaten Bir Hesabın Var Mı?')}}</span>
+                    <a href="{{route('login')}}">
+                        <span>{{__('Giriş Yap')}}</span>
                     </a>
                 </p>
 
-                <div class="divider my-4">
-                    <div class="divider-text">or</div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
-                        <i class="tf-icons fa-brands fa-facebook-f fs-5"></i>
-                    </a>
-
-                    <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
-                        <i class="tf-icons fa-brands fa-google fs-5"></i>
-                    </a>
-
-                    <a href="javascript:;" class="btn btn-icon btn-label-twitter">
-                        <i class="tf-icons fa-brands fa-twitter fs-5"></i>
-                    </a>
-                </div>
             </div>
         </div>
         <!-- /Register -->

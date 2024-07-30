@@ -1,5 +1,5 @@
 @extends('errors::minimal')
 
-@section('title', __('Service Unavailable'))
+@section('title', __('İşletmeye Erişemezsiniz'))
 @section('code', '503')
-@section('message', __('Service Unavailable'))
+@section('message', __('Bu İşletme Kurulumunu Tamamlamamış Olduğu İÇİN ERİŞEMEZSİNİZ'))

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Business;
 
 use App\Http\Controllers\Controller;
+use App\Models\Place;
 use App\Services\Sms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -16,15 +18,24 @@ class HomeController extends Controller
     {
         $this->user = auth('web')->user();
         $this->business = $this->user->place();
+        if (!isset($this->business)){
+            return to_route('business.place.create')->with('response', [
+               'status' => "info",
+               'message' => "İlk adım olarak bir işletme ekleyin sonrasında işletmenizi yönetin"
+            ]);
+        }
     }
 
     public function visitors()
     {
-
         $sales = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $sales[] = $this->business->visitors()->whereMonth('created_at', $i)->count();
+        if (isset($this->business)){
+            for ($i = 1; $i <= 12; $i++) {
+                $sales[] = $this->business->visitors()->whereMonth('created_at', $i)->count();
+            }
         }
+
+
         return $sales;
     }
 

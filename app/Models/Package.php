@@ -13,4 +13,5 @@ class Package extends Model
     {
         return $this->hasMany(PackagePropartie::class, 'package_id', 'id')->orderBy('order_number', 'asc');
     }
+
 }

@@ -33,10 +33,10 @@
     <div class="col-md-6 select2-primary">
         <label class="form-label" for="multicol-language">Diğer Diller</label>
         <select id="multicol-language" name="other_languages[]" class="select2 form-select" multiple>
-            <option value="tr" @selected(in_array('tr', $place->other_languages))>Turkish</option>
-            <option value="en" @selected(in_array('en', $place->other_languages))>English</option>
-            <option value="fr" @selected(in_array('fr', $place->other_languages))>French</option>
-            <option value="de" @selected(in_array('de', $place->other_languages))>German</option>
+            <option value="tr" @selected(in_array('tr', $place->other_languages ?? []))>Turkish</option>
+            <option value="en" @selected(in_array('en', $place->other_languages ?? []))>English</option>
+            <option value="fr" @selected(in_array('fr', $place->other_languages ?? []))>French</option>
+            <option value="de" @selected(in_array('de', $place->other_languages ?? []))>German</option>
         </select>
     </div>
     <div class="col-md-6">

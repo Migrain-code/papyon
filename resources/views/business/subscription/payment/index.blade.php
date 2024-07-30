@@ -27,7 +27,19 @@
                                     </div>
                                 </div>
                                 <div id="form-credit-card" class="row card-body">
+
                                     <div class="col-12">
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="collapsible-payment-name">Kartın Üzerindeki İsim</label>
+                                                <input
+                                                    type="text"
+                                                    id="collapsible-payment-name"
+                                                    class="form-control"
+                                                    name="name"
+                                                    placeholder="Ahmet Aslan" />
+                                            </div>
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label w-100" for="creditCardMask">Kart Numarası</label>
                                             <div class="input-group input-group-merge">
@@ -44,18 +56,8 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-12 col-md-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="collapsible-payment-name">Kartın Üzerindeki İsim</label>
-                                                    <input
-                                                        type="text"
-                                                        id="collapsible-payment-name"
-                                                        class="form-control"
-                                                        name="name"
-                                                        placeholder="Ahmet Aslan" />
-                                                </div>
-                                            </div>
-                                            <div class="col-6 col-md-3">
+
+                                            <div class="col-6">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="collapsible-payment-expiry-date">Tarih</label>
                                                     <input
@@ -66,7 +68,7 @@
                                                         placeholder="MM/YY" />
                                                 </div>
                                             </div>
-                                            <div class="col-6 col-md-3">
+                                            <div class="col-6">
                                                 <div class="mb-3">
                                                     <label class="form-label" for="collapsible-payment-cvv">CVV</label>
                                                     <div class="input-group input-group-merge">
@@ -90,6 +92,22 @@
                                     </div>
                                 </div>
                                 <div class="ms-auto card-footer">
+                                    <table class="table mb-4" id="printArea">
+                                        <tbody>
+                                        <tr>
+                                            <td>Ürün Fiyatı</td>
+                                            <td>{{$package->price}} TL</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Eklemeler</td>
+                                            <td>{{$addedPrice}} TL</td>
+                                        </tr>
+                                        <tr class="total-row fw-bold">
+                                            <td>Toplam</td>
+                                            <td>{{$total}} TL</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                     <button type="submit" class="btn btn-primary me-sm-3 me-1">Ödeme Yap</button>
                                     <button type="reset" class="btn btn-label-secondary">İptal Et</button>
                                 </div>

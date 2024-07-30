@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Core\CustomResourceRegistrar;
 use App\Models\Cart;
 use App\Models\City;
+use App\Models\Page;
 use App\Models\Place;
 use App\Models\Setting;
 use App\Models\Table;
@@ -37,6 +38,10 @@ class AppServiceProvider extends ServiceProvider
         }
 
         \Config::set('settings', $settings);
+
+        $terms = Page::where('type', 0)->whereStatus(1)->get();
+        View::share('terms', $terms);
+
         $this->app->bind('Illuminate\Routing\ResourceRegistrar', function () use ($registrar) {
             return $registrar;
         });

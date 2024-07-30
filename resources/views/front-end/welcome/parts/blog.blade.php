@@ -33,18 +33,17 @@
             </div>
             <div class="blog_posts_right blog_swiper">
                 <div class="swiper-wrapper">
-                   {{--
 
-                     @foreach ($blogs as $b)
+                     @foreach ($blogs as $blog)
                         <div class="swiper-slide">
                             <div class="blog_posts_right_card">
                                 <div class="blog_posts_right_card_image">
-                                    <img src="{{ asset($b->images[0] ?? null) }}" alt="post_image">
+                                    <img src="{{ storage($blog->image) }}" class="" alt="post_image">
                                 </div>
                                 <div class="blog_posts_right_card_desc">
-                                    {{ $b['name'] ?? $b['name'] }} <br>
+                                    {{ $blog->title }} <br>
                                     <a style="text-decoration:underline;"
-                                       href="">{{ __('Daha Fazla Bilgi') }} <img
+                                       href="{{route('blog.detail', $blog->slug)}}">{{ __('Daha Fazla Bilgi') }} <img
                                             style="padding-left: 20px;"
                                             src="{{ asset('/images/main_page_post_right_arrow.png') }}"
                                             alt="">
@@ -53,7 +52,7 @@
                             </div>
                         </div>
                     @endforeach
-                   --}}
+
 
                 </div>
                 <div class="swiper-pagination"></div>

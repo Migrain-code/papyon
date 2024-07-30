@@ -111,23 +111,7 @@
                     </a>
                 </p>
 
-                <div class="divider my-4">
-                    <div class="divider-text">veya</div>
-                </div>
 
-                <div class="d-flex justify-content-center">
-                    <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
-                        <i class="tf-icons fa-brands fa-facebook-f fs-5"></i>
-                    </a>
-
-                    <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
-                        <i class="tf-icons fa-brands fa-google fs-5"></i>
-                    </a>
-
-                    <a href="javascript:;" class="btn btn-icon btn-label-twitter">
-                        <i class="tf-icons fa-brands fa-twitter fs-5"></i>
-                    </a>
-                </div>
             </div>
         </div>
         <!-- /Login -->

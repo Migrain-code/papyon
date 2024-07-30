@@ -113,6 +113,19 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div data-i18n="Hizmet Paketleri">Hizmet Paketleri</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{route('admin.package.index')}}" class="menu-link">
+                        <div data-i18n="Paket Listesi">Paket Listesi</div>
+                    </a>
+                </li>
+            </ul>
 
         <li class="menu-item">
             <a href="{{route('admin.partnership.index')}}" class="menu-link">
@@ -136,7 +149,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="{{route('business.contract.index')}}" class="menu-link">
+            <a href="{{route('admin.page.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-writing-sign"></i>
                 <div data-i18n="Sözleşmeler">Sözleşmeler</div>
             </a>

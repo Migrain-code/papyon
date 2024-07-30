@@ -39,6 +39,7 @@ Route::get('sss', [\App\Http\Controllers\Frontend\HomeController::class, 'faq'])
 Route::get('entegrasyonlar', [\App\Http\Controllers\Frontend\HomeController::class, 'entegration'])->name('entegration.index');
 Route::get('package', [\App\Http\Controllers\Frontend\HomeController::class, 'package'])->name('package.index');
 Route::get('is-birligi', [\App\Http\Controllers\Frontend\HomeController::class, 'partnership'])->name('partnership.index');
+Route::get('sayfa/{slug}', [\App\Http\Controllers\Frontend\HomeController::class, 'pageDetail'])->name('page.detail');
 Route::post('is-birligi', [\App\Http\Controllers\Frontend\HomeController::class, 'partnershipForm'])
     ->middleware('throttle:3,4') // 1. parametre istek sayısı 2.dakika. yani 4 dakikada 3 istek atabilir;
     ->name('partnership.store');
@@ -221,6 +222,8 @@ Route::prefix('admin')->as('admin.')->group(function (){
         Route::resource('partnership', \App\Http\Controllers\PartnershipRequestController::class);
         Route::resource('contact', \App\Http\Controllers\ContactRequestController::class);
         Route::resource('demoRequest', \App\Http\Controllers\DemoRequestController::class);
+        Route::resource('package', \App\Http\Controllers\PackageController::class);
+        Route::resource('page', \App\Http\Controllers\PageController::class);
 
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');

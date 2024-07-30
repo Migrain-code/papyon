@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     function togglePrice() {
       if (priceDurationToggler.checked) {
+          $('[name="packageType"]').val('1');
         // If checked
         priceYearlyList.map(function (yearEl) {
           yearEl.classList.remove('d-none');
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
         });
       } else {
         // If not checked
+          $('[name="packageType"]').val('0');
         priceYearlyList.map(function (yearEl) {
           yearEl.classList.add('d-none');
         });

@@ -9,11 +9,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
+    use HasRoles;
 
 
     /**
@@ -25,6 +28,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'start_time',
+        'end_time',
+        'status'
     ];
 
     /**
