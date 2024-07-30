@@ -12,7 +12,7 @@
                 </div>
                 <div class="packages_middle_title">
                     {{setting('section_5_sub_title')}}
-                    <div class="qr_menu_card_title_line"></div>
+
                 </div>
                 <div class="packages_sub_title">
                     {{setting('section_5_min_title')}}

@@ -225,6 +225,7 @@ Route::prefix('admin')->as('admin.')->group(function (){
         Route::resource('package', \App\Http\Controllers\PackageController::class);
         Route::resource('page', \App\Http\Controllers\PageController::class);
 
+
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');
             Route::get('/contact', [\App\Http\Controllers\Admin\MainPageController::class, 'contact'])->name('contact');
@@ -234,6 +235,7 @@ Route::prefix('admin')->as('admin.')->group(function (){
             Route::post('all-delete-object', [\App\Http\Controllers\AjaxController::class, 'allDelete']);
         });
 
+        Route::get('setting', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('setting.index');
         Route::post('setting', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('setting.update');
     });
 });

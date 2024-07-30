@@ -17,7 +17,7 @@
                         <div><img src="{{storage($feature->image)}}" style="max-width: 250px;object-fit: cover;border-radius: 15px"></div>
                         <div class="qr_menu_card_title">
                             {{$feature->title}}
-                            <div class="qr_menu_card_title_line"></div>
+
                         </div>
                         <div class="qr_menu_card_subtitle">
                             {{\Illuminate\Support\Str::limit(strip_tags($feature->description), 50)}}

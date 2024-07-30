@@ -135,7 +135,7 @@ body a {
 .header .left {
     position: absolute;
     left: 30px;
-    top: 31px
+    top: 20px
 }
 
 .header .left svg {
@@ -148,7 +148,7 @@ body a {
     font-family: MuseoSans-900
 }
 .header .middle a img {
-     margin-top: -25px;
+     margin-top: -50px;
 }
 .header .middle a svg {
     margin-top: -25px;
@@ -156,7 +156,6 @@ body a {
     max-height: 40px;
     width: 120px;
     height: 30px;
-    color: var(--theme-font-color);
 }
 .header .bottomss {
     display: flex;
