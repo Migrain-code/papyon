@@ -381,7 +381,7 @@ Vale talebi için teşekkürler.";
                 $customer = $customer ."Plaka:". $request->text . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
                 $message = str_replace('{ORDER_ID}', strtotime(date('d-m-Y')), $message);
-                return redirect()->to('https://wa.me/' . clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
+                return redirect()->to('https://wa.me/' . "0".clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
             return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "success",
