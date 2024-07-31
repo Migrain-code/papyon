@@ -7,7 +7,7 @@
     <div class="col-md-6">
         <label class="form-label" for="multicol-email">Mekan Linki</label>
         <div class="input-group input-group-merge">
-            <span class="input-group-text" id="multicol-email2">papayon.com/</span>
+            <span class="input-group-text" id="multicol-email2">papayonqr.com/mekan/</span>
             <input
                 type="text"
                 id="placeLink"
@@ -28,6 +28,8 @@
             <option value="en" @selected($place->main_language == "en")>English</option>
             <option value="fr" @selected($place->main_language == "fr")>French</option>
             <option value="de" @selected($place->main_language == "de")>German</option>
+            <option value="ar" @selected($place->main_language == "ar")>Arabic</option>
+            <option value="ru" @selected($place->main_language == "ru")>Russisch</option>
         </select>
     </div>
     <div class="col-md-6 select2-primary">
@@ -37,6 +39,8 @@
             <option value="en" @selected(in_array('en', $place->other_languages ?? []))>English</option>
             <option value="fr" @selected(in_array('fr', $place->other_languages ?? []))>French</option>
             <option value="de" @selected(in_array('de', $place->other_languages ?? []))>German</option>
+            <option value="ar" @selected(in_array('ar', $place->other_languages ?? []))>Arabic</option>
+            <option value="ru" @selected(in_array('ru', $place->other_languages ?? []))>Russisch</option>
         </select>
     </div>
     <div class="col-md-6">

@@ -110,6 +110,7 @@ body a {
     font-size: 14px;
     color: var(--top_menu_bg);
     font-weight: bold;
+    width: max-content;
 }
 
 .modal-backdrop {

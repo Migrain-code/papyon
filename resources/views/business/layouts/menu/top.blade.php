@@ -25,6 +25,9 @@
                         {{authUser()->remainingDate()}} Gün Kaldı
                     </div>
                 </div>
+                <a class="btn btn-icon text-dark" href="{{route('place.show', authUser()->place()->slug)}}" target="_blank">
+                    <i class="ti ti-world"></i>
+                </a>
             </div>
         </div>
         <!-- /Search -->

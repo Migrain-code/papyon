@@ -208,6 +208,7 @@ class Place extends Model
         // Masaya Sipariş
         $service->order_type = $serviceData["order_type"];
         $service->table_phone = clearPhone($serviceData["table_phone"]);
+        $service->table_order = clearPhone($serviceData["table_order"]);
 
         //Hesap İste
         $service->request_account = isset($serviceData["request_account"]);
@@ -250,6 +251,7 @@ class Place extends Model
         // Masaya Sipariş
         $service->order_type = $serviceData["order_type"];
         $service->table_phone = clearPhone($serviceData["table_phone"]);
+        $service->table_order = isset($serviceData["table_order"]);
 
         //Hesap İste
         $service->request_account = isset($serviceData["request_account"]);

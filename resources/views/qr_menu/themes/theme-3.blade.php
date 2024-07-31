@@ -99,9 +99,7 @@
                                 <div class="bottom">
                                     <div class="title">{{$product->name}}</div>
                                     <div class="price">
-                                        <p>
-                                            ₺ {{$product->price}}
-                                        </p>
+                                        <p>{{$product->price}} ₺</p>
                                         <span class="addToCartButton" data-product="{{$product->id}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="61.479" height="61.479" viewBox="0 0 61.479 61.479">
                                             <g id="Group_3412" data-name="Group 3412" transform="translate(-7714.521 -5540.625)">
@@ -134,18 +132,7 @@
 @endsection
 
 @section('scripts')
-    <script>
-        const swiper = new Swiper('#mainPageSwiper', {
-            loop: true,
-            /*     autoplay: {
-                    delay: 5000,
-                }, */
-            pagination: {
-                el: '.swiper-pagination',
-            },
 
-        });
-    </script>
     <script>
         $(document).on('click', '.columnButtons', function (){
            var type = $(this).data('column');

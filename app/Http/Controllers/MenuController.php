@@ -167,7 +167,8 @@ class MenuController extends Controller
     {
         $categories = $menu->categories;
         $allergens = Allergen::whereStatus(1)->get();
-        return view('business.menu.edit.index', compact('menu', 'categories', 'allergens'));
+        $themeId = $this->business->theme_id;
+        return view('business.menu.edit.index', compact('menu', 'categories', 'allergens', 'themeId'));
     }
 
     public function useMenu(Menu $menu)

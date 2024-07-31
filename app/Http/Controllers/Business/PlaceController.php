@@ -86,6 +86,7 @@ class PlaceController extends Controller
             'call_a_waiter_phone',
             'order_type',
             'table_phone',
+            'table_order',
             'request_account',
             'request_account_phone',
             'call_a_valet',
@@ -264,6 +265,7 @@ class PlaceController extends Controller
             'call_a_waiter_phone',
             'order_type',
             'table_phone',
+            'table_order',
             'request_account',
             'request_account_phone',
             'call_a_valet',
@@ -278,6 +280,7 @@ class PlaceController extends Controller
         ]);
 
         $serviceData['place_id'] = $place->id;
+
         if (isset($place->services)){
             $place->updateService($serviceData);
         } else{

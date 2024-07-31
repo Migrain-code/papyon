@@ -6,9 +6,6 @@
 @endsection
 
 @section('content')
-    @php
-        $themeId = 1;
-    @endphp
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Menüler /</span> Menü Detayı / Görünütlenen Menü ({{$menu->name}})</h4>
         <div class="row">
@@ -67,6 +64,15 @@
     <script src="/business/assets/js/project/product/category.js"></script>
     <script src="https://unpkg.com/cropperjs"></script>
     <script>
+        @if($themeId == 3)
+            var cropWidth = 190;
+            var cropHeight = 150;
+            var asRadio = 1;
+        @else
+            var cropWidth = 900;
+            var cropHeight = 400;
+            var asRadio = 2.25;
+        @endif
         document.addEventListener('DOMContentLoaded', function () {
             const fileInput = document.getElementById('categoryImage');
             const image = document.getElementById('image');
@@ -85,12 +91,12 @@
                             cropper.destroy();
                         }
                         cropper = new Cropper(image, {
-                            aspectRatio: 2.25, // 600x400 oranı (3:2)
+                            aspectRatio: asRadio, // 600x400 oranı (3:2)
                             viewMode: 1,
-                            minCropBoxWidth: 900,
-                            minCropBoxHeight: 400,
+                            minCropBoxWidth: cropWidth,
+                            minCropBoxHeight: cropHeight,
                             ready() {
-                                cropper.setCropBoxData({ width: 900, height: 400 });
+                                cropper.setCropBoxData({ width: cropWidth, height: cropHeight });
                             }
                         });
                     };
@@ -101,12 +107,12 @@
             cropButton.addEventListener('click', function () {
                 if($('#categoryImageCheck').is(':checked')){
                     const croppedCanvas = cropper.getCroppedCanvas({
-                        width: 900,
-                        height: 400
+                        width: cropWidth,
+                        height: cropHeight
                     });
                     canvas.style.display = 'none';
-                    canvas.width = 900;
-                    canvas.height = 400;
+                    canvas.width = cropWidth;
+                    canvas.height = cropHeight;
                     canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
 
                     croppedCanvas.toBlob(function (blob) {
@@ -221,12 +227,12 @@
                             cropper.destroy();
                         }
                         cropper = new Cropper(image, {
-                            aspectRatio: 2.25, // 600x400 oranı (3:2)
+                            aspectRatio: asRadio, // 600x400 oranı (3:2)
                             viewMode: 1,
-                            minCropBoxWidth: 900,
-                            minCropBoxHeight: 400,
+                            minCropBoxWidth: cropWidth,
+                            minCropBoxHeight: cropHeight,
                             ready() {
-                                cropper.setCropBoxData({ width: 900, height: 400 });
+                                cropper.setCropBoxData({ width: cropWidth, height: cropHeight });
                             }
                         });
                     };
@@ -236,12 +242,12 @@
 
             cropButton.addEventListener('click', function () {
                 const croppedCanvas = cropper.getCroppedCanvas({
-                    width: 900,
-                    height: 400
+                    width: cropWidth,
+                    height: cropHeight
                 });
                 canvas.style.display = 'none';
-                canvas.width = 900;
-                canvas.height = 400;
+                canvas.width = cropWidth;
+                canvas.height = cropHeight;
                 canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
 
                 croppedCanvas.toBlob(function (blob) {
