@@ -30,6 +30,7 @@
             Pop-up Banner
         </a>
     </li>
+
     <li class="nav-item">
         <a class="nav-link @if(request()->routeIs('business.menu.crytpedView')) active @endif" href="{{route('business.menu.crytpedView', $menu->id)}}">
             <i class="ti ti-lock ti-xs me-1"></i>

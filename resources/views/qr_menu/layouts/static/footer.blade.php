@@ -1,7 +1,24 @@
-
+<style>
+    .goToTopButton {
+        background: white;
+        box-shadow: 1px 3px 15px #00000052;
+        width: 35px;
+        height: 35px;
+        position: fixed;
+        right: 30px;
+        bottom: 80px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #595757;
+        font-size: 16px;
+    }
+</style>
 @if($footerVisibility)
 
     <footer class="footer">
+        <a href="#goToTop" class="goToTopButton"><i class="ti ti-circle-arrow-up-filled"></i></a>
         <div class="menu">
             <ul>
                 @foreach($menuOrders as $menu)

@@ -20,7 +20,7 @@
         <li class="menu-item">
             <a href="{{route('admin.dashboard')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
-                <div data-i18n="Dashboards">Dashboards</div>
+                <div data-i18n="Gösterge Paneli">Gösterge Paneli</div>
                 {{-- <div class="badge bg-primary rounded-pill ms-auto">5</div> --}}
             </a>
         </li>
