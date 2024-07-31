@@ -141,12 +141,23 @@
 <script src="/business/assets/js/custom.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 <script>
-    new TomSelect("#select-beast",{
+    var routeTemplate = '{{ route('productDetail', ['slug' => $place->slug, 'product' => ':product']) }}';
+
+    new TomSelect("#select-beast", {
         create: false,
         sortField: {
             field: "text",
             direction: "asc"
         }
+    });
+
+    $('#select-beast').on('change', function (){
+        var productId = $(this).val();
+        var slug = $(this).data('slug'); // 'slug' değerini data attribute'undan alıyoruz
+
+        var routeDirect = routeTemplate.replace(':product', productId);
+
+        window.location.href = routeDirect;
     });
 </script>
 <script type="text/javascript">
