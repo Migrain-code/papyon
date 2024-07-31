@@ -137,6 +137,12 @@
                 <div data-i18n="Sözleşmeler">Sözleşmeler</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="{{route('admin.allergen.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-writing-sign"></i>
+                <div data-i18n="Alerjenler">Alerjenler</div>
+            </a>
+        </li>
 
         <li class="menu-item">
             <a href="{{route('admin.setting.index')}}" class="menu-link">
