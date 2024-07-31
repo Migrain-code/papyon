@@ -11,6 +11,6 @@ class Region extends Model
 
     public function tables()
     {
-        return $this->hasMany(Table::class, 'region_id', 'id')->orderBy('name', 'asc');
+        return $this->hasMany(Table::class, 'region_id', 'id')->orderBy('id', 'asc');
     }
 }
