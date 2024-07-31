@@ -2,14 +2,7 @@
 @section('title', 'QR Menü')
 @section('description', 'QR Menü')
 @section('styles')
-    <style>
-        iframe {
-            display: block !important;
-            max-width: 100%;
-            height: 300px;
-        }
 
-    </style>
 @endsection
 @section('content')
     <section class="product_detail" style="padding: 10px;padding-bottom: 90px;">
@@ -41,7 +34,7 @@
                 </p>
 
         </div>
-        @if ($product->embed)
+        @if (false)
             <button data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="79.727" height="51.674" viewBox="0 0 79.727 51.674">
                     <g id="_2unob7.tif" data-name="2unob7.tif" transform="translate(-5785 -4625.797)">
