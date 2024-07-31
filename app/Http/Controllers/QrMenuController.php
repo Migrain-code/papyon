@@ -483,14 +483,12 @@ Vale talebi için teşekkürler.";
             $newDemand->save();
             if (isset($this->place->services->valet_phone)) {
                 $message = "Yeni Garson Talebi: {ORDER_ID}
+*Masa Bilgileri*
+{CUSTOMER_DETAILS}
 
-				*Masa Bilgileri*
+-----------------------------
 
-				{CUSTOMER_DETAILS}
-
-				-----------------------------
-
-				Garson talebi için teşekkürler.";
+Garson talebi için teşekkürler.";
                 $message = str_replace('{ORDER_ID}', strtotime(date('d-m-Y')), $message);
                 $customer = '';
                 $customer = $customer ."Masa Adı:". $this->table->name . "\n";
