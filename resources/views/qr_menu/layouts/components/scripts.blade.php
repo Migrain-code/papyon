@@ -139,7 +139,7 @@
      }
 </style>
 <script src="/business/assets/js/custom.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+<script src="/qr_menu/assets/css/tom-select.complete.min.js"></script>
 <script>
     var routeTemplate = '{{ route('productDetail', ['slug' => $place->slug, 'product' => ':product']) }}';
 
@@ -148,7 +148,10 @@
         sortField: {
             field: "text",
             direction: "asc"
-        }
+        },
+         onInitialize: function() {
+                document.getElementById('searchIconArea').style.display = 'block';
+            }
     });
 
     $('#select-beast').on('change', function (){

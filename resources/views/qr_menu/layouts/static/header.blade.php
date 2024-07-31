@@ -71,7 +71,7 @@
                         </optgroup>
                     @endforeach
                 </select>
-                <svg xmlns="http://www.w3.org/2000/svg" width="43.643" height="51.634"
+                <svg xmlns="http://www.w3.org/2000/svg" id="searchIconArea" style="display: none" width="43.643" height="51.634"
                      viewBox="0 0 43.643 51.634">
                     <g id="Group_1116" data-name="Group 1116" transform="translate(-2798.356 -3782.369)">
                         <path id="Path_1276" data-name="Path 1276"

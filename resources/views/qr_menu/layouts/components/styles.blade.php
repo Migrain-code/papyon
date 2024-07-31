@@ -33,8 +33,19 @@
 </style>
 <link rel="stylesheet" href="/qr_menu/assets/app-XiLQjXB9.css">
 <link rel="stylesheet" href="/qr_menu/assets/custom.css">
-<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+<link href="/qr_menu/assets/css/tom-select.css" rel="stylesheet">
 <style>
+    #select-beast {
+        background: #fff;
+        border: none;
+        height: 34px;
+        border-radius: 10px;
+        font-size: 13px;
+        line-height: 18px;
+        padding: 5px 11px;
+        position: relative;
+        width: 100%;
+    }
     .ts-dropdown .optgroup-header {
         color: #303030;
         background: #fff;
