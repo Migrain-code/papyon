@@ -92,7 +92,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-faq.html">
+                        <a class="dropdown-item" href="javascript:void(0)">
                             <i class="ti ti-help me-2 ti-sm"></i>
                             <span class="align-middle">Destek</span>
                         </a>
