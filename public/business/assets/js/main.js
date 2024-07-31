@@ -143,19 +143,19 @@ if (document.getElementById('layout-menu')) {
     if (storedStyle === 'light') {
       styleSwitcherIcon.classList.add('ti-sun');
       new bootstrap.Tooltip(styleSwitcherIcon, {
-        title: 'Light Mode',
+        title: 'Açık Mod',
         fallbackPlacements: ['bottom']
       });
     } else if (storedStyle === 'dark') {
       styleSwitcherIcon.classList.add('ti-moon');
       new bootstrap.Tooltip(styleSwitcherIcon, {
-        title: 'Dark Mode',
+        title: 'Koyu Mod',
         fallbackPlacements: ['bottom']
       });
     } else {
       styleSwitcherIcon.classList.add('ti-device-desktop');
       new bootstrap.Tooltip(styleSwitcherIcon, {
-        title: 'System Mode',
+        title: 'Sistem Mod',
         fallbackPlacements: ['bottom']
       });
     }
