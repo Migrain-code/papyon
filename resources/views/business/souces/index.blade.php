@@ -34,6 +34,7 @@
 
                 <!-- Multi Column with Form Separator -->
                 <div class="card my-4">
+                    @include('business.menu.edit.nav')
                     <!-- User Content -->
                     <div class="card-body order-0 order-md-1">
                         <!-- Fixed Header -->

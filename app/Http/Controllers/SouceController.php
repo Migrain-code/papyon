@@ -24,7 +24,8 @@ class SouceController extends Controller
      */
     public function index()
     {
-        return view('business.souces.index');
+        $menu = $this->business->activeMenu();
+        return view('business.souces.index', compact('menu'));
     }
 
     /**

@@ -23,7 +23,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        return view('business.material.index');
+        $menu = $this->business->activeMenu();
+        return view('business.material.index', compact('menu'));
     }
 
     /**
