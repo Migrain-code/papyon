@@ -36,7 +36,7 @@
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
            @include('business.layouts.menu.parts.branch')
-           @include('business.layouts.menu.parts.language')
+
            @include('business.layouts.menu.parts.theme-mode')
            @include('business.layouts.menu.parts.notification')
 
