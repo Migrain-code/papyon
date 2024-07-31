@@ -14,7 +14,7 @@
                     </div>
                     <div class="col">
                         <label class="switch switch-lg">
-                            <input type="checkbox" @checked($place->services->table_order) class="switch-input" name="table_order" onchange="toggleCallArea(this, 'table-order-area')">
+                            <input type="checkbox" @checked(isset($place->services) && $place->services->table_order) class="switch-input" name="table_order" onchange="toggleCallArea(this, 'table-order-area')">
                             <span class="switch-toggle-slider">
                         <span class="switch-on"><i class="ti ti-check"></i></span>
                         <span class="switch-off"><i class="ti ti-x"></i></span>
@@ -23,26 +23,26 @@
                         </label>
                     </div>
                 </div>
-                <div class="callArea " id="table-order-area" @if($place->services->table_order) style="display: block" @else style="display: none" @endif >
+                <div class="callArea " id="table-order-area" @if(isset($place->services) && $place->services->table_order) style="display: block" @else style="display: none" @endif >
                     <div class="d-flex flex-row justify-content-start my-3">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" @checked($place->services->order_type == 0) data-disable="true" type="radio" name="order_type" id="inlineRadio1" value="0" />
+                            <input class="form-check-input" @checked(isset($place->services) && $place->services->order_type == 0) data-disable="true" type="radio" name="order_type" id="inlineRadio1" value="0" />
                             <label class="form-check-label" for="inlineRadio1">Sipariş Ver</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" @checked($place->services->order_type == 1) data-disable="false" type="radio" name="order_type" id="inlineRadio1" value="1" />
+                            <input class="form-check-input" @checked(isset($place->services) && $place->services->order_type == 1) data-disable="false" type="radio" name="order_type" id="inlineRadio1" value="1" />
                             <label class="form-check-label" for="inlineRadio1">Whatsapp Sipariş</label>
                         </div>
                     </div>
 
                 </div>
-                <div class="callArea2" id="table-phone-area" @if($place->services->order_type == 1) style="display: block" @else style="display: none" @endif >
+                <div class="callArea2" id="table-phone-area" @if(isset($place->services) && $place->services->order_type == 1) style="display: block" @else style="display: none" @endif >
 
                     <div class="col" style="max-width: 240px">
                         <label>Telefon Numarası</label>
                     </div>
                     <div class="col">
-                        <input type="text" name="table_phone" value="{{$place->services->table_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                        <input type="text" name="table_phone" value="{{isset($place->services) ? $place->services->table_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                     </div>
                 </div>
             </div>
@@ -58,21 +58,21 @@
                 </div>
                 <div class="col">
                     <label class="switch switch-lg">
-                        <input type="checkbox" class="switch-input" name="call_a_waiter" @checked($place->services->call_a_waiter) onchange="toggleCallArea(this, 'waiter-call-area')">
+                        <input type="checkbox" class="switch-input" name="call_a_waiter" @checked(isset($place->services) && $place->services->call_a_waiter) onchange="toggleCallArea(this, 'waiter-call-area')">
                         <span class="switch-toggle-slider">
                         <span class="switch-on"><i class="ti ti-check"></i></span>
                         <span class="switch-off"><i class="ti ti-x"></i></span>
                     </span>
-                        <span class="switch-label">@if($place->services->call_a_waiter) Aktif @else Kapalı @endif</span>
+                        <span class="switch-label">@if(isset($place->services) && $place->services->call_a_waiter) Aktif @else Kapalı @endif</span>
                     </label>
                 </div>
             </div>
-            <div class="mt-3 callArea" id="waiter-call-area" @if($place->services->call_a_waiter) style="display: block;" @else style="display: none;" @endif >
+            <div class="mt-3 callArea" id="waiter-call-area" @if(isset($place->services) && $place->services->call_a_waiter) style="display: block;" @else style="display: none;" @endif >
                 <div class="col" style="max-width: 240px">
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="call_a_waiter_phone" value="{{$place->services->call_a_waiter_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="call_a_waiter_phone" value="{{isset($place->services) ? $place->services->call_a_waiter_phone :""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@
                 </div>
                 <div class="col">
                     <label class="switch switch-lg">
-                        <input type="checkbox" class="switch-input" name="request_account" @checked($place->services->request_account) onchange="toggleCallArea(this, 'wallet-call-area')">
+                        <input type="checkbox" class="switch-input" name="request_account" @checked(isset($place->services) && $place->services->request_account) onchange="toggleCallArea(this, 'wallet-call-area')">
                         <span class="switch-toggle-slider">
                             <span class="switch-on"><i class="ti ti-check"></i></span>
                             <span class="switch-off"><i class="ti ti-x"></i></span>
@@ -94,12 +94,12 @@
                     </label>
                 </div>
             </div>
-            <div class="mt-3 callArea" id="wallet-call-area" @if($place->services->request_account) style="display: block;" @else style="display: none;" @endif>
+            <div class="mt-3 callArea" id="wallet-call-area" @if(isset($place->services) && $place->services->request_account) style="display: block;" @else style="display: none;" @endif>
                 <div class="col" style="max-width: 240px">
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="request_account_phone" value="{{$place->services->request_account_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="request_account_phone" value="{{isset($place->services) ? $place->services->request_account_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="col">
                     <label class="switch switch-lg">
-                        <input type="checkbox" class="switch-input" name="call_a_valet" @checked($place->services->call_a_valet) onchange="toggleCallArea(this, 'vale-call-area')">
+                        <input type="checkbox" class="switch-input" name="call_a_valet" @checked(isset($place->services) && $place->services->call_a_valet) onchange="toggleCallArea(this, 'vale-call-area')">
                         <span class="switch-toggle-slider">
                         <span class="switch-on"><i class="ti ti-check"></i></span>
                         <span class="switch-off"><i class="ti ti-x"></i></span>
@@ -121,12 +121,12 @@
                     </label>
                 </div>
             </div>
-            <div class="mt-3 callArea" id="vale-call-area" @if($place->services->call_a_valet) style="display: block;" @else style="display: none;" @endif >
+            <div class="mt-3 callArea" id="vale-call-area" @if(isset($place->services) && $place->services->call_a_valet) style="display: block;" @else style="display: none;" @endif >
                 <div class="col" style="max-width: 240px">
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="valet_phone" value="{{$place->services->valet_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="valet_phone" value="{{isset($place->services) ? $place->services->valet_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="col">
                     <label class="switch switch-lg">
-                        <input type="checkbox" class="switch-input" name="call_a_taxi" @checked($place->services->call_a_taxi) onchange="toggleCallArea(this, 'taksi-call-area')">
+                        <input type="checkbox" class="switch-input" name="call_a_taxi" @checked(isset($place->services) && $place->services->call_a_taxi) onchange="toggleCallArea(this, 'taksi-call-area')">
                         <span class="switch-toggle-slider">
                         <span class="switch-on"><i class="ti ti-check"></i></span>
                         <span class="switch-off"><i class="ti ti-x"></i></span>
@@ -149,12 +149,12 @@
                     </label>
                 </div>
             </div>
-            <div class="mt-3 callArea" id="taksi-call-area" @if($place->services->call_a_taxi) style="display: block;" @else style="display: none;" @endif>
+            <div class="mt-3 callArea" id="taksi-call-area" @if(isset($place->services) && $place->services->call_a_taxi) style="display: block;" @else style="display: none;" @endif>
                 <div class="col" style="max-width: 240px">
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="taxi_phone" value="{{$place->services->taxi_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="taxi_phone" value="{{isset($place->services) ? $place->services->taxi_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -168,7 +168,7 @@
                 </div>
                 <div class="col">
                     <label class="switch switch-lg">
-                        <input type="checkbox" class="switch-input" name="take_away_order" @checked($place->services->take_away_order) onchange="toggleCallArea(this, 'gel-al-call-area')">
+                        <input type="checkbox" class="switch-input" name="take_away_order" @checked(isset($place->services) && $place->services->take_away_order) onchange="toggleCallArea(this, 'gel-al-call-area')">
                         <span class="switch-toggle-slider">
                         <span class="switch-on"><i class="ti ti-check"></i></span>
                         <span class="switch-off"><i class="ti ti-x"></i></span>
@@ -177,12 +177,12 @@
                     </label>
                 </div>
             </div>
-            <div class="mt-3 callArea" id="gel-al-call-area" @if($place->services->take_away_order) style="display: block;" @else style="display: none;" @endif>
+            <div class="mt-3 callArea" id="gel-al-call-area" @if(isset($place->services) && $place->services->take_away_order) style="display: block;" @else style="display: none;" @endif>
                 <div class="col" style="max-width: 240px">
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="take_away_phone" value="{{$place->services->take_away_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="take_away_phone" value="{{isset($place->services) ? $place->services->take_away_phone :""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -196,7 +196,7 @@
                 </div>
                 <div class="col">
                     <label class="switch switch-lg">
-                        <input type="checkbox" class="switch-input" name="package_order" @checked($place->services->package_order) onchange="toggleCallArea(this, 'paket-call-area')">
+                        <input type="checkbox" class="switch-input" name="package_order" @checked(isset($place->services) && $place->services->package_order) onchange="toggleCallArea(this, 'paket-call-area')">
                         <span class="switch-toggle-slider">
                         <span class="switch-on"><i class="ti ti-check"></i></span>
                         <span class="switch-off"><i class="ti ti-x"></i></span>
@@ -205,12 +205,12 @@
                     </label>
                 </div>
             </div>
-            <div class="mt-3 callArea" id="paket-call-area" @if($place->services->package_order)  style="display: block;" @else  style="display: none;" @endif>
+            <div class="mt-3 callArea" id="paket-call-area" @if(isset($place->services) && $place->services->package_order)  style="display: block;" @else  style="display: none;" @endif>
                 <div class="col" style="max-width: 240px">
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="package_order_phone" value="{{$place->services->package_order_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="package_order_phone" value="{{isset($place->services) ? $place->services->package_order_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -222,7 +222,7 @@
                 <label>Teslimat Ücreti</label>
             </div>
             <div class="col">
-                <input type="number" name="delivery_fee" value="{{$place->services->delivery_fee}}" id="multicol-delivery-fee" class="form-control" placeholder="örn. 16">
+                <input type="number" name="delivery_fee" value="{{isset($place->services) ? $place->services->delivery_fee : 0}}" id="multicol-delivery-fee" class="form-control" placeholder="örn. 16">
             </div>
         </div>
     </div>

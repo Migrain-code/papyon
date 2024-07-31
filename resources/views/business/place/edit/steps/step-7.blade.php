@@ -42,7 +42,7 @@
                         <label>Telefon Numarası</label>
                     </div>
                     <div class="col">
-                        <input type="text" name="table_phone" value="{{isset($place->services) && $place->services->table_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                        <input type="text" name="table_phone" value="{{isset($place->services) ? $place->services->table_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="call_a_waiter_phone" value="{{isset($place->services) && $place->services->call_a_waiter_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="call_a_waiter_phone" value="{{isset($place->services) ? $place->services->call_a_waiter_phone :""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="request_account_phone" value="{{isset($place->services) && $place->services->request_account_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="request_account_phone" value="{{isset($place->services) ? $place->services->request_account_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -126,7 +126,7 @@
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="valet_phone" value="{{isset($place->services) && $place->services->valet_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="valet_phone" value="{{isset($place->services) ? $place->services->valet_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="taxi_phone" value="{{isset($place->services) && $place->services->taxi_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="taxi_phone" value="{{isset($place->services) ? $place->services->taxi_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -182,7 +182,7 @@
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="take_away_phone" value="{{isset($place->services) && $place->services->take_away_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="take_away_phone" value="{{isset($place->services) ? $place->services->take_away_phone :""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -210,7 +210,7 @@
                     <label>Telefon Numarası</label>
                 </div>
                 <div class="col">
-                    <input type="text" name="package_order_phone" value="{{isset($place->services) && $place->services->package_order_phone}}" class="form-control phone" placeholder="örn. 555 555 5555">
+                    <input type="text" name="package_order_phone" value="{{isset($place->services) ? $place->services->package_order_phone : ""}}" class="form-control phone" placeholder="örn. 555 555 5555">
                 </div>
             </div>
         </div>
@@ -222,7 +222,7 @@
                 <label>Teslimat Ücreti</label>
             </div>
             <div class="col">
-                <input type="number" name="delivery_fee" value="{{isset($place->services) && $place->services->delivery_fee}}" id="multicol-delivery-fee" class="form-control" placeholder="örn. 16">
+                <input type="number" name="delivery_fee" value="{{isset($place->services) ? $place->services->delivery_fee : 0}}" id="multicol-delivery-fee" class="form-control" placeholder="örn. 16">
             </div>
         </div>
     </div>
