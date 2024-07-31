@@ -375,12 +375,12 @@ Sipariş için teşekkürler.";
 -----------------------------
 
 Vale talebi için teşekkürler.";
-                $message = str_replace('{ORDER_ID}', "#".$newDemand, $message);
+                $message = str_replace('{ORDER_ID}', "#".$newDemand->id, $message);
                 $customer = '';
                 $customer = $customer ."Masa Adı:". $this->table->name . "\n";
                 $customer = $customer ."Plaka:". $request->text . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
-                $message = str_replace('{ORDER_ID}', "#".$newDemand, $message);
+                $message = str_replace('{ORDER_ID}', "#".$newDemand->id, $message);
                 return redirect()->to('https://wa.me/' . "0".clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
             return to_route('menu.index', $this->place->slug)->with('response', [
@@ -416,12 +416,12 @@ Vale talebi için teşekkürler.";
 -----------------------------
 
 Taksi talebi için teşekkürler.";
-                $message = str_replace('{ORDER_ID}', "#".$newDemand, $message);
+                $message = str_replace('{ORDER_ID}', "#".$newDemand->id, $message);
                 $customer = '';
                 $customer = $customer ."Masa Adı:". $this->table->name . "\n";
                 $customer = $customer ."Müşteri Adı:". $request->text . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
-                $message = str_replace('{ORDER_ID}', "#".$newDemand, $message);
+                $message = str_replace('{ORDER_ID}', "#".$newDemand->id, $message);
                 return redirect()->to('https://wa.me/' . clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
             return to_route('menu.index', $this->place->slug)->with('response', [
@@ -452,11 +452,11 @@ Taksi talebi için teşekkürler.";
 -----------------------------
 
 Hesap talebi için teşekkürler.";
-                $message = str_replace('{ORDER_ID}', "#".$newDemand, $message);
+                $message = str_replace('{ORDER_ID}', "#".$newDemand->id, $message);
                 $customer = '';
                 $customer = $customer ."Masa Adı:". $this->table->name . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
-                $message = str_replace('{ORDER_ID}', "#".$newDemand, $message);
+                $message = str_replace('{ORDER_ID}', "#".$newDemand->id, $message);
                 return redirect()->to('https://wa.me/' . clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
             return to_route('menu.index', $this->place->slug)->with('response', [
@@ -487,11 +487,11 @@ Hesap talebi için teşekkürler.";
 -----------------------------
 
 Garson talebi için teşekkürler.";
-                $message = str_replace('{ORDER_ID}', "#".$newDemand, $message);
+                $message = str_replace('{ORDER_ID}', "#".$newDemand->id, $message);
                 $customer = '';
                 $customer = $customer ."Masa Adı:". $this->table->name . "\n";
                 $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
-                $message = str_replace('{ORDER_ID}', "#".$newDemand, $message);
+                $message = str_replace('{ORDER_ID}', "#".$newDemand->id, $message);
                 return redirect()->to('https://wa.me/' . clearPhone($this->place->services->valet_phone) . '?text=' . urlencode($message));
             }
             return to_route('menu.index', $this->place->slug)->with('response', [
