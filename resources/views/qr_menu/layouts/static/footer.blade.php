@@ -3,7 +3,7 @@
         background: white;
         box-shadow: 1px 3px 15px #00000052;
         width: 40px;
-        height: 40px;
+        height: 50px;
         position: fixed;
         right: 30px;
         bottom: 80px;
@@ -12,7 +12,7 @@
         justify-content: center;
         align-items: center;
         color: var(--top_menu_bg);
-        font-size: 16px;
+        font-size: 25px;
     }
 </style>
 @if($footerVisibility)
