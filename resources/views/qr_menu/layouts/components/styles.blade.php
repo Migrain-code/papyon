@@ -57,6 +57,7 @@
         background: #fff;
         cursor: text;
         height: 34px;
+        overflow: hidden;
     }
 
 </style>
