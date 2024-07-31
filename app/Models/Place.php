@@ -43,10 +43,25 @@ class Place extends Model
         return $this->hasMany(PlaceWorkTime::class, 'place_id', 'id')->orderBy('id', 'asc');
     }
 
+    public function createWorkTimes()
+    {
+        $dayList = DayList::all();
+        foreach ($dayList as $day) {
+            $workTime = new PlaceWorkTime();
+            $workTime->place_id = $this->id;
+            $workTime->day_id = $day->id;
+            $workTime->status = 1;
+            $workTime->start_time = "08:00";
+            $workTime->end_time = "20:00";
+            $workTime->save();
+        }
+    }
+
     public function announcements() // Duyurular
     {
         return $this->hasMany(Announcement::class, 'place_id', 'id');
     }
+
     public function souces() // soslar
     {
         return $this->hasMany(Souce::class, 'place_id', 'id');
@@ -97,10 +112,12 @@ class Place extends Model
     {
         return $this->hasMany(Order::class, 'place_id', 'id');
     }
+
     public function visitors() // ziyaretçiler
     {
         return $this->hasMany(PlaceVisitor::class, 'place_id', 'id');
     }
+
     public function claims() // Siparişler
     {
         return $this->hasMany(Claim::class, 'place_id', 'id');
@@ -115,6 +132,7 @@ class Place extends Model
     {
         return $this->hasMany(Suggestion::class, 'place_id', 'id');
     }
+
     public function suggestionQuestions() // Görüş ve Öneriler
     {
         return $this->hasMany(SuggestionQuestion::class, 'place_id', 'id');
@@ -123,6 +141,19 @@ class Place extends Model
     public function colors() // Renkler
     {
         return $this->hasMany(ThemeColor::class, 'place_id', 'id');
+    }
+
+    public function createColor()
+    {
+        $defaultColors = ThemeColor::COLOR_VARIABLES;
+        foreach ($defaultColors as $color) {
+            $menuOrder = new ThemeColor();
+            $menuOrder->place_id = $this->id;
+            $menuOrder->name = $color["name"];
+            $menuOrder->value = $color["value"];
+            $menuOrder->save();
+        }
+        $this->updateSetupPercentage();
     }
 
     public function menuOrders() // Menü sıralaması
@@ -148,7 +179,7 @@ class Place extends Model
                 $menuOrder->order_number = $index;
                 $menuOrder->save();
             }
-
+            $this->updateSetupPercentage();
         }
     }
 
@@ -201,6 +232,8 @@ class Place extends Model
         // Teslimat Ücreti
         $service->delivery_fee = $serviceData["delivery_fee"];
         $service->save();
+
+        $this->updateSetupPercentage();
     }
 
     public function updateService($serviceData)
@@ -210,7 +243,9 @@ class Place extends Model
         //Garson Çağır
         $service->call_a_waiter = isset($serviceData["call_a_waiter"]);
         $service->call_a_waiter_phone = isset($serviceData["call_a_waiter"]) ? clearPhone($serviceData["call_a_waiter_phone"]) : null;
-        $this->menuOrders()->where('menu_id', 3)->first()->update(['status' =>  isset($serviceData["call_a_waiter"])]);
+        if ($this->menuOrders()->count() > 0) {
+            $this->menuOrders()->where('menu_id', 3)->first()->update(['status' => isset($serviceData["call_a_waiter"])]);
+        }
 
         // Masaya Sipariş
         $service->order_type = $serviceData["order_type"];
@@ -219,18 +254,21 @@ class Place extends Model
         //Hesap İste
         $service->request_account = isset($serviceData["request_account"]);
         $service->request_account_phone = isset($serviceData["request_account"]) ? clearPhone($serviceData["request_account_phone"]) : null;
-        $this->menuOrders()->where('menu_id', 1)->first()->update(['status' =>  isset($serviceData["request_account"])]);
-
+        if ($this->menuOrders()->count() > 0) {
+            $this->menuOrders()->where('menu_id', 1)->first()->update(['status' => isset($serviceData["request_account"])]);
+        }
         //Vale Çağır
         $service->call_a_valet = isset($serviceData["call_a_valet"]);
         $service->valet_phone = isset($serviceData["call_a_valet"]) ? clearPhone($serviceData["valet_phone"]) : null;
-        $this->menuOrders()->where('menu_id', 6)->first()->update(['status' =>  isset($serviceData["call_a_valet"])]);
-
+        if ($this->menuOrders()->count() > 0) {
+            $this->menuOrders()->where('menu_id', 6)->first()->update(['status' => isset($serviceData["call_a_valet"])]);
+        }
         //Taxi Çağır
         $service->call_a_taxi = isset($serviceData["call_a_taxi"]);
         $service->taxi_phone = isset($serviceData["call_a_taxi"]) ? clearPhone($serviceData["taxi_phone"]) : null;
-        $this->menuOrders()->where('menu_id', 5)->first()->update(['status' =>  isset($serviceData["call_a_taxi"])]);
-
+        if ($this->menuOrders()->count() > 0) {
+            $this->menuOrders()->where('menu_id', 5)->first()->update(['status' => isset($serviceData["call_a_taxi"])]);
+        }
         //Gel Al Sipariş
         $service->take_away_order = isset($serviceData["take_away_order"]);
         $service->take_away_phone = isset($serviceData["take_away_order"]) ? clearPhone($serviceData["take_away_phone"]) : null;
@@ -242,6 +280,8 @@ class Place extends Model
         // Teslimat Ücreti
         $service->delivery_fee = $serviceData["delivery_fee"];
         $service->save();
+
+        $this->updateSetupPercentage();
     }
 
     public function totalClaims()
@@ -261,6 +301,7 @@ class Place extends Model
 
         return $claims;
     }
+
     public function allClaim()
     {
         $ordersCount = $this->orders->where('status', 0)->count();
@@ -272,6 +313,7 @@ class Place extends Model
 
         return $totalClaims;
     }
+
     public function clone()
     {
         $newPlace = $this->replicate();
@@ -319,5 +361,61 @@ class Place extends Model
             }
         }
 
+    }
+
+    public function updateSetupPercentage()
+    {
+        $percentage = 0;
+        $emptyArea = [];
+        if (!$this->activeMenu()) {
+            $percentage += 10;
+            $emptyArea [] = "Menü";
+        }
+        if ($this->regions->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Bölge";
+        }
+        if ($this->contracts->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Sözleşmeler";
+        }
+        if ($this->souces->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Soslar";
+        }
+        if ($this->materials->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Ürünler";
+
+        }
+        if ($this->suggestionQuestions->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Görüş ve Öneri Soruları";
+
+        }
+        if ($this->colors->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Tema Ayarları";
+
+        }
+        if ($this->menuOrders->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Menü Ayarları";
+
+        }
+        if ($this->services->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Hizmet Ayarları";
+
+        }
+        if ($this->workTimes->count() == 0) {
+            $percentage += 10;
+            $emptyArea [] = "Çalışma Saatleri";
+
+        }
+        $this->setup_percentage = 100 - $percentage;
+        $this->save();
+
+        return $emptyArea;
     }
 }

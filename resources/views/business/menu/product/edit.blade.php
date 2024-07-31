@@ -324,26 +324,31 @@
                     reader.readAsDataURL(file);
                 }
             });
-
             cropButton.addEventListener('click', function () {
-                const croppedCanvas = cropper.getCroppedCanvas({
-                    width: 190,
-                    height: 150
-                });
-                canvas.style.display = 'none';
-                canvas.width = 190;
-                canvas.height = 150;
-                canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
+                if($('#productImageCheck').is(':checked')){
+                    const croppedCanvas = cropper.getCroppedCanvas({
+                        width: 190,
+                        height: 150
+                    });
+                    canvas.style.display = 'none';
+                    canvas.width = 190;
+                    canvas.height = 150;
+                    canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
 
-                croppedCanvas.toBlob(function (blob) {
-                    const reader = new FileReader();
-                    reader.onloadend = function () {
-                        croppedImageInput.value = reader.result;
-                        $('#productAddForm').submit();
-                    };
-                    reader.readAsDataURL(blob);
-                });
+                    croppedCanvas.toBlob(function (blob) {
+                        const reader = new FileReader();
+                        reader.onloadend = function () {
+                            croppedImageInput.value = reader.result;
+                            $('#productAddForm').submit();
+                        };
+                        reader.readAsDataURL(blob);
+                    });
+                } else{
+                    $('#productAddForm').submit();
+                }
+
             });
+
         });
     </script>
 @endsection

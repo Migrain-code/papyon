@@ -111,8 +111,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
         Route::resource('region', RegionController::class);
         Route::resource('menu', MenuController::class);
         Route::resource('place-unit', PlaceUnitController::class);
-        Route::prefix('menu/{menu}')->as('menu.')->group(function (){{
-
+        Route::prefix('menu/{menu}')->as('menu.')->group(function (){
             Route::get('status', [MenuController::class, 'statusView'])->name('status');
             Route::post('update/price', [MenuController::class, 'updatePrice'])->name('updatePrice');
             Route::get('pop-up-banner', [MenuController::class, 'popupView'])->name('popup');
@@ -123,7 +122,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
             Route::get('menu-crypted', [MenuPasswordController::class, 'crytpedView'])->name('crytpedView');
             Route::get('update-password-status', [MenuPasswordController::class, 'updatePasswordStatus'])->name('updatePasswordStatus');
             Route::post('update-password', [MenuPasswordController::class, 'updatePassword'])->name('updatePassword');
-        }});
+        });
         Route::resource('menu-category', MenuCategoryController::class);
         Route::resource('menu-category-product', MenuCategoryProductController::class);
         Route::prefix('menu-category/{category}')->as('menuCategory.')->group(function (){
@@ -224,7 +223,7 @@ Route::prefix('admin')->as('admin.')->group(function (){
         Route::resource('demoRequest', \App\Http\Controllers\DemoRequestController::class);
         Route::resource('package', \App\Http\Controllers\PackageController::class);
         Route::resource('page', \App\Http\Controllers\PageController::class);
-
+        Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
 
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');

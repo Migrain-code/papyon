@@ -62,4 +62,14 @@
 
         </div>
     </div>
+    <div class="col-md-6">
+        <label class="form-label" for="multicol-email">Yekili Seçiniz</label>
+        <select id="multicol-country" name="user_id" data-placeholder="Yetkili Seçiniz" class="select2 form-select" data-allow-clear="true">
+            <option value="">Yetkili Seçiniz</option>
+            @foreach($users as $user)
+                <option value="{{$user->id}}">{{$user->name}}</option>
+            @endforeach
+        </select>
+
+    </div>
 </div>

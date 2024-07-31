@@ -9,6 +9,7 @@ use App\Models\Place;
 use App\Models\PlaceWifi;
 use App\Models\PlaceWorkTime;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -34,7 +35,8 @@ class PlaceController extends Controller
     public function create()
     {
         $dayList = DayList::all();
-        return view('admin.place.create.index', compact('dayList'));
+        $users = User::all();
+        return view('admin.place.create.index', compact('dayList', 'users'));
     }
 
     /**
@@ -207,8 +209,9 @@ class PlaceController extends Controller
     {
         $dayList = DayList::all();
         $workTimes = $place->workTimes;
+        $users = User::all();
 
-        return view('admin.place.edit.index', compact('place', 'dayList', 'workTimes'));
+        return view('admin.place.edit.index', compact('place', 'dayList', 'workTimes', 'users'));
     }
 
     /**

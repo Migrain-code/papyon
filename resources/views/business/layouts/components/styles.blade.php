@@ -7,7 +7,7 @@
 <link
     href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
     rel="stylesheet"/>
-
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 <!-- Icons -->
 <link rel="stylesheet" href="/business/assets/vendor/fonts/fontawesome.css"/>
 <link rel="stylesheet" href="/business/assets/vendor/fonts/tabler-icons.css"/>
@@ -38,6 +38,11 @@
     .dayArea {
         min-height: 25px;
         min-width: 250px;
+    }
+    .pacifico-regular {
+        font-family: "Quicksand", sans-serif;
+        font-weight: 900 !important;
+        font-style: normal;
     }
     @media (max-width: 576px) {
         .dayArea{

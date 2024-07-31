@@ -42,7 +42,23 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    const STATUS_LIST = [
+        0 => [
+            "id" => 0,
+            "name" => "Pasif",
+            "icon" => '<span class="badge bg-label-warning">Pasif</span>',
+        ],
+        1 => [
+            "id" => 1,
+            "name" => "Aktif",
+            "icon" => '<span class="badge bg-label-success">Aktif</span>',
+        ],
+    ];
 
+    public function advertStatus($type)
+    {
+        return self::STATUS_LIST[$this->status][$type] ?? null;
+    }
     /**
      * Get the attributes that should be cast.
      *

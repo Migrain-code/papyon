@@ -7,6 +7,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="icon" type="image/x-icon" href="{{storage(setting('site_favicon'))}}"/>
+
 @php
     $accordionBodyColor = str_replace(array('rgb(', ')'), '', hexToRgb($colors->get('category_bg')));
  @endphp

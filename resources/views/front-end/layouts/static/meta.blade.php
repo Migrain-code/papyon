@@ -1,4 +1,4 @@
-<title>{{$place->name. " | "}} @yield('title')</title>
+<title>@yield('title')</title>
 <meta name="description" content="@yield('description', setting('speed_meta_descriptions'))">
 <meta name="google-site-verification" content="YymKdAxxSFBt7MzGQotmI3ZM3exWAf8e_JND8dwMUEQ">
 <link rel="canonical" href="https://www.hizlirandevu.com.tr" />

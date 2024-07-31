@@ -69,7 +69,7 @@
                                 <iframe id="cardFrame" src="{{route('place.show',$place->slug)}}" style="width: 100%;height: 80vh" frameborder="0"></iframe>
                             </div>
                             <div class="col-8">
-                                <form class="card mb-4" method="post" action="{{route('business.menu-design.update', $menuDesign->id)}}">
+                                <form class="card mb-4" method="post" action="{{route('business.menu-design.update', $menuDesign->first()->id)}}">
                                     @csrf
                                     @method('PUT')
                                     <div class="card-body">

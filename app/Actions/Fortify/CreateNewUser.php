@@ -42,12 +42,12 @@ class CreateNewUser implements CreatesNewUsers
             'status' => 1
         ]);
         $place = new Place();
-        $place->name = "1. Mekan";
-        $place->slug = Str::slug("1. Mekan");
+        $place->name = uniqid(5).". Mekan";
+        $place->slug = Str::slug($place->name);
         $place->is_default = 1;
         $place->user_id = $user->id;
         $place->save();
-
+        $place->createWorkTimes();
         return $user;
     }
 }

@@ -101,6 +101,7 @@ class PlaceController extends Controller
 
         $serviceData['place_id'] = $place->id;
         $place->createService($serviceData);
+        $place->updateSetupPercentage();
         return to_route('business.place.index')->with('response', [
            'status' => "success",
            'message' => "Mekan Oluşturuldu"
@@ -210,7 +211,6 @@ class PlaceController extends Controller
     {
         $dayList = DayList::all();
         $workTimes = $place->workTimes;
-
         return view('business.place.edit.index', compact('place', 'dayList', 'workTimes'));
     }
 
@@ -219,7 +219,7 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        //$request->dd();
+
         $place->name = $request->input('place_name');
         $place->slug = Str::slug($request->input('place_link'));
         $place->instagram = $request->input('instagram');
@@ -250,8 +250,13 @@ class PlaceController extends Controller
         }
 
         $placeWifi = $place->wifi;
+        if (!isset($placeWifi)){
+            $placeWifi = new PlaceWifi();
+            $placeWifi->place_id = $place->id;
+        }
+
         $placeWifi->pass = $request->input('wifi_password');
-        $placeWifi->pass = $request->input('wifi_name');
+        $placeWifi->name = $request->input('wifi_name');
         $placeWifi->save();
 
         $serviceData = $request->only([
@@ -273,7 +278,12 @@ class PlaceController extends Controller
         ]);
 
         $serviceData['place_id'] = $place->id;
-        $place->updateService($serviceData);
+        if (isset($place->services)){
+            $place->updateService($serviceData);
+        } else{
+            $place->createService($serviceData);
+        }
+        $place->updateSetupPercentage();
         return to_route('business.place.index')->with('response', [
             'status' => "success",
             'message' => "Mekan Bilgileriniz Güncellendi"

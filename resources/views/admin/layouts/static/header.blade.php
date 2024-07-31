@@ -16,7 +16,7 @@
     <title>Papyon</title>
 
     <meta name="description" content="" />
-
+    @include('admin.layouts.static.meta')
     @include('admin.layouts.components.styles')
 </head>
 

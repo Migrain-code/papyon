@@ -99,18 +99,62 @@
             });
 
             cropButton.addEventListener('click', function () {
-                const croppedCanvas = cropper.getCroppedCanvas({
-                    width: 900,
-                    height: 400
-                });
-                canvas.style.display = 'none';
-                canvas.width = 900;
-                canvas.height = 400;
-                canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
+                if($('#categoryImageCheck').is(':checked')){
+                    const croppedCanvas = cropper.getCroppedCanvas({
+                        width: 900,
+                        height: 400
+                    });
+                    canvas.style.display = 'none';
+                    canvas.width = 900;
+                    canvas.height = 400;
+                    canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
 
-                croppedCanvas.toBlob(function (blob) {
+                    croppedCanvas.toBlob(function (blob) {
+                        const formData = new FormData();
+                        formData.append('croppedImage', blob);
+                        formData.append('menu_id', '{{$menu->id}}')
+                        formData.append('name', $('[name="name"]').val())
+                        formData.append('_token', csrf_token);
+
+                        fetch('/business/menu-category', {
+                            method: 'POST',
+                            body: formData,
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === "success") {
+                                    addCategoryModal.hide();
+                                    Swal.fire({
+                                        title: 'Başarılı!',
+                                        text: data.message,
+                                        icon: 'success',
+                                        confirmButtonText: 'Tamam'
+                                    });
+                                    setTimeout(function (){
+                                        location.reload();
+                                    }, 500);
+                                } else {
+                                    Swal.fire({
+                                        title: 'Hata!',
+                                        text: 'Bir hata oluştu.',
+                                        icon: 'error',
+                                        confirmButtonText: 'Tamam'
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error(error);
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Bir hata oluştu.',
+                                    icon: 'error',
+                                    confirmButtonText: 'Tamam'
+                                });
+                            });
+                    });
+                }
+                else{
                     const formData = new FormData();
-                    formData.append('croppedImage', blob);
                     formData.append('menu_id', '{{$menu->id}}')
                     formData.append('name', $('[name="name"]').val())
                     formData.append('_token', csrf_token);
@@ -150,7 +194,9 @@
                                 confirmButtonText: 'Tamam'
                             });
                         });
-                });
+                }
+
+
             });
         });
 

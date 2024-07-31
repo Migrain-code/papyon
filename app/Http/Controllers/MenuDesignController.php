@@ -18,6 +18,12 @@ class MenuDesignController extends Controller
         $this->user = auth('web')->user();
         $this->business = $this->user->place();
         $this->menuOrders = $this->business->menuOrders;
+        if($this->menuOrders->count() == 0){
+            $this->business->createMenu();
+        }
+        if($this->business->colors->count() == 0){
+            $this->business->createColor();
+        }
     }
 
     /**
@@ -25,6 +31,7 @@ class MenuDesignController extends Controller
      */
     public function index()
     {
+        $this->business = $this->user->place();
         $menuOrders = $this->business->menuOrders;
         return view('business.theme.index', compact('menuOrders'));
     }
@@ -34,8 +41,9 @@ class MenuDesignController extends Controller
      */
     public function create()
     {
-        $place = $this->business;
-        $menuDesign = MenuDesign::first();
+        $place =  $this->user->place();
+        $menuDesign = $place->menuOrders;
+
         $colors = $place->colors;
         $newColors = [];
         foreach ($colors as $color){
@@ -83,10 +91,9 @@ class MenuDesignController extends Controller
      */
     public function update(Request $request, MenuDesign $menuDesign)
     {
-        //$request->dd();
         foreach ($request->except(['_token', '_method']) as $key => $item) {
 
-            $query = ThemeColor::query()->whereName($key)->first();
+            $query = ThemeColor::query()->where('place_id', $this->business->id)->whereName($key)->first();
             if ($query) {
                 if ($query->value != $item) {
                     $query->name = $key;
@@ -101,6 +108,7 @@ class MenuDesignController extends Controller
                 $newQuery->save();
             }
         }
+        $result = $this->business->updateSetupPercentage();
 
         return back()->with('response', [
             'status'=>"success",
@@ -108,11 +116,4 @@ class MenuDesignController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(MenuDesign $menuDesign)
-    {
-        //
-    }
 }
