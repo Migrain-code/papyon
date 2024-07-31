@@ -80,7 +80,7 @@
                                             @endif
                                     </span>
                                     @endif
-                                    <img src="{{storage($product->image)}}" style="min-height: 150px; object-fit: cover;width: 100%" alt="">
+                                    <img src="{{storage($product->image)}}" onclick="window.open('{{route('productDetail', [$place->slug, $product->id])}}', '_blank')" style="min-height: 150px; object-fit: cover;width: 100%" alt="">
 
                                     @if(false)
                                         <div class="discount">
