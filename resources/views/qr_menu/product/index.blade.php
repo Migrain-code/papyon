@@ -23,7 +23,7 @@
                         </div>
                     @empty
                         <div class="swiper-slide">
-                            <img src="{{storage($product->image)}}" alt="">
+                            <img style="height: 300px" src="{{storage($product->image)}}" alt="">
 
                         </div>
                     @endforelse

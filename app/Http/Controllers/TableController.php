@@ -61,8 +61,8 @@ class TableController extends Controller
             $table->name = $request->table_single;
             $table->qr_name = $uniqueString;
             $table->save();
-
-            $table->qr_code = generateQrCode($uniqueString, Str::slug($region->name), Str::slug($table->name), $place->id);
+            $url = route('table.show', $uniqueString);
+            $table->qr_code = generateQrCode($url, Str::slug($region->name), Str::slug($table->name), $place->id);
             $table->save();
         } else{
             for ($i = 1; $i <= $request->table_count; $i++){
@@ -73,8 +73,8 @@ class TableController extends Controller
                 $table->name = $request->table_multi. " ".$i;
                 $table->qr_name = $uniqueString;
                 $table->save();
-
-                $table->qr_code = generateQrCode($uniqueString, Str::slug($region->name), Str::slug($table->name), $place->id);
+                $url = route('table.show', $uniqueString);
+                $table->qr_code = generateQrCode($url, Str::slug($region->name), Str::slug($table->name), $place->id);
                 $table->save();
             }
         }

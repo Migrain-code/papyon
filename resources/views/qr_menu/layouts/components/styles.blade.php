@@ -41,5 +41,12 @@
         cursor: default;
         font-weight: bold;
     }
+
+    .ts-control, .ts-wrapper.single.input-active .ts-control {
+        background: #fff;
+        cursor: text;
+        height: 34px;
+    }
+
 </style>
 @yield('styles')

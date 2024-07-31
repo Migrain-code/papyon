@@ -5,7 +5,7 @@
     <style>
         .cropper-container {
             max-width: 100%;
-            max-height: 300px;
+            max-height: 500px;
             overflow: hidden;
             position: relative;
         }
@@ -284,7 +284,8 @@
             const canvas = document.getElementById('canvas');
             const croppedImageInput = document.getElementById('croppedInput');
             let cropper;
-
+            var cropWidth = 500;
+            var cropHeight = 450;
             fileInput.addEventListener('change', function (e) {
                 const files = e.target.files;
                 if (files && files.length > 0) {
@@ -295,27 +296,28 @@
                         if (cropper) {
                             cropper.destroy();
                         }
+
                         image.onload = function() {
                             const imageWidth = image.naturalWidth;
                             const imageHeight = image.naturalHeight;
-                            let scaledWidth = 190;
-                            let scaledHeight = 150;
+                            let scaledWidth = cropWidth;
+                            let scaledHeight = cropHeight;
 
-                            if (imageWidth / imageHeight > 190 / 150) {
-                                scaledHeight = 150;
-                                scaledWidth = (imageWidth / imageHeight) * 150;
+                            if (imageWidth / imageHeight > cropWidth / cropHeight) {
+                                scaledHeight = cropHeight;
+                                scaledWidth = (imageWidth / imageHeight) * cropHeight;
                             } else {
-                                scaledWidth = 190;
-                                scaledHeight = (imageHeight / imageWidth) * 190;
+                                scaledWidth = cropWidth;
+                                scaledHeight = (imageHeight / imageWidth) * cropWidth;
                             }
 
                             cropper = new Cropper(image, {
                                 aspectRatio: 1,
                                 viewMode: 1,
-                                minCropBoxWidth: 190,
-                                minCropBoxHeight: 150,
+                                minCropBoxWidth: cropWidth,
+                                minCropBoxHeight: cropHeight,
                                 ready() {
-                                    cropper.setCropBoxData({ left: 0, top: 0, width: 190, height: 150 });
+                                    cropper.setCropBoxData({ left: 0, top: 0, width: cropWidth, height: cropHeight });
                                     cropper.setCanvasData({ left: 0, top: 0, width: scaledWidth, height: scaledHeight });
                                 }
                             });
@@ -327,11 +329,11 @@
             cropButton.addEventListener('click', function () {
                 if($('#productImageCheck').is(':checked')){
                     const croppedCanvas = cropper.getCroppedCanvas({
-                        width: 190,
-                        height: 150
+                        width: cropWidth,
+                        height: cropHeight
                     });
                     canvas.style.display = 'none';
-                    canvas.width = 190;
+                    canvas.width = cropWidth;
                     canvas.height = 150;
                     canvas.getContext('2d').drawImage(croppedCanvas, 0, 0);
 

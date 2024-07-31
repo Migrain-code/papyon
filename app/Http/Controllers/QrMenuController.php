@@ -190,7 +190,6 @@ class QrMenuController extends Controller
         return response()->json([
             'status' => "success",
             'message' => "Sepetinizdeki Ürünler Kaldırıldı",
-
         ]);
     }
 
@@ -219,12 +218,13 @@ class QrMenuController extends Controller
         }
         $generalTotal = calculateCart($this->cart);
 
-        $message = $this->tableOrderCreate($request, $cart, $generalTotal);
-
+        $result = $this->tableOrderCreate($request, $cart, $generalTotal);
+        $message = $result["message"];
+        $orderId = $result["orderId"];
         if ($whatsappStatus) {
             return redirect()->to('https://wa.me/' . clearPhone($phone) . '?text=' . urlencode($message));
         } else {
-            return to_route('order.detail', $this->place->slug)->with('response', [
+            return to_route('order.detail', [$this->place->slug, $orderId])->with('response', [
                 'status' => "success",
                 'message' => "Siparişiniz Oluşturuldu. Sipariş Durumunu Buradan Kontrol Edebilirsiniz."
             ]);
@@ -285,7 +285,10 @@ class QrMenuController extends Controller
         } else {
             $message = $order->id;
         }
-        return $message;
+        return [
+            'message' => $message,
+            'orderId' => $order->id,
+        ];
     }
 
     public function orderDetail(Request $request, $place, Order $order)

@@ -51,7 +51,7 @@ Route::post('iletisim-formu', [\App\Http\Controllers\Frontend\HomeController::cl
     ->name('contact.form');
 
 Route::get('mekan/{slug}', [PlaceMenuController::class, 'index'])->name('place.show');
-Route::get('table/{code}', [PlaceMenuController::class, 'table']);
+Route::get('table/{code}', [PlaceMenuController::class, 'table'])->name('table.show');
 Route::middleware('checkPlace')->group(function (){
     Route::prefix("mekan/{slug}")->group(function (){
             Route::get('/anasayfa', [QrMenuController::class, 'index'])->name('menu.index');
