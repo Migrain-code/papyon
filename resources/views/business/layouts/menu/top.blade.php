@@ -16,9 +16,10 @@
                 </div>
                 <div class="progress dayArea">
                     <div
+
                         class="progress-bar"
                         role="progressbar"
-                        style="width: 100%"
+                        style="width: 100%;background-color: #252745"
                         aria-valuenow="{{authUser()->remainingDate()}}"
                         aria-valuemin="0"
                         aria-valuemax="100">
