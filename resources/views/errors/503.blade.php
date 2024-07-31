@@ -2,4 +2,4 @@
 
 @section('title', __('İşletmeye Erişemezsiniz'))
 @section('code', '503')
-@section('message', __('Bu İşletme Kurulumunu Tamamlamamış Olduğu İÇİN ERİŞEMEZSİNİZ'))
+@section('message', __('Lütfen menüye erişmek için QR kodunuzu okutunuz. Eğer hala erişemiyorsanız, işletme kurulumunu henüz tamamlamamış olabilir.'))
