@@ -2,8 +2,8 @@
     .goToTopButton {
         background: white;
         box-shadow: 1px 3px 15px #00000052;
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
         position: fixed;
         right: 30px;
         bottom: 80px;
