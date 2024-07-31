@@ -11,7 +11,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #595757;
+        color: var(--top_menu_bg);
         font-size: 16px;
     }
 </style>
