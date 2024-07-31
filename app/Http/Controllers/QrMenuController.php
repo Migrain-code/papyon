@@ -410,13 +410,12 @@ Vale talebi için teşekkürler.";
             if (isset($this->place->services->valet_phone)) {
                 $message = "Yeni Taksi Talebi: {ORDER_ID}
 
-				*Masa Bilgileri*
+*Masa Bilgileri*
+{CUSTOMER_DETAILS}
 
-				{CUSTOMER_DETAILS}
+-----------------------------
 
-				-----------------------------
-
-				Taksi talebi için teşekkürler.";
+Taksi talebi için teşekkürler.";
                 $message = str_replace('{ORDER_ID}', strtotime(date('d-m-Y')), $message);
                 $customer = '';
                 $customer = $customer ."Masa Adı:". $this->table->name . "\n";
