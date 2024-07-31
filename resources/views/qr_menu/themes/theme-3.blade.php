@@ -55,8 +55,10 @@
                     @if($loop->first)
                         <div class="d-flex">
                             <button class="columnButtons" data-column="twoColumn"><i class="ti ti-layout-2"></i></button>
+                            {{--
                             <button class="columnButtons" data-column="threeColumn"><i class="ti ti-grid-dots"></i></button>
                             <button class="columnButtons" data-column="singleColumn"><i class="ti ti-maximize"></i></button>
+                            --}}
                         </div>
                     @endif
                 </div>
