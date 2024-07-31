@@ -38,11 +38,13 @@
                         <div data-i18n="Mekan Listesi">Mekan Listesi</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                {{--
+                    <li class="menu-item">
                     <a href="{{route('business.place.create')}}" class="menu-link">
                         <div data-i18n="Mekan Ekle">Mekan Ekle</div>
                     </a>
                 </li>
+                --}}
             </ul>
         </li>
         <!-- Layouts -->
