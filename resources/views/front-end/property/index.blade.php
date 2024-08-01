@@ -14,7 +14,7 @@
             <div class="qr_menu_container_cards">
                 @forelse($features as $feature)
                     <a class="qr_menu_card" href="{{route('property.detail', $feature->slug)}}">
-                        <div><img src="{{storage($feature->image)}}" style="max-width: 250px;object-fit: cover;border-radius: 15px"></div>
+                        <div><img src="{{storage($feature->image)}}" style="max-width: 60px;object-fit: cover;border-radius: 15px"></div>
                         <div class="qr_menu_card_title">
                             {{$feature->title}}
 
