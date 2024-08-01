@@ -3,7 +3,8 @@
 @section('styles')
     <style>
         iframe{
-            max-width: 1287px;
+            max-width: 940px;
+            max-height: 480px;
             border-radius: 30px;
         }
 
