@@ -4,7 +4,7 @@
         <div class="title">
             {{setting('section_2_first_title')}}
         </div>
-        <div class="subtitle">
+        <div class="subtitle mb-3">
             {{setting('section_2_second_title')}}
         </div>
         <div class="qr_menu_container_cards">
