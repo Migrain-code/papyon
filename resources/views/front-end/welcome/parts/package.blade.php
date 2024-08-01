@@ -12,14 +12,31 @@
                 {{setting('section_5_min_title')}}
             </div>
             <div class="packages_page_extra">
-
+                <style>
+                    .newCard {
+                        background: #3b3176;
+                        padding: 4px;
+                        border-radius: 10px;
+                        font-size: 12px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: absolute;
+                        top: -11px;
+                        right: 3%;
+                        /* width: 130px; */
+                        color: white;
+                    }
+                </style>
                 <div class="packages_items">
                     @foreach($packages as $package)
-                        <form class="packages_items_item" method="get" action="{{route('business.subscribtion.payForm', $package->slug)}}">
+                        <form class="packages_items_item position-relative" method="get" action="{{route('business.subscribtion.payForm', $package->slug)}}">
                             <div class="title d-flex justify-content-between w-100">
                                 <div class="">{{$package->name}} </div>
                                 <div class="">{{$package->price. " TL"}}</div>
-
+                                @if($loop->index == 1)
+                                    <span class="newCard">Önerilen</span>
+                                @endif
                             </div>
                             <div class="props">
                                 <ul>
