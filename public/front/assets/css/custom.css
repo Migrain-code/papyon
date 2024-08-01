@@ -585,7 +585,9 @@ footer .end_icons {
     filter: brightness(0) grayscale(100%) invert(1);
 
 }
-
+.qr_menu_card:hover .qr_menu_card_arrow svg {
+    filter: brightness(1) grayscale(100%) invert(1);
+}
 .qr_menu_card .qr_menu_card_arrow svg {
     transition: stroke 0.3s ease;
 }
