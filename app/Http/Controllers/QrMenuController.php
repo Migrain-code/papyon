@@ -330,8 +330,17 @@ Toplam Fiyat: *{ORDER_TOTAL}*
 Sipariş için teşekkürler.";
         $message = str_replace('{ORDER_ID}', $order->id, $message);
         $products = '';
+
         foreach ($order->cart as $cart) {
             $products = $products . $cart->name . " - " . $cart->quantity . " Adet" . "\n";
+            if (!is_array($cart->sauces)){
+                $sauces = json_decode($cart->sauces);
+                $products.= "Soslar: \n" . implode(',', $sauces);
+            }
+            if (!is_array($cart->materials)){
+                $materials = json_decode($cart->materials);
+                $products.= "Malzemeler: \n" . implode(',', $materials);
+            }
         }
         $message = str_replace('{ORDER_DETAILS}', $products, $message);
         $message = str_replace('{ORDER_TOTAL}', formatPrice($order->total), $message);
@@ -342,6 +351,7 @@ Sipariş için teşekkürler.";
             $customer = $customer . "Ad Soyad: " . $order->name . "\n";
             $customer = $customer . "Telefon: " . $order->phone . "\n";
             $customer = $customer . "Adres: " . $order->address . "\n";
+
             $customer = $customer . "Not: " . $order->note . "\n";
             $message = str_replace('{CUSTOMER_DETAILS}', $customer, $message);
         } else{
