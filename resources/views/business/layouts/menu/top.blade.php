@@ -12,7 +12,9 @@
         <div class="navbar-nav align-items-center justify-content-center">
             <div class="d-flex justify-content-center align-items-center gap-3">
                 <div class="fw-bold ">
-                    <h5 class="m-0">{{authUser()->place()->name}}</h5>
+                    @if(authUser()->place()->setup_percentage > 50)
+                        <h5 class="m-0">{{authUser()->place()->name}}</h5>
+                    @endif
                 </div>
                 <div class="progress dayArea">
                     <div
