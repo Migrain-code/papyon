@@ -22,12 +22,13 @@ class PlaceController extends Controller
     {
         $this->user = auth('web')->user();
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $places = $this->user->places()->orderBy('order_number', 'asc')/*->whereIn('status', [1,2])*/->paginate(6);
+        $places = $this->user->places()->orderBy('order_number', 'asc')/*->whereIn('status', [1,2])*/ ->paginate(6);
         return view('business.place.index', compact('places'));
     }
 
@@ -65,7 +66,7 @@ class PlaceController extends Controller
         $place->save();
 
         $dayList = DayList::all();
-        foreach ($dayList as $day){
+        foreach ($dayList as $day) {
             $workTime = new PlaceWorkTime();
             $workTime->place_id = $place->id;
             $workTime->day_id = $day->id;
@@ -104,8 +105,8 @@ class PlaceController extends Controller
         $place->createService($serviceData);
         $place->updateSetupPercentage();
         return to_route('business.place.index')->with('response', [
-           'status' => "success",
-           'message' => "Mekan Oluşturuldu"
+            'status' => "success",
+            'message' => "Mekan Oluşturuldu"
         ]);
     }
 
@@ -114,20 +115,20 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        if ($this->user->place()->id != $place->id){
+        if ($this->user->place()->id != $place->id) {
             $this->user->places()->update(['is_default' => 0]);
             $place->is_default = 1;
 
-            if ($place->save()){
+            if ($place->save()) {
                 return to_route('business.place.index')->with('response', [
                     'status' => "success",
-                    'message' => $place->name ." Adlı Mekana Geçiş Yaptınız"
+                    'message' => $place->name . " Adlı Mekana Geçiş Yaptınız"
                 ]);
             }
-        } else{
+        } else {
             return back()->with('response', [
                 'status' => "warning",
-                'message' =>"Aynı Mekanı Seçtiniz"
+                'message' => "Aynı Mekanı Seçtiniz"
             ]);
         }
 
@@ -138,7 +139,7 @@ class PlaceController extends Controller
         $place->clone();
         return to_route('business.place.index')->with('response', [
             'status' => "success",
-            'message' => $place->name ." Adlı Mekanı Kopyaladınız"
+            'message' => $place->name . " Adlı Mekanı Kopyaladınız"
         ]);
 
     }
@@ -149,16 +150,17 @@ class PlaceController extends Controller
         $place->save();
         return back()->with('response', [
             'status' => "success",
-            'message' => $place->name ." Adlı Mekanı Pasife Aldınız"
+            'message' => $place->name . " Adlı Mekanı Pasife Aldınız"
         ]);
     }
+
     public function active(Place $place)
     {
         $place->status = 1;
         $place->save();
         return back()->with('response', [
             'status' => "success",
-            'message' => $place->name ." Adlı Mekanı Yayına Aldınız"
+            'message' => $place->name . " Adlı Mekanı Yayına Aldınız"
         ]);
     }
 
@@ -167,16 +169,16 @@ class PlaceController extends Controller
         $orders = $place->orders()->where('status', 5)
             ->where('order_type', 0)
             ->when(!$request->filled('date_range'), function ($q) use ($request) {
-              $q->whereDate('created_at', now()->toDateString());
+                $q->whereDate('created_at', now()->toDateString());
             })
             ->when($request->filled('date_range'), function ($q) use ($request) {
                 $timePartition = explode('-', $request->date_range);
                 $startTime = Carbon::createFromFormat('d.m.Y', trim($timePartition[0]))->startOfDay();
                 $endTime = Carbon::createFromFormat('d.m.Y', trim($timePartition[1]))->endOfDay();
 
-                if ($startTime == $endTime){
+                if ($startTime == $endTime) {
                     $q->whereDate('created_at', $startTime);
-                } else{
+                } else {
                     $q->whereBetween('created_at', [$startTime, $endTime]);
                 }
             })
@@ -231,15 +233,16 @@ class PlaceController extends Controller
         $place->latitude = $request->input('latitude');
         $place->longitude = $request->input('longitude');
         $place->maps_embed = $request->embed;
-        if ($request->hasFile('logo')){
+        if ($request->hasFile('logo')) {
             $place->logo = $request->file('logo')->store('placeLogos');
 
         }
+        $place->status = 1;
         $place->save();
 
         $dayList = DayList::all();
         $place->workTimes()->delete();
-        foreach ($dayList as $day){
+        foreach ($dayList as $day) {
             $workTime = new PlaceWorkTime();
             $workTime->place_id = $place->id;
             $workTime->day_id = $day->id;
@@ -250,7 +253,7 @@ class PlaceController extends Controller
         }
 
         $placeWifi = $place->wifi;
-        if (!isset($placeWifi)){
+        if (!isset($placeWifi)) {
             $placeWifi = new PlaceWifi();
             $placeWifi->place_id = $place->id;
         }
@@ -280,13 +283,13 @@ class PlaceController extends Controller
 
         $serviceData['place_id'] = $place->id;
 
-        if (isset($place->services)){
+        if (isset($place->services)) {
             $place->updateService($serviceData);
-        } else{
+        } else {
             $place->createService($serviceData);
         }
         $place->updateSetupPercentage();
-        return to_route('business.place.index')->with('response', [
+        return back()->with('response', [
             'status' => "success",
             'message' => "Mekan Bilgileriniz Güncellendi"
         ]);
