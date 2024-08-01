@@ -595,6 +595,9 @@ footer .end_icons {
 .qr_menu_card:hover .qr_menu_card_arrow svg {
     stroke: white; /* Change arrow color to white on hover */
 }
+.qr_menu_card:hover .qr_menu_card_title {
+    color: white; /* Change arrow color to white on hover */
+}
 .qr_menu_card:hover div:nth-child(2) div {
   display: none;
 }
