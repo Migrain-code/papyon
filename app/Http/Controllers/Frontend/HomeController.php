@@ -356,7 +356,7 @@ class HomeController extends Controller
     {
         //$this->temp();
         $packages = Package::all();
-        $features = Feature::whereStatus(1)->latest()->take(4)->get();
+        $features = Feature::whereStatus(1)->latest()->get();
         $blogs = Blog::whereStatus(1)->latest()->take(5)->get();
 
         return view('front-end.welcome.index', compact('packages', 'features', 'blogs'));

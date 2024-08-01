@@ -7,7 +7,14 @@
             max-height: 480px;
             border-radius: 30px;
         }
-
+        @media (max-width: 768px) {
+            iframe{
+                width: 100%;
+                max-width: 400px;
+                max-height: 250px;
+                border-radius: 30px;
+            }
+        }
     </style>
 
 @endsection
