@@ -206,7 +206,7 @@ class Place extends Model
         $service->call_a_waiter = isset($serviceData["call_a_waiter"]);
         $service->call_a_waiter_phone = isset($serviceData["call_a_waiter"]) ? clearPhone($serviceData["call_a_waiter_phone"]) : null;
         // Masaya Sipariş
-        $service->order_type = $serviceData["order_type"];
+        $service->order_type = isset($serviceData["order_type"]) ? $serviceData["order_type"] : null;
         $service->table_phone = clearPhone($serviceData["table_phone"]);
         $service->table_order = clearPhone($serviceData["table_order"]);
 
@@ -249,7 +249,7 @@ class Place extends Model
         }
 
         // Masaya Sipariş
-        $service->order_type = $serviceData["order_type"];
+        $service->order_type = isset($serviceData["order_type"]) ? $serviceData["order_type"] : null;
         $service->table_phone = clearPhone($serviceData["table_phone"]);
         $service->table_order = isset($serviceData["table_order"]);
 
