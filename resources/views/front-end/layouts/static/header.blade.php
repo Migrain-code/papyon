@@ -12,7 +12,7 @@
     @include('front-end.layouts.components.styles')
 </head>
 
-<body style="0 !important;">
+<body style="0px !important;">
 
 @include('front-end.layouts.menu.top')
 @include('front-end.layouts.menu.mobile')

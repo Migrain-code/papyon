@@ -11,8 +11,6 @@
         display: none;
         height: 0px !important;
     }
-    iframe{
-        display: none;
-    }
+
 </style>
 @yield('styles')
