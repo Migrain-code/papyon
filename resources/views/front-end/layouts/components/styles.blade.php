@@ -3,4 +3,16 @@
 <link rel="stylesheet" href="/front/assets/css/swiper-bundle.min.css">
 <link href="/front/assets/css/custom.css" rel="stylesheet">
 <link rel="icon" type="image/x-icon" href="{{storage(setting('site_favicon'))}}"/>
+<style>
+    .skiptranslate{
+        display: none;
+    }
+    .skiptranslate iframe{
+        display: none;
+        height: 0px !important;
+    }
+    iframe{
+        display: none;
+    }
+</style>
 @yield('styles')
