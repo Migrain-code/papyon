@@ -2299,9 +2299,9 @@ footer .end_icons {
     flex-direction: column;
     gap: 20px;
   }
-  .home_page_banner_left {
+  /*.home_page_banner_left {
     min-width: 425px;
-  }
+  }*/
   .main_page_swiper .swiper {
     padding: 0 50px;
   }
