@@ -208,7 +208,7 @@ class Place extends Model
         // Masaya Sipariş
         $service->order_type = isset($serviceData["order_type"]) ? $serviceData["order_type"] : null;
         $service->table_phone = clearPhone($serviceData["table_phone"]);
-        $service->table_order = clearPhone($serviceData["table_order"]);
+        $service->table_order = isset($serviceData["table_order"]) ? clearPhone($serviceData["table_order"]) : null;
 
         //Hesap İste
         $service->request_account = isset($serviceData["request_account"]);
