@@ -11,7 +11,7 @@
             iframe{
                 width: 100%;
                 max-width: 400px;
-                max-height: 250px;
+                max-height: 200px;
                 border-radius: 30px;
             }
         }
