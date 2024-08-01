@@ -61,11 +61,6 @@
                 <!-- /Logo -->
                 <h3 class="mb-1">Papyon Qr Menüye Katılın 🚀</h3>
                 <p class="mb-4">Siparişlerinizi hızlı takip edin!</p>
-                @if($errors->any())
-                    @foreach ($errors->all() as $error)
-                       {{$error}}
-                    @endforeach
-                @endif
                 <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="mb-3">
@@ -75,12 +70,13 @@
                             class="form-control"
                             id="username"
                             name="name"
+                            value="{{old('name')}}"
                             placeholder="Adınızı ve soyadınızı giriniz"
                             autofocus />
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">E-posta</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="E-posta Adresinizi Giriniz" />
+                        <input type="text" class="form-control" value="{{old('email')}}" id="email" name="email" placeholder="E-posta Adresinizi Giriniz" />
                     </div>
                     <div class="mb-3 form-password-toggle">
                         <label class="form-label" for="password">Şifre</label>
