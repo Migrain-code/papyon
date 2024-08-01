@@ -2,19 +2,18 @@
     <div class="overlay"></div>
     <div class="container">
         <div class="home_page_banner_left p-5">
-
-                @php
+            {{--
+                 @php
                 $text = "";
-                foreach (explode('-', setting('section_1_title')) as $str){
+                $words = explode('-', setting('section_1_title'));
+                foreach ($words as $str){
                     $text .= $str." &amp; ";
                 }
-
             @endphp
             <h3 class="typewrite" data-period="2000" data-type='[&quot;{!! $text !!} &quot;]'>
                 <span class="wrap"></span>
             </h3>
-
-
+            --}}
             <div class="home_page_banner_left_second">
                 <h3>{{setting('section_2_title')}} </h3>
             </div>
