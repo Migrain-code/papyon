@@ -336,14 +336,15 @@ Sipariş için teşekkürler.";
             if (!is_array($cart->sauces)){
                 $sauces = json_decode($cart->sauces);
                 $products.= "Soslar: \n" . implode(',', $sauces)."\n";
-                $products.= "-----------------------------\n";
             }
             if (!is_array($cart->materials)){
                 $materials = json_decode($cart->materials);
                 $products.= "Malzemeler: \n" . implode(',', $materials)."\n";
-                $products.= "-----------------------------\n";
+
             }
+            $products.= "-----------------------------\n";
         }
+
         $message = str_replace('{ORDER_DETAILS}', $products, $message);
         $message = str_replace('{ORDER_TOTAL}', formatPrice($order->total), $message);
 
