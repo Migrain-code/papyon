@@ -405,7 +405,7 @@ class Place extends Model
             $emptyArea [] = "Menü Ayarları";
 
         }
-        if ($this->services->count() == 0) {
+        if (isset($this->services) && $this->services()->count() == 0) {
             $percentage += 10;
             $emptyArea [] = "Hizmet Ayarları";
 
