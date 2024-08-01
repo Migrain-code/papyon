@@ -31,7 +31,7 @@ class PlaceAddRequest extends FormRequest
             'price_type' => 'required',
             'instagram' => 'required',
             'theme_id' => 'required',
-            'logo' => 'required',
+            //'logo' => 'required',
             'day_opened' => 'required',
             'day_open_clock' => 'required',
             'day_close_clock' => 'required',
