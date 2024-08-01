@@ -10,7 +10,7 @@
             <div class="topest">
                 <div class="left">
                     <div class="top">
-                        <img src="{{storage($feature->image)}}" style="max-height: 450px;border-radius: 30px;object-fit: cover" alt="">
+
                         @if(count($heads) > 0)
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item">

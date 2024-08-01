@@ -579,8 +579,19 @@ footer .end_icons {
   background-color: #3b3176;
   color: #fff !important;
 }
-.qr_menu_card:hover div:last-of-type svg {
-  color: red;
+
+.qr_menu_card:hover .icon img.svg-img {
+    fill: white; /* Change SVG fill color to white on hover */
+    filter: brightness(0) grayscale(100%) invert(1);
+
+}
+
+.qr_menu_card .qr_menu_card_arrow svg {
+    transition: stroke 0.3s ease;
+}
+
+.qr_menu_card:hover .qr_menu_card_arrow svg {
+    stroke: white; /* Change arrow color to white on hover */
 }
 .qr_menu_card:hover div:nth-child(2) div {
   display: none;
