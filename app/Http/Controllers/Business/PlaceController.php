@@ -218,9 +218,8 @@ class PlaceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Place $place)
+    public function update(PlaceAddRequest $request, Place $place)
     {
-
         $place->name = $request->input('place_name');
         $place->slug = Str::slug($request->input('place_link'));
         $place->instagram = $request->input('instagram');
