@@ -604,6 +604,7 @@ footer .end_icons {
   display: flex;
   position: relative;
   align-items: center;
+    color: #43506E;
 }
 .qr_menu_card_title_line {
   width: 200px;
