@@ -6,7 +6,63 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Spatie\Html\Elements\A;
 use Spatie\Html\Elements\Div;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Storage;
+function base64Convertor($base64Image, $folderName = "uploads"){
+    $base64Image = str_replace('data:image/png;base64,', '', $base64Image);
+    $base64Image = str_replace(' ', '+', $base64Image);
 
+    // Base64 verisini decode edin
+    $imageData = base64_decode($base64Image);
+
+    // Dosya adını ve dizinini belirleyin
+    $fileName = Str::uuid() . '.png';
+    $filePath = $folderName.'/' . $fileName;
+
+    // Dosyayı kaydedin
+    \Illuminate\Support\Facades\Storage::put($filePath, $imageData);
+    $fileUrl = \Illuminate\Support\Facades\Storage::url($filePath);
+
+    return str_replace('/storage/', '', $fileUrl);
+}
+
+function base64Convertor2($base64Image, $folderName = "uploads") {
+    // ImageManager sınıfını başlatın
+    $manager = new ImageManager(new \Intervention\Image\Drivers\Imagick\Driver()); // Bu kısmı düzenledim
+
+    $base64Image = str_replace('data:image/png;base64,', '', $base64Image);
+    $base64Image = str_replace(' ', '+', $base64Image);
+
+    // Base64 verisini decode edin
+    $imageData = base64_decode($base64Image);
+
+    // Geçici bir dosya oluşturun
+    $tempFilePath = sys_get_temp_dir() . '/' . Str::uuid() . '.png';
+    file_put_contents($tempFilePath, $imageData);
+
+    // Intervention Image ile görüntüyü açın
+    $image = $manager->make($tempFilePath);
+    $image->resize(300, 200); // İstenilen boyutları ayarlayın
+
+    // DPI ayarını Imagick kullanarak yapın
+    $imagick = $image->getCore();
+    $imagick->setImageResolution(300, 300); // 300 DPI olarak ayarlayın
+    $imagick->writeImage($tempFilePath);
+
+    // Dosya adını ve dizinini belirleyin
+    $fileName = Str::uuid() . '.png';
+    $filePath = $folderName . '/' . $fileName;
+
+    // Dosyayı belirlenen dizine taşıyın
+    Storage::put($filePath, file_get_contents($tempFilePath));
+
+    // Geçici dosyayı silin
+    unlink($tempFilePath);
+
+    // URL'i döndürün
+    $fileUrl = Storage::url($filePath);
+    return str_replace('/storage/', '', $fileUrl);
+}
 function generateWifiQrCode($ssid, $password, $encryption = 'WPA')
 {
     // Format the text for the WiFi QR code
@@ -330,22 +386,7 @@ function formatPrice($price)
     return $formattedPrice;
 }
 
-function base64Convertor($base64Image, $folderName = "uploads"){
-    $base64Image = str_replace('data:image/png;base64,', '', $base64Image);
-    $base64Image = str_replace(' ', '+', $base64Image);
 
-    // Base64 verisini decode edin
-    $imageData = base64_decode($base64Image);
-
-    // Dosya adını ve dizinini belirleyin
-    $fileName = Str::uuid() . '.png';
-    $filePath = $folderName.'/' . $fileName;
-
-    // Dosyayı kaydedin
-    \Illuminate\Support\Facades\Storage::put($filePath, $imageData);
-    $fileUrl = \Illuminate\Support\Facades\Storage::url($filePath);
-    return str_replace('/storage/', '', $fileUrl);
-}
 function create_dropdown_button($buttons, $id, $addedClass)
 {
     $newButtons = "";

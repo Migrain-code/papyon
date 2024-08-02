@@ -142,7 +142,10 @@ class Place extends Model
     {
         return $this->hasMany(ThemeColor::class, 'place_id', 'id');
     }
-
+    public function tables() // Masalar
+    {
+        return $this->hasMany(Table::class, 'place_id', 'id');
+    }
     public function createColor()
     {
         $defaultColors = ThemeColor::COLOR_VARIABLES;
@@ -208,7 +211,7 @@ class Place extends Model
         // Masaya Sipariş
         $service->order_type = isset($serviceData["order_type"]) ? $serviceData["order_type"] : null;
         $service->table_phone = clearPhone($serviceData["table_phone"]);
-        $service->table_order = isset($serviceData["table_order"]) ? clearPhone($serviceData["table_order"]) : null;
+        $service->table_order = isset($serviceData["table_order"]) ? 1 : 0;
 
         //Hesap İste
         $service->request_account = isset($serviceData["request_account"]);
