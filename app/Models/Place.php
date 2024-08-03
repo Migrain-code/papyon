@@ -146,6 +146,11 @@ class Place extends Model
     {
         return $this->hasMany(Table::class, 'place_id', 'id');
     }
+
+    public function templates() // Masalar
+    {
+        return $this->hasMany(PlaceTemplate::class, 'place_id', 'id');
+    }
     public function createColor()
     {
         $defaultColors = ThemeColor::COLOR_VARIABLES;

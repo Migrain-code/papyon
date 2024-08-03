@@ -13,4 +13,9 @@ class Table extends Model
     {
         return $this->hasOne(Place::class, 'id', 'place_id');
     }
+
+    public function region()
+    {
+        return $this->hasOne(Region::class, 'id', 'region_id');
+    }
 }

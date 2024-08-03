@@ -2,7 +2,10 @@
 * demo.css
 * File include item demo only specific css only
 ******************************************************************************/
-
+@font-face {
+    font-family: 'adobe-clean-bold';
+    src: url('/business/assets/fonts/adobe-clean-bold.otf');
+}
 .light-style .menu .app-brand.demo {
   height: 64px;
 }

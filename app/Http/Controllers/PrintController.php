@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TableResource;
 use App\Models\Place;
+use App\Models\PlaceTemplate;
+use App\Models\Table;
 use App\Services\UploadFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +13,14 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class PrintController extends Controller
 {
+    private $business;
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = auth('web')->user();
+        $this->business = $this->user->place();
+    }
     public function index()
     {
         return view('business.print.index');
@@ -18,8 +28,14 @@ class PrintController extends Controller
 
     public function store(Request $request)
     {
-        $result = base64Convertor2($request->menuCardBase64, 'themeTypes');
-
+        $table = Table::find($request->table_id);
+        $tableName = $table->region->name."-".$table->name;
+        $result = base64Convertor2($request->menuCardBase64, 'themeTypes/'.$this->business->id, $tableName);
+        $newTemplate = new PlaceTemplate();
+        $newTemplate->place_id = $this->business->id;
+        $newTemplate->table_name = $tableName;
+        $newTemplate->image = $result;
+        $newTemplate->save();
         return response()->json([
            'status' => "success",
            'message' => $result,
@@ -28,7 +44,7 @@ class PrintController extends Controller
 
     public function create(Request $request)
     {
-        $tables = Place::find(1)->tables()->take(5)->get();
+        $tables = $this->business->tables()->get();
         return response()->json(TableResource::collection($tables));
     }
 

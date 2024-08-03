@@ -2,12 +2,11 @@
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Spatie\Html\Elements\A;
 use Spatie\Html\Elements\Div;
-use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Image;
 function base64Convertor($base64Image, $folderName = "uploads"){
     $base64Image = str_replace('data:image/png;base64,', '', $base64Image);
     $base64Image = str_replace(' ', '+', $base64Image);
@@ -26,42 +25,25 @@ function base64Convertor($base64Image, $folderName = "uploads"){
     return str_replace('/storage/', '', $fileUrl);
 }
 
-function base64Convertor2($base64Image, $folderName = "uploads") {
-    // ImageManager sınıfını başlatın
-    $manager = new ImageManager(new \Intervention\Image\Drivers\Imagick\Driver()); // Bu kısmı düzenledim
-
+function base64Convertor2($base64Image, $folderName = "uploads", $tableName = "test") {
     $base64Image = str_replace('data:image/png;base64,', '', $base64Image);
     $base64Image = str_replace(' ', '+', $base64Image);
 
     // Base64 verisini decode edin
     $imageData = base64_decode($base64Image);
 
-    // Geçici bir dosya oluşturun
-    $tempFilePath = sys_get_temp_dir() . '/' . Str::uuid() . '.png';
-    file_put_contents($tempFilePath, $imageData);
+    $image = \Intervention\Image\Laravel\Facades\Image::read($imageData);
+    $image->resize(1480, 2100);
 
-    // Intervention Image ile görüntüyü açın
-    $image = $manager->make($tempFilePath);
-    $image->resize(300, 200); // İstenilen boyutları ayarlayın
+    $image->setResolution(300, 300);
 
-    // DPI ayarını Imagick kullanarak yapın
-    $imagick = $image->getCore();
-    $imagick->setImageResolution(300, 300); // 300 DPI olarak ayarlayın
-    $imagick->writeImage($tempFilePath);
+    $fileName = Str::slug($tableName) . '.png';
+    $resizedFilePath = $folderName . '/' . $fileName;
 
-    // Dosya adını ve dizinini belirleyin
-    $fileName = Str::uuid() . '.png';
-    $filePath = $folderName . '/' . $fileName;
+    Storage::put($resizedFilePath, (string) $image->encode());
 
-    // Dosyayı belirlenen dizine taşıyın
-    Storage::put($filePath, file_get_contents($tempFilePath));
-
-    // Geçici dosyayı silin
-    unlink($tempFilePath);
-
-    // URL'i döndürün
-    $fileUrl = Storage::url($filePath);
-    return str_replace('/storage/', '', $fileUrl);
+    $resizedFileUrl = Storage::url($resizedFilePath);
+    return str_replace('/storage/', '', $resizedFileUrl);
 }
 function generateWifiQrCode($ssid, $password, $encryption = 'WPA')
 {

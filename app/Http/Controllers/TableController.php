@@ -29,6 +29,7 @@ class TableController extends Controller
     {
         $place = $this->business;
         $regions = $place->regions;
+
         return view('business.table.index', compact('regions'));
     }
 
