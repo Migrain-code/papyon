@@ -25,7 +25,9 @@ class CheckControlMiddleware
             abort(503);
         }*/
         $menu = $place->activeMenu();
-
+        if (!isset($menu)){
+            abort(503);
+        }
         $products = $menu->products;
         $categories = $menu->categories;
         $swipers = $place->activeAdverts;
