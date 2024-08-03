@@ -257,10 +257,15 @@ class PlaceController extends Controller
             $placeWifi = new PlaceWifi();
             $placeWifi->place_id = $place->id;
         }
-
-        $placeWifi->pass = $request->input('wifi_password');
-        $placeWifi->name = $request->input('wifi_name');
-        $placeWifi->save();
+        if ($request->filled('wifi_name') && $request->filled('wifi_password')){
+            $placeWifi->pass = $request->input('wifi_password');
+            $placeWifi->name = $request->input('wifi_name');
+            $placeWifi->save();
+        } else{
+            if (isset($placeWifi)){
+                $placeWifi->delete();
+            }
+        }
 
         $serviceData = $request->only([
             'call_a_waiter',

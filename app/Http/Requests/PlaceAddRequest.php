@@ -29,13 +29,13 @@ class PlaceAddRequest extends FormRequest
             'main_language' => 'required',
             //'other_language' => 'required',
             'price_type' => 'required',
-            'instagram' => 'required',
+            //'instagram' => 'required',
             'theme_id' => 'required',
             //'logo' => 'required',
             'day_opened' => 'required',
             'day_open_clock' => 'required',
             'day_close_clock' => 'required',
-            'wifi_password' => 'required',
+            //'wifi_password' => 'required',
         ];
     }
 
