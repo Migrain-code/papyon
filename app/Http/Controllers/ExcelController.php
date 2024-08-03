@@ -20,7 +20,13 @@ class ExcelController extends Controller
     public function categoryExport()
     {
         $activeMenu = authUser()->place()->activeMenu();
-        if (!isset($activeMenu) && $activeMenu->categories->count() == 0){
+        if (!isset($activeMenu)){
+            return to_route('business.menu.index')->with('response', [
+                'status' => "error",
+                'message' => "Hiç kategori eklemediniz.Ayrıca Menünüz Yok. Menü Eklemeniz Gerekmektedir",
+            ]);
+        }
+        if ($activeMenu->categories->count() == 0){
             return to_route('business.menu.index')->with('response', [
                 'status' => "error",
                 'message' => "Hiç kategori eklemediniz.Ayrıca Menünüz Yok. Menü Eklemeniz Gerekmektedir",
