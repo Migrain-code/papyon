@@ -64,7 +64,7 @@
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="teamMemberList" style="">
                                                 <a class="dropdown-item" href="{{route('business.menu.useMenu', $menu->id)}}">Bu Menüyü Kullan</a>
                                                 <a class="dropdown-item" href="{{route('business.menu.edit', $menu->id)}}">Düzenle</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Sil</a>
+                                                <a class="dropdown-item" href="{{route('business.menu.show', $menu->id)}}">Sil</a>
                                             </div>
                                         </div>
                                         <div class="bg-label-primary rounded-3 text-center mb-3 pt-4 pb-4">

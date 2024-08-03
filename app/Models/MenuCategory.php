@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MenuCategory extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $fillable = ["order_number"];
     public function products()
     {
@@ -28,5 +28,12 @@ class MenuCategory extends Model
             $newProduct->category_id = $newCategory->id; // Yeni menu_id ile güncelle
             $newProduct->save();
         }
+    }
+
+    protected static function booted()
+    {
+        static::deleted(function ($category) {
+            $category->products()->delete();
+        });
     }
 }

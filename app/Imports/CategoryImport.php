@@ -16,10 +16,10 @@ class CategoryImport implements ToModel, WithStartRow
     public $importedCount = 0; // Counter for imported categories
     public $skippedCount = 0;  // Counter for skipped categories
 
-    public function __construct($categories)
+    public function __construct($categories, $menuId)
     {
         $this->activeCategories = $categories;
-        $this->menuId = $categories->first()->menu_id;
+        $this->menuId = $menuId;
     }
 
     /**

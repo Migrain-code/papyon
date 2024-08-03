@@ -144,7 +144,9 @@ class MenuController extends Controller
         $menu = new Menu();
         $menu->place_id = $place->id;
         $menu->name = $request->input('name');
-        $menu->image = $request->file('menu_image')->store('menuLogos');
+        if ($request->hasFile('menu_image')){
+            $menu->image = $request->file('menu_image')->store('menuLogos');
+        }
         if ($menu->save()) {
             if ($place->menus->count() == 1) {
                 $menu->is_default = 1;
@@ -193,6 +195,14 @@ class MenuController extends Controller
         //
     }
 
+    public function show(Menu $menu)
+    {
+        $menu->delete();
+        return back()->with('response', [
+           'status' => "success",
+           'message' => "Menü Başarılı Bir Şekilde Silindi"
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      */

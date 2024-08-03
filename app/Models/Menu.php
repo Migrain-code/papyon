@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Menu extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     public function categories()
     {
@@ -57,5 +57,24 @@ class Menu extends Model
             $newCryptedMenu->menu_id = $newMenu->id; // Yeni menu_id ile güncelle
             $newCryptedMenu->save();
         }
+    }
+
+    protected static function booted()
+    {
+        static::deleted(function ($menu) {
+            $menu->categories()->delete();
+
+            // İlişkili ürünleri sil
+            $menu->products()->delete();
+
+            // İlişkili banner'ı sil
+            if ($menu->banner) {
+                $menu->banner->delete();
+            }
+            // İlişkili şifreli menüyü sil
+            if ($menu->cryptedMenu) {
+                $menu->cryptedMenu->delete();
+            }
+        });
     }
 }
