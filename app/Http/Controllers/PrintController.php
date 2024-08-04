@@ -23,7 +23,7 @@ class PrintController extends Controller
     }
     public function index()
     {
-        return view('business.print.index');
+        return view('business.print.template-2.index');
     }
 
     public function store(Request $request)
@@ -31,11 +31,19 @@ class PrintController extends Controller
         $table = Table::find($request->table_id);
         $tableName = $table->region->name."-".$table->name;
         $result = base64Convertor2($request->menuCardBase64, 'themeTypes/'.$this->business->id, $tableName);
-        $newTemplate = new PlaceTemplate();
-        $newTemplate->place_id = $this->business->id;
-        $newTemplate->table_name = $tableName;
-        $newTemplate->image = $result;
-        $newTemplate->save();
+        $existTable = $this->business->templates()->where('table_id', $table->id)->first();
+        if (isset($existTable)){
+            $existTable->image = $result;
+            $existTable->save();
+        } else{
+            $newTemplate = new PlaceTemplate();
+            $newTemplate->place_id = $this->business->id;
+            $newTemplate->table_id = $table->id;
+            $newTemplate->table_name = $tableName;
+            $newTemplate->image = $result;
+            $newTemplate->save();
+        }
+
         return response()->json([
            'status' => "success",
            'message' => $result,
@@ -44,7 +52,7 @@ class PrintController extends Controller
 
     public function create(Request $request)
     {
-        $tables = $this->business->tables()->get();
+        $tables = $this->business->tables()->take(5)->get();
         return response()->json(TableResource::collection($tables));
     }
 

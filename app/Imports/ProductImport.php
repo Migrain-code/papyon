@@ -38,6 +38,7 @@ class ProductImport implements ToModel, WithStartRow
                 $menuCategoryProduct->name = $row[2];
                 $menuCategoryProduct->order_number = $row[1];
                 $menuCategoryProduct->price = $row[3] ?? 0;
+                $menuCategoryProduct->description = $row[4] ?? 0;
                 if (in_array($menuCategoryProduct->name, $productNames)){
                     $this->skippedCount++;
                 } else{
