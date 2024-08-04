@@ -30,7 +30,7 @@ class PrintController extends Controller
     {
         $table = Table::find($request->table_id);
         $tableName = $table->region->name."-".$table->name;
-
+        dd($request->input('menuCardBase64'));
         $result = base64Convertor2($request->input('menuCardBase64'), 'themeTypes/'.$this->business->id, $tableName);
         $existTable = $this->business->templates()->where('table_id', $table->id)->first();
         if (isset($existTable)){
