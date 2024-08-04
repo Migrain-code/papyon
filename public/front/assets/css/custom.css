@@ -564,7 +564,8 @@ footer .end_icons {
   padding: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   gap: 15px;
   min-width: 264px;
   border-radius: 15px;
