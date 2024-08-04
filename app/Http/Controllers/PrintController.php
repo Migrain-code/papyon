@@ -52,7 +52,7 @@ class PrintController extends Controller
 
     public function create(Request $request)
     {
-        $tables = $this->business->tables()->take(5)->get();
+        $tables = $this->business->tables()->get();
         return response()->json(TableResource::collection($tables));
     }
 
