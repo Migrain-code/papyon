@@ -79,7 +79,6 @@
                                                 </div>
                                             </th>
                                             <th>Ad Soyad</th>
-                                            <th>Telefon</th>
                                             <th>Durum</th>
                                             <th>Masa</th>
                                             <th>Tarih</th>
@@ -107,7 +106,6 @@
         var DATA_COLUMNS = [
             {data: 'id'},
             {data: 'name'},
-            {data: 'phone'},
             {data: 'status'},
             {data: 'table_id'},
             {data: 'created_at'},

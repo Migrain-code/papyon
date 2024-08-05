@@ -3,7 +3,7 @@
 <div class="row g-3">
     <div class="col-6">
         <div class="mb-3">
-            <label for="formFile" class="form-label">Logo Seçiniz</label>
+            <label for="formFile" class="form-label">Logo Seçiniz (500*167)</label>
             <input class="form-control" name="logo" type="file" id="formFile">
         </div>
     </div>

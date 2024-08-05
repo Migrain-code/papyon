@@ -102,6 +102,7 @@
                                     <div class="title">{{$product->name}}</div>
                                     <div class="price">
                                         <p>{{$product->price}} ₺</p>
+                                        @if($place->services->package_order || $place->services->take_away_order)
                                         <span class="addToCartButton" data-product="{{$product->id}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="61.479" height="61.479" viewBox="0 0 61.479 61.479">
                                             <g id="Group_3412" data-name="Group 3412" transform="translate(-7714.521 -5540.625)">
@@ -117,6 +118,7 @@
                                             </g>
                                         </svg>
                                         </span>
+                                        @endif
                                     </div>
                                 </div>
                             </a>

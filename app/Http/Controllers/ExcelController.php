@@ -58,6 +58,11 @@ class ExcelController extends Controller
 
     public function categoryImport(Request $request)
     {
+        $request->validate([
+            'category_import' => 'required|file|mimes:xls,xlsx,csv'
+        ], [], [
+            'category_import' => 'Kategori Excel Dosya'
+        ]);
         $activeMenu = authUser()->place()->activeMenu();
         if (!isset($activeMenu)){
             return to_route('business.menu.index')->with('response', [
@@ -76,6 +81,11 @@ class ExcelController extends Controller
 
     public function productImport(Request $request)
     {
+        $request->validate([
+            'product_import' => 'required|file|mimes:xls,xlsx,csv'
+        ], [], [
+            'product_import' => 'Ürün Excel Dosya'
+        ]);
         $activeMenu = authUser()->place()->activeMenu();
         if (!isset($activeMenu)){
             return to_route('business.menu.index')->with('response', [
