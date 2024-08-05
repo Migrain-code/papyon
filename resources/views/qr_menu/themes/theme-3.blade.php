@@ -132,7 +132,7 @@
             @include('qr_menu.themes.parts.swiper')
         @endif
     </div>
-    @if(isset($menu->banner))
+    @if(isset($menu->banner) && $menu->banner->status == 1)
         <div class="dialogModal">
             <div class="modal fade" id="popupBannerModal" data-bs-backdrop="static" data-bs-keyboard="false"
                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -191,7 +191,7 @@
 
     </script>
 
-    @if(isset($menu->banner))
+    @if(isset($menu->banner) && $menu->banner->status == 1)
         <script>
             if (!localStorage.getItem('modalShown')) {
                 var productModal = new bootstrap.Modal(document.querySelector('#popupBannerModal'));
