@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html
-    lang="en"
+    lang="tr"
     class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
     dir="ltr"
     data-theme="theme-default"

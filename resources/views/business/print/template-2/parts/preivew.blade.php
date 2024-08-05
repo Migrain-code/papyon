@@ -3,7 +3,7 @@
         <div class="topBg" id="topBg"></div>
         <div class="container">
             <div class="logoArea">
-                <img id="logoImage" src="/business/template/logo.svg" style="width: 450px">
+                <img id="logoImage" src="/business/template/logo.png" style="width: 450px">
             </div>
             <div class="card my-4" id="innerBox" style="border-radius: 30px;background-color: #faeedb">
                 <div class="card-body" style="min-height: 490px">

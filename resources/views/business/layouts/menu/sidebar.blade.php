@@ -110,9 +110,15 @@
             </a>
         </li>
         <li class="menu-item">
+            <a href="{{route('business.placeTemplate.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-template"></i>
+                <div data-i18n="Şablonlar">Şablonlar</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="{{route('business.create-template.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-template"></i>
-                <div data-i18n="Çıktı Al">Çıktı Al</div>
+                <div data-i18n="Şablon Oluştur">Şablon Oluştur</div>
             </a>
         </li>
     </ul>
