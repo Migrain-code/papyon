@@ -24,23 +24,17 @@
         <label class="form-label" for="multicol-country">Ana Dil</label>
         <select id="multicol-country" name="main_language" class="select2 form-select" data-allow-clear="true">
             <option value="">Select</option>
-            <option value="tr" @selected($place->main_language == "tr")>Turkish</option>
-            <option value="en" @selected($place->main_language == "en")>English</option>
-            <option value="fr" @selected($place->main_language == "fr")>French</option>
-            <option value="de" @selected($place->main_language == "de")>German</option>
-            <option value="ar" @selected($place->main_language == "ar")>Arabic</option>
-            <option value="ru" @selected($place->main_language == "ru")>Russisch</option>
+            @foreach($languages as $language)
+             <option value="{{$language->sort_name}}" @selected($place->main_language == $language->sort_name)>{{$language->name}}</option>
+            @endforeach
         </select>
     </div>
     <div class="col-md-6 select2-primary">
         <label class="form-label" for="multicol-language">Diğer Diller</label>
         <select id="multicol-language" name="other_languages[]" class="select2 form-select" multiple>
-            <option value="tr" @selected(in_array('tr', $place->other_languages ?? []))>Turkish</option>
-            <option value="en" @selected(in_array('en', $place->other_languages ?? []))>English</option>
-            <option value="fr" @selected(in_array('fr', $place->other_languages ?? []))>French</option>
-            <option value="de" @selected(in_array('de', $place->other_languages ?? []))>German</option>
-            <option value="ar" @selected(in_array('ar', $place->other_languages ?? []))>Arabic</option>
-            <option value="ru" @selected(in_array('ru', $place->other_languages ?? []))>Russisch</option>
+            @foreach($languages as $language)
+                <option value="{{$language->sort_name}}" @selected(in_array($language->sort_name, $place->other_languages ?? []))>{{$language->name}}</option>
+            @endforeach
         </select>
     </div>
     <div class="col-md-6">

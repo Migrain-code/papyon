@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Business;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlaceAddRequest;
 use App\Models\DayList;
+use App\Models\MenuLanguage;
 use App\Models\Place;
 use App\Models\PlaceWifi;
 use App\Models\PlaceWorkTime;
@@ -214,7 +215,8 @@ class PlaceController extends Controller
     {
         $dayList = DayList::all();
         $workTimes = $place->workTimes;
-        return view('business.place.edit.index', compact('place', 'dayList', 'workTimes'));
+        $languages = MenuLanguage::all();
+        return view('business.place.edit.index', compact('place', 'dayList', 'workTimes', 'languages'));
     }
 
     /**
