@@ -80,6 +80,7 @@
                 @endforeach
             </div>
         @endif
+        @if($place->services->package_order || $place->services->take_away_order)
         <div class="basket">
             <button class="addToCartButton" data-product="{{$product->id}}">
                 <i class="ti ti-shopping-cart"></i>
@@ -87,6 +88,7 @@
                 <b>{{ $product->price. $place->price_type }}</b>
             </button>
         </div>
+        @endif
 
         <div class="dialogModal videoModal">
             <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
