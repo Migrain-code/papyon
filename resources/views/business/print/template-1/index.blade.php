@@ -142,6 +142,7 @@
 @endsection
 
 @section('content')
+
     <div id="overlay" style="display:none;flex-direction: column">
         <div id="loader"></div>
         <div class="alert alert-warning mt-5">Şablonlar Oluşturana Kadar Siteyi Kapatmayın</div>
