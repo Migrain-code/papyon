@@ -40,6 +40,16 @@ function base64Convertor2($base64Image, $folderName = "uploads", $tableName = "t
     $fileName = Str::slug($tableName) . '.png';
     $resizedFilePath = $folderName . '/' . $fileName;
 
+    if (!Storage::exists($folderName)) {
+        Storage::makeDirectory($folderName, 0755, true, true);
+    } else {
+        // Klasör var ve izinler 0700 ise, izinleri 0755 olarak değiştirin
+        $folderPath = storage_path('app/public/' . $folderName);
+        if (substr(sprintf('%o', fileperms($folderPath)), -4) == '0700') {
+            chmod($folderPath, 0755);
+        }
+    }
+
     Storage::put($resizedFilePath, (string) $image->encode());
 
     $resizedFileUrl = Storage::url($resizedFilePath);
