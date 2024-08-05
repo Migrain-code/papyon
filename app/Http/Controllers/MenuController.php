@@ -77,6 +77,13 @@ class MenuController extends Controller
 
     public function updatePopup(Menu $menu ,Request $request)
     {
+        $request->validate([
+           'banner_type' => 'required',
+           'banner_description' => 'required'
+        ], [], [
+            'banner_type' => 'banner türü',
+            'banner_description' => 'banner açıklaması'
+        ]);
         $menuBanner = $menu->banner;
         if(!isset($menuBanner)){
             $menuBanner = new MenuPopupBanner();
