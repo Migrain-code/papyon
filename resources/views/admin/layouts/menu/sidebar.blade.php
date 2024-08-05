@@ -143,7 +143,12 @@
                 <div data-i18n="Alerjenler">Alerjenler</div>
             </a>
         </li>
-
+        <li class="menu-item">
+            <a href="{{route('admin.language.index')}}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-language"></i>
+                <div data-i18n="Diller">Diller</div>
+            </a>
+        </li>
         <li class="menu-item">
             <a href="{{route('admin.setting.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-settings"></i>

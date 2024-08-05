@@ -227,6 +227,7 @@ Route::prefix('admin')->as('admin.')->group(function (){
         Route::resource('page', \App\Http\Controllers\PageController::class);
         Route::resource('user', \App\Http\Controllers\Admin\UserController::class);
         Route::resource('allergen', \App\Http\Controllers\Admin\AllergenController::class);
+        Route::resource('language', \App\Http\Controllers\MenuLanguageController::class);
 
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');
