@@ -15,7 +15,8 @@
 </script>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<script type="text/javascript">
+{{--
+    <script type="text/javascript">
     function handleCookie(val) {
         let check = getCookie("googtrans");
         if (val != "" && val != null) {
@@ -63,6 +64,7 @@
     });
 
 </script>
+--}}
 
 <style>
     body.swal2-toast-shown .swal2-container {
