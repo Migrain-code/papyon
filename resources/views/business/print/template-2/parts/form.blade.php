@@ -84,7 +84,7 @@
                     <tr>
                         <td class="text-nowrap">Logo Rengi</td>
                         <td>
-                            <div class="color-picker-classic" data-color-id="logoFooter" data-attribute-name="color"></div>
+                            <div class="color-picker-classic" data-class-name="st0" data-attribute-name="fill"></div>
                         </td>
                     </tr>
                 </tbody>

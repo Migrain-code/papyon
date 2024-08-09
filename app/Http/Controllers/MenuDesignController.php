@@ -32,7 +32,7 @@ class MenuDesignController extends Controller
     public function index()
     {
         $this->business = $this->user->place();
-        $menuOrders = $this->business->menuOrders;
+        $menuOrders = $this->business->menuOrders->where('status', 1);
         return view('business.theme.index', compact('menuOrders'));
     }
 

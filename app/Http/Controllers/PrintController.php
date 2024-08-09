@@ -23,7 +23,7 @@ class PrintController extends Controller
     }
     public function index()
     {
-        return view('business.print.template-2.index');
+        return view('business.print.template-1.index');
     }
 
     public function store(Request $request)

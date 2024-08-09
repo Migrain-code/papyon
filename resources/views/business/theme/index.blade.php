@@ -1,6 +1,11 @@
 @extends('business.layouts.master')
 @section('title', 'Tema Ayarları')
 @section('styles')
+    <style>
+        .accordion-button::after {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -53,10 +58,8 @@
                 </div>
                 <div class="card-body">
                     <div class="row gy-4 mb-4">
-                        @include('business.theme.menu.nav')
                         <!--/ User Pills -->
                         @include('business.theme.tabs.menu-content')
-
 
                     </div>
                     <div class="navigationArea d-flex align-items-center justify-content-center">

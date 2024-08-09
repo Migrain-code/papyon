@@ -62,7 +62,6 @@
                 </div>
                 <div class="card-body">
                     <div class="row gy-4 mb-4">
-                        @include('business.theme.menu.nav')
                         <!--/ User Pills -->
                         <div class="row">
                             <div class="col-4">
@@ -104,64 +103,64 @@
             // iFrame içindeki belgeye eriş
             iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
         });
-        $(document).on('change', '[name="top_menu_bg"]', function () {
+        $(document).on('input', '[name="top_menu_bg"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.header').css('background-color', selectedColor);
         });
-        $(document).on('change', '[name="bottom_menu_bg_close"]', function () {
+        $(document).on('input', '[name="bottom_menu_bg_close"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.footer .menu').css('background-color', selectedColor);
         });
-        $(document).on('change', '[name="bottom_menu_font"]', function () {
+        $(document).on('input', '[name="bottom_menu_font"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.footer .menu ul li a i').css('color', selectedColor);
         });
-        $(document).on('change', '[name="bottom_menu_font_close"]', function () {
+        $(document).on('input', '[name="bottom_menu_font_close"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.footer .menu ul li a i').css('color', selectedColor);
         });
-        $(document).on('change', '[name="bottom_menu_bg"]', function () {
+        $(document).on('input', '[name="bottom_menu_bg"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.footer .show-menu').css('background-color', selectedColor);
         });
-        $(document).on('change', '[name="bottom_menu_font"]', function () {
+        $(document).on('input', '[name="bottom_menu_font"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.footer .menu ul').css('color', selectedColor);
             $(iframeDocument).find('.footer .show-menu li a span').css('color', selectedColor);
         });
-        $(document).on('change', '[name="category_button_bg"]', function () {
+        $(document).on('input', '[name="category_button_bg"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button').css('background-color', selectedColor);
         });
-        $(document).on('change', '[name="category_button_font"]', function () {
+        $(document).on('input', '[name="category_button_font"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.categories_page_categories-2 .content .accordion .accordion-item .accordion-header .accordion-button .column span').css('color', selectedColor);
         });
-        $(document).on('change', '[name="category_bg"]', function () {
+        $(document).on('input', '[name="category_bg"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.categories_page_categories-2 .content .accordion .accordion-item .accordion-body').css('background-color', selectedColor);
         });
-        $(document).on('change', '[name="product_card_bg"]', function () {
+        $(document).on('input', '[name="product_card_bg"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.cardContent').css('background-color', selectedColor);
         });
-        $(document).on('change', '[name="product_card_font"]', function () {
+        $(document).on('input', '[name="product_card_font"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.categories_page_categories-2 .content .accordion .accordion-item .accordion-body .content .title').css('color', selectedColor);
             $(iframeDocument).find('.categories_page_categories-2 .content .accordion .accordion-item .accordion-body .content .description').css('color', selectedColor);
 
         });
-        $(document).on('change', '[name="product_card_time_bg"]', function () {
+        $(document).on('input', '[name="product_card_time_bg"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.calorieAre').css('background-color', selectedColor);
 
         });
-        $(document).on('change', '[name="product_card_time_font"]', function () {
+        $(document).on('input', '[name="product_card_time_font"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.calorieAre').css('color', selectedColor);
 
         });
-        $(document).on('change', '[name="product_card_add_button_bg"]', function () {
+        $(document).on('input', '[name="product_card_add_button_bg"]', function () {
             let selectedColor = $(this).val();
             $(iframeDocument).find('.addToCardButton').css('color', selectedColor);
 
