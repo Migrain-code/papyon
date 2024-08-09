@@ -10,6 +10,7 @@ use App\Models\Place;
 use App\Models\PlaceWifi;
 use App\Models\PlaceWorkTime;
 use App\Models\Service;
+use App\Models\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -39,7 +40,9 @@ class PlaceController extends Controller
     public function create()
     {
         $dayList = DayList::all();
-        return view('business.place.create.index', compact('dayList'));
+        $templates = Template::all();
+
+        return view('business.place.create.index', compact('dayList', 'templates'));
     }
 
     /**
@@ -216,7 +219,8 @@ class PlaceController extends Controller
         $dayList = DayList::all();
         $workTimes = $place->workTimes;
         $languages = MenuLanguage::all();
-        return view('business.place.edit.index', compact('place', 'dayList', 'workTimes', 'languages'));
+        $templates = Template::all();
+        return view('business.place.edit.index', compact('place', 'dayList', 'workTimes', 'languages', 'templates'));
     }
 
     /**
