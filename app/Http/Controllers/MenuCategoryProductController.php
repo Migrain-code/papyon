@@ -32,7 +32,8 @@ class MenuCategoryProductController extends Controller
         $menu = $category->menu;
         $sauces = $this->business->souces;
         $materials = $this->business->materials;
-        return view('business.menu.product.create', compact('categories', 'allergens', 'menu', 'category', 'sauces', 'materials'));
+        $placeUnits = $this->business->units;
+        return view('business.menu.product.create', compact('categories', 'allergens', 'menu', 'category', 'sauces', 'materials', 'placeUnits'));
     }
     public function updateOrder(Request $request)
     {

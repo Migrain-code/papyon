@@ -53,6 +53,15 @@
                                 </div>
                             </div>
                         @empty
+                            <div class="alert alert-primary alert-dismissible text-center d-flex flex-column align-items-center " role="alert">
+                                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addMenuCategoryModal"  class="btn fs-5" style="background-color: #7367f0;color: white;border: 1px dashed #ffffff">
+                                    <i class="fa fa-plus-circle me-2 my-2"></i>
+                                    Kategori Oluştur
+                                </a>
+                                <p class="my-3" style="max-width: 400px">
+                                    Görünüşe Göre Hiç Kategori Oluşturmamışsınız. Şimdi "Kategori Oluştur" butonuna tıklayın ve ilk kategorinizi oluşturun.
+                                </p>
+                            </div>
                         @endforelse
                     </div>
                 </div>

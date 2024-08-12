@@ -6,11 +6,11 @@
         @foreach($templates as $template)
             <div class="col-2 mb-md-0 mb-2">
                 <div class="form-check custom-option custom-option-image custom-option-image-check">
-                    <input class="form-check-input" @checked($place->theme_id == $template->id) name="theme_id" type="radio" value="{{$template->id}}" id="customCheckboxImg{{$template->id}}" checked />
+                    <input class="form-check-input" @checked($place->theme_id == $template->id) name="theme_id" type="radio" value="{{$template->id}}" id="customCheckboxImg{{$template->id}}" />
                     <label class="form-check-label custom-option-content" for="customCheckboxImg{{$template->id}}">
-                                          <span class="custom-option-body">
-                                            <img src="{{storage($template->image)}}" alt="cbImg" />
-                                          </span>
+                      <span class="custom-option-body">
+                        <img src="{{storage($template->image)}}" alt="cbImg" />
+                      </span>
                     </label>
                 </div>
             </div>

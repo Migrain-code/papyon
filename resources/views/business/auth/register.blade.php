@@ -75,6 +75,17 @@
                             autofocus />
                     </div>
                     <div class="mb-3">
+                        <label for="business_username" class="form-label">Mekan Adı</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="business_username"
+                            name="company_name"
+                            value="{{old('company_name')}}"
+                            placeholder="Mekan Adınızı Yazınız"
+                            autofocus />
+                    </div>
+                    <div class="mb-3">
                         <label for="email" class="form-label">E-posta</label>
                         <input type="text" class="form-control" value="{{old('email')}}" id="email" name="email" placeholder="E-posta Adresinizi Giriniz" />
                     </div>
@@ -92,11 +103,11 @@
                         </div>
                     </div>
                     <div class="mb-3 form-password-toggle">
-                        <label class="form-label" for="password">Şifre Tekrarı</label>
+                        <label class="form-label" for="password_confirmation">Şifre Tekrarı</label>
                         <div class="input-group input-group-merge">
                             <input
                                 type="password"
-                                id="password"
+                                id="password_confirmation"
                                 class="form-control"
                                 name="password_confirmation"
                                 placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
@@ -106,11 +117,13 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
-                            <label class="form-check-label" for="terms-conditions">
+                            <input class="form-check-input" type="checkbox" id="terms" name="terms" />
+                            <label class="form-check-label" for="terms">
                                 Papyon
                                 @foreach($terms as $term)
-                                    <a href="{{route('page.detail', $term->slug)}}" target="_blank">{{$term->title. " ,"}}</a>
+                                    @if($term->type == 0)
+                                        <a href="{{route('page.detail', $term->slug)}}" target="_blank">{{$term->title. " ,"}}</a>
+                                    @endif
                                 @endforeach
                                 sözleşmelerini okudum, kabul ediyorum.
                             </label>

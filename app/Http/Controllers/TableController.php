@@ -55,6 +55,11 @@ class TableController extends Controller
         }
         $place = $this->business;
         if($request->filled('table_single')){
+            $request->validate([
+               'table_single' => "required"
+            ], [], [
+                'table_single' => "Masa Adı"
+            ]);
             $uniqueString = (string) Str::uuid();
             $table = new Table();
             $table->place_id = $place->id;
@@ -66,6 +71,14 @@ class TableController extends Controller
             $table->qr_code = generateQrCode($url, Str::slug($region->name), Str::slug($table->name), $place->id);
             $table->save();
         } else{
+            $request->validate([
+                'table_multi' => "required",
+                'table_count' => "required"
+            ], [], [
+                'table_multi' => "Masa Adı",
+                'table_count' => "Masa Sayısı"
+
+            ]);
             for ($i = 1; $i <= $request->table_count; $i++){
                 $uniqueString = (string) Str::uuid();
                 $table = new Table();

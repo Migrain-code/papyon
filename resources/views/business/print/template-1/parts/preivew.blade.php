@@ -2,7 +2,7 @@
     <div class="menu-card" id="menuCard">
         <div id="menuBorder">
             <div class="logoArea">
-                <img id="logoImage" src="/business/assets/img/test_logo.png">
+                <img id="logoImage" src="/business/template/logo.png" style="max-width: 90%">
             </div>
             <div id="title">TEMASSIZ MENÜ</div>
             <div id="qrcode">

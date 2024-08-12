@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Mekanlar/</span> Mekan Listesi</h4>
+        <h4 class="py-3 mb-4"><span class="text-muted fw-light">Raporlar/</span> Gün Sonu Raporu</h4>
 
         <div class="app-academy">
             <div class="card p-0 mb-4">
@@ -25,11 +25,11 @@
                     </div>
                     <div class="app-academy-md-50 card-body d-flex align-items-md-center flex-column text-md-center">
                         <h3 class="card-title mb-4 lh-sm px-md-5 lh-lg">
-                            Hesabınıza Kayıtlı Olan
-                            <span class="text-primary fw-medium text-nowrap">Tüm Mekanlar</span>.
+                            {{authUser()->place()->name}}
+                            <span class="text-primary fw-medium text-nowrap"> Raporlarınız</span>.
                         </h3>
                         <p class="mb-3">
-                            Burada eklediğiniz tüm şubeleriniz için tüm düzenleme, yönetim, şube kopyalama ve kaldırma işlerinizi yapabilirsiniz.
+                            Burada seçmiş olduğunuz mekan için gün sonu raporunu görebilirsiniz. Veya özel tarih aralığı seçerek belirli tarih aralığındaki raproları görüntüleyebilirsiniz.
                         </p>
 
                     </div>

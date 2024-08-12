@@ -11,13 +11,7 @@ $('.editCategory').on('click', function (){
             $('[name="category_name"]').val(res.name)
             if(res.image && $('#updateImageInputContainer').length > 0){
 
-                /*var img = document.createElement('img');
-                img.style.width="100%";
-                img.src = res.image;
-
-                // img etiketini imageContainer içerisine ekle
-                var container = document.getElementById('updateImageInputContainer');
-                container.appendChild(img);*/
+                loadImageIntoCropper(res.image);
 
                 var categoryCheckbox = document.getElementById('categoryImageCheckUpdate');
                 categoryCheckbox.checked = true;
@@ -49,6 +43,7 @@ $('.editCategory').on('click', function (){
     updateCategoryModal.show();
 
 });
+
 $('#categoryImageCheck').on('change', function (){
 
     var imageInputArea = document.getElementById('imageInputContainer');

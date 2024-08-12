@@ -22,7 +22,8 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[^\d]*$/'],
+            'company_name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -31,6 +32,13 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'terms' => 'accepted'
+        ], [], [
+            'name' => "Ad Soyad",
+            'company_name' => "Mekan Adı",
+            'email' => "E-posta",
+            'password' => "Şifre",
+            'terms' => "Şartlar ve Koşullar"
         ])->validate();
 
         $user = User::create([
@@ -42,7 +50,7 @@ class CreateNewUser implements CreatesNewUsers
             'status' => 1
         ]);
         $place = new Place();
-        $place->name = uniqid(5).". Mekan";
+        $place->name = $input["company_name"];
         $place->slug = Str::slug($place->name);
         $place->is_default = 1;
         $place->user_id = $user->id;

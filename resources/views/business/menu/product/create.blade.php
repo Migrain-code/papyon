@@ -168,7 +168,7 @@
                            <div class="col-12">
                                <div class="card">
                                    <h5 class="card-header d-flex justify-content-between">Fiyat Bilgileri
-                                       <a type="button" class="btn btn-success text-white" data-bs-target="#addPartition" data-bs-toggle="modal">Birim Ekle</a>
+                                       <a type="button" class="btn btn-success text-white" data-bs-target="#addUnitModal" data-bs-toggle="modal">Birim Ekle</a>
                                    </h5>
                                    <div class="card-body">
                                        <div class="form-repeater">
@@ -182,9 +182,10 @@
 
                                                        <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                                            <label class="form-label" for="form-repeater-1-3">Birim </label>
-                                                           <select id="form-repeater-1-3" name="added_unit" class="form-select">
-                                                               <option value="0">200 Gram</option>
-                                                               <option value="1">400 Gram</option>
+                                                           <select id="form-repeater-1-3" name="added_unit" class="form-select unitSelect">
+                                                               @foreach($placeUnits as $placeUnit)
+                                                                   <option value="{{$placeUnit->id}}">{{$placeUnit->name}}</option>
+                                                               @endforeach
                                                            </select>
                                                        </div>
 
@@ -220,7 +221,7 @@
 
         </div>
     </div>
-    @include('business.menu.modals.add-menu')
+    @include('business.menu.product.add-unit')
 @endsection
 @section('scripts')
     <script src="/business/assets/vendor/libs/select2/select2.js"></script>
@@ -229,6 +230,10 @@
     <script src="/business/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
     <script src="/business/assets/js/forms-extras.js"></script>
     <script src="https://unpkg.com/cropperjs"></script>
+    <script src="/business/assets/js/project/product/add-unit.js"></script>
+    <script>
+        var unitAddUrl = "{{route('business.place-unit.store')}}";
+    </script>
     <script>
         $('#productImageCheck').on('change', function (){
             var productImageInputArea = document.getElementById('productImageInputContainer');

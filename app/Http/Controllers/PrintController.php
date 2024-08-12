@@ -6,6 +6,7 @@ use App\Http\Resources\TableResource;
 use App\Models\Place;
 use App\Models\PlaceTemplate;
 use App\Models\Table;
+use App\Models\Template;
 use App\Services\UploadFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -23,7 +24,7 @@ class PrintController extends Controller
     }
     public function index()
     {
-        return view('business.print.template-1.index');
+        return view('business.print.index');
     }
 
     public function store(Request $request)

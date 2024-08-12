@@ -151,7 +151,6 @@
     <div id="overlay" style="display:none;flex-direction: column">
         <div id="loader"></div>
         <div class="text-warning fs-4 mt-5 text-center" style="max-width: 500px">Bu işlem biraz uzun sürebilir bu sürede lütfen ekranı kapatmayınız. Pencereyi arka plana atıp bekleyebilrisniz</div>
-
     </div>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">QR Ayarları/</span> Çıktı Al</h4>

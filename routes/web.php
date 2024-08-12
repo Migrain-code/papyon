@@ -109,6 +109,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
         });
         Route::resource('table', TableController::class);
         Route::resource('create-template', \App\Http\Controllers\PrintController::class);
+        Route::resource('menu-template', \App\Http\Controllers\MenuTemplateController::class);
         Route::resource('placeTemplate', \App\Http\Controllers\PlaceTemplateController::class);
         Route::resource('region', RegionController::class);
         Route::resource('menu', MenuController::class);

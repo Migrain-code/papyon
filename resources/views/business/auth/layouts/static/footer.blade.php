@@ -8,18 +8,10 @@
 <script href="/business/assets/assets/vendor/libs/typeahead-js/typeahead.js"></script>
 <script href="/business/assets/assets/vendor/js/menu.js"></script>
 
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-<script href="/business/assets/assets/vendor/libs/@form-validation/popular.js"></script>
-<script href="/business/assets/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
-<script href="/business/assets/assets/vendor/libs/@form-validation/auto-focus.js"></script>
-
 <!-- Main JS -->
 <script href="/business/assets/assets/js/main.js"></script>
 
-<!-- Page JS -->
-<script href="/business/assets/assets/js/pages-auth.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
     body.swal2-toast-shown .swal2-container {

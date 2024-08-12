@@ -79,7 +79,7 @@ class SuggestionController extends Controller
                 return $looper;
             })
             ->editColumn('table_id', function ($q) {
-                return $q->table->name;
+                return $q->table->name ?? "Silinmiş Masa";
             })
             ->editColumn('created_at', function ($q) {
                 return $q->created_at->format('d.m.Y H:i');

@@ -59,10 +59,6 @@
         var catgoryUpdateOrderUrl= '{{ route('business.category.updateOrder') }}';
         var productUpdateOrderUrl = '{{ route('business.product.updateOrder') }}'
     </script>
-    <!-- Page JS -->
-    <script src="/business/assets/js/project/product/listing.js"></script>
-    <script src="/business/assets/js/project/product/category.js"></script>
-    <script src="https://unpkg.com/cropperjs"></script>
     <script>
         @if($themeId == 3)
             var cropWidth = 190;
@@ -73,6 +69,13 @@
             var cropHeight = 400;
             var asRadio = 2.25;
         @endif
+    </script>
+    <!-- Page JS -->
+    <script src="/business/assets/js/project/product/listing.js"></script>
+    <script src="/business/assets/js/project/product/category.js"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
+    <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             const fileInput = document.getElementById('categoryImage');
             const image = document.getElementById('image');
@@ -208,12 +211,13 @@
 
     </script>
     <script>
+        var cropper;
         document.addEventListener('DOMContentLoaded', function () {
             const fileInput = document.getElementById('updateCategoryImage');
             const image = document.getElementById('updateImage');
             const cropButton = document.getElementById('update-crop-button');
             const canvas = document.getElementById('updateCanvas');
-            let cropper;
+
 
             fileInput.addEventListener('change', function (e) {
                 const files = e.target.files;
@@ -294,5 +298,26 @@
                 });
             });
         });
+        function loadImageIntoCropper(imageSrc) {
+            const fileInput = document.getElementById('updateCategoryImage');
+            const image = document.getElementById('updateImage');
+            const cropButton = document.getElementById('update-crop-button');
+            const canvas = document.getElementById('updateCanvas');
+
+            image.style.display = "block";
+            image.src = imageSrc;
+            if (cropper) {
+                cropper.destroy();
+            }
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 1,
+                minCropBoxWidth: cropWidth,
+                minCropBoxHeight: cropHeight,
+                ready() {
+                    cropper.setCropBoxData({ width: cropWidth, height: cropHeight });
+                }
+            });
+        }
     </script>
 @endsection

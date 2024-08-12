@@ -67,7 +67,7 @@
                                                 <a class="dropdown-item" href="{{route('business.menu.show', $menu->id)}}">Sil</a>
                                             </div>
                                         </div>
-                                        <div class="bg-label-primary rounded-3 text-center mb-3 pt-4 pb-4">
+                                        <div onclick="window.location.href='{{route('business.menu.edit', $menu->id)}}'" class="bg-label-primary rounded-3 text-center mb-3 pt-4 pb-4 cursor-pointer">
                                             <img class="img-fluid" src="{{storage($menu->image)}}" alt="Card girl image" width="140"  style="min-height: 150px;object-fit: cover;border-radius: 5px">
                                         </div>
                                         <h4 class="mb-2 pb-1"><a href="{{route('business.menu.edit', $menu->id)}}">{{$menu->name}}</a></h4>

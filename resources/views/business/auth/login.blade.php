@@ -118,5 +118,11 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+    <script src="/business/assets/vendor/libs/@form-validation/popular.js"></script>
+    <script src="/business/assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+    <script src="/business/assets/vendor/libs/@form-validation/auto-focus.js"></script>
+    <script src="/business/assets/js/pages-auth.js"></script>
+@endsection
 
 

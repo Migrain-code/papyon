@@ -1,5 +1,5 @@
 @extends('business.layouts.master')
-@section('title', 'Mekan Ekle')
+@section('title', 'Mekan Bilgileri')
 @section('styles')
     <link rel="stylesheet" href="/business/assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="/business/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css" />
@@ -21,7 +21,7 @@
                                 <h5 class="card-title mb-0">Mekan Oluşturma Sihirbazı! 🎉</h5>
                                 <p class="mb-2">Şimdi yeni mekanınızı ekleyin</p>
                                 <h4 class="text-primary mb-1"></h4>
-                                <a href="javascript:;" class="btn btn-primary">Mekanlarım</a>
+                                <a href="{{route('business.place.index')}}" class="btn btn-primary">Mekanlarım</a>
                             </div>
                         </div>
                         <div class="col-5 text-center text-sm-left">
@@ -156,6 +156,17 @@
 
     </script>
     <script src="/business/assets/js/project/place/map.js"></script>
-
+    <script>
+        document.getElementById('logoInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('logoImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 
 @endsection
