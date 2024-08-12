@@ -20,7 +20,7 @@
                                 <span>{{ __($menu->getMenu('name')) }}</span></a>
                         </li>
                     @else
-                        @if($menu->menu_id != 3 && $menu->menu_id != 4 && $menu->menu_id != 5 && $menu->menu_id != 6 && $menu->menu_id != 1)
+                        @if($menu->menu_id != 3 && $menu->menu_id != 5 && $menu->menu_id != 6 && $menu->menu_id != 1)
 
                             <li>
 
