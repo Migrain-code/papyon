@@ -77,6 +77,14 @@
                                    <input type="number" id="nameBasic" name="price" class="form-control" value="{{$menuCategoryProduct->price}}" placeholder="Örn. Menü 1">
                                </div>
                            </div>
+                           <div class="col-md-12 mb-4">
+                               <label for="select2Categories" class="form-label">Ürün Kategorisi</label>
+                               <select id="select2Categories" name="category_id" class="select2 form-select">
+                                   @foreach($categories as $category)
+                                       <option value="{{$category->id}}" @selected($category->id == $menuCategoryProduct->category_id)>{{$category->name}}</option>
+                                   @endforeach
+                               </select>
+                           </div>
                            <div class="row">
                                <div class="col mb-4">
                                    <label for="nameBasic" class="form-label">Pişirme Süresi</label>

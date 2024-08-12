@@ -52,6 +52,11 @@ function fetchCart(dataDiscount = 0) {
 }
 
 $(document).on('click', '.addToCartButton', function () {
+    $(this).addClass('pulse');
+    // Pulse effect to last for a few seconds
+    setTimeout(() => {
+        $(this).removeClass('pulse');
+    }, 500);
 // Gather selected materials
     var selectedMaterials = [];
     $('input[name="materials[]"]:checked').each(function() {

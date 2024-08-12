@@ -139,6 +139,7 @@ class MenuCategoryProductController extends Controller
     public function edit(MenuCategoryProduct $menuCategoryProduct)
     {
         $menuCategoryProduct->status = !$menuCategoryProduct->status;
+
         if ($menuCategoryProduct->save()) {
             return response()->json([
                 'status' => "success",
@@ -159,6 +160,7 @@ class MenuCategoryProductController extends Controller
         $menuCategoryProduct->calorie_total = $request->input('calorie');
         $menuCategoryProduct->calorie_total = $request->input('calorie');
         $menuCategoryProduct->cookie_time = $request->input('cooking_time');
+        $menuCategoryProduct->category_id = $request->input('category_id');
 
         if ($menuCategoryProduct->save()){
             if ($request->croppedImage && isset($request->croppedImage)){

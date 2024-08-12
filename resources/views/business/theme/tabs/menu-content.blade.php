@@ -18,7 +18,6 @@
                                                 </span>
 
                                         </button>
-                                        <span class="alert alert-warning fs-6 m-2">Pasif</span>
 
                                     </h2>
                                 </div>

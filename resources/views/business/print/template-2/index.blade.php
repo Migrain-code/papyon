@@ -194,23 +194,6 @@
             }
         });
 
-
-        /*document.getElementById('themeColor').addEventListener('input', function() {
-            document.getElementById('topBg').style.backgroundColor = this.value;
-
-        });*/
-
-        $(function (){
-            changeTextColors();
-        });
-        function changeTextColors() {
-            // SVG elementini seç
-            $('.cls-1').css('fill', '#c5483e');//qr çerçeve
-            $('.cls-3').css('fill', '#000000');//scan me yazısı
-            $('.cls-4').css('fill', '#000000');//okutunuz metni
-            $('.cls-5').css('fill', '#000000');//tel icon
-
-        }
         function convertMenuCardToBase64(tableName) {
             const menuCard = document.getElementById('menuCard');
             const factor = 300 / 96;
@@ -227,7 +210,8 @@
                     data: {
                         '_token': csrf_token,
                         'menuCardBase64': base64Image,
-                        'table_id': tableName
+                        'table_id': tableName,
+                        'apply': $('[name="apply"]:checked').val(),
                     },
                     success: function () {
                         console.log('şablon oluşturuldu');
@@ -246,7 +230,10 @@
             const response = await $.ajax({
                 'url': apiUrl,
                 dataType: 'JSON',
-                'method': 'GET'
+                'method': 'GET',
+                'data': {
+                    'apply': $('[name="apply"]:checked').val()
+                },
             });
 
             for (let i = 0; i < response.length; i++) {
@@ -270,10 +257,11 @@
             const pickers = document.querySelectorAll('.color-picker-classic');
 
             pickers.forEach(picker => {
+                const defaultColor = picker.getAttribute('data-default');
                 const pickrInstance = Pickr.create({
                     el: picker,
                     theme: 'classic',
-                    default: 'rgba(102, 108, 232, 1)',
+                    default: defaultColor,
                     swatches: [
                         'rgba(102, 108, 232, 1)',
                         'rgba(40, 208, 148, 1)',

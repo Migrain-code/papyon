@@ -33,5 +33,11 @@
             var discountTotal = $(this).data('discount');
             fetchCart(discountTotal);
         });
+        $(document).on('click', '.orderCreateButton', function (){
+            var orderType = $(this).data('order-type');
+
+            $("[name='order_type']").val(orderType);
+            $('#packetOrderForm').submit();
+        });
     </script>
 @endsection

@@ -12,6 +12,7 @@ class PlaceMenuController extends Controller
 {
     public function index($slug, Request $request)
     {
+        Session::forget('table');
         $place = Place::whereSlug($slug)->first();
         $placeVisitor = new PlaceVisitor();
         $placeVisitor->place_id = $place->id;
@@ -23,6 +24,8 @@ class PlaceMenuController extends Controller
 
     public function table($code, Request $request)
     {
+        Session::forget('table');
+
         $table = Table::where('qr_name', $code)->first();
         $place = $table->place;
         $placeVisitor = new PlaceVisitor();

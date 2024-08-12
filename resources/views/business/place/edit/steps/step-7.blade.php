@@ -225,6 +225,15 @@
                 <input type="number" name="delivery_fee" value="{{isset($place->services) ? $place->services->delivery_fee : 0}}" id="multicol-delivery-fee" class="form-control" placeholder="örn. 16">
             </div>
         </div>
+        <!-- Gel Al indirim -->
+        <div class="" id="delivery_fee" style="max-width: 500px;">
+            <div class="col">
+                <label>Gel Al Sipariş İndirim Oranı (Yüzdelik olarak giriş yapınız)</label>
+            </div>
+            <div class="col">
+                <input type="number" name="take_away_discount" value="{{isset($place->services) ? $place->services->take_away_discount : 0}}" id="multicol-delivery-fee" class="form-control" placeholder="örn. 16">
+            </div>
+        </div>
     </div>
 
 </div>

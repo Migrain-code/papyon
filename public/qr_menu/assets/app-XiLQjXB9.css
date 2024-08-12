@@ -198,8 +198,8 @@ body a {
 
 .header .bottomss .item svg {
     border-radius: 8px;
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     padding: 7px;
     color: var(--top_menu_bg);
     /* border: 1px solid #A3ACB8; */
@@ -585,7 +585,7 @@ body a {
 .categories .content {
     margin: 10px auto;
     display: flex;
-    gap: 5px;
+    gap: 15px;
     overflow-x: auto
 }
 
@@ -675,7 +675,7 @@ body a {
 
 .card-style-1 .bottom .title {
     font-family: Roboto Medium, sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: var(--product_card_font);
 }
 

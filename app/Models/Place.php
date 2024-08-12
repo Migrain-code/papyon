@@ -185,6 +185,7 @@ class Place extends Model
                 $menuOrder->name = $menu["name"];
                 $menuOrder->menu_id = $index;
                 $menuOrder->order_number = $index;
+                //$menuOrder->status = 0;
                 $menuOrder->save();
             }
             $this->updateSetupPercentage();
@@ -289,6 +290,20 @@ class Place extends Model
 
         // Teslimat Ücreti
         $service->delivery_fee = $serviceData["delivery_fee"];
+        // gel al indirim tutarı
+        $service->take_away_discount = $serviceData["take_away_discount"];
+        if ($this->menuOrders()->count() > 0) {
+            $this->menuOrders()->where('menu_id', 4)->first()
+                ->update(
+                    ['status' => isset($serviceData["package_order"]) && isset($serviceData["table_order"]) && isset($serviceData["take_away_order"])]
+                );
+        }
+        if ($this->menuOrders()->count() > 0) {
+            $this->menuOrders()->where('menu_id', 12)->first()
+                ->update(
+                    ['status' => isset($serviceData["package_order"]) && isset($serviceData["table_order"]) && isset($serviceData["take_away_order"])]
+                );
+        }
         $service->save();
 
         $this->updateSetupPercentage();

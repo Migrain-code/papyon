@@ -169,8 +169,13 @@ class QrMenuController extends Controller
     public function getCart(Request $request)
     {
         $generalTotal = calculateCart($this->cart);
-        $delivery = $request->discount == 0 ? $this->place->services->delivery_fee : 0;
-        $discount = $request->discount > 0 ? 5 : 0;
+        if ($this->cart->count() == 0){
+            $delivery = 0;
+        } else{
+            $delivery = $request->discount == 0 ? $this->place->services->delivery_fee : 0;
+        }
+
+        $discount = $request->discount > 0 ? $this->place->services->take_away_discount : 0;
         $discountTotal = ($generalTotal * $discount) / 100;
         $total = ($generalTotal + $delivery) - $discountTotal;
         return response()->json([
@@ -195,18 +200,30 @@ class QrMenuController extends Controller
 
     public function orderCreate(Request $request)
     {
+        if ($request->order_type_id == 0 || $request->order_type_id == 2)// paket veya gel al sipariş ise
+        {
+            $request->validate([
+               'name' => "required",
+               'phone' => "required",
+               'address' => "required"
+            ], [] , [
+               'name' => "Ad Soyad",
+               'phone' => "Telefon",
+               'address' => "Adres"
+            ]);
+        }
         $phone = "";
         $whatsappStatus = false;
         if (isset($request->order_type_id)){
             if ($request->order_type_id == 0){ // paket sipariş telefonu
                 $phone = $this->place->services->package_order_phone;
-                $whatsappStatus = isset($phone) ? true : false;
+                $whatsappStatus = isset($phone) && $request->order_type == "wpOrder" ? true : false;
             } elseif ($request->order_type_id == 1){ // masa sipariş telefonu
                 $phone = $this->place->services->table_phone;
-                $whatsappStatus = isset($phone) ? true : false;
+                $whatsappStatus =isset($phone) && $request->order_type == "wpOrder" ? true : false;
             } else{
-                $phone = $this->place->services->take_away_phone;
-                $whatsappStatus = isset($phone) ? true : false;
+                $phone = $this->place->services->take_away_phone; // gel al
+                $whatsappStatus = isset($phone) && $request->order_type == "wpOrder" ? true : false;
             }
         }
         $cart = $this->cart;
@@ -456,7 +473,7 @@ Taksi talebi için teşekkürler.";
             $newDemand->table_id = $this->table->id;
             $newDemand->type_id = 3;//Hesap isteme talebi;
             $newDemand->save();
-            if (isset($this->place->services->valet_phone)) {
+            if (isset($this->place->services->request_account_phone)) {
                 $message = "Yeni Hesap Talebi: {ORDER_ID}
 
 *Masa Bilgileri*
@@ -479,7 +496,7 @@ Hesap talebi için teşekkürler.";
         } else {
             return to_route('menu.index', $this->place->slug)->with('response', [
                 'status' => "error",
-                'message' => "Hesap isteme çağırımı sadece masa üzerinden yapılabilir."
+                'message' => "Hesap isteme özelliği sadece masa QR kodu okutularak yapılabilir."
             ]);
         }
     }

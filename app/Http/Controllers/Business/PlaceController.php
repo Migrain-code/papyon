@@ -220,6 +220,12 @@ class PlaceController extends Controller
         $workTimes = $place->workTimes;
         $languages = MenuLanguage::all();
         $templates = Template::all();
+        if ($place->colors->count() == 0){
+            $place->createColor();
+        }
+        if ($place->menuOrders->count() == 0){
+            $place->createMenu();
+        }
         return view('business.place.edit.index', compact('place', 'dayList', 'workTimes', 'languages', 'templates'));
     }
 
@@ -289,7 +295,8 @@ class PlaceController extends Controller
             'take_away_phone',
             'package_order',
             'package_order_phone',
-            'delivery_fee'
+            'delivery_fee',
+            'take_away_discount'
         ]);
 
         $serviceData['place_id'] = $place->id;

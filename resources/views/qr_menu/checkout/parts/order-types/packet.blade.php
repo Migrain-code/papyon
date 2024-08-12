@@ -6,9 +6,16 @@
         @if ($place->services->take_away_order) {{-- Gel Al Sipariş --}}
         <div class="paymentType">
             <input type="radio"
-                   value="2" name="order_type_id" data-discount="5" id="orderType_selection1">
-            <label for="orderType_selection1">{{ __('Gel Al Sipariş') }} <span>%5
-                                {{ __('İndirim') }}</span></label>
+                   value="2" name="order_type_id" data-discount="{{$place->services->take_away_discount}}" id="orderType_selection1">
+            <label for="orderType_selection1">
+                {{ __('Gel Al Sipariş') }}
+                @if($place->services->take_away_discount > 0)
+                    <span>%{{$place->services->take_away_discount}}
+                        {{ __('İndirim') }}
+                    </span>
+                @endif
+
+            </label>
         </div>
         @endif
         @if ($place->services->package_order)
@@ -49,17 +56,23 @@
         <div class="formItem">
               <textarea class="" name="order_note" placeholder="Sipariş Notunuzu Buraya Yazınız" id="" cols="30" rows="6"></textarea>
         </div>
+    <input type="hidden" name="order_type" value="normalOrder">
 </div>
 </form>
 <div class="bottomsaw">
     <div>
-        @if(isset($place->services->table_phone))
-            <button class="orderCreateButton" onclick="$('#packetOrderForm').submit()">
+        @if(isset($place->services->package_order_phone))
+            <button type="button" class="orderCreateButton" data-order-type="normalOrder" style="background-color: var(--top_menu_bg);min-width: 185px;">
+                <i class="ti ti-shopping-bag"></i>
+                {{ __('Sipariş Ver') }}
+            </button>
+            <button type="button" class="orderCreateButton" data-order-type="wpOrder">
                 <i class="ti ti-brand-whatsapp"></i>
                 {{ __('Whatsapp İle Sipariş') }}
             </button>
+
         @else
-            <button class="orderCreateButton" style="background-color: var(--theme-background-color);min-width: 185px;" onclick="$('#packetOrderForm').submit()">
+            <button type="button" class="orderCreateButton" data-order-type="normalOrder"  style="background-color: var(--top_menu_bg);min-width: 185px;">
                 <i class="ti ti-shopping-bag"></i>
                 {{ __('Sipariş Ver') }}
             </button>

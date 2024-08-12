@@ -1,24 +1,8 @@
-<style>
-    .goToTopButton {
-        background: white;
-        box-shadow: 1px 3px 15px #00000052;
-        width: 40px;
-        height: 50px;
-        position: fixed;
-        right: 30px;
-        bottom: 80px;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--top_menu_bg);
-        font-size: 25px;
-    }
-</style>
+
 @if($footerVisibility)
 
     <footer class="footer">
-        <a href="#goToTop" class="goToTopButton"><i class="ti ti-circle-arrow-up-filled"></i></a>
+        <a href="javascript:void(0)" id="goToTopBtn" class="goToTopButton"><i class="ti ti-circle-arrow-up-filled"></i></a>
         <div class="menu">
             <ul>
                 @foreach($menuOrders as $menu)
@@ -28,12 +12,25 @@
                         $route = str_replace('long', $place->longitude, $route);
 
                     @endphp
-                    <li>
+                    @if(session('table'))
+                        <li>
 
-                        <a href="{{$route}}" id="{{$menu->getMenu("id")}}">
-                            {!! $menu->getMenu('icon') !!}
-                            <span>{{ __($menu->getMenu('name')) }}</span></a>
-                    </li>
+                            <a href="{{$route}}" id="{{$menu->getMenu("id")}}">
+                                {!! $menu->getMenu('icon') !!}
+                                <span>{{ __($menu->getMenu('name')) }}</span></a>
+                        </li>
+                    @else
+                        @if($menu->menu_id != 3 && $menu->menu_id != 4 && $menu->menu_id != 5 && $menu->menu_id != 6 && $menu->menu_id != 1)
+
+                            <li>
+
+                                <a href="{{$route}}" id="{{$menu->getMenu("id")}}">
+                                    {!! $menu->getMenu('icon') !!}
+                                    <span>{{ __($menu->getMenu('name')) }}</span></a>
+                            </li>
+                        @endif
+                    @endif
+
                 @endforeach
             </ul>
 

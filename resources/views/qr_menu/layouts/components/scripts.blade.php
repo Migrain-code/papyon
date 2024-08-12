@@ -8,6 +8,15 @@
             // $(".close-button").siblings().toggleClass("d-none");
             // $("#toggleAdvice").toggleClass("d-none");
             // $("#toggleAdvice").siblings().toggleClass("d-none");
+        });
+        $(".layer").click(function() {
+            $(".menu").toggleClass("show-menu");
+            $(".layer").toggleClass("modal-backdrop fade show");
+            $(".close-button").toggleClass("d-none");
+            $("#menuRedLine").toggleClass("d-none");
+            // $(".close-button").siblings().toggleClass("d-none");
+            // $("#toggleAdvice").toggleClass("d-none");
+            // $("#toggleAdvice").siblings().toggleClass("d-none");
         })
         $("#toggleMenu").click(function() {
             $(".layer").toggleClass("modal-backdrop fade show");
@@ -224,5 +233,21 @@
     </script>
     <script src="/qr_menu/assets/js/cart.js"></script>
 @endif
+<script>
+    document.addEventListener("scroll", function() {
+        const goToTopBtn = document.getElementById("goToTopBtn");
+        const pageHeight = document.documentElement.scrollHeight;
+        const scrollPosition = window.scrollY + window.innerHeight;
 
+        // Sayfa ortasından daha fazla scroll edildiğinde butonu göster
+        if (scrollPosition >= pageHeight / 2) {
+            goToTopBtn.style.display = "flex";
+        } else {
+            goToTopBtn.style.display = "none";
+        }
+    });
+    document.getElementById("goToTopBtn").addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 @yield('scripts')
