@@ -107,14 +107,14 @@ function initAutocomplete() {
     });
 }
 function addEmbed(latitude,longitude){
-    var embedUrl = `https://www.google.com/maps/embed/v1/place?q=${latitude},${longitude}&key=AIzaSyBcMXrk2ldIslFsanG5wUm5EuuTjkLfl8U`;
+    var embedUrl = `https://www.google.com/maps/embed/v1/place?q=${latitude},${longitude}&key=AIzaSyDwasXeYPSIcV42cMjj4h6POD008xgvq9I`;
     var embed = `<iframe width="100%" height="350" frameborder="0" style="border:0;border-radius: 15px"
                     src="${embedUrl}" allowfullscreen></iframe>`
     $('#embed').val(embed);
 
 }
 function reverseGeocode(latitude, longitude) {
-    var geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBcMXrk2ldIslFsanG5wUm5EuuTjkLfl8U`;
+    var geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDwasXeYPSIcV42cMjj4h6POD008xgvq9I`;
 
     fetch(geocodingUrl)
         .then(response => response.json())

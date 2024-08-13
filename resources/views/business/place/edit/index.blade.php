@@ -150,7 +150,7 @@
     <script src="/business/assets/vendor/libs/jquery-timepicker/jquery-timepicker.js"></script>
     <script src="/business/assets/vendor/libs/pickr/pickr.js"></script>
     <script src="/business/assets/js/project/place/add.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcMXrk2ldIslFsanG5wUm5EuuTjkLfl8U&libraries=places&callback=initAutocomplete" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwasXeYPSIcV42cMjj4h6POD008xgvq9I&libraries=places&callback=initAutocomplete" async defer></script>
     <script>
         var defaultLatitude = '{{$place->latitude}}';
         var defaultLongitude = '{{$place->longitude}}';
