@@ -22,7 +22,7 @@
                                 <div class="card p-2 h-100 shadow-none border">
                                     <div class="card-body p-3 pt-2">
                                         <div class="rounded-2 text-center mb-3 position-relative" >
-                                            <img class="img-fluid rounded" style="max-height: 250px;" src="{{storage($template->image)}}" alt="tutor image 1"/>
+                                            <img class="img-fluid rounded" onclick="window.open('{{ storage($template->image) }}', '_blank')" style="max-height: 250px;" src="{{storage($template->image)}}" alt="tutor image 1"/>
                                         </div>
                                         <div class="d-flex flex-column flex-md-row gap-2 text-nowrap">
                                             <a

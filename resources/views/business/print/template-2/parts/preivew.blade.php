@@ -1,15 +1,12 @@
 <div class="menu-preview" id="menuPreview">
     <div class="menu-card d-flex justify-content-center align-items-center position-relative" id="menuCard">
         <div class="topBg" id="topBg"></div>
-        <div class="container">
-            <div class="logoArea">
-                <img id="logoImage" src="/business/template/logo.png" style="width: 450px">
-            </div>
-            <div class="card my-4" id="innerBox" style="border-radius: 30px;background-color: #faeedb">
-                <div class="card-body" style="min-height: 490px">
+        <div class="">
+
+            <div class="card my-4 w-100" id="innerBox" style="border-radius: 15px;background-color: #faeedb;width: 9.2cm !important;">
+                <div class="card-body" style="max-height: 10cm;height: 9.2cm;">
                     <div class="d-flex justify-content-center flex-column align-items-center">
-                        <h3 class="fs-4" id="title">Menüyü Görmek İçin
-                            QR Okutunuz!</h3>
+
                         <div class="card d-flex justify-content-center align-items-center" style="background: none;border: none;box-shadow: none">
                             <div class="d-flex justify-content-center align-items-center position-relative" style="">
                                 <svg id="katman_1" class="borderBox" data-name="katman 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 242.79 274.99">
@@ -23,10 +20,10 @@
                                     </defs>
                                     <path class="cls-1" d="M225.24,0H17.54C7.87,0,0,7.87,0,17.54v207.7c0,9.67,7.87,17.55,17.54,17.55h71.36l31.91,32.2,33.02-32.2h71.4c9.67,0,17.54-7.87,17.54-17.55V17.54c0-9.67-7.87-17.54-17.54-17.54ZM239.52,225.24c0,7.87-6.41,14.28-14.28,14.28h-72.72s-31.67,30.87-31.67,30.87l-30.59-30.87h0s0,0,0,0h0s0,0,0,0H17.54c-7.87,0-14.28-6.41-14.28-14.28V17.54c0-7.87,6.41-14.28,14.28-14.28h207.7c7.87,0,14.28,6.41,14.28,14.28v207.7Z"/>
                                 </svg>
-                                <img src="/business/test/masa1.png" id="qrImage" style="margin-top: -30px;max-width: 160px;position: absolute;">
+                                <img src="/business/test/masa1.png" id="qrImage" style="margin-top: -18px;max-width: 90px;position: absolute;">
                             </div>
-                            <div class="d-flex">
-                                <svg id="katman_1" style="width: 145px;" data-name="katman 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 791.92 268.69">
+                            <div class="d-flex" style="width: 9cm !important;justify-content: center;align-items: center;">
+                                <svg id="katman_1" style="width: 130px;margin-right: 15px;" data-name="katman 1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 791.92 268.69">
                                     <defs>
                                         <style>
                                             .cls-1 {
@@ -174,11 +171,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-column">
+
+
+                        <div class="d-flex flex-column">
                         <div class="container">
-                            <table class="custom-table mt-3">
+                            <table class="custom-table mt-4">
                                 <tr>
-                                    <td class="slogan" id="slogan">Dijital Lezzet Anahtarı</td>
                                     <td class="bahce" id="table-number">Bahçe 1</td>
                                 </tr>
                             </table>
@@ -271,6 +269,7 @@ C132.7,13.46,130.24,10.8,125.59,10.8z"/>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -92,6 +92,7 @@
                 // Toggle visibility based on the checkbox state
                 if ($(this).data('disable')) {
                     callArea2.hide();
+                    callArea2.find('input').val('');
                 } else {
                     callArea2.show();
                 }

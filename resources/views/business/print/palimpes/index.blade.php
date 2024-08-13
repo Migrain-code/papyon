@@ -2,64 +2,57 @@
 @section('title', 'Hesabım')
 @section('styles')
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
-
     <style>
 
         .menu-editor {
             display: flex;
             margin: auto;
-
         }
 
         .menu-preview {
             flex: 1;
             padding: 20px;
-            max-width: 10cm;
-            max-height: 10cm;
         }
         #title{
-            max-width: 227px;
-            color: #2c2e35;
+            margin-top: 80px;
+            font-size: 48px;
             font-family: adobe-clean-bold;
-            font-weight: bold;
-            font-size: 23px !important;
-        }
-        .topBg{
-            height: 10cm;
-            max-width: 10cm;
-            width: 10cm;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: rgb(209 43 29 / 80%);
         }
         .menu-card {
+            background-color: #d6cfc7;
             padding: 20px;
             border: 1px solid #ccc;
             text-align: center;
-            min-height: 10cm;
-            height: 10cm;
-            max-width: 10cm;
-            width: 10cm;
-            position: relative;
-            background-image: url('/business/template/dekor.svg');
-            background-size: cover;
-        }
-        .logoArea{
-            /*margin-bottom: 30px;
-            margin-top: 30px;*/
+            min-height: 20cm;
+            height: 20cm;
+            max-width: 15cm;
+            width: 15cm;
             position: relative;
         }
+
+        .menu-card h1 {
+            font-size: 36px;
+            color: #e0d02d;
+        }
+
+        .menu-card h3 {
+            font-size: 18px;
+            color: #f6f2e1;
+        }
+
         .menu-controls {
             flex: 1;
             padding: 20px;
             background-color: #fff;
             border: none;
-            margin-left: 15px;
 
         }
-
+        #menuBorder {
+            position: relative;
+            min-height: 19cm;
+            min-width: 14cm;
+            border: 3px solid red;
+        }
         .menu-controls label {
             display: block;
             margin-top: 10px;
@@ -73,50 +66,51 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        .borderBox{
-            width: 110px;
-            height: 140px;
-
+        .logoArea {
+            margin: 10px 0;
+            min-height: 100px;
+            max-height: 100px;
+            height: 100px;
         }
-        .custom-table {
-            width: 100%;
-            color: #B85640;
-            font-weight: bold;
-            margin-bottom: 3px;
+        #table-number{
+            background-color: black;
+            padding: 5px;
+            max-width: 130px;
+            min-width: 130px;
+            min-height: 30px;
+            margin: auto;
+            border-radius: 5px;
         }
-
-        .custom-table td {
-            border-top: 2px solid #B85640;
-            border-bottom: 2px solid #B85640;
-            padding: 10px;
-        }
-
-        .custom-table .slogan {
-            width: 60%;
-            border-right: 2px solid #B85640;
-            padding: 0px;
-            text-align: left;
-            font-size: 12px;
-        }
-
-        .custom-table .bahce {
-            width: 40%;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .custom-table .bahce span {
-            font-weight: bold;
-        }
-
-        .logo {
+        #menu_description {
+            /* font-weight: 800; */
+            padding-top: 15px;
+            max-width: 230px;
+            margin: 7px auto;
             font-size: 24px;
-            color: #B85640;
+            font-family: 'Quicksand';
+        }
+        #footer{
+            padding-top: 15px;
             font-weight: bold;
-            margin-top: -5px;
+            font-size: 42px;
+            left: 30%;
+            font-family: "Alex Brush", cursive;
+        }
+        #qrcode{
+            max-width: 150px;
+            margin: auto;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            position: relative;
+        }
+        #qrImage{
+            border-radius: 10px;
+            max-width: 130px;
+            max-height: 130px;
         }
         #logoImage{
-            object-fit: cover;
+            width: 500px;
         }
         #overlay {
             position: fixed;
@@ -148,6 +142,7 @@
 @endsection
 
 @section('content')
+
     <div id="overlay" style="display:none;flex-direction: column">
         <div id="loader"></div>
         <div class="text-warning fs-4 mt-5 text-center" style="max-width: 500px">Bu işlem biraz uzun sürebilir bu sürede lütfen ekranı kapatmayınız. Pencereyi arka plana atıp bekleyebilrisniz</div>
@@ -162,8 +157,8 @@
             </div>
             <div class="card-body">
                 <div class="menu-editor">
-                    @include('business.print.template-3.parts.preivew')
-                    @include('business.print.template-3.parts.form')
+                    @include('business.print.palimpes.parts.preivew')
+                    @include('business.print.palimpes.parts.form')
 
                 </div>
             </div>
@@ -173,25 +168,65 @@
 
 @endsection
 @section('scripts')
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr"></script>
-
     <script>
-       document.getElementById('logoInput').addEventListener('change', function(event) {
+        document.getElementById('logoInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
-                const allowedFormats = ['image/png', 'image/jpeg', 'image/jpg'];
-                if (allowedFormats.includes(file.type)) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById('logoImage').src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    alert('Sadece PNG, JPG, ve JPEG dosya formatlarına izin verilmektedir.');
-                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('logoImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
             }
+        });
+        document.getElementById('backgroundInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('menuCard').style.backgroundImage = `url(${e.target.result})`;
+                    document.getElementById('menuCard').style.backgroundSize = 'cover'; // Arka planı kapsayacak şekilde ayarlar
+                    document.getElementById('menuCard').style.backgroundPosition = 'center'; // Arka planın merkezlenmesini sağlar
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('titleInput').addEventListener('input', function() {
+            document.getElementById('title').textContent = this.value;
+
+        });
+        document.getElementById('themeColor').addEventListener('input', function() {
+            document.getElementById('menuCard').style.backgroundImage = null;
+            document.getElementById('menuCard').style.backgroundColor = this.value;
+
+        });
+        document.getElementById('titleColorInput').addEventListener('input', function() {
+            document.getElementById('title').style.color = this.value;
+            document.getElementById('footer').style.color = this.value;
+        });
+
+        document.getElementById('tableBgColorInput').addEventListener('input', function() {
+            document.getElementById('table-number').style.backgroundColor = this.value;
+        });
+
+        document.getElementById('tableFontColorInput').addEventListener('input', function() {
+            document.getElementById('table-number').style.color = this.value;
+        });
+        document.getElementById('borderColor').addEventListener('input', function() {
+            document.getElementById('menuBorder').style.borderColor = this.value;
+        });
+        document.getElementById('borderWidth').addEventListener('input', function() {
+            document.getElementById('menuBorder').style.borderWidth = this.value+ "px";
+        });
+        document.getElementById('menuDescriptionInput').addEventListener('input', function() {
+            document.getElementById('menu_description').textContent = this.value;
+        });
+
+        document.getElementById('menuDescriptionColorInput').addEventListener('input', function() {
+            document.getElementById('menu_description').style.color = this.value;
+
         });
 
         function convertMenuCardToBase64(tableName) {
@@ -210,9 +245,7 @@
                     data: {
                         '_token': csrf_token,
                         'menuCardBase64': base64Image,
-                        'table_id': tableName,
-                        'apply': $('[name="apply"]:checked').val(),
-                        'boxSize': 'box'
+                        'table_id': tableName
                     },
                     success: function () {
                         console.log('şablon oluşturuldu');
@@ -231,10 +264,7 @@
             const response = await $.ajax({
                 'url': apiUrl,
                 dataType: 'JSON',
-                'method': 'GET',
-                'data': {
-                    'apply': $('[name="apply"]:checked').val()
-                },
+                'method': 'GET'
             });
 
             for (let i = 0; i < response.length; i++) {
@@ -252,64 +282,5 @@
                'title' : "Şablon Tüm Masalara Uygulandı"
             });
         }
-    </script>
-    <script>
-        (function () {
-            const pickers = document.querySelectorAll('.color-picker-classic');
-
-            pickers.forEach(picker => {
-                const defaultColor = picker.getAttribute('data-default');
-                const pickrInstance = Pickr.create({
-                    el: picker,
-                    theme: 'classic',
-                    default: defaultColor,
-                    swatches: [
-                        'rgba(102, 108, 232, 1)',
-                        'rgba(40, 208, 148, 1)',
-                        'rgba(255, 73, 97, 1)',
-                        'rgba(255, 145, 73, 1)',
-                        'rgba(30, 159, 242, 1)'
-                    ],
-                    components: {
-                        // Main components
-                        preview: true,
-                        opacity: true,
-                        hue: true,
-
-                        // Input / output Options
-                        interaction: {
-                            hex: true,
-                            rgba: true,
-                            hsla: true,
-                            hsva: true,
-                            cmyk: true,
-                            input: true,
-                            clear: true,
-                            save: true
-                        }
-                    }
-                });
-
-                pickrInstance.on('change', (color) => {
-                    const rgbaColor = color.toRGBA().toString();
-                    const targetId = picker.getAttribute('data-color-id');
-                    const targetElement = document.getElementById(targetId);
-                    const attributeName = picker.getAttribute('data-attribute-name');
-                    const className = picker.getAttribute('data-class-name');
-
-                    if (className) {
-                        const elements = document.querySelectorAll(`.${className}`);
-                        elements.forEach(element => {
-                            element.style[attributeName] = rgbaColor;
-                        });
-                    } else if (targetId) {
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            targetElement.style[attributeName] = rgbaColor;
-                        }
-                    }
-                });
-            });
-        })();
     </script>
 @endsection

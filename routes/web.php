@@ -230,6 +230,7 @@ Route::prefix('admin')->as('admin.')->group(function (){
         Route::resource('allergen', \App\Http\Controllers\Admin\AllergenController::class);
         Route::resource('language', \App\Http\Controllers\MenuLanguageController::class);
         Route::resource('template', \App\Http\Controllers\TemplateController::class);
+        Route::resource('menu-template', \App\Http\Controllers\Admin\MenuTemplateController::class);
 
         Route::prefix('mainpage')->as('mainpage.')->group(function (){
             Route::get('/', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('index');

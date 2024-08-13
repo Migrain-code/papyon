@@ -25,7 +25,7 @@ function base64Convertor($base64Image, $folderName = "uploads"){
     return str_replace('/storage/', '', $fileUrl);
 }
 
-function base64Convertor2($base64Image, $folderName = "uploads", $tableName = "test") {
+function base64Convertor2($base64Image, $folderName = "uploads", $tableName = "test", $boxType = "rectangle") {
     $base64Image = str_replace('data:image/png;base64,', '', $base64Image);
     $base64Image = str_replace(' ', '+', $base64Image);
 
@@ -33,7 +33,11 @@ function base64Convertor2($base64Image, $folderName = "uploads", $tableName = "t
     $imageData = base64_decode($base64Image);
 
     $image = \Intervention\Image\Laravel\Facades\Image::read($imageData);
-    $image->resize(1480, 2100);
+    if ($boxType == "rectangle"){
+        $image->resize(1480, 2100);
+    } else{ //10 * 10 cm
+        $image->resize(1181, 1181);
+    }
 
     $image->setResolution(300, 300);
 

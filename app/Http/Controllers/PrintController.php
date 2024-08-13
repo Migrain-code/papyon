@@ -32,7 +32,7 @@ class PrintController extends Controller
         if ($request->apply == 0){ // masa yazdırma
             $table = Table::find($request->table_id);
             $tableName = $table->region->name."-".$table->name;
-            $result = base64Convertor2($request->input('menuCardBase64'), 'themeTypes/'.$this->business->id, $tableName);
+            $result = base64Convertor2($request->input('menuCardBase64'), 'themeTypes/'.$this->business->id, $tableName, $request->boxSize);
             $existTable = $this->business->templates()->where('table_id', $table->id)->first();
             if (isset($existTable)){
                 $existTable->image = $result;
@@ -47,7 +47,7 @@ class PrintController extends Controller
             }
         } else{
             $tableName = $this->business->name;
-            $result = base64Convertor2($request->input('menuCardBase64'), 'themeTypes/'.$this->business->id, $tableName);
+            $result = base64Convertor2($request->input('menuCardBase64'), 'themeTypes/'.$this->business->id, $tableName, $request->boxSize);
             $this->business->templates()->delete();
             $newTemplate = new PlaceTemplate();
             $newTemplate->place_id = $this->business->id;

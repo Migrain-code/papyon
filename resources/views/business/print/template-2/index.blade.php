@@ -9,11 +9,14 @@
         .menu-editor {
             display: flex;
             margin: auto;
+
         }
 
         .menu-preview {
             flex: 1;
             padding: 20px;
+            max-width: 10cm;
+            max-height: 10cm;
         }
         #title{
             max-width: 227px;
@@ -23,9 +26,9 @@
             font-size: 23px !important;
         }
         .topBg{
-            height: 20cm;
-            max-width: 15cm;
-            width: 15cm;
+            height: 10cm;
+            max-width: 10cm;
+            width: 10cm;
             position: absolute;
             top: 0;
             left: 0;
@@ -35,10 +38,10 @@
             padding: 20px;
             border: 1px solid #ccc;
             text-align: center;
-            min-height: 20cm;
-            height: 20cm;
-            max-width: 15cm;
-            width: 15cm;
+            min-height: 10cm;
+            height: 10cm;
+            max-width: 10cm;
+            width: 10cm;
             position: relative;
             background-image: url('/business/template/dekor.svg');
             background-size: cover;
@@ -53,6 +56,7 @@
             padding: 20px;
             background-color: #fff;
             border: none;
+            margin-left: 15px;
 
         }
 
@@ -70,8 +74,8 @@
             border-radius: 4px;
         }
         .borderBox{
-            width: 200px;
-            height: 230px;
+            width: 110px;
+            height: 140px;
 
         }
         .custom-table {
@@ -90,13 +94,15 @@
         .custom-table .slogan {
             width: 60%;
             border-right: 2px solid #B85640;
-            padding: 15px 0px;
+            padding: 0px;
             text-align: left;
+            font-size: 12px;
         }
 
         .custom-table .bahce {
             width: 40%;
             text-align: center;
+            font-size: 14px;
         }
 
         .custom-table .bahce span {
@@ -107,7 +113,7 @@
             font-size: 24px;
             color: #B85640;
             font-weight: bold;
-            margin-top: 40px;
+            margin-top: -5px;
         }
         #logoImage{
             width: 400px;
@@ -178,7 +184,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr"></script>
 
     <script>
-        document.getElementById('logoInput').addEventListener('change', function(event) {
+       /* document.getElementById('logoInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (file) {
                 const allowedFormats = ['image/png', 'image/jpeg', 'image/jpg'];
@@ -192,7 +198,7 @@
                     alert('Sadece PNG, JPG, ve JPEG dosya formatlarına izin verilmektedir.');
                 }
             }
-        });
+        });*/
 
         function convertMenuCardToBase64(tableName) {
             const menuCard = document.getElementById('menuCard');
@@ -212,6 +218,7 @@
                         'menuCardBase64': base64Image,
                         'table_id': tableName,
                         'apply': $('[name="apply"]:checked').val(),
+                        'boxSize': 'box'
                     },
                     success: function () {
                         console.log('şablon oluşturuldu');

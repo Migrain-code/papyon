@@ -1,10 +1,5 @@
 <div class="menu-controls">
-    <div class="row">
-        <div class="form-group col-12">
-            <label>Logo (598 * 134)</label>
-            <input type="file" name="logo" accept=".png, .jpg, .jpeg"  class="form-control" id="logoInput">
-        </div>
-    </div>
+
     <div class="row">
         <div class="table-responsive rounded">
             <table class="table table-striped">
@@ -27,12 +22,7 @@
                             <div class="color-picker-classic" data-default="rgba(250, 238, 219,1)" data-color-id="innerBox" data-attribute-name="backgroundColor"></div>
                         </td>
                      </tr>
-                    <tr>
-                        <td class="text-nowrap">Yazı Rengi</td>
-                        <td>
-                            <div class="color-picker-classic" data-default="rgba(0, 0, 0, 1)" data-color-id="title" data-attribute-name="color"></div>
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class="text-nowrap">Kutu Çerçevesi</td>
                         <td>
@@ -69,18 +59,7 @@
                             <div class="color-picker-classic" data-default="rgba(213, 79, 66,1)" data-color-id="slogan" data-attribute-name="borderColor"></div>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="text-nowrap">Masa Adı Alanı</td>
-                        <td>
-                            <div class="color-picker-classic" data-default="rgba(213, 79, 66,1)" data-color-id="table-number" data-attribute-name="color"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap">Masa Adı Çerçeve Rengi</td>
-                        <td>
-                            <div class="color-picker-classic" data-default="rgba(213, 79, 66,1)" data-color-id="table-number" data-attribute-name="borderColor"></div>
-                        </td>
-                    </tr>
+
                     <tr>
                         <td class="text-nowrap">Logo Rengi</td>
                         <td>

@@ -51,6 +51,26 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <div data-i18n="Temalar">Temalar</div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{route('admin.template.index')}}" class="menu-link">
+                        <div data-i18n="Menü Temaları">Menü Temaları</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{route('admin.menu-template.index')}}" class="menu-link">
+                        <div data-i18n="Şablon Temaları">Şablon Temaları</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <!-- Layouts -->
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
