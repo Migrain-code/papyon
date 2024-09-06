@@ -55,17 +55,18 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <a href="{{route('business.menu.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-book"></i>
                 <div data-i18n="Menü İşlemleri">Menü İşlemleri</div>
             </a>
+        </li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons ti ti-book"></i>
+                <div data-i18n="QR İşlemleri">QR İşlemleri</div>
+            </a>
 
             <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{route('business.menu.index')}}" class="menu-link">
-                        <div data-i18n="Menü">Menü</div>
-                    </a>
-                </li>
                 <li class="menu-item">
                     <a href="{{route('business.placeTemplate.index')}}" class="menu-link">
                         <div data-i18n="Şablon Listesi">Şablon Listesi</div>
@@ -77,6 +78,7 @@
                         <div data-i18n="Şablon Oluştur">Şablon Oluştur</div>
                     </a>
                 </li>
+
 
             </ul>
         </li>
@@ -132,6 +134,8 @@
             <a href="{{route('business.suggestion.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-message"></i>
                 <div data-i18n="Görüş ve Öneriler">Görüş ve Öneriler</div>
+                <div class="badge bg-danger rounded-pill ms-auto">{{auth('web')->user()->place()->allClaim()}}</div>
+
             </a>
         </li>
         <li class="menu-item">

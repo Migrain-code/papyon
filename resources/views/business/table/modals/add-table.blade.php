@@ -52,7 +52,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Kapat</button>
-                <button type="submit" class="btn btn-primary">Kaydet</button>
+                <button type="submit" class="btn btn-primary addTableBtn">Kaydet</button>
             </div>
         </form>
     </div>

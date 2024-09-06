@@ -152,8 +152,16 @@
     <script src="/business/assets/js/project/place/add.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwasXeYPSIcV42cMjj4h6POD008xgvq9I&libraries=places&callback=initAutocomplete" async defer></script>
     <script>
-        var defaultLatitude = '{{$place->latitude}}';
-        var defaultLongitude = '{{$place->longitude}}';
+        /*"lat" : 41.02430469999999,
+            "lng" : 40.5185067*/
+        @if(isset($place->latitude) && isset($place->longitude))
+            var defaultLatitude = '{{$place->latitude}}';
+            var defaultLongitude = '{{$place->longitude}}';
+        @else
+            var defaultLatitude = '41.02430469999999';
+            var defaultLongitude = '40.5185067';
+        @endif
+
 
     </script>
     <script src="/business/assets/js/project/place/map.js"></script>

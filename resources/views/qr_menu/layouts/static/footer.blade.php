@@ -1,36 +1,42 @@
 
 @if($footerVisibility)
-
+    @php
+            $sortedMenus =  $menuOrders->sortBy('order_number');
+            // Menüleri sıraladıktan sonra üçüncü sıradaki menüye ulaşmak için slice kullanabiliriz.
+            $menuToPlaceThird = $sortedMenus->where('menu_id', 2)->first(); // ID 2 olan menü
+            $sortedMenus = $sortedMenus->filter(function($menu) {
+                return $menu->menu_id != 2; // ID 2 olan menüyü diğerlerinden çıkarıyoruz
+            });
+            $sortedMenus = $sortedMenus->slice(0, 2) // İlk iki menü
+                            ->concat([$menuToPlaceThird]) // Üçüncü sıraya eklemek istediğimiz menü
+                            ->concat($sortedMenus->slice(2)); // Geri kalan menüler
+    @endphp
     <footer class="footer">
         <a href="javascript:void(0)" id="goToTopBtn" class="goToTopButton"><i class="ti ti-circle-arrow-up-filled"></i></a>
         <div class="menu">
+
             <ul>
-                @foreach($menuOrders as $menu)
+                @foreach($sortedMenus as $menu)
                     @php
                         $route = $menu->getMenu("route");
                         $route = str_replace('lat', $place->latitude, $route);
                         $route = str_replace('long', $place->longitude, $route);
-
                     @endphp
                     @if(session('table'))
                         <li>
-
                             <a href="{{$route}}" id="{{$menu->getMenu("id")}}">
                                 {!! $menu->getMenu('icon') !!}
                                 <span>{{ __($menu->getMenu('name')) }}</span></a>
                         </li>
                     @else
                         @if($menu->menu_id != 3 && $menu->menu_id != 5 && $menu->menu_id != 6 && $menu->menu_id != 1)
-
                             <li>
-
                                 <a href="{{$route}}" id="{{$menu->getMenu("id")}}">
                                     {!! $menu->getMenu('icon') !!}
                                     <span>{{ __($menu->getMenu('name')) }}</span></a>
                             </li>
                         @endif
                     @endif
-
                 @endforeach
             </ul>
 

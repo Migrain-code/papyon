@@ -79,10 +79,12 @@ class MenuController extends Controller
     {
         $request->validate([
            'banner_type' => 'required',
-           'banner_description' => 'required'
+           'banner_description' => 'required_if:banner_type,1,3',
+           'banner_image' => 'required_if:banner_type,2'
         ], [], [
             'banner_type' => 'banner türü',
-            'banner_description' => 'banner açıklaması'
+            'banner_description' => 'banner açıklaması',
+            'banner_image' => 'görsel'
         ]);
         $menuBanner = $menu->banner;
         if(!isset($menuBanner)){
@@ -194,6 +196,14 @@ class MenuController extends Controller
         ]);
     }
 
+    public function copyMenu(Menu $menu)
+    {
+        $menu->clone($this->business);
+        return to_route('business.menu.index')->with('response', [
+            'status' => "success",
+            'message' => "Menü Kopyalandı"
+        ]);
+    }
     /**
      * Update the specified resource in storage.
      */

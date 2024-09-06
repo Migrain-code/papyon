@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Menu extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public function categories()
     {
@@ -34,6 +34,7 @@ class Menu extends Model
     {
         $newMenu = $this->replicate();
         $newMenu->place_id = $newPlace->id; // Yeni place_id ile güncelle
+        $newMenu->is_default = 0;
         $newMenu->save();
 
         foreach ($this->categories as $category) {

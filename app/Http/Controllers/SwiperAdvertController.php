@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SwiperAdvert\AdvertAddRequest;
 use App\Models\SwiperAdvert;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -28,7 +29,7 @@ class SwiperAdvertController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdvertAddRequest $request)
     {
 
         $swiperAdvert = new SwiperAdvert();
@@ -69,9 +70,11 @@ class SwiperAdvertController extends Controller
      */
     public function update(Request $request, SwiperAdvert $swiperAdvert)
     {
-        $swiperAdvert->image = $request->file('image')->store('swiperAdvert');
+        if ($request->hasFile('image')){
+            $swiperAdvert->image = $request->file('image')->store('swiperAdvert');
+            $swiperAdvert->save();
+        }
         $swiperAdvert->status = 1;
-        $swiperAdvert->save();
         return to_route('business.swiper-advert.index')->with('response',[
             'status' => "success",
             'message' => "Reklam Güncellendi"

@@ -44,9 +44,16 @@
             </div>
 
             <div class="app-ecommerce">
-                <div class="alert alert-info" role="alert">
-                    1.) Kategori ve ürünlerinizi excelde hazırlayarak toplu yükleyebilirsiniz. <br>
-                    2.) Ürün fiyatlarını Ürünleri Dışarı Aktar diyerek toplu olarak güncelleyebilirsiniz.
+                <div class="alert alert-danger" role="alert">
+                    <ol list="1">
+                        <li>Kategori ve ürünlerinizi excelde hazırlayarak toplu yükleyebilirsiniz.</li>
+                        <li>Kategorileri örnek kategori dosyamızdaki şekilde yazmalısınız.</li>
+                        <li>Ürünleri örnek ürün dosyamızdaki şekilde yazmalısınız.</li>
+                        <li>Ürünleri eklerken kategori isimlerindeki küçük büyük harf uyumuna dikkat etmeniz gerekmektedir.
+                            <u><b>İçecekler</b></u> şeklinde yazdığınız bir kategori adını ürün excel dosyasına da <u><b>İçecekler</b></u> şeklinde yazmanız gerekmektedir.</li>
+
+                    </ol>
+
 
 
                 </div>

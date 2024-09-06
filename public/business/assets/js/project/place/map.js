@@ -3,19 +3,8 @@ let marker = null;
 var businessLat;
 var businessLong;
 function initAutocomplete() {
-    if (typeof defaultLatitude !== 'undefined'){
-        businessLat = defaultLatitude;
-        businessLong = defaultLongitude;
-
-    } else{
-        var businessLat = '41.0250244963033';
-        var businessLong = '40.51829611874486';
-        if (isNaN(businessLat) || isNaN(businessLong)) {
-            businessLat = 41.0250244963033; // Varsayılan enlem
-            businessLong = 40.51829611874486; // Varsayılan boylam
-        }
-    }
-    // Harita başlatma kodu burada
+    businessLat = defaultLatitude;
+    businessLong = defaultLongitude;
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: parseFloat(businessLat), lng: parseFloat(businessLong) },

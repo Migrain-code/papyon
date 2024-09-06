@@ -8,6 +8,11 @@
         </div>
     </div>
     <div class="col-6" style="background: #dedede; padding: 15px">
-        <img src="{{storage($place->logo)}}" class="img-fluid w-100" id="logoImage" style="max-width: 300px">
+        @if(isset($place->logo))
+            <img src="{{storage($place->logo)}}" class="img-fluid w-100" id="logoImage" style="max-width: 300px">
+        @else
+            <img src="/business/template/logo.png" class="img-fluid w-100" id="logoImage" style="max-width: 300px">
+
+        @endif
     </div>
 </div>

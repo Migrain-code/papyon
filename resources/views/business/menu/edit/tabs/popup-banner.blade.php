@@ -73,10 +73,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="row" id="textContainer">
-                                                    <div class="col mb-4">
-                                                        <label for="nameBasic" class="form-label">Banner Metni</label>
-                                                        <textarea type="text" id="nameBasic" name="banner_description" class="form-control" placeholder="Örn. Menü 1">{{isset($banner) ? $banner->description : ""}}</textarea>
-                                                    </div>
+                                                            <div class="col mb-4 bannerContainer" @if(isset($banner) && $banner->banner_type == "2" ) style="display: none"  @endif>
+                                                                <label for="nameBasic" class="form-label">Banner Metni</label>
+                                                                <textarea type="text" id="nameBasic" name="banner_description"  class="form-control" placeholder="Örn. Menü 1">{{isset($banner) ? $banner->description : ""}}</textarea>
+                                                            </div>
                                                 </div>
                                                 <div class="row">
                                                     <button type="submit" class="btn btn-success">Kaydet</button>
@@ -153,10 +153,12 @@
                 $('#bannerTypeImage').attr('src', '/business/assets/img/project/banners/popup-text-image.png');
                 $('#imageContainer').css('display', 'block');
                 $('#textContainer').css('display', 'block');
+                $('.bannerContainer').css('display', 'block');
             }else if (bannerType == 2){
                 $('#bannerTypeImage').attr('src', '/business/assets/img/project/banners/popup-image.png');
                 $('#imageContainer').css('display', 'block');
                 $('#textContainer').css('display', 'none');
+
                 $('[name="banner_description"]').text("");
             } else if (bannerType == 3){
                 $('#bannerTypeImage').attr('src', '/business/assets/img/project/banners/popup-text.png');

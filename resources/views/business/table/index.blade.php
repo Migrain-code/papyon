@@ -12,10 +12,41 @@
         .accordion-button:not(.collapsed) {
             color: white;
         }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Yarı saydam siyah */
+            z-index: 9998; /* Yüksek z-index */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #242745; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 @endsection
 
 @section('content')
+    <div id="overlay" style="display:none;flex-direction: column">
+        <div id="loader"></div>
+        <div class="text-warning fs-4 mt-5 text-center" style="max-width: 500px">Bu işlem biraz uzun sürebilir bu sürede lütfen ekranı kapatmayınız. Pencereyi arka plana atıp bekleyebilrisniz</div>
+
+    </div>
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-4"><span class="text-muted fw-light">Masalar ve Bölgeler/</span> Masa Listesi</h4>
 
@@ -180,6 +211,10 @@
            $('[name="region_new_name"]').val(dataName);
            $('#editRegionForm').attr('action', dataUrl);
            modal.show();
+        });
+
+        $('.addTableBtn').on('click', function (){
+            document.getElementById('overlay').style.display = 'flex';
         });
     </script>
 @endsection

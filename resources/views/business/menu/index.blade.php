@@ -63,6 +63,7 @@
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="teamMemberList" style="">
                                                 <a class="dropdown-item" href="{{route('business.menu.useMenu', $menu->id)}}">Bu Menüyü Kullan</a>
+                                                <a class="dropdown-item" href="{{route('business.menu.copyMenu', $menu->id)}}">Bu Menüyü Kopyala</a>
                                                 <a class="dropdown-item" href="{{route('business.menu.edit', $menu->id)}}">Düzenle</a>
                                                 <a class="dropdown-item" href="{{route('business.menu.show', $menu->id)}}">Sil</a>
                                             </div>
@@ -70,6 +71,11 @@
                                         <div onclick="window.location.href='{{route('business.menu.edit', $menu->id)}}'" class="bg-label-primary rounded-3 text-center mb-3 pt-4 pb-4 cursor-pointer">
                                             <img class="img-fluid" src="{{storage($menu->image)}}" alt="Card girl image" width="140"  style="min-height: 150px;object-fit: cover;border-radius: 5px">
                                         </div>
+                                        @if($menu->is_default == 1)
+                                            <span class="badge bg-label-success">Şuanda Kullanılıyor</span>
+                                        @else
+                                            <span class="badge bg-label-danger">Pasif</span>
+                                        @endif
                                         <h4 class="mb-2 pb-1"><a href="{{route('business.menu.edit', $menu->id)}}">{{$menu->name}}</a></h4>
 
                                         <div class="row mb-3 g-3">

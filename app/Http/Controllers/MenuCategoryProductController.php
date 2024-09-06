@@ -236,7 +236,7 @@ class MenuCategoryProductController extends Controller
             }
             return to_route('business.menu.edit', $menuCategoryProduct->category->menu_id)->with('response',[
                 'status' => "success",
-                'message' => "Ürün Başarılı Bir Şekilde Güncellendi"
+                'message' => $menuCategoryProduct->name. " Ürünü Başarılı Bir Şekilde Güncellendi"
             ]);
         }
     }

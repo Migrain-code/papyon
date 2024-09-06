@@ -28,7 +28,8 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\SuggestionQuestionController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\PasswordResetController;
-
+Route::get('test', [\App\Http\Controllers\Frontend\HomeController::class, 'soketTest']);
+Route::get('event', [\App\Http\Controllers\Frontend\HomeController::class, 'testEven']);
 Route::get('/', [\App\Http\Controllers\Frontend\HomeController::class, 'index'])->name('front.index');
 Route::get('ozellikler', [\App\Http\Controllers\Frontend\HomeController::class, 'features'])->name('property.index');
 Route::get('ozellikler/{slug}/detay', [\App\Http\Controllers\Frontend\HomeController::class, 'featureDetail'])->name('property.detail');
@@ -119,6 +120,7 @@ Route::middleware(['auth:web', 'twoFactor'])->group(function (){
             Route::post('update/price', [MenuController::class, 'updatePrice'])->name('updatePrice');
             Route::get('pop-up-banner', [MenuController::class, 'popupView'])->name('popup');
             Route::get('use-menu', [MenuController::class, 'useMenu'])->name('useMenu');
+            Route::get('copy-menu', [MenuController::class, 'copyMenu'])->name('copyMenu');
             Route::get('update-pop-up-status', [MenuController::class, 'updatePopupStatus'])->name('updatePopupStatus');
             Route::post('update-up-banner', [MenuController::class, 'updatePopup'])->name('updatePopup');
 

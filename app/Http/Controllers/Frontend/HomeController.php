@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\PrivateEvent;
+use App\Events\TestEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
@@ -14,6 +16,7 @@ use App\Models\Feature;
 use App\Models\Gallery;
 use App\Models\MenuCategory;
 use App\Models\MenuCategoryProduct;
+use App\Models\Order;
 use App\Models\Package;
 use App\Models\Page;
 use App\Models\PartnershipRequest;
@@ -21,6 +24,18 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function soketTest()
+    {
+        return view('socket.test');
+    }
+
+    public function testEven()
+    {
+        $orders = Order::all();
+        $userId = 7;
+        event(new PrivateEvent($orders, $userId));
+        return "done";
+    }
     public function temp()
     {
         $menu_kategori = array(

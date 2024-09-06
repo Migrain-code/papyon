@@ -84,7 +84,7 @@
                                             @elseif($place->status == 1)
                                                 <span class="badge bg-label-success">Aktif</span>
                                             @else
-                                                <span class="badge bg-label-danger">Kilitli Destek Ekibimiz ile İletişime geçiniz</span>
+                                                <span class="badge bg-label-danger">Mekan Kurulumu Yapılmamış</span>
                                             @endif
 
 

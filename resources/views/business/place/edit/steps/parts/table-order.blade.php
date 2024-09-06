@@ -19,7 +19,7 @@
             <div class="d-flex flex-row justify-content-start my-3">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" @checked(isset($place->services) && $place->services->order_type == 0) data-disable="true" type="radio" name="order_type" id="inlineRadio1" value="0" />
-                    <label class="form-check-label" for="inlineRadio1">Sipariş Ver</label>
+                    <label class="form-check-label" for="inlineRadio1">Panel</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" @checked(isset($place->services) && $place->services->order_type == 1) data-disable="false" type="radio" name="order_type" id="inlineRadio1" value="1" />
