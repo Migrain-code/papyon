@@ -338,7 +338,24 @@ class Place extends Model
 
         return $totalClaims;
     }
+    public function claimCategories()
+    {
+        $ordersCount = $this->orders->where('status', 0)->count();
+        $packetCount = $this->orders->where('status', 0)->where('order_type', 0)->count();
+        $taxiCount = $this->claims->where('type_id', 0)->where('status', 0)->count();
+        $valeCount = $this->claims->where('type_id', 1)->where('status', 0)->count();
+        $waiterCount = $this->claims->where('type_id', 2)->where('status', 0)->count();
+        $totalClaims = $ordersCount + $taxiCount + $valeCount + $waiterCount;
 
+        return [
+            'ordersCount' => $ordersCount,
+            'packetCount' => $packetCount,
+            'taxiCount' => $taxiCount,
+            'valeCount' => $valeCount,
+            'waiterCount' => $waiterCount,
+            'totalClaims' => $totalClaims,
+        ];
+    }
     public function clone()
     {
         $newPlace = $this->replicate();

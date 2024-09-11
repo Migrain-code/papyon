@@ -140,6 +140,8 @@
                 console.error("Audio playback failed:", error);
             });
 
+            $('.newClaimCount').text(e.data.totalClaims);
+            $('#datatable').DataTable().ajax.reload();
             /*Toast.fire({
                 icon: 'info',
                 title: 'Yeni siparişiniz var',
