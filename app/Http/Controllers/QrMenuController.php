@@ -241,7 +241,7 @@ class QrMenuController extends Controller
         $orderId = $result["orderId"];
         $place = Place::find($this->place->id);
         $orders = $place->claimCategories();
-        event(new PrivateEvent($orders, $this->place->user_id));
+        //event(new PrivateEvent($orders, $this->place->user_id));
         if ($whatsappStatus) {
             return redirect()->to('https://wa.me/' . clearPhone($phone) . '?text=' . urlencode($message));
         } else {

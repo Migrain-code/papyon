@@ -157,8 +157,8 @@
             </div>
             <div class="card-body">
                 <div class="menu-editor">
-                    @include('business.print.palimpes.parts.preivew')
-                    @include('business.print.palimpes.parts.form')
+                    @include('business.print.template-4.parts.preivew')
+                    @include('business.print.template-4.parts.form')
 
                 </div>
             </div>
@@ -169,6 +169,7 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         document.getElementById('logoInput').addEventListener('change', function(event) {
             const file = event.target.files[0];
@@ -228,6 +229,8 @@
             document.getElementById('menu_description').style.color = this.value;
 
         });
+    </script>
+    <script>
 
         function convertMenuCardToBase64(tableName) {
             const menuCard = document.getElementById('menuCard');
@@ -245,7 +248,9 @@
                     data: {
                         '_token': csrf_token,
                         'menuCardBase64': base64Image,
-                        'table_id': tableName
+                        'table_id': tableName,
+                        'apply': $('[name="apply"]:checked').val(),
+                        'boxSize': 'rectangle'
                     },
                     success: function () {
                         console.log('şablon oluşturuldu');
