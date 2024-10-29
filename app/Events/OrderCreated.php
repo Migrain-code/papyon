@@ -22,7 +22,7 @@ class OrderCreated implements ShouldBroadcast
     public function broadcastWith()
     {
         return [
-            'order' => $this->orderData, // Burada sipariş verilerini döndürün
+            'order' => json_encode($this->orderData), // Burada sipariş verilerini döndürün
         ];
     }
     public function broadcastOn()
