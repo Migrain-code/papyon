@@ -4,7 +4,7 @@
         <span class="badge bg-white text-primary badge-center ms-1 rounded-circle ms-2" id="orderCount">{{$claims['orderCount']}}</span>
     </a>
     <a href="{{route('business.claim.packet')}}" class="btn  @if(request()->routeIs('business.claim.packet')) btn-dark @else btn-label-dark @endif ">
-        Paket Servis
+        Paket Siparişleri
         <span class="badge bg-white text-dark badge-center ms-1 rounded-circle ms-2" id="packetCount">{{$claims['packetCount']}}</span>
     </a>
     <a href="{{route('business.claim.taxi')}}" class="btn  @if(request()->routeIs('business.claim.taxi')) btn-warning @else btn-label-warning @endif ">
