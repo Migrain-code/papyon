@@ -20,13 +20,14 @@ Echo.channel('order-channel')
         const waiterCount = orderData.waiterCount;
         const totalClaims = orderData.totalClaims;
         // Değerleri uygun div'lere yazdır
-        $('#newClaimCount').text(ordersCount);
-        $('#orderCount').text(ordersCount);
-        $('#packetCount').text(packetCount);
-        $('#taxiCount').text(taxiCount);
-        $('#valeCount').text(valeCount);
-        $('#waiterCount').text(waiterCount);
-        $('#totalClaims').text(totalClaims);
+        document.getElementById('newClaimCount').textContent = ordersCount;
+        document.getElementById('orderCount').textContent = ordersCount;
+        document.getElementById('packetCount').textContent = packetCount;
+        document.getElementById('taxiCount').textContent = taxiCount;
+        document.getElementById('valeCount').textContent = valeCount;
+        document.getElementById('waiterCount').textContent = waiterCount;
+        document.getElementById('totalClaims').textContent = totalClaims;
+
 
 
         // Ses çal
