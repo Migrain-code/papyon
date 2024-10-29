@@ -112,42 +112,8 @@
     });
 
 </script>
-<audio id="success-sound" src="/qr_menu/assets/audio/pebble.mp3" preload="auto"></audio>
-<button id="hidden-play-button" style="visibility: hidden;">Play Sound</button>
-@vite('resources/js/app.js')
-<script>
-    var audio;
 
-    $(function (){
-        audio = document.getElementById('success-sound');
+@vite(['resources/js/app.js'])
 
-        // Ensure the user has interacted with the page first
-        document.addEventListener('click', function() {
-            // Play the audio silently and then pause it to enable future play
-            audio.play().then(() => {
-                audio.pause();  // Pause immediately after playback
-                audio.currentTime = 0;  // Reset to start
-            }).catch((error) => {
-                console.error("Initial silent playback failed:", error);
-            });
-        }, {once: true}); // Run this only once after the first click
-    });
-
-    setTimeout(() => {
-        window.Echo.private('private-channel.user.{{ authUser()->id }}').listen('PrivateEvent', (e) => {
-            // Play the sound when the event is received
-            audio.play().catch((error) => {
-                console.error("Audio playback failed:", error);
-            });
-
-            $('.newClaimCount').text(e.data.totalClaims);
-            $('#datatable').DataTable().ajax.reload();
-            /*Toast.fire({
-                icon: 'info',
-                title: 'Yeni siparişiniz var',
-            })*/
-        });
-    }, 200);
-</script>
 
 @yield('scripts')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderCreated;
 use App\Events\PrivateEvent;
 use App\Http\Resources\ProductResource;
 use App\Models\Announcement;
@@ -21,6 +22,7 @@ use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
+
 
 class QrMenuController extends Controller
 {
@@ -241,7 +243,8 @@ class QrMenuController extends Controller
         $orderId = $result["orderId"];
         $place = Place::find($this->place->id);
         $orders = $place->claimCategories();
-        //event(new PrivateEvent($orders, $this->place->user_id));
+        event(new OrderCreated($result));
+
         if ($whatsappStatus) {
             return redirect()->to('https://wa.me/' . clearPhone($phone) . '?text=' . urlencode($message));
         } else {
