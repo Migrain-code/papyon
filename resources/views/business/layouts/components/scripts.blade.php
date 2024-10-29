@@ -1,6 +1,3 @@
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-
 <script src="/business/assets/vendor/libs/jquery/jquery.js"></script>
 <script src="/business/assets/vendor/libs/popper/popper.js"></script>
 <script src="/business/assets/vendor/js/bootstrap.js"></script>
@@ -10,18 +7,14 @@
 <script src="/business/assets/vendor/libs/i18n/i18n.js"></script>
 <script src="/business/assets/vendor/libs/typeahead-js/typeahead.js"></script>
 <script src="/business/assets/vendor/js/menu.js"></script>
-
-<!-- Vendors JS -->
 <script src="/business/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 <script src="/business/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 <script src="/business/assets/vendor/libs/select2/select2.js"></script>
 
-<!-- Main JS -->
 <script src="/business/assets/js/main.js"></script>
-
-<!-- Page JS -->
 <script src="/business/assets/js/app-ecommerce-dashboard.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Global Alert box-->
 <style>
     body.swal2-toast-shown .swal2-container {
         z-index: 1200;
@@ -32,6 +25,8 @@
         pointer-events: none;
     }
 </style>
+<!-- Global csrf variable-->
+
 <script>
     var csrf_token = "{{csrf_token()}}";
 </script>
