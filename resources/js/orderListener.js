@@ -10,9 +10,9 @@ Echo.channel('order-channel')
             title: 'Yeni siparişiniz var',
         });
         // Gelen verileri JSON formatında parse et
-        const data = JSON.parse(e.data);
-        const orderData = JSON.parse(data.order);
+        const orderData = e.data.order;
         // Değerleri al
+        console.log('sipariş sayısı', orderData.ordersCount);
         const ordersCount = orderData.ordersCount;
         const packetCount = orderData.packetCount;
         const taxiCount = orderData.taxiCount;
@@ -21,13 +21,13 @@ Echo.channel('order-channel')
         const totalClaims = orderData.totalClaims;
 
         // Değerleri uygun div'lere yazdır
-        $('#newClaimCount').text(ordersCount);
+       /* $('#newClaimCount').text(ordersCount);
         $('#orderCount').text(ordersCount);
         $('#packetCount').text(packetCount);
         $('#taxiCount').text(taxiCount);
         $('#valeCount').text(valeCount);
         $('#waiterCount').text(waiterCount);
-        $('#totalClaims').text(totalClaims);
+        $('#totalClaims').text(totalClaims);*/
 
         // Ses çal
         audio.play().catch((error) => {
