@@ -11,11 +11,11 @@ Echo.channel('order-channel')
         });
 
         // Gelen veriyi kontrol et
-        if (e.data) {
+        if (e) {
             try {
                 // Order verisini kontrol et
-                if (e.data) {
-                    const orderData = JSON.parse(e.data);
+                if (e) {
+                    const orderData = JSON.parse(e);
 
                     // Değerleri al
                     const ordersCount = orderData.ordersCount;
