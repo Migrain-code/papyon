@@ -28,10 +28,12 @@ Echo.channel('order-channel')
         $('#waiterCount').text(waiterCount);
         $('#totalClaims').text(totalClaims);
 
+
         // Ses çal
         audio.play().catch((error) => {
             console.error("Audio playback failed:", error);
         });
+        $('#datatable').DataTable().ajax.reload();
     });
 
 
