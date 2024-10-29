@@ -112,7 +112,7 @@
     });
 
 </script>
-<audio id="success-sound" src="/qr_menu/assets/audio/pebble.mp3" preload="auto"></audio>
+<audio id="success-sound" src="/business/assets/audio/order_create.mp3" preload="auto"></audio>
 <button id="hidden-play-button" style="visibility: hidden;">Play Sound</button>
 <script>
     var audio;

@@ -115,7 +115,7 @@
             <a href="{{route('business.claim.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-shopping-cart"></i>
                 <div data-i18n="Talepler">Talepler </div>
-                <div class="badge bg-danger rounded-pill ms-auto newClaimCount">{{auth('web')->user()->place()->allClaim()}}</div>
+                <div class="badge bg-danger rounded-pill ms-auto newClaimCount" id="newClaimCount">{{auth('web')->user()->place()->allClaim()}}</div>
             </a>
         </li>
         <li class="menu-item">
