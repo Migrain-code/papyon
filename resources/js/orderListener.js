@@ -26,7 +26,7 @@ Echo.channel('order-channel')
         document.getElementById('taxiCount').textContent = taxiCount;
         document.getElementById('valeCount').textContent = valeCount;
         document.getElementById('waiterCount').textContent = waiterCount;
-        document.getElementById('totalClaims').textContent = totalClaims;
+        //document.getElementById('totalClaims').textContent = totalClaims;
 
 
 
