@@ -11,14 +11,14 @@ Echo.channel('order-channel')
         });
         // Gelen verileri JSON formatında parse et
         const data = JSON.parse(e.data);
-
+        const orderData = JSON.parse(data.order);
         // Değerleri al
-        const ordersCount = data.order.ordersCount;
-        const packetCount = data.order.packetCount;
-        const taxiCount = data.order.taxiCount;
-        const valeCount = data.order.valeCount;
-        const waiterCount = data.order.waiterCount;
-        const totalClaims = data.order.totalClaims;
+        const ordersCount = orderData.ordersCount;
+        const packetCount = orderData.packetCount;
+        const taxiCount = orderData.taxiCount;
+        const valeCount = orderData.valeCount;
+        const waiterCount = orderData.waiterCount;
+        const totalClaims = orderData.totalClaims;
 
         // Değerleri uygun div'lere yazdır
         $('#newClaimCount').text(ordersCount);
