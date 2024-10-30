@@ -110,7 +110,7 @@ class ClaimController extends Controller
             })
             ->editColumn('name', function ($q) {
                 if (isset($q->table_id)){
-                    return createName(route('business.claim.edit', $q->id), $q->table->name);
+                    return $q->table->name ?? "Silinmiş Masa";
                 } else{
                     return createName(route('business.claim.edit', $q->id), $q->name);
                 }
