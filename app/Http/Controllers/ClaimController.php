@@ -112,7 +112,7 @@ class ClaimController extends Controller
                 if (isset($q->table_id)){
                     return $q->table->name ?? "Silinmiş Masa";
                 } else{
-                    return createName(route('business.claim.edit', $q->id), $q->name);
+                    return createName(route('business.claim.edit', $q->id), $q->name ?? "");
                 }
 
             })
