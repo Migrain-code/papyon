@@ -74,7 +74,8 @@
                                                     <i class="ti ti-dots-vertical ti-sm text-muted"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="teamMemberList" style="">
-                                                    <a class="dropdown-item" href="{{route('admin.place.show', $place->id)}}">Bu Mekana Geçiş Yap</a>
+                                                    <a class="dropdown-item" href="{{route('admin.place.passive', $place->id)}}">Mekanı Pasife Al</a>
+                                                    <a class="dropdown-item" href="{{route('admin.place.active', $place->id)}}">Mekanı Aktif Et</a>
                                                     <a class="dropdown-item" href="{{route('admin.place.clone', $place->id)}}">Bu Mekanı Kopyala</a>
                                                     <a class="dropdown-item" href="{{route('admin.place.todayReport', $place->id)}}">Kasa Raporu</a>
                                                     <a class="dropdown-item" href="whatsapp://send?text={{urlencode(route('place.show', $place->slug))}}">Paylaş</a>

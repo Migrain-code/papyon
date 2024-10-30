@@ -21,9 +21,9 @@ class CheckControlMiddleware
         if (!isset($place->slug)){
             abort(503);
         }
-        /*if ($place->setup_percentage < 80){
+        if ($place->status == 2){
             abort(503);
-        }*/
+        }
         $menu = $place->activeMenu();
         if (!isset($menu)){
             abort(503);

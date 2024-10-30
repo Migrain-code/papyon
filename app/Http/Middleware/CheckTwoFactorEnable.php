@@ -18,8 +18,18 @@ class CheckTwoFactorEnable
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
+
         $this->createVerifyCode($user);
         Session::put('phone', $user->phone);
+        $place = $user->place();
+
+        if ($place->status == 2) { //engellenmiş
+            auth('web')->logout();
+            return to_route('login')->with('response',[
+                'status' => "error",
+                'message' => "Hesabınızda Erişim Engelli Bulunuyor"
+            ]);
+        }
         if (isset($user->two_factor_secret)
             && !$request->routeIs('business.twoFactor') && !$request->routeIs('business.twoFactor.verify')
             && !$request->routeIs('business.twoFactor.resend')
