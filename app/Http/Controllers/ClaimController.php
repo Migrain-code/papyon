@@ -120,7 +120,7 @@ class ClaimController extends Controller
                 return createPhone($q->phone, formatPhone($q->phone));
             })
             ->editColumn('table_id', function ($q) {
-                return $q->table->name;
+                return $q->table->name ?? "Silinmiş Masa";
             })
             ->editColumn('status', function ($q) {
                 return $q->status('icon');
