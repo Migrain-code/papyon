@@ -134,7 +134,7 @@
             <a href="{{route('business.suggestion.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-message"></i>
                 <div data-i18n="Görüş ve Öneriler">Yorumlar</div>
-                <div class="badge bg-danger rounded-pill ms-auto">{{auth('web')->user()->place()->allClaim()}}</div>
+                <div class="badge bg-danger rounded-pill ms-auto">{{auth('web')->user()->place()->newSuggestionCount()}}</div>
 
             </a>
         </li>

@@ -133,6 +133,10 @@ class Place extends Model
         return $this->hasMany(Suggestion::class, 'place_id', 'id');
     }
 
+    public function newSuggestionCount()
+    {
+        return $this->suggestions()->where('status', 0)->count();
+    }
     public function suggestionQuestions() // Görüş ve Öneriler
     {
         return $this->hasMany(SuggestionQuestion::class, 'place_id', 'id');

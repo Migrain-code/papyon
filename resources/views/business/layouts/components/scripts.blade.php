@@ -108,23 +108,7 @@
 
 </script>
 <audio id="success-sound" src="/business/assets/audio/order_create.mp3" preload="auto"></audio>
-<button id="hidden-play-button" style="visibility: hidden;">Play Sound</button>
-<script>
-    var audio;
-    $(function (){
-        audio = document.getElementById('success-sound');
-        // Ensure the user has interacted with the page first
-        document.addEventListener('click', function() {
-            // Play the audio silently and then pause it to enable future play
-            audio.play().then(() => {
-                audio.pause();  // Pause immediately after playback
-                audio.currentTime = 0;  // Reset to start
-            }).catch((error) => {
-                console.error("Initial silent playback failed:", error);
-            });
-        }, {once: true}); // Run this only once after the first click
-    });
-</script>
+
 @vite(['resources/js/app.js'])
 
 
